@@ -9,6 +9,17 @@
 
 </div>
 
+## 🧭 Guia de Navegação (Índice)
+
+- **[📖 Descrição](#descricao)**
+- **[🚀 Projetos](#projetos)**
+  - **[🧪 Astro Sample](#astro-sample)**
+  - **[🎭 ATARASHII GAKKO! Landing Page](#atarashii-gakko)**
+  - **[🛒 Product Management](#product-management)**
+  - **[📝 Scriptora](#scriptora)**
+- **[👤 Sobre o Desenvolvedor](#sobre-o-desenvolvedor)**
+- **[📜 Licença](#licenca)**
+
 ## 📖 Descrição <a name="descricao"></a>
 
 Este repositório reúne projetos desenvolvidos com [Astro](https://astro.build/), um framework moderno para criação de sites estáticos e aplicações web rápidas. Cada projeto demonstra diferentes abordagens de design, organização de código e funcionalidades interativas, oferecendo exemplos práticos de como usar Astro em situações reais.
