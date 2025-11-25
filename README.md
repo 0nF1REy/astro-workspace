@@ -1,5 +1,5 @@
 <h1 align="center">
-   Astro Projects
+   Astro - Workspace
 </h1>
 
 <div align="center">
@@ -9,20 +9,20 @@
 
 </div>
 
-## 📖 Descrição
+## 📖 Descrição <a name="descricao"></a>
 
 Este repositório reúne projetos desenvolvidos com [Astro](https://astro.build/), um framework moderno para criação de sites estáticos e aplicações web rápidas. Cada projeto demonstra diferentes abordagens de design, organização de código e funcionalidades interativas, oferecendo exemplos práticos de como usar Astro em situações reais.
 
 Atualmente, há um projeto de landing page que inclui componentes interativos e layouts responsivos, seguindo boas práticas de desenvolvimento front-end e arquitetura escalável. Este repositório também pode servir como referência para quem deseja aprender Astro, explorar padrões de design e entender como estruturar projetos de forma clara e organizada.
 
-## 🚀 Projetos
+## 🚀 Projetos <a name="projetos"></a>
 
-### 🧪 Astro Sample
+### 🧪 Astro Sample <a name="astro-sample"></a>
 
 **📁 Pasta:** `astro-sample/`  
 **🎯 Descrição:** Projeto de exemplo e experimentação com Astro, demonstrando a integração entre componentes React e Astro, uso de Tailwind CSS e estruturação básica de um projeto web moderno.
 
-![Banner - Astro Sample](/readme_images/astro-sample.png)
+![Banner - Astro Sample](/resources/images/docs/astro-sample.png)
 
 #### ✨ Funcionalidades
 
@@ -72,12 +72,12 @@ src/
 
 ---
 
-### 🎭 ATARASHII GAKKO! Landing Page
+### 🎭 ATARASHII GAKKO! Landing Page <a name="atarashii-gakko"></a>
 
 **📁 Pasta:** `atarashii-gakko/`  
 **🎯 Descrição:** Clone da landing page oficial do grupo japonês ATARASHII GAKKO!, apresentando sua discografia mais recente, datas da turnê mundial e cadastro de newsletter.
 
-![Banner - Atarashii Gakko](/readme_images/atarashii-gakko.png)
+![Banner - Atarashii Gakko](/resources/images/docs/atarashii-gakko.png)
 
 #### ✨ Funcionalidades
 
@@ -120,12 +120,12 @@ src/
 
 ---
 
-### 🛒 Product Management
+### 🛒 Product Management <a name="product-management"></a>
 
 **📁 Pasta:** `product-management/`  
 **🎯 Descrição:** Sistema completo para cadastro, edição e listagem de produtos, com autenticação de usuários e integração ao Firebase. O projeto utiliza Astro com React, SCSS modular, tipagem TypeScript e layout centralizado, focando em boas práticas de UX e arquitetura escalável.
 
-![Banner - Product Management](/readme_images/product-management.png)
+![Banner - Product Management](/resources/images/docs/product-management.png)
 
 #### ✨ Funcionalidades
 
@@ -177,12 +177,12 @@ src/
 
 ---
 
-### 📝 Scriptora
+### 📝 Scriptora <a name="scriptora"></a>
 
 **📁 Pasta:** `scriptora/`  
 **🎯 Descrição:** Blog e site de conteúdo construído com Astro, focado em publicação de artigos usando as Content Collections do Astro. O projeto reúne um conjunto de componentes reutilizáveis (cards, navbar, busca, paginação), uma API simples de busca (serverless) e uma organização de conteúdo em Markdown para facilitar criação e manutenção editorial.
 
-![Banner - Scriptora](/readme_images/scriptora/scriptora.png)
+![Banner - Scriptora](/resources/images/docs/scriptora/scriptora.png)
 
 #### ✨ Funcionalidades
 
@@ -197,8 +197,8 @@ src/
 #### 🛠️ Tecnologias Utilizadas
 
 - **Framework:** Astro
-- **Estilização:** Tailwind CSS  
-- **Tipagem:** TypeScript  
+- **Estilização:** Tailwind CSS
+- **Tipagem:** TypeScript
 - **Deploy:** Vercel
 - **Conteúdo:** Astro Content Collections (Markdown)
 
@@ -229,9 +229,7 @@ src/
 - **Performance-first:** Tailwind + Astro para pages leves e rápido Time-to-First-Byte
 - **Experiência editorial:** Fluxo simples para adicionar novos posts via Markdown
 
----
-
-## 👤 Sobre o Desenvolvedor
+## 👤 Sobre o Desenvolvedor <a name="sobre-o-desenvolvedor"></a>
 
 <div align="center">
 
@@ -240,7 +238,7 @@ src/
     <td align="center">
         <br>
         <a href="https://github.com/0nF1REy" target="_blank">
-          <img src="./readme_images/alan-ryan.jpg" height="160" alt="Foto de Alan Ryan" style="border-radius:50%;border:3px solid #0077B5;">
+          <img src="./resources/images/docs/alan-ryan.jpg" height="160" alt="Foto de Alan Ryan">
         </a>
         </p>
         <a href="https://github.com/0nF1REy" target="_blank">
@@ -271,39 +269,7 @@ src/
 
 ---
 
-## 📫 Contribuir
-
-Contribuições são muito bem-vindas! Se você deseja contribuir com o projeto, por favor, siga estes passos:
-
-1.  **Faça um Fork** do repositório.
-
-2.  **Crie uma nova Branch** para sua feature ou correção:
-
-    ```bash
-    git checkout -b feature/nome-da-feature
-    ```
-
-3.  **Faça suas alterações** e realize o commit:
-
-    ```bash
-    git commit -m "feat: Adiciona nova feature"
-    ```
-
-4.  **Envie suas alterações** para o seu fork:
-
-    ```bash
-    git push origin feature/nome-da-feature
-    ```
-
-5.  **Abra um pull request** para a branch `main` do repositório original.
-
-## 📚 Recursos Adicionais
-
-- **<a href="https://www.atlassian.com/br/git/tutorials/making-a-pull-request" target="_blank">📝 Como criar um Pull Request</a>**
-
-- **<a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank">💾 Padrão de Commits Convencionais</a>**
-
-## 📜 Licença
+## 📜 Licença <a name="licenca"></a>
 
 Este projeto está sob a **licença MIT**. Consulte o arquivo **[LICENSE](LICENSE)** para obter mais detalhes.
 
