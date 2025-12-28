@@ -1,0 +1,36 @@
+#hero-header {
+  .nav-item {
+    @apply text-xl lg:text-[1.5rem] font-black text-[#333] uppercase transition-colors duration-200 block;
+    font-family: "Arial Black", "Arial Bold", sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+
+    &:hover {
+      @apply text-pink-500;
+    }
+  }
+
+  .twitter-link {
+    @apply transition-transform duration-300;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .character-img {
+    width: 550px;
+    height: auto;
+    max-width: none;
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
