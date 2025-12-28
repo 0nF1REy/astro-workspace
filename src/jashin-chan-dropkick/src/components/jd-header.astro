@@ -1,0 +1,21 @@
+---
+import { menuItems } from "../data/menu";
+import type { MenuItem } from "../data/menu";
+---
+
+<header class="bg-gray-800 p-4 flex justify-between items-center">
+  <div class="text-xl font-bold">HEADER</div>
+  <nav>
+    <ul class="flex gap-4">
+      {
+        menuItems.map((item: MenuItem) => (
+          <li>
+            <a href={item.href} id={item.id} class="hover:text-yellow-400">
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

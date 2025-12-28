@@ -1,0 +1,12 @@
+$primary-color: #facc15;
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #0f1115;
+  color: white;
+}
+
+.btn-primary {
+  @apply px-4 py-2 rounded font-bold;
+  background-color: $primary-color;
+}
