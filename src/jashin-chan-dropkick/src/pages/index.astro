@@ -1,9 +1,10 @@
 ---
 import JdBaseLayout from "../layouts/jd-base-layout.astro";
+import JdHero from "../components/home/jd-hero.astro";
 
 const pageTitle = "Jashinchan - Home";
 ---
 
 <JdBaseLayout title={pageTitle} showChrome={false}>
-  <h1 class="text-4xl font-bold text-center mt-10">Hello World - Index</h1>
+  <JdHero />
 </JdBaseLayout>
