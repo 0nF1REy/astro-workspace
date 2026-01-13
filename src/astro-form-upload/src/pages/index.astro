@@ -3,6 +3,12 @@ import BaseHead from "../components/BaseHead.astro";
 import PageHeader from "../components/PageHeader.astro";
 import { v2 as cloudinary } from "cloudinary";
 import { Image } from "@unpic/astro";
+import "../styles/global.css";
+
+interface CloudinaryResource {
+  secure_url: string;
+  public_id: string;
+}
 
 cloudinary.config({
   cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
@@ -10,43 +16,53 @@ cloudinary.config({
   api_secret: import.meta.env.CLOUDINARY_API_SECRET,
 });
 
-let images = [];
+let images: CloudinaryResource[] = [];
+let errorMsg = "";
 
 try {
-  const result = await cloudinary.search
-    .expression("folder:astro")
-    .sort_by("uploaded_at", "desc")
-    .max_results(30)
-    .execute();
-
-  images = result.resources;
+  const result = await cloudinary.api.resources({
+    type: "upload",
+    prefix: "astro",
+    max_results: 30,
+  });
+  images = result.resources || [];
 } catch (error) {
-  if (error instanceof Error) {
-    console.error(error.message);
-  } else {
-    console.error(error);
-  }
+  errorMsg = "Erro na conexão com o servidor de imagens.";
 }
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <BaseHead />
   </head>
   <body>
     <main>
       <PageHeader />
-      <p><a href="/upload">Submit your photo</a></p>
-      <section>
+      <div class="my-10">
+        <a href="/upload">Enviar nova arte</a>
+      </div>
+
+      {
+        errorMsg && (
+          <div class="bg-red-500/10 border border-red-500 text-red-500 p-4 rounded-xl mb-8 font-bold">
+            {errorMsg}
+          </div>
+        )
+      }
+
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {
-          images.map((image: { secure_url: string; filename: string }) => (
-            <Image
-              src={image.secure_url}
-              layout="constrained"
-              width={200}
-              height={200}
-            />
+          images.map((image: CloudinaryResource) => (
+            <div class="fade-in">
+              <Image
+                src={image.secure_url}
+                layout="constrained"
+                width={400}
+                height={400}
+                alt="Capa de álbum"
+              />
+            </div>
           ))
         }
       </section>

@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import PageHeader from "../components/PageHeader.astro";
 import { v2 as cloudinary } from "cloudinary";
 import { Image } from "@unpic/astro";
+import "../styles/global.css";
 
 cloudinary.config({
   cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
@@ -10,37 +11,37 @@ cloudinary.config({
   api_secret: import.meta.env.CLOUDINARY_API_SECRET,
 });
 
-const uploadStream = async (buffer: Uint8Array, options: any) => {
-  return new Promise((resolve, reject) => {
-    cloudinary.uploader
-      .upload_stream(options, (error, result) => {
-        if (error) return reject(error);
-        resolve(result);
-      })
-      .end(buffer);
-  });
-};
-
-let uploadedFile: any | undefined;
+let uploadedFile: any;
+let uploadError = "";
 
 if (Astro.request.method === "POST") {
-  const data = await Astro.request.formData();
+  try {
+    const data = await Astro.request.formData();
+    const file = data.get("file") as File;
 
-  const file = data.get("file") as File;
+    if (!file || file.size === 0) {
+      uploadError = "Arquivo inválido.";
+    } else {
+      const arrayBuffer = await file.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
 
-  const arrayBuffer = await file.arrayBuffer();
-  const uit8Array = new Uint8Array(arrayBuffer);
-
-  const response = await uploadStream(uit8Array, {
-    folder: "astro",
-  });
-
-  uploadedFile = response;
+      uploadedFile = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream({ folder: "astro" }, (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          })
+          .end(buffer);
+      });
+    }
+  } catch (error) {
+    uploadError = "Erro no upload. Verifique os dados.";
+  }
 }
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <BaseHead />
   </head>
@@ -48,28 +49,34 @@ if (Astro.request.method === "POST") {
     <main>
       <PageHeader />
 
-      {
-        uploadedFile ? (
-          <section>
-            <h2>Thank you 🎉</h2>
-            <Image
-              src={uploadedFile.secure_url}
-              layout="constrained"
-              width={300}
-              height={300}
-            />
-            <a href="/">&#8592; Back to all photos</a>
-          </section>
-        ) : (
-          <section>
-            <form method="post" action="/upload" enctype="multipart/form-data">
-              <label for="file">Upload your photo:</label>
-              <input type="file" name="file" id="file" required />
-              <button>Submit</button>
+      <div class="max-w-xl mx-auto mt-12">
+        {
+          uploadedFile ? (
+            <div class="fade-in bg-gintama-dark p-8 rounded-2xl border border-gintama-cyan/30">
+              <h2 class="text-2xl font-black text-gintama-cyan mb-6">
+                UPLOAD REALIZADO
+              </h2>
+              <Image
+                src={uploadedFile.secure_url}
+                layout="constrained"
+                width={300}
+                height={300}
+                class="mx-auto rounded-lg mb-8"
+              />
+              <a href="/">Voltar para galeria</a>
+            </div>
+          ) : (
+            <form method="post" enctype="multipart/form-data">
+              <label>Selecione a Imagem</label>
+              <input type="file" name="file" accept="image/*" required />
+              <button type="submit">Iniciar Upload</button>
+              {uploadError && (
+                <p class="text-red-500 mt-4 font-black">{uploadError}</p>
+              )}
             </form>
-          </section>
-        )
-      }
+          )
+        }
+      </div>
     </main>
   </body>
 </html>
