@@ -1,7 +1,7 @@
 {
   "name": "cloudinary-astro-upload",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "develop": "astro dev",
     "dev": "astro dev",
