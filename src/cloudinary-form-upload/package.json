@@ -1,5 +1,14 @@
 {
   "name": "cloudinary-form-upload",
+  "description": "An Astro-based file upload application that enables users to upload files directly to Cloudinary using server-side form handling without client-side JavaScript",
+  "keywords": [
+    "astro",
+    "cloudinary",
+    "file-upload",
+    "form-handling",
+    "server-side",
+    "image-gallery"
+  ],
   "type": "module",
   "version": "0.1.1",
   "scripts": {
@@ -9,6 +18,19 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
+  },
+  "author": {
+    "name": "Alan Ryan da Silva Domingues",
+    "email": "alanryan619@gmail.com",
+    "url": "https://github.com/0nF1REy"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0nF1REy/astro-workspace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
