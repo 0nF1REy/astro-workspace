@@ -1,9 +1,9 @@
 ---
 import "@fontsource/poppins";
 import "../styles/global.css";
-import Header from "../components/Header";
-import { ClientRouter } from "astro:transitions";
+import Header from "../components/Header.tsx";
 import Contact from "../sections/Contact.astro";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title?: string;
@@ -20,33 +20,134 @@ const {
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
     <title>{title}</title>
-    <script
-      src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"
-      defer></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"
-      defer></script>
     <ClientRouter />
   </head>
   <body>
+    <canvas id="bg-canvas"></canvas>
+
     <Header client:load />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <Contact />
 
-    <script src="/scripts/animations.js" is:inline></script>
+    <style is:global>
+      #bg-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: -1;
+        background: #050505;
+        pointer-events: none;
+      }
+
+      section {
+        position: relative;
+        background: transparent !important;
+      }
+    </style>
+
+    <script>
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+      gsap.registerPlugin(ScrollTrigger);
+
+      function initParticles() {
+        const canvas = document.getElementById(
+          "bg-canvas"
+        ) as HTMLCanvasElement;
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        let particles: any[] = [];
+        const particleCount = 60;
+
+        class Particle {
+          x: number;
+          y: number;
+          vx: number;
+          vy: number;
+
+          constructor(w: number, h: number) {
+            this.x = Math.random() * w;
+            this.y = Math.random() * h;
+            this.vx = (Math.random() - 0.5) * 0.4;
+            this.vy = (Math.random() - 0.5) * 0.4;
+          }
+
+          update(w: number, h: number) {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0 || this.x > w) this.vx *= -1;
+            if (this.y < 0 || this.y > h) this.vy *= -1;
+          }
+        }
+
+        function resize() {
+          if (!canvas) return;
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          particles = Array.from(
+            { length: particleCount },
+            () => new Particle(canvas.width, canvas.height)
+          );
+        }
+
+        function animate() {
+          if (!ctx || !canvas) return;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          ctx.strokeStyle = "rgba(0, 255, 180, 0.1)";
+          ctx.fillStyle = "rgba(0, 255, 180, 0.4)";
+
+          particles.forEach((p, i) => {
+            p.update(canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            for (let j = i + 1; j < particles.length; j++) {
+              const p2 = particles[j];
+              const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+              if (dist < 180) {
+                ctx.beginPath();
+                ctx.lineWidth = 1 - dist / 180;
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+              }
+            }
+          });
+        }
+
+        resize();
+        window.addEventListener("resize", resize);
+        gsap.ticker.add(animate);
+
+        gsap.to(canvas, {
+          y: -50,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "body",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+          },
+        });
+      }
+
+      document.addEventListener("astro:page-load", initParticles);
+    </script>
   </body>
 </html>

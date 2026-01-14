@@ -3,23 +3,18 @@ import Button from "../components/Button.astro";
 ---
 
 <section class="hero" id="home">
-  <canvas id="matrix-canvas"></canvas>
-
-  <div class="container hero__container">
+  <div class="container">
     <div class="hero__content">
       <p class="hero__intro">Olá, eu sou</p>
       <h1 class="hero__name">Alan Ryan <span>da Silva Domingues</span></h1>
       <h2 class="hero__subtitle">Técnico em Desenvolvimento de Sistemas</h2>
-      <div class="hero__actions">
-        <Button text="Ver projetos" href="#work" />
-      </div>
+      <Button text="Ver projetos" href="#work" />
     </div>
   </div>
 </section>
 
 <style>
   .hero {
-    position: relative;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -29,24 +24,6 @@ import Button from "../components/Button.astro";
     background-position: left;
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: hidden;
-    background-color: #000;
-  }
-
-  #matrix-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.15;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .hero__container {
-    position: relative;
-    z-index: 2;
   }
 
   .hero__content {
@@ -54,20 +31,12 @@ import Button from "../components/Button.astro";
     max-width: 800px;
   }
 
-  .hero__intro,
-  .hero__name,
-  .hero__subtitle,
-  .hero__actions {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
   .hero__intro {
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 0.5rem;
-    color: var(--primary-clr-400);
+    color: var(--text-clr-alt, #666);
   }
 
   .hero__name {
@@ -75,7 +44,6 @@ import Button from "../components/Button.astro";
     line-height: 1.1;
     margin-bottom: 0.5rem;
     font-weight: 800;
-    color: #fff;
   }
 
   .hero__name span {
@@ -87,7 +55,6 @@ import Button from "../components/Button.astro";
     font-weight: 400;
     margin-bottom: 2rem;
     opacity: 0.9;
-    color: #e0e0e0;
   }
 
   @media (width >= 768px) {
@@ -102,59 +69,3 @@ import Button from "../components/Button.astro";
     }
   }
 </style>
-
-<script>
-  import { gsap } from "gsap";
-
-  const canvas = document.getElementById("matrix-canvas") as HTMLCanvasElement;
-
-  if (canvas) {
-    const ctx = canvas.getContext("2d");
-
-    if (!ctx) {
-      console.warn("Contexto 2D não encontrado");
-    } else {
-      const resizeCanvas = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      };
-
-      resizeCanvas();
-      window.addEventListener("resize", resizeCanvas);
-
-      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>?/[]{}*&^%$#@!";
-      const fontSize = 16;
-      const columns = canvas.width / fontSize;
-      const drops = Array(Math.floor(columns)).fill(1);
-
-      const drawMatrix = () => {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = "#0F0";
-        ctx.font = fontSize + "px monospace";
-
-        for (let i = 0; i < drops.length; i++) {
-          const text = characters.charAt(
-            Math.floor(Math.random() * characters.length)
-          );
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
-          drops[i]++;
-        }
-      };
-
-      gsap.ticker.add(drawMatrix);
-    }
-  }
-
-  const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
-
-  tl.to(".hero__intro", { opacity: 1, y: 0, delay: 0.5 })
-    .to(".hero__name", { opacity: 1, y: 0 }, "-=0.7")
-    .to(".hero__subtitle", { opacity: 1, y: 0 }, "-=0.7")
-    .to(".hero__actions", { opacity: 1, y: 0 }, "-=0.7");
-</script>
