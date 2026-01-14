@@ -8,7 +8,9 @@ import Button from "../components/Button.astro";
       <p class="hero__intro">Olá, eu sou</p>
       <h1 class="hero__name">Alan Ryan <span>da Silva Domingues</span></h1>
       <h2 class="hero__subtitle">Técnico em Desenvolvimento de Sistemas</h2>
-      <Button text="Ver projetos" href="#work" />
+      <div class="hero__actions">
+        <Button text="Ver projetos" href="#work" />
+      </div>
     </div>
   </div>
 </section>
@@ -24,6 +26,7 @@ import Button from "../components/Button.astro";
     background-position: left;
     background-repeat: no-repeat;
     background-size: cover;
+    perspective: 1000px;
   }
 
   .hero__content {
@@ -31,12 +34,21 @@ import Button from "../components/Button.astro";
     max-width: 800px;
   }
 
+  .hero__intro,
+  .hero__name,
+  .hero__subtitle,
+  .hero__actions {
+    opacity: 0;
+    visibility: hidden;
+    will-change: transform, opacity, filter;
+  }
+
   .hero__intro {
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 0.5rem;
-    color: var(--text-clr-alt, #666);
+    color: var(--primary-clr-400);
   }
 
   .hero__name {
@@ -47,6 +59,7 @@ import Button from "../components/Button.astro";
   }
 
   .hero__name span {
+    display: inline-block;
     color: var(--primary-clr-400);
   }
 
@@ -69,3 +82,115 @@ import Button from "../components/Button.astro";
     }
   }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+
+  function initHeroAnimation() {
+    gsap.set(".hero__intro", {
+      autoAlpha: 0,
+      y: -20,
+      filter: "blur(10px)",
+    });
+
+    gsap.set(".hero__name", {
+      autoAlpha: 0,
+      scale: 0.9,
+      rotationX: -45,
+    });
+
+    gsap.set(".hero__subtitle", {
+      autoAlpha: 0,
+      x: -30,
+      filter: "blur(8px)",
+    });
+
+    gsap.set(".hero__actions", {
+      autoAlpha: 0,
+      scale: 0,
+      rotation: 360,
+      y: 100,
+    });
+
+    const tl = gsap.timeline({
+      defaults: {
+        ease: "power3.out",
+      },
+    });
+
+    tl.to(".hero__intro", {
+      autoAlpha: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 0.8,
+      delay: 0.2,
+    })
+      .to(
+        ".hero__name",
+        {
+          autoAlpha: 1,
+          scale: 1,
+          rotationX: 0,
+          duration: 1,
+          ease: "back.out(1.2)",
+        },
+        "-=0.5"
+      )
+      .to(
+        ".hero__name span",
+        {
+          scale: 1.05,
+          duration: 0.3,
+          yoyo: true,
+          repeat: 1,
+        },
+        "-=0.2"
+      )
+      .to(
+        ".hero__subtitle",
+        {
+          autoAlpha: 1,
+          x: 0,
+          filter: "blur(0px)",
+          duration: 0.7,
+        },
+        "-=0.6"
+      )
+      .to(
+        ".hero__actions",
+        {
+          autoAlpha: 1,
+          scale: 1.5,
+          rotation: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "back.out(4)",
+        },
+        "-=0.3"
+      )
+      .to(".hero__actions", {
+        scale: 1,
+        duration: 0.3,
+        ease: "elastic.out(2, 0.4)",
+      })
+      .to(".hero__actions .btn", {
+        scale: 1.15,
+        boxShadow: "0 0 30px rgba(30, 113, 183, 0.8)",
+        duration: 0.3,
+        repeat: 2,
+        yoyo: true,
+        ease: "power2.inOut",
+      })
+      .to(".hero__actions .btn", {
+        y: -8,
+        scale: 1.08,
+        rotation: 2,
+        duration: 1.5,
+        ease: "power2.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+  }
+
+  document.addEventListener("astro:page-load", initHeroAnimation);
+</script>
