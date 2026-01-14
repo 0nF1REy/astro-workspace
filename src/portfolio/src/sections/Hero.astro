@@ -5,7 +5,9 @@ import Button from "../components/Button.astro";
 <section class="hero" id="home">
   <div class="container">
     <div class="hero__content">
-      <h1>Design de <span>Logotipo Dinâmico</span> para a sua Marca</h1>
+      <p class="hero__intro">Olá, eu sou</p>
+      <h1 class="hero__name">Alan Ryan <span>da Silva Domingues</span></h1>
+      <h2 class="hero__subtitle">Técnico em Desenvolvimento de Sistemas</h2>
       <Button text="Ver projetos" href="#work" />
     </div>
   </div>
@@ -26,21 +28,44 @@ import Button from "../components/Button.astro";
 
   .hero__content {
     margin-inline: auto;
+    max-width: 800px;
   }
 
-  h1 {
+  .hero__intro {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    color: var(--text-clr-alt, #666);
+  }
+
+  .hero__name {
     font-size: 2.5rem;
-    line-height: 1.3;
-    margin-bottom: 1rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
   }
 
-  span {
+  .hero__name span {
     color: var(--primary-clr-400);
   }
 
+  .hero__subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
   @media (width >= 768px) {
-    h1 {
-      font-size: 3.5rem;
+    .hero__intro {
+      font-size: 1.25rem;
+    }
+    .hero__name {
+      font-size: 4rem;
+    }
+    .hero__subtitle {
+      font-size: 1.75rem;
     }
   }
 </style>
