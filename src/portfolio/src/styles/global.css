@@ -5,7 +5,6 @@
   --secondary-clr-200: #969595;
   --secondary-clr-300: #696969;
   --secondary-clr-400: #262a2c;
-  --secondary-clr-700: #1a1a1a;
   --secondary-clr-900: #131313;
 }
 
@@ -18,8 +17,16 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: var(--secondary-clr-700);
+  background-color: transparent;
   color: var(--secondary-clr-100);
+}
+
+html {
+  background-color: #050505;
+}
+
+main {
+  background: transparent;
 }
 
 img {
@@ -137,7 +144,6 @@ h2 {
 }
 
 .menu {
-  background-color: var(--secondary-clr-700);
   border-left: 1.5px solid var(--secondary-clr-400);
   height: 100%;
   padding-top: 8rem;
