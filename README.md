@@ -1,10 +1,10 @@
-<h1 align="center">
-   Astro - Workspace
-</h1>
+<p align="center">
+    <img src="./resources/images/docs/logotypes/astro-workspace.png" width="150" alt="Logotipo — Astro Workspace" />
+</p>
 
 <div align="center">
 
-![Maintenance](https://img.shields.io/maintenance/yes/2025?style=for-the-badge)
+![Maintenance](https://img.shields.io/maintenance/yes/2026?style=for-the-badge)
 ![License MIT](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
 
 </div>
@@ -20,11 +20,11 @@
 - **[👤 Sobre o Desenvolvedor](#sobre-o-desenvolvedor)**
 - **[📜 Licença](#licenca)**
 
+## Astro Workspace
+
 ## 📖 Descrição <a name="descricao"></a>
 
 Este repositório reúne projetos desenvolvidos com [Astro](https://astro.build/), um framework moderno para criação de sites estáticos e aplicações web rápidas. Cada projeto demonstra diferentes abordagens de design, organização de código e funcionalidades interativas, oferecendo exemplos práticos de como usar Astro em situações reais.
-
-Atualmente, há um projeto de landing page que inclui componentes interativos e layouts responsivos, seguindo boas práticas de desenvolvimento front-end e arquitetura escalável. Este repositório também pode servir como referência para quem deseja aprender Astro, explorar padrões de design e entender como estruturar projetos de forma clara e organizada.
 
 ## 🚀 Projetos <a name="projetos"></a>
 
@@ -33,7 +33,7 @@ Atualmente, há um projeto de landing page que inclui componentes interativos e 
 **📁 Pasta:** `astro-sample/`  
 **🎯 Descrição:** Projeto de exemplo e experimentação com Astro, demonstrando a integração entre componentes React e Astro, uso de Tailwind CSS e estruturação básica de um projeto web moderno.
 
-![Banner - Astro Sample](/resources/images/docs/astro-sample.png)
+![Banner - Astro Sample](/resources/images/docs/project-highlights/astro-sample/astro-sample.png)
 
 #### ✨ Funcionalidades
 
@@ -88,7 +88,7 @@ src/
 **📁 Pasta:** `atarashii-gakko/`  
 **🎯 Descrição:** Clone da landing page oficial do grupo japonês ATARASHII GAKKO!, apresentando sua discografia mais recente, datas da turnê mundial e cadastro de newsletter.
 
-![Banner - Atarashii Gakko](/resources/images/docs/atarashii-gakko.png)
+![Banner - Atarashii Gakko](/resources/images/docs/project-highlights/atarashii-gakko/atarashii-gakko.png)
 
 #### ✨ Funcionalidades
 
@@ -136,7 +136,7 @@ src/
 **📁 Pasta:** `product-management/`  
 **🎯 Descrição:** Sistema completo para cadastro, edição e listagem de produtos, com autenticação de usuários e integração ao Firebase. O projeto utiliza Astro com React, SCSS modular, tipagem TypeScript e layout centralizado, focando em boas práticas de UX e arquitetura escalável.
 
-![Banner - Product Management](/resources/images/docs/product-management.png)
+![Banner - Product Management](/resources/images/docs/project-highlights/product-management/product-management.png)
 
 #### ✨ Funcionalidades
 
@@ -193,7 +193,7 @@ src/
 **📁 Pasta:** `scriptora/`  
 **🎯 Descrição:** Blog e site de conteúdo construído com Astro, focado em publicação de artigos usando as Content Collections do Astro. O projeto reúne um conjunto de componentes reutilizáveis (cards, navbar, busca, paginação), uma API simples de busca (serverless) e uma organização de conteúdo em Markdown para facilitar criação e manutenção editorial.
 
-![Banner - Scriptora](/resources/images/docs/scriptora/scriptora.png)
+![Banner - Scriptora](/resources/images/docs/project-highlights/scriptora/scriptora.png)
 
 #### ✨ Funcionalidades
 
@@ -242,14 +242,12 @@ src/
 
 ## 👤 Sobre o Desenvolvedor <a name="sobre-o-desenvolvedor"></a>
 
-<div align="center">
-
-<table>
+<table align="center">
   <tr>
     <td align="center">
         <br>
         <a href="https://github.com/0nF1REy" target="_blank">
-          <img src="./resources/images/docs/alan-ryan.jpg" height="160" alt="Foto de Alan Ryan">
+          <img src="./resources/images/docs/developer/alan-ryan.jpg" height="160" alt="Foto — Alan Ryan">
         </a>
         </p>
         <a href="https://github.com/0nF1REy" target="_blank">
@@ -284,6 +282,6 @@ src/
 
 Este projeto está sob a **licença MIT**. Consulte o arquivo **[LICENSE](LICENSE)** para obter mais detalhes.
 
-> ℹ️ **Aviso de Licença:** © 2025 Alan Ryan da Silva Domingues. Este projeto está licenciado sob os termos da licença MIT. Isso significa que você pode usá-lo, copiá-lo, modificá-lo e distribuí-lo com liberdade, desde que mantenha os avisos de copyright.
+> ℹ️ **Aviso de Licença:** &copy; 2025-2026 Alan Ryan da Silva Domingues. Este projeto está licenciado sob os termos da licença MIT. Isso significa que você pode usá-lo, copiá-lo, modificá-lo e distribuí-lo com liberdade, desde que mantenha os avisos de copyright.
 
 ⭐ Se este repositório foi útil para você, considere dar uma estrela!
