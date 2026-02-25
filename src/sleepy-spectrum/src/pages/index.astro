@@ -1,10 +1,9 @@
 ---
-import AuthLayout from "@/layouts/AuthLayout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<AuthLayout server:defer title="Welcome - Markdown Converter">
-  <div class="flex items-center justify-center min-h-screen">
-    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900">
-    </div>
+<BaseLayout title="Home">
+  <div class="flex min-h-[70vh] items-center justify-center">
+    <h2 class="text-3xl font-semibold text-neutral-900">Hello World!</h2>
   </div>
-</AuthLayout>
+</BaseLayout>

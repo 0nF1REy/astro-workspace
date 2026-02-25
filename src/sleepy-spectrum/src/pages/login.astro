@@ -3,9 +3,9 @@ import AuthLayout, { appearance } from "@/layouts/AuthLayout.astro";
 import { SignIn } from "@clerk/astro/components";
 ---
 
-<AuthLayout title="Sign In – Markdown Converter">
+<AuthLayout title="Sign In">
   <SignIn
-    forceRedirectUrl="/conversions"
+    forceRedirectUrl="/"
     signUpUrl="/new-account"
     appearance={appearance}
   />

@@ -11,10 +11,7 @@ export const onRequest = clerkMiddleware((auth, context) => {
     return context.redirect("/login");
   }
 
-  if (
-    isAuthenticated &&
-    (path === "/login" || path === "/new-account" || path === "/")
-  ) {
-    return context.redirect("/conversions");
+  if (isAuthenticated && (path === "/login" || path === "/new-account")) {
+    return context.redirect("/");
   }
 });

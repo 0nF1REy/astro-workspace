@@ -20,15 +20,10 @@
 
 :root {
   --bg: 255 255 255;
-  --card: 250 250 250;
   --foreground: 17 24 39;
-  --muted: 100 116 139;
   --primary: 20 184 166;
-  --border: 226 232 240;
-  --glass: 255 255 255 / 0.6;
-  --radius-lg: 0.75rem;
-  --container-max: 1200px;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial;
 }
 
@@ -65,23 +60,13 @@ a:hover {
   text-decoration: underline;
 }
 
-.container {
-  width: 100%;
-  max-width: var(--container-max);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 .bg-grid {
-  background-image: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.02) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-  background-size: 24px 24px, 24px 24px;
+  background-size:
+    24px 24px,
+    24px 24px;
 }
 
 .blob {
@@ -127,55 +112,6 @@ a:hover {
   animation-delay: 2.4s;
 }
 
-#file-upload {
-  background: linear-gradient(
-    135deg,
-    rgba(var(--bg), 0.98),
-    rgba(var(--card), 0.98)
-  );
-  border-radius: var(--radius-lg);
-  border: 1px solid rgb(var(--border));
-  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06);
-}
-
-#file-upload:focus-within {
-  outline: 3px solid rgba(var(--primary), 0.12);
-}
-
-.size-14 {
-  width: 56px;
-  height: 56px;
-}
-
-.text-foreground {
-  color: rgb(var(--foreground));
-}
-.text-muted-foreground {
-  color: rgb(var(--muted));
-}
-
-.bg-card {
-  background-color: rgb(var(--card));
-}
-.border {
-  border-color: rgb(var(--border));
-}
-.border-border {
-  border-color: rgb(var(--border));
-}
-
-.rounded-xl {
-  border-radius: 0.75rem;
-}
-.rounded-2xl {
-  border-radius: 1rem;
-}
-
-.code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono",
-    "Segoe UI Mono", monospace;
-}
-
 button,
 .btn {
   font: inherit;
@@ -188,20 +124,6 @@ button:focus,
 .btn:focus {
   outline: 3px solid rgba(var(--primary), 0.12);
   outline-offset: 2px;
-}
-
-@media (min-width: 768px) {
-  .container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-.card {
-  background: rgb(var(--card));
-  border: 1px solid rgb(var(--border));
-  border-radius: 0.75rem;
-  padding: 1rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
