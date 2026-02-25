@@ -1,28 +1,37 @@
 {
   "name": "clerk-auth",
   "type": "module",
-  "version": "3.0.0",
+  "version": "0.1.0",
+  "description": "Minimal Astro authentication demo using Clerk with protected routes and login/signup flow.",
+  "keywords": [
+    "astro",
+    "clerk",
+    "authentication",
+    "login",
+    "signup",
+    "protected-routes",
+    "astro-auth",
+    "cloudflare"
+  ],
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
-  "keywords": [
-    "astro"
-  ],
   "author": {
     "name": "Alan Ryan da Silva Domingues",
-    "email": "alanryan619@gmail.com"
+    "email": "alanryan619@gmail.com",
+    "url": "https://github.com/0nF1REy"
   },
   "license": "MIT",
-  "homepage": "https://github.com/0nF1REy/astro-projects",
+  "homepage": "https://github.com/0nF1REy/astro-workspace",
   "repository": {
     "type": "git",
-    "url": "https://github.com/0nF1REy/astro-projects.git"
+    "url": "https://github.com/0nF1REy/astro-workspace.git"
   },
   "bugs": {
-    "url": "https://github.com/0nF1REy/astro-projects/issues"
+    "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.10",
