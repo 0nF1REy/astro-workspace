@@ -1,0 +1,71 @@
+---
+interface Props {
+  label: string;
+  url: string;
+  image: string;
+  index: number;
+}
+
+const { label, url, image, index } = Astro.props;
+
+const colors = ["#5ba5d9", "#2e51a2", "#14181c"];
+const bgColor = colors[index] || "#000";
+---
+
+<a
+  href={url}
+  target="_blank"
+  class="card-v2"
+  style={`background-color: ${bgColor}`}
+>
+  <div class="content">
+    <img src={image} alt="" class="logo" />
+    <span class="label">{label}</span>
+  </div>
+</a>
+
+<style lang="scss">
+  .card-v2 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: filter 0.3s ease;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+
+  .label {
+    color: white;
+    font-family: "Lora", serif;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  @media (max-width: 768px) {
+    .card-v2 {
+      padding: 40px 20px;
+    }
+    .label {
+      font-size: 1.5rem;
+    }
+    .logo {
+      width: 45px;
+    }
+  }
+</style>

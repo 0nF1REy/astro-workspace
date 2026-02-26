@@ -1,0 +1,54 @@
+---
+import { PROFILE_DATA } from "../../data/profile";
+import LinkCard from "./LinkCard.astro";
+---
+
+<div class="split-container">
+  <div class="links-side">
+    {
+      PROFILE_DATA.links
+        .slice(0, 3)
+        .map((link, index) => <LinkCard {...link} index={index} />)
+    }
+  </div>
+
+  <div class="image-side">
+    <img src={PROFILE_DATA.avatarUrl} alt={PROFILE_DATA.name} />
+  </div>
+</div>
+
+<style lang="scss">
+  .split-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .links-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .image-side {
+    flex: 1;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .split-container {
+      flex-direction: column-reverse;
+      height: auto;
+      overflow: visible;
+    }
+    .image-side {
+      height: 50vh;
+    }
+  }
+</style>
