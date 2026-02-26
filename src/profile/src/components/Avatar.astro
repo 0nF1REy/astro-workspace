@@ -28,7 +28,9 @@ const { src, alt } = Astro.props;
     border-radius: 50%;
     object-fit: cover;
     z-index: 2;
-    border: 3px solid var(--gintama-black);
+    border: 3px solid var(--gintama-cyan);
+    filter: grayscale(0%);
+    transform: scale(1.05);
     transition: all 0.5s ease;
   }
 
@@ -49,11 +51,5 @@ const { src, alt } = Astro.props;
     to {
       transform: rotate(360deg);
     }
-  }
-
-  .avatar-container:hover .profile-img {
-    filter: grayscale(0%);
-    transform: scale(1.05);
-    border-color: var(--gintama-cyan);
   }
 </style>
