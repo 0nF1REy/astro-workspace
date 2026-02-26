@@ -1,9 +1,3 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ProfileView from "../components/ProfileView.astro";
-import { PROFILE_DATA } from "../data/profile";
+return Astro.redirect("/v1");
 ---
-
-<Layout title={`${PROFILE_DATA.name} // Profile`}>
-  <ProfileView />
-</Layout>
