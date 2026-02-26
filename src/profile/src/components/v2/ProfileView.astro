@@ -13,6 +13,7 @@ import LinkCard from "./LinkCard.astro";
   </div>
 
   <div class="image-side">
+    <div class="image-overlay"></div>
     <img src={PROFILE_DATA.avatarUrl} alt={PROFILE_DATA.name} />
   </div>
 </div>
@@ -23,22 +24,41 @@ import LinkCard from "./LinkCard.astro";
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    background-color: #000;
   }
 
   .links-side {
     flex: 1;
     display: flex;
     flex-direction: column;
+    z-index: 5;
   }
 
   .image-side {
     flex: 1;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
     }
+
+    .image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
+      z-index: 2;
+      pointer-events: none;
+    }
+  }
+
+  .split-container:has(.card-v2:hover) .image-side img {
+    transform: scale(1.05) translateX(10px);
   }
 
   @media (max-width: 768px) {
@@ -48,7 +68,7 @@ import LinkCard from "./LinkCard.astro";
       overflow: visible;
     }
     .image-side {
-      height: 50vh;
+      height: 60vh;
     }
   }
 </style>
