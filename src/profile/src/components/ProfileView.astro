@@ -1,0 +1,100 @@
+---
+import Avatar from "./Avatar.astro";
+import LinkCard from "./LinkCard.astro";
+import { PROFILE_DATA } from "../data/profile";
+---
+
+<main class="profile-viewport">
+  <div class="content-wrapper">
+    <header class="header">
+      <Avatar src={PROFILE_DATA.avatarUrl} alt={PROFILE_DATA.name} />
+      <h1 class="name">{PROFILE_DATA.name}</h1>
+      <p class="slogan">{PROFILE_DATA.slogan}</p>
+    </header>
+
+    <nav class="links-section">
+      {PROFILE_DATA.links.map((link) => <LinkCard {...link} />)}
+    </nav>
+  </div>
+
+  <div class="background-effects">
+    <div class="radial-glow"></div>
+  </div>
+</main>
+
+<style lang="scss">
+  .profile-viewport {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--gintama-bg);
+  }
+
+  .content-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+    text-align: center;
+    animation: slideUpFade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .header {
+    margin-bottom: 2.5rem;
+  }
+
+  .name {
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin: 1.5rem 0 0.5rem;
+    color: var(--gintama-silver);
+    text-shadow: 0 0 15px rgba(243, 244, 246, 0.2);
+  }
+
+  .slogan {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--gintama-cyan);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .background-effects {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .radial-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120vw;
+    height: 120vh;
+    background: radial-gradient(
+      circle at center,
+      rgba(76, 166, 184, 0.08) 0%,
+      transparent 70%
+    );
+  }
+
+  @keyframes slideUpFade {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+}
+const { src, alt } = Astro.props;
+---
+
+<div class="avatar-container">
+  <div class="border-ring"></div>
+  <img src={src} alt={alt} class="profile-img" />
+</div>
+
+<style lang="scss">
+  .avatar-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 2;
+    border: 3px solid var(--gintama-black);
+    transition: all 0.5s ease;
+  }
+
+  .border-ring {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border: 2px dashed var(--gintama-cyan);
+    border-radius: 50%;
+    animation: rotate 20s linear infinite;
+    opacity: 0.5;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .avatar-container:hover .profile-img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+    border-color: var(--gintama-cyan);
+  }
+</style>
