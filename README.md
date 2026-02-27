@@ -17,6 +17,7 @@
   - **[🎭 ATARASHII GAKKO! Landing Page](#atarashii-gakko)**
   - **[🛒 Product Management](#product-management)**
   - **[📝 Scriptora](#scriptora)**
+  - **[👤 Profile](#profile)**
 - **[👤 Sobre o Desenvolvedor](#sobre-o-desenvolvedor)**
 - **[📜 Licença](#licenca)**
 
@@ -239,6 +240,63 @@ src/
 - **Arquitetura orientada a conteúdo:** Separação clara entre conteúdo (Markdown) e apresentação (Astro components)
 - **Performance-first:** Tailwind + Astro para pages leves e rápido Time-to-First-Byte
 - **Experiência editorial:** Fluxo simples para adicionar novos posts via Markdown
+
+---
+
+### 👤 Profile <a name="profile"></a>
+
+**📁 Pasta:** `profile/`  
+**🎯 Descrição:** Página de perfil pessoal construída com Astro, focada em centralizar links externos em uma experiência visual marcante. O projeto possui duas variações de interface (`/v1` e `/v2`) e redireciona a rota principal para a versão padrão.
+
+![Banner - Profile - V1](/resources/images/docs/project-highlights/profile/profile-v1.png)
+![Banner - Profile - V2](/resources/images/docs/project-highlights/profile/profile-v2.png)
+
+#### ✨ Funcionalidades
+
+- **🔁 Redirecionamento Inteligente:** A rota `/` redireciona automaticamente para `/v1`
+- **🧩 Duas Versões de Interface:** `v1` com cards centralizados e `v2` com layout split interativo
+- **🖼️ Avatar e Isotipos:** Exibição de foto de perfil e logos de plataformas sociais
+- **🔗 Link Hub Pessoal:** Atalhos para Rate Your Music, MyAnimeList e Letterboxd
+- **🎨 Identidade Visual Própria:** Tema dark com animações, transições e tipografia customizada
+- **📱 Responsividade:** Adaptação de layout para desktop e mobile
+
+#### 🛠️ Tecnologias Utilizadas
+
+- **Framework:** Astro 5
+- **Estilização:** SCSS/Sass
+- **Ícones:** Font Awesome
+- **Tipagem:** TypeScript (config strict do Astro)
+- **Deploy:** Vercel (adapter configurado)
+
+#### 📂 Estrutura do Projeto
+
+```
+src/
+├── components/
+│   ├── v1/
+│   └── v2/
+├── data/
+├── layouts/
+├── pages/
+└── styles/
+```
+
+#### 🔬 Recursos Demonstrados
+
+- **Arquitetura orientada a dados:** Informações do perfil centralizadas em `src/data/profile.ts`
+- **Componentização por versão:** Separação clara dos componentes de `v1` e `v2`
+- **Layout global reutilizável:** Base compartilhada com controle de scroll por página
+- **Design tokens com SCSS:** Variáveis globais para cores e consistência visual
+- **Deploy-ready:** Projeto pronto para publicação na Vercel
+
+#### 🎨 Características Técnicas
+
+- **Projeto enxuto e focado:** Estrutura simples para manutenção e expansão
+- **Roteamento por arquivos:** Páginas em `src/pages` com comportamento previsível
+- **UI com microinterações:** Hover effects, animações e transições suaves
+- **Separação de responsabilidades:** Dados, layout e componentes organizados por domínio
+
+---
 
 ## 👤 Sobre o Desenvolvedor <a name="sobre-o-desenvolvedor"></a>
 
