@@ -14,4 +14,5 @@ export const menuItems: MenuItem[] = [
   { href: "/goods", id: "jd-goods", label: "Goods" },
   { href: "/movie", id: "jd-movie", label: "Movie" },
   { href: "/special", id: "jd-special", label: "Special" },
+    { href: "/business", id: "jd-business", label: "Business Info" },
 ];
