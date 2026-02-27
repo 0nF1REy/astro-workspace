@@ -2,11 +2,35 @@
   "name": "profile",
   "type": "module",
   "version": "0.2.1",
+  "description": "A personal profile link hub built with Astro, featuring two UI versions and a clean, responsive layout for sharing social platforms.",
+  "keywords": [
+    "astro",
+    "profile",
+    "link-hub",
+    "personal-site",
+    "responsive-design",
+    "scss",
+    "vercel"
+  ],
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
+  },
+  "author": {
+    "name": "Alan Ryan da Silva Domingues",
+    "email": "alanryan619@gmail.com",
+    "url": "https://github.com/0nF1REy"
+  },
+  "license": "MIT",
+  "homepage": "https://alan-ryan-profile.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0nF1REy/astro-workspace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
     "@astrojs/vercel": "^9.0.4",
