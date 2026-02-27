@@ -4,9 +4,10 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 interface Props {
   title?: string;
+  enablePageScroll?: boolean;
 }
 
-const { title = "Profile | Alan Ryan" } = Astro.props;
+const { title = "Profile | Alan Ryan", enablePageScroll = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -25,7 +26,7 @@ const { title = "Profile | Alan Ryan" } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class={enablePageScroll ? "allow-page-scroll" : undefined}>
     <slot />
   </body>
 </html>
@@ -45,5 +46,10 @@ const { title = "Profile | Alan Ryan" } = Astro.props;
 
   * {
     box-sizing: border-box;
+  }
+
+  body.allow-page-scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 </style>
