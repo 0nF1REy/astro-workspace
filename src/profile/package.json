@@ -1,7 +1,7 @@
 {
   "name": "profile",
   "type": "module",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A personal profile link hub built with Astro, featuring two UI versions and a clean, responsive layout for sharing social platforms.",
   "keywords": [
     "astro",
