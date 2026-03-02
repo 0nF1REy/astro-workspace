@@ -10,8 +10,8 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
       <div class="hero__copy">
         <p class="hero__intro">Olá, eu sou</p>
         <h1 class="hero__name">Alan Ryan <span>da Silva Domingues</span></h1>
-        <h2 class="hero__subtitle">
-          Desenvolvedor Full Stack • Técnico em Desenvolvimento de Sistemas
+        <h2 class="hero__subtitle" aria-live="polite">
+          <span class="hero__subtitle-role">Desenvolvedor Full Stack</span>
         </h2>
         <div class="hero__actions">
           <Button text="Ver projetos" href="#work" />
@@ -126,13 +126,23 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
     margin-bottom: 1.75rem;
     opacity: 0.9;
     line-height: 1.45;
+    min-height: 2.1rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .hero__subtitle-role {
+    display: block;
+    font-weight: 600;
+    color: var(--secondary-clr-100);
+    text-align: left;
   }
 
   .hero__actions {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 1.15rem;
   }
 
   .hero__cv {
@@ -142,8 +152,10 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
     border-radius: 5rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      border-color 200ms ease, background-color 200ms ease;
+    transition:
+      transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 200ms ease,
+      background-color 200ms ease;
   }
 
   .hero__cv:hover {
@@ -162,7 +174,9 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
   .hero__social a {
     color: var(--secondary-clr-100);
     font-size: 1.45rem;
-    transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), color 180ms ease;
+    transition:
+      transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      color 180ms ease;
   }
 
   .hero__social a:hover {
@@ -190,6 +204,7 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
 
     .hero__subtitle {
       font-size: clamp(1.2rem, 2vw, 1.65rem);
+      min-height: 2.6rem;
     }
 
     .hero__social {
@@ -206,12 +221,83 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
 <script>
   import { gsap } from "gsap";
 
+  let roleLoop: gsap.core.Animation | null = null;
+
+  function startRoleTextLoop() {
+    const roleElement = document.querySelector(
+      ".hero__subtitle-role",
+    ) as HTMLElement | null;
+
+    if (!roleElement) return;
+
+    if (roleLoop) {
+      roleLoop.kill();
+      roleLoop = null;
+    }
+
+    const roles = [
+      "Desenvolvedor Full Stack",
+      "Técnico em Desenvolvimento de Sistemas",
+    ];
+
+    let roleIndex = 0;
+
+    const cycle = () => {
+      roleLoop = gsap.to(roleElement, {
+        autoAlpha: 0,
+        y: -8,
+        filter: "blur(6px)",
+        duration: 0.35,
+        ease: "power2.out",
+        onComplete: () => {
+          roleIndex = (roleIndex + 1) % roles.length;
+          roleElement.textContent = roles[roleIndex];
+
+          gsap.fromTo(
+            roleElement,
+            {
+              autoAlpha: 0,
+              y: 8,
+              filter: "blur(6px)",
+            },
+            {
+              autoAlpha: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.4,
+              ease: "power2.out",
+              onComplete: () => {
+                roleLoop = gsap.delayedCall(2.4, cycle);
+              },
+            },
+          );
+        },
+      });
+    };
+
+    roleLoop = gsap.delayedCall(2.6, cycle);
+  }
+
   function initHeroAnimation() {
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
+    const roleElement = document.querySelector(
+      ".hero__subtitle-role",
+    ) as HTMLElement | null;
+
+    if (roleLoop) {
+      roleLoop.kill();
+      roleLoop = null;
+    }
+
     if (prefersReducedMotion) {
+      if (roleElement) {
+        roleElement.textContent =
+          "Desenvolvedor Full Stack • Técnico em Desenvolvimento de Sistemas";
+      }
+
       gsap.set(
         [
           ".hero__intro",
@@ -224,9 +310,13 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
         {
           autoAlpha: 1,
           clearProps: "transform,filter,visibility,opacity",
-        }
+        },
       );
       return;
+    }
+
+    if (roleElement) {
+      roleElement.textContent = "Desenvolvedor Full Stack";
     }
 
     gsap.set(".hero__intro", {
@@ -288,7 +378,7 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
           duration: 1,
           ease: "back.out(1.2)",
         },
-        "-=0.5"
+        "-=0.5",
       )
       .to(
         ".hero__name span",
@@ -298,7 +388,7 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
           yoyo: true,
           repeat: 1,
         },
-        "-=0.2"
+        "-=0.2",
       )
       .to(
         ".hero__subtitle",
@@ -308,7 +398,7 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
           filter: "blur(0px)",
           duration: 0.7,
         },
-        "-=0.6"
+        "-=0.6",
       )
       .to(
         ".hero__actions",
@@ -320,7 +410,7 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
           duration: 0.45,
           ease: "back.out(4)",
         },
-        "-=0.3"
+        "-=0.3",
       )
       .to(
         ".hero__media",
@@ -332,7 +422,7 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
           duration: 0.75,
           ease: "power3.out",
         },
-        "-=0.4"
+        "-=0.4",
       )
       .to(
         ".hero__social",
@@ -341,7 +431,7 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
           y: 0,
           duration: 0.45,
         },
-        "-=0.35"
+        "-=0.35",
       )
       .to(".hero__actions", {
         scale: 1,
@@ -365,6 +455,8 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
         yoyo: true,
         repeat: -1,
       });
+
+    startRoleTextLoop();
   }
 
   document.addEventListener("astro:page-load", initHeroAnimation);
