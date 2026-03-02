@@ -10,10 +10,44 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
       <div class="hero__copy">
         <p class="hero__intro">Olá, eu sou</p>
         <h1 class="hero__name">Alan Ryan <span>da Silva Domingues</span></h1>
-        <h2 class="hero__subtitle">Técnico em Desenvolvimento de Sistemas</h2>
+        <h2 class="hero__subtitle">
+          Desenvolvedor Full Stack • Técnico em Desenvolvimento de Sistemas
+        </h2>
         <div class="hero__actions">
           <Button text="Ver projetos" href="#work" />
+          <a
+            class="hero__cv"
+            href="https://www.linkedin.com/in/alan-ryan-b115ba228/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ver currículo no LinkedIn"
+          >
+            Baixar CV
+          </a>
         </div>
+
+        <ul class="hero__social" role="list" aria-label="Redes sociais">
+          <li>
+            <a
+              href="https://github.com/0nF1REy"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/alan-ryan-b115ba228/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
       </div>
 
       <div class="hero__media">
@@ -91,6 +125,49 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
     font-weight: 400;
     margin-bottom: 1.75rem;
     opacity: 0.9;
+    line-height: 1.45;
+  }
+
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .hero__cv {
+    border: 1px solid color-mix(in srgb, var(--primary-clr-400) 70%, #fff 30%);
+    color: var(--secondary-clr-100);
+    padding: 0.7rem 1.25rem;
+    border-radius: 5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 200ms ease, background-color 200ms ease;
+  }
+
+  .hero__cv:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary-clr-400);
+    background-color: rgba(30, 113, 183, 0.12);
+  }
+
+  .hero__social {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.1rem;
+  }
+
+  .hero__social a {
+    color: var(--secondary-clr-100);
+    font-size: 1.45rem;
+    transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), color 180ms ease;
+  }
+
+  .hero__social a:hover {
+    color: var(--primary-clr-400);
+    transform: translateY(-3px);
   }
 
   @media (width >= 768px) {
@@ -115,6 +192,10 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
       font-size: clamp(1.2rem, 2vw, 1.65rem);
     }
 
+    .hero__social {
+      margin-top: 1.2rem;
+    }
+
     .hero__media {
       justify-self: end;
       width: min(100%, 520px);
@@ -137,6 +218,7 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
           ".hero__name",
           ".hero__subtitle",
           ".hero__actions",
+          ".hero__social",
           ".hero__media",
         ],
         {
@@ -177,6 +259,11 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
       x: 40,
       scale: 0.95,
       filter: "blur(8px)",
+    });
+
+    gsap.set(".hero__social", {
+      autoAlpha: 0,
+      y: 14,
     });
 
     const tl = gsap.timeline({
@@ -246,6 +333,15 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
           ease: "power3.out",
         },
         "-=0.4"
+      )
+      .to(
+        ".hero__social",
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.45,
+        },
+        "-=0.35"
       )
       .to(".hero__actions", {
         scale: 1,
