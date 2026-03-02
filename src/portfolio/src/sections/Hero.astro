@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import Button from "../components/Button.astro";
 import HeroImage from "../assets/images/hero/alan-ryan-01.png";
 ---
@@ -51,7 +50,14 @@ import HeroImage from "../assets/images/hero/alan-ryan-01.png";
       </div>
 
       <div class="hero__media">
-        <Image src={HeroImage} alt="Foto de Alan Ryan" width={620} />
+        <img
+          src={HeroImage.src}
+          alt="Foto de Alan Ryan"
+          width={HeroImage.width}
+          height={HeroImage.height}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   </div>

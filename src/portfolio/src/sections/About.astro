@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import Button from "../components/Button.astro";
 import AboutImage from "../assets/images/about/alan-ryan-02.jpg";
 ---
@@ -20,7 +19,14 @@ import AboutImage from "../assets/images/about/alan-ryan-02.jpg";
       </div>
 
       <div class="about__image">
-        <Image src={AboutImage} alt="Foto de Alan Ryan" />
+        <img
+          src={AboutImage.src}
+          alt="Foto de Alan Ryan"
+          width={AboutImage.width}
+          height={AboutImage.height}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   </div>

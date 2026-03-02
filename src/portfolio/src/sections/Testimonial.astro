@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import Person1 from "../assets/images/testimonial/person-01.jpg";
 import Person2 from "../assets/images/testimonial/person-02.png";
 
@@ -46,11 +45,13 @@ const testimonialData = [
             <p class="description">{data.description}</p>
 
             <div class="person">
-              <Image
-                width={500}
-                height={500}
-                src={data.image}
+              <img
+                src={data.image.src}
+                width={data.image.width}
+                height={data.image.height}
                 alt={data.name}
+                loading="lazy"
+                decoding="async"
               />
 
               <div class="name">
