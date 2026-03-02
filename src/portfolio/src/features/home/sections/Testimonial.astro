@@ -23,50 +23,63 @@ const testimonialData = [
 ];
 ---
 
-<section class="testimonial-section pt-section">
-  <div class="content-wrapper">
-    <h2>O que as pessoas estão dizendo</h2>
+<div class="capsule">
+  <section class="testimonial-section pt-section pb-section">
+    <div class="content-wrapper">
+      <h2>O que as pessoas estão dizendo</h2>
 
-    <div class="testimonial-section__grid">
-      {
-        testimonialData.map((data) => (
-          <div class="testimonial">
-            <div class="rating" aria-label={`${data.rating} stars`}>
-              {Array(data.rating)
-                .fill(0)
-                .map((_) => (
-                  <i
-                    class="fas fa-star"
-                    style={{ color: "var(--primary-clr-400)" }}
-                  />
-                ))}
-            </div>
+      <div class="testimonial-section__grid">
+        {
+          testimonialData.map((data) => (
+            <div class="testimonial">
+              <div class="rating" aria-label={`${data.rating} stars`}>
+                {Array(data.rating)
+                  .fill(0)
+                  .map((_) => (
+                    <i
+                      class="fas fa-star"
+                      style={{ color: "var(--primary-clr-400)" }}
+                    />
+                  ))}
+              </div>
 
-            <p class="description">{data.description}</p>
+              <p class="description">{data.description}</p>
 
-            <div class="person">
-              <img
-                src={data.image.src}
-                width={data.image.width}
-                height={data.image.height}
-                alt={data.name}
-                loading="lazy"
-                decoding="async"
-              />
+              <div class="person">
+                <img
+                  src={data.image.src}
+                  width={data.image.width}
+                  height={data.image.height}
+                  alt={data.name}
+                  loading="lazy"
+                  decoding="async"
+                />
 
-              <div class="name">
-                <h4>{data.name}</h4>
-                <p>{data.handle}</p>
+                <div class="name">
+                  <h4>{data.name}</h4>
+                  <p>{data.handle}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <style>
+  .capsule {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--secondary-clr-400);
+    border-bottom: 1px solid var(--secondary-clr-400);
+  }
+
+  .pb-section {
+    padding-bottom: 7rem;
+  }
+
   .testimonial-section {
     position: relative;
     background-color: rgba(17, 24, 39, 0.4) !important;

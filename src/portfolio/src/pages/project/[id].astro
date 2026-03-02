@@ -10,14 +10,26 @@ export async function getStaticPaths() {
 
   return projects.map((project: CollectionEntry<"projects">) => ({
     params: { id: project.id },
-    props: { project },
+    props: {
+      project,
+      otherProjects: projects.filter((item) => item.id !== project.id),
+    },
   }));
 }
 
-const { project } = Astro.props as { project: CollectionEntry<"projects"> };
+const { project, otherProjects } = Astro.props as {
+  project: CollectionEntry<"projects">;
+  otherProjects: CollectionEntry<"projects">[];
+};
 
-const { title, mainImage, otherImages = [], storyTitle, storyContent } =
-  project.data;
+const {
+  title,
+  mainImage,
+  otherImages = [],
+  storyTitle,
+  storyContent,
+} = project.data;
+const relatedProjects = otherProjects.slice(0, 3);
 ---
 
 <Layout {title}>
@@ -66,11 +78,41 @@ const { title, mainImage, otherImages = [], storyTitle, storyContent } =
           </div>
         )
       }
+
+      {
+        relatedProjects.length > 0 && (
+          <div class="project-detail__related pb-section">
+            <h2>Outros projetos</h2>
+
+            <div class="project-detail__related-grid">
+              {relatedProjects.map((item) => (
+                <a
+                  class="project-detail__related-card"
+                  href={`/project/${item.id}`}
+                >
+                  <Image
+                    src={item.data.mainImage}
+                    alt={item.data.title}
+                    widths={[400, 800]}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    loading="lazy"
+                  />
+                  <h3>{item.data.title}</h3>
+                </a>
+              ))}
+            </div>
+          </div>
+        )
+      }
     </div>
   </section>
 </Layout>
 
 <style>
+  .pb-section {
+    padding-bottom: 5rem;
+  }
+
   .project-detail {
     padding-bottom: clamp(1.25rem, 3vw, 2.5rem);
   }
@@ -153,9 +195,52 @@ const { title, mainImage, otherImages = [], storyTitle, storyContent } =
     object-fit: cover;
   }
 
+  .project-detail__related {
+    margin-top: clamp(2rem, 5vw, 3.5rem);
+    padding-top: clamp(1.5rem, 4vw, 2.5rem);
+    border-top: 1px solid var(--secondary-clr-400);
+  }
+
+  .project-detail__related h2 {
+    text-align: left;
+    margin-bottom: clamp(1rem, 2.5vw, 1.8rem);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .project-detail__related-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project-detail__related-card {
+    display: block;
+    color: var(--secondary-clr-100);
+  }
+
+  .project-detail__related-card h3 {
+    margin-top: 0.75rem;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    line-height: 1.35;
+    transition: color 0.25s ease-in-out;
+  }
+
+  .project-detail__related-card:hover h3 {
+    color: var(--primary-clr-400);
+  }
+
+  .project-detail__related-card :global(img) {
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
   @media (width >= 768px) {
     .project-detail__gallery {
       grid-template-columns: repeat(2, 1fr);
+      gap: clamp(1rem, 2vw, 1.5rem);
+    }
+
+    .project-detail__related-grid {
+      grid-template-columns: repeat(3, 1fr);
       gap: clamp(1rem, 2vw, 1.5rem);
     }
   }
