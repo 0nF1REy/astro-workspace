@@ -24,11 +24,11 @@ const testimonialData = [
 ];
 ---
 
-<section class="pt-section">
-  <div class="container">
+<section class="testimonial-section pt-section">
+  <div class="content-wrapper">
     <h2>O que as pessoas estão dizendo</h2>
 
-    <div class="content">
+    <div class="testimonial-section__grid">
       {
         testimonialData.map((data) => (
           <div class="testimonial">
@@ -66,7 +66,7 @@ const testimonialData = [
 </section>
 
 <style>
-  section {
+  .testimonial-section {
     position: relative;
     background-color: rgba(17, 24, 39, 0.4) !important;
     backdrop-filter: blur(1px);
@@ -74,7 +74,7 @@ const testimonialData = [
     overflow: hidden;
   }
 
-  .content {
+  .testimonial-section__grid {
     background:
       linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.85)),
       url("../assets/images/testimonial/bg.png");
@@ -85,17 +85,8 @@ const testimonialData = [
     padding: 2rem;
     border-radius: 1rem;
     position: relative;
-  }
-
-  .content::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 95%;
-    height: 2px;
-    background-color: var(--secondary-clr-300);
+    display: grid;
+    gap: 2rem;
   }
 
   .rating {
@@ -107,7 +98,7 @@ const testimonialData = [
   }
 
   .testimonial:not(:last-child) {
-    margin-bottom: 2.5rem;
+    margin-bottom: 0;
   }
 
   .description {
@@ -137,20 +128,10 @@ const testimonialData = [
   }
 
   @media (width >= 768px) {
-    .content {
-      display: grid;
+    .testimonial-section__grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 3rem;
       padding: 4rem 2.5rem;
-    }
-
-    .content::after {
-      height: 85%;
-      width: 2px;
-    }
-
-    .testimonial:not(:last-child) {
-      margin-bottom: 0;
     }
   }
 </style>

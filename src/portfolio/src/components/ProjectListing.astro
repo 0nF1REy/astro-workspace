@@ -34,6 +34,12 @@ const { title, mainImage, client, work } = project.data;
 </article>
 
 <style>
+  .project {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
   .project:not(:last-child) {
     margin-bottom: 3rem;
   }
@@ -88,5 +94,11 @@ const { title, mainImage, client, work } = project.data;
 
   .details p {
     color: var(--secondary-clr-300);
+  }
+
+  @media (width >= 768px) {
+    .project:not(:last-child) {
+      margin-bottom: 0;
+    }
   }
 </style>

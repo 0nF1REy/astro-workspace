@@ -5,8 +5,8 @@ import AboutImage from "../assets/images/about/alan-ryan-02.jpg";
 ---
 
 <section id="about" class="about pt-section">
-  <div class="container">
-    <div class="grid">
+  <div class="content-wrapper">
+    <div class="about__grid">
       <div class="about__content">
         <h2>Sobre mim</h2>
         <p>
@@ -59,10 +59,13 @@ import AboutImage from "../assets/images/about/alan-ryan-02.jpg";
   .about__content p {
     margin-bottom: 2rem;
     color: var(--secondary-clr-100);
+    line-height: 1.7;
+    max-width: 62ch;
   }
 
   .about__image {
     position: relative;
+    width: min(100%, 460px);
   }
 
   .about__image::before {
@@ -90,6 +93,7 @@ import AboutImage from "../assets/images/about/alan-ryan-02.jpg";
   }
 
   .about__image img {
+    width: 100%;
     border-radius: 0.5rem;
   }
 
@@ -106,10 +110,10 @@ import AboutImage from "../assets/images/about/alan-ryan-02.jpg";
       font-size: 1.1rem;
     }
 
-    .grid {
+    .about__grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 4rem;
+      gap: clamp(2rem, 5vw, 4rem);
       place-items: center;
     }
   }

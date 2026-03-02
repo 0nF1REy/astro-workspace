@@ -32,7 +32,7 @@ const Header = () => {
 
   return (
     <header className={isScrolling ? "header scrolling" : "header"}>
-      <div className="container">
+      <div className="header__wrapper">
         <div className="header__content">
           {/* Logo */}
           <a href="/" className="logo">
@@ -45,6 +45,8 @@ const Header = () => {
           {/* Menu icons */}
           <button
             className="menu-icons"
+            aria-controls="primary-navigation"
+            aria-expanded={isClicked}
             aria-label={`${isClicked ? "Close menu" : "Open menu"}`}
             onClick={handleNavClick}
           >

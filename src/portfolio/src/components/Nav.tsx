@@ -24,7 +24,11 @@ const Nav = ({ isClicked }: { isClicked: boolean }) => {
   };
 
   return (
-    <nav className={`nav ${isClicked ? "showMenu" : ""}`}>
+    <nav
+      id="primary-navigation"
+      aria-label="Navegação principal"
+      className={`nav ${isClicked ? "showMenu" : ""}`}
+    >
       <ul className="menu">
         {links.map(({ label, href, id }) => (
           <li key={label}>

@@ -5,11 +5,11 @@ import ProjectListing from "../components/ProjectListing.astro";
 const projects: CollectionEntry<"projects">[] = await getCollection("projects");
 ---
 
-<section id="work" class="pt-section">
-  <div class="container">
+<section id="work" class="projects pt-section">
+  <div class="content-wrapper">
     <h2>Projetos em Destaque</h2>
 
-    <div class="grid">
+    <div class="projects__grid">
       {
         projects.map((project) => {
           return <ProjectListing project={project} />;
@@ -20,11 +20,15 @@ const projects: CollectionEntry<"projects">[] = await getCollection("projects");
 </section>
 
 <style>
+  .projects__grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
   @media (width >= 768px) {
-    .grid {
-      display: grid;
+    .projects__grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+      gap: clamp(1.5rem, 3vw, 2.25rem);
     }
   }
 </style>
