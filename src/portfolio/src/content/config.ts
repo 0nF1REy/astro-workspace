@@ -7,11 +7,9 @@ const projectCollection = defineCollection({
       client: z.string(),
       work: z.string(),
       mainImage: image(),
-      otherImages: z.array(image()),
+      otherImages: z.array(image()).optional(),
       storyTitle: z.string(),
       storyContent: z.string(),
-      dayOneTitle: z.string(),
-      dayOneContent: z.string(),
     });
   },
 });
