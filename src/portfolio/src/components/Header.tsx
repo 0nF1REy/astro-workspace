@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import Nav from "./Nav";
 
-const Header = () => {
+type HeaderProps = {
+  showNav?: boolean;
+};
+
+const Header = ({ showNav = true }: HeaderProps) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
 
@@ -40,22 +44,24 @@ const Header = () => {
           </a>
 
           {/* Navbar */}
-          <Nav isClicked={isClicked} />
+          {showNav && <Nav isClicked={isClicked} />}
 
           {/* Menu icons */}
-          <button
-            className="menu-icons"
-            aria-controls="primary-navigation"
-            aria-expanded={isClicked}
-            aria-label={`${isClicked ? "Close menu" : "Open menu"}`}
-            onClick={handleNavClick}
-          >
-            {isClicked ? (
-              <i className="fa-solid fa-close" aria-label="true"></i>
-            ) : (
-              <i className="fa-solid fa-bars" aria-label="true"></i>
-            )}
-          </button>
+          {showNav && (
+            <button
+              className="menu-icons"
+              aria-controls="primary-navigation"
+              aria-expanded={isClicked}
+              aria-label={`${isClicked ? "Close menu" : "Open menu"}`}
+              onClick={handleNavClick}
+            >
+              {isClicked ? (
+                <i className="fa-solid fa-close" aria-label="true"></i>
+              ) : (
+                <i className="fa-solid fa-bars" aria-label="true"></i>
+              )}
+            </button>
+          )}
         </div>
       </div>
     </header>
