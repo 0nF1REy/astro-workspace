@@ -26,11 +26,11 @@
     "url": "https://github.com/0nF1REy/astro-projects/issues"
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.0",
-    "@astrojs/vercel": "^8.2.9",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/vercel": "^9.0.4",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
-    "astro": "^5.14.4",
+    "astro": "^5.18.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   }

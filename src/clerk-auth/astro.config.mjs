@@ -9,6 +9,8 @@ import react from "@astrojs/react";
 import svelte from "@astrojs/svelte";
 import tailwindcss from "@tailwindcss/vite";
 
+import vercel from "@astrojs/vercel";
+
 export default defineConfig({
   integrations: [
     clerk({
@@ -20,11 +22,7 @@ export default defineConfig({
     react(),
     svelte(),
   ],
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    },
-  }),
+  adapter: vercel(),
   vite: {
     ssr: {},
     plugins: [tailwindcss()],

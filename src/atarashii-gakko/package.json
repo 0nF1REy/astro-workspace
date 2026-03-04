@@ -27,11 +27,11 @@
     "url": "https://github.com/0nF1REy/astro-projects/issues"
   },
   "dependencies": {
-    "@astrojs/vercel": "^8.2.8",
+    "@astrojs/vercel": "^9.0.4",
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
-    "astro": "^5.14.1"
+    "astro": "^5.18.0"
   },
   "devDependencies": {
     "sass": "^1.93.2"
