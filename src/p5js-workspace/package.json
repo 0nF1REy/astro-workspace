@@ -1,7 +1,7 @@
 {
   "name": "web",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Astro-based landing page for selecting p5.js execution environments (static and dynamic) with a themed UI.",
   "keywords": [
     "astro",
@@ -34,8 +34,8 @@
     "url": "https://github.com/0nF1REy/p5js-workspace/issues"
   },
   "dependencies": {
-    "@astrojs/vercel": "^9.0.4",
-    "astro": "^5.17.1",
+    "@astrojs/vercel": "^10.0.0",
+    "astro": "^6.0.3",
     "sass": "^1.97.3"
   }
 }
