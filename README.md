@@ -18,6 +18,7 @@
   - **[🛒 Product Management](#product-management)**
   - **[📝 Scriptora](#scriptora)**
   - **[👤 Profile](#profile)**
+  - **[🎨 p5.js Workspace](#p5js-workspace)**
 - **[👤 Sobre o Desenvolvedor](#sobre-o-desenvolvedor)**
 - **[📜 Licença](#licenca)**
 
@@ -295,6 +296,55 @@ src/
 - **Roteamento por arquivos:** Páginas em `src/pages` com comportamento previsível
 - **UI com microinterações:** Hover effects, animações e transições suaves
 - **Separação de responsabilidades:** Dados, layout e componentes organizados por domínio
+
+---
+
+### 🎨 p5.js Workspace <a name="p5js-workspace"></a>
+
+**📁 Pasta:** `p5js-workspace/`  
+**🎯 Descrição:** Landing page desenvolvida com Astro para selecionar rapidamente ambientes de execução de sketches p5.js, com foco em navegação direta para variações estática e dinâmica.
+
+![Banner - p5.js Workspace](/resources/images/docs/project-highlights/p5js-workspace/homepage.png)
+
+#### ✨ Funcionalidades
+
+- **🧭 Seletor de Ambientes:** Atalhos rápidos para execuções `STATIC` e `DYNAMIC`
+- **🧱 Arquitetura Enxuta:** Estrutura simples com separação entre layout, componente principal e dados
+- **🧾 Dados Tipados:** Links centralizados em camada TypeScript (`src/data/links.ts`)
+- **🎨 Tema Customizado:** Identidade visual com variáveis SCSS, tipografia externa e efeitos de destaque
+- **📱 Interface Responsiva:** Comportamento adaptado para diferentes tamanhos de tela
+
+#### 🛠️ Tecnologias Utilizadas
+
+- **Framework:** Astro 5
+- **Estilização:** SCSS/Sass
+- **Tipagem:** TypeScript
+- **Deploy:** Vercel (configurado)
+
+#### 📂 Estrutura do Projeto
+
+```
+src/
+├── assets/
+├── components/
+├── data/
+├── layouts/
+├── pages/
+└── styles/
+```
+
+#### 🔬 Recursos Demonstrados
+
+- **Composição orientada a componentes:** Tela principal desacoplada do layout base
+- **Design tokens globais:** Variáveis SCSS para cores e consistência visual
+- **Navegação por dados:** Rotas externas gerenciadas por estrutura tipada
+- **Landing page focada em tarefa:** Fluxo rapido para abrir ambientes de sketch
+
+#### 🎨 Características Técnicas
+
+- **Frontend estático de alta performance:** Build otimizado via Astro
+- **Estrutura manutenível:** Divisão clara entre apresentação e configuração de links
+- **Escalável para novos destinos:** Fácil adição de novos ambientes de execução
 
 ---
 
