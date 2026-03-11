@@ -1,0 +1,17 @@
+// Gintama Core - Theme Variables
+$gintama-black: #0a0a0b;
+$gintama-cyan: #4ca6b8;
+$gintama-silver: #f3f4f6;
+$gintama-bg: hsl(220 18% 10%);
+$card-bg: rgba(255, 255, 255, 0.02);
+$card-border: rgba(76, 166, 184, 0.2);
+
+// Export para CSS Variables (acessíveis globalmente)
+:root {
+  --gintama-black: #{$gintama-black};
+  --gintama-cyan: #{$gintama-cyan};
+  --gintama-silver: #{$gintama-silver};
+  --gintama-bg: #{$gintama-bg};
+  --card-bg: #{$card-bg};
+  --card-border: #{$card-border};
+}

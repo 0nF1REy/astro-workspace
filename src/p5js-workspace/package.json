@@ -1,0 +1,41 @@
+{
+  "name": "web",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Astro-based landing page for selecting p5.js execution environments (static and dynamic) with a themed UI.",
+  "keywords": [
+    "astro",
+    "p5js",
+    "p5.js",
+    "creative-coding",
+    "execution-environment",
+    "landing-page",
+    "scss",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "author": {
+    "name": "Alan Ryan da Silva Domingues",
+    "email": "alanryan619@gmail.com",
+    "url": "https://github.com/0nF1REy"
+  },
+  "license": "MIT",
+  "homepage": "https://p5js-workspace.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0nF1REy/p5js-workspace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0nF1REy/p5js-workspace/issues"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "^9.0.4",
+    "astro": "^5.17.1",
+    "sass": "^1.97.3"
+  }
+}
