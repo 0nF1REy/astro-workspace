@@ -1,10 +1,14 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-
 import react from "@astrojs/react";
 import vercel from "@astrojs/vercel";
+import { viteCleaner } from "./configs/vite-cleaner.mjs";
 
 export default defineConfig({
+  output: "static",
+  integrations: [react()],
+  adapter: vercel(),
+
   server: {
     port: 4321,
   },
@@ -13,7 +17,7 @@ export default defineConfig({
     enabled: false,
   },
 
-  integrations: [react()],
-  output: "server",
-  adapter: vercel(),
+  vite: {
+    ...viteCleaner,
+  },
 });
