@@ -9,6 +9,10 @@ export default defineConfig({
   integrations: [react()],
   adapter: vercel(),
 
+  security: {
+    csp: true,
+  },
+
   server: {
     port: 4321,
   },
