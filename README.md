@@ -37,6 +37,7 @@ Este repositório usa arquivos de **VS Code Multi-Root Workspace** versionados p
 Em vez de executar `code .` dentro de `projects/nome-do-projeto`, abra o arquivo `.code-workspace` do projeto desejado.
 
 ```bash
+make help
 make list
 make open p=astro-blog
 
@@ -55,6 +56,13 @@ Cada workspace abre duas pastas no VS Code:
 - **Git funcional:** o histórico de commits e a view de Source Control continuam apontando para o repositório raiz.
 - **Menos peso:** o workspace oculta e deixa de observar as outras pastas de projeto pela raiz, reduzindo indexação, watchers e ruído.
 - **Mais foco:** a árvore principal fica restrita ao projeto atual, enquanto `docs/` e arquivos globais continuam disponíveis na raiz.
+
+### Comandos úteis
+
+- `make help`: mostra os comandos disponíveis e os atalhos por projeto
+- `make list`: lista os projetos detectados automaticamente
+- `make open p=astro-blog`: abre um projeto pelo nome
+- `make astro-blog`: abre diretamente o atalho do projeto
 
 ### Observação importante
 

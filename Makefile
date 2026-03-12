@@ -1,10 +1,22 @@
+.DEFAULT_GOAL := help
+
 WORKSPACE_DIR := projects
 PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 
-.PHONY: list open \
+.PHONY: help list open \
 	astro-blog astro-sample atarashii-gakko clerk-auth cloudinary-form-upload \
 	jashin-chan-dropkick p5js-workspace portfolio product-management profile scriptora \
 	blog
+
+help:
+	@printf "Uso:\n"
+	@printf "  make list                          Lista os projetos disponiveis\n"
+	@printf "  make open p=<nome-do-projeto>      Abre o workspace de um projeto\n"
+	@printf "  make <nome-do-projeto>             Abre o atalho direto do projeto\n"
+	@printf "\nAtalhos disponiveis:\n"
+	@for project in $(PROJECTS); do printf "  - %s\n" "$$project"; done
+	@printf "\nAlias extras:\n"
+	@printf "  - blog\n"
 
 list:
 	@printf "Projetos disponiveis:\n"
