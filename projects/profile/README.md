@@ -7,8 +7,8 @@ Projeto em **Astro** para página de perfil pessoal com foco em links externos (
 
 A rota `/` redireciona automaticamente para `/v1`.
 
-![Banner - Profile - V1](/resources/images/docs/project-highlights/profile/profile-v1.png)
-![Banner - Profile - V2](/resources/images/docs/project-highlights/profile/profile-v2.png)
+![Banner - Profile - V1](/docs/images/showcases/profile/profile-v1.png)
+![Banner - Profile - V2](/docs/images/showcases/profile/profile-v2.png)
 
 ## Objetivo
 

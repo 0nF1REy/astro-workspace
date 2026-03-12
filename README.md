@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./resources/images/docs/logotypes/astro-workspace.png" width="150" alt="Logotipo — Astro Workspace" />
+    <img src="./docs/images/logotype/astro-workspace.png" width="150" alt="Logotipo — Astro Workspace" />
 </p>
 
 <div align="center">
@@ -35,7 +35,7 @@ Este repositório reúne projetos desenvolvidos com [Astro](https://astro.build/
 **📁 Pasta:** `projects/astro-sample/`  
 **🎯 Descrição:** Projeto de exemplo e experimentação com Astro, demonstrando a integração entre componentes React e Astro, uso de Tailwind CSS e estruturação básica de um projeto web moderno.
 
-![Banner - Astro Sample](/resources/images/docs/project-highlights/astro-sample/astro-sample.png)
+![Banner - Astro Sample](/docs/images/showcases/astro-sample/astro-sample.png)
 
 #### ✨ Funcionalidades
 
@@ -90,7 +90,7 @@ src/
 **📁 Pasta:** `projects/atarashii-gakko/`  
 **🎯 Descrição:** Clone da landing page oficial do grupo japonês ATARASHII GAKKO!, apresentando sua discografia mais recente, datas da turnê mundial e cadastro de newsletter.
 
-![Banner - Atarashii Gakko](/resources/images/docs/project-highlights/atarashii-gakko/atarashii-gakko.png)
+![Banner - Atarashii Gakko](/docs/images/showcases/atarashii-gakko/atarashii-gakko.png)
 
 #### ✨ Funcionalidades
 
@@ -138,7 +138,7 @@ src/
 **📁 Pasta:** `projects/product-management/`  
 **🎯 Descrição:** Sistema completo para cadastro, edição e listagem de produtos, com autenticação de usuários e integração ao Firebase. O projeto utiliza Astro com React, SCSS modular, tipagem TypeScript e layout centralizado, focando em boas práticas de UX e arquitetura escalável.
 
-![Banner - Product Management](/resources/images/docs/project-highlights/product-management/product-management.png)
+![Banner - Product Management](/docs/images/showcases/product-management/product-management.png)
 
 #### ✨ Funcionalidades
 
@@ -195,7 +195,7 @@ src/
 **📁 Pasta:** `projects/scriptora/`  
 **🎯 Descrição:** Blog e site de conteúdo construído com Astro, focado em publicação de artigos usando as Content Collections do Astro. O projeto reúne um conjunto de componentes reutilizáveis (cards, navbar, busca, paginação), uma API simples de busca (serverless) e uma organização de conteúdo em Markdown para facilitar criação e manutenção editorial.
 
-![Banner - Scriptora](/resources/images/docs/project-highlights/scriptora/scriptora.png)
+![Banner - Scriptora](/docs/images/showcases/scriptora/scriptora.png)
 
 #### ✨ Funcionalidades
 
@@ -249,8 +249,8 @@ src/
 **📁 Pasta:** `projects/profile/`  
 **🎯 Descrição:** Página de perfil pessoal construída com Astro, focada em centralizar links externos em uma experiência visual marcante. O projeto possui duas variações de interface (`/v1` e `/v2`) e redireciona a rota principal para a versão padrão.
 
-![Banner - Profile - V1](/resources/images/docs/project-highlights/profile/profile-v1.png)
-![Banner - Profile - V2](/resources/images/docs/project-highlights/profile/profile-v2.png)
+![Banner - Profile - V1](/docs/images/showcases/profile/profile-v1.png)
+![Banner - Profile - V2](/docs/images/showcases/profile/profile-v2.png)
 
 #### ✨ Funcionalidades
 
@@ -304,7 +304,7 @@ src/
 **📁 Pasta:** `projects/p5js-workspace/`  
 **🎯 Descrição:** Landing page desenvolvida com Astro para selecionar rapidamente ambientes de execução de sketches p5.js, com foco em navegação direta para variações estática e dinâmica.
 
-![Banner - p5.js Workspace](/resources/images/docs/project-highlights/p5js-workspace/homepage.png)
+![Banner - p5.js Workspace](/docs/images/showcases/p5js-workspace/homepage.png)
 
 #### ✨ Funcionalidades
 
@@ -355,7 +355,7 @@ src/
     <td align="center">
         <br>
         <a href="https://github.com/0nF1REy" target="_blank">
-          <img src="./resources/images/docs/developer/alan-ryan.jpg" height="160" alt="Foto — Alan Ryan">
+          <img src="./docs/images/developer/alan-ryan.jpg" height="160" alt="Foto — Alan Ryan">
         </a>
         </p>
         <a href="https://github.com/0nF1REy" target="_blank">

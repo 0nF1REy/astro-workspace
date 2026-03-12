@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="../../resources/images/docs/project-highlights/p5js-workspace/logotype.png" width="250" alt="Logotipo — p5.js Workspace" />
+    <img src="../../docs/images/showcases/p5js-workspace/logotype.png" width="250" alt="Logotipo — p5.js Workspace" />
 </p>
 
 <div align="center">
