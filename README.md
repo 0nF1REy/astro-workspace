@@ -28,6 +28,38 @@
 
 Este repositório reúne projetos desenvolvidos com [Astro](https://astro.build/), um framework moderno para criação de sites estáticos e aplicações web rápidas. Cada projeto demonstra diferentes abordagens de design, organização de código e funcionalidades interativas, oferecendo exemplos práticos de como usar Astro em situações reais.
 
+## 🛠️ Ambiente de Desenvolvimento
+
+Este repositório usa arquivos de **VS Code Multi-Root Workspace** versionados para abrir um projeto específico sem perder o Git da raiz.
+
+### Como abrir um projeto
+
+Em vez de executar `code .` dentro de `projects/nome-do-projeto`, abra o arquivo `.code-workspace` do projeto desejado.
+
+```bash
+make list
+make open p=astro-blog
+
+# atalhos prontos
+make blog
+make scriptora
+```
+
+Cada workspace abre duas pastas no VS Code:
+
+- o projeto atual, como pasta principal de trabalho
+- a raiz do repositório, para manter Git, documentação e configurações globais acessíveis
+
+### Por que usar esse fluxo
+
+- **Git funcional:** o histórico de commits e a view de Source Control continuam apontando para o repositório raiz.
+- **Menos peso:** o workspace oculta e deixa de observar as outras pastas de projeto pela raiz, reduzindo indexação, watchers e ruído.
+- **Mais foco:** a árvore principal fica restrita ao projeto atual, enquanto `docs/` e arquivos globais continuam disponíveis na raiz.
+
+### Observação importante
+
+Abrir diretamente uma subpasta com `code .` continua sendo uma sessão focada apenas naquela pasta. Para trabalhar com o Git da raiz e manter o VS Code leve, o fluxo recomendado neste repositório é abrir o arquivo `.code-workspace` correspondente.
+
 ## 🚀 Projetos <a name="projetos"></a>
 
 ### 🧪 Astro Sample <a name="astro-sample"></a>

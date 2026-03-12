@@ -1,0 +1,41 @@
+{
+  "folders": [
+    {
+      "name": "PROJECT: P5JS WORKSPACE",
+      "path": "."
+    },
+    {
+      "name": "REPO ROOT (GIT/DOCS)",
+      "path": "../../"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "projects": true,
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/.astro": true
+    },
+    "search.exclude": {
+      "projects": true,
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/.astro": true
+    },
+    "files.watcherExclude": {
+      "projects/**": true,
+      "**/node_modules/**": true,
+      "**/dist/**": true,
+      "**/.astro/**": true
+    },
+    "git.autoRepositoryDetection": "subFolders",
+    "git.openRepositoryInParentFolders": "always"
+  },
+  "extensions": {
+    "recommendations": [
+      "astro-build.astro-vscode",
+      "esbenp.prettier-vscode",
+      "bradlc.vscode-tailwindcss"
+    ]
+  }
+}
