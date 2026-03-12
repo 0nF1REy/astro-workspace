@@ -1,7 +1,7 @@
 {
   "name": "web",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Astro-based landing page for selecting p5.js execution environments (static and dynamic) with a themed UI.",
   "keywords": [
     "astro",
