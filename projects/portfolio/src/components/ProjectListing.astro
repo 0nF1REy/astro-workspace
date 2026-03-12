@@ -13,7 +13,7 @@ const { title, mainImage, client, work } = project.data;
 
 <article class="project">
   <a class="image" href={`/project/${project.id}`} aria-label={title}>
-    <Image width={500} height={500} src={mainImage} alt={title} />
+    <Image width={900} src={mainImage} alt={title} />
   </a>
 
   <a href={`/project/${project.id}`} class="title" aria-label={title}>
@@ -52,6 +52,8 @@ const { title, mainImage, client, work } = project.data;
     margin-bottom: 1.5rem;
     border-radius: 0.5rem;
     width: 100%;
+    height: auto;
+    max-height: clamp(180px, 24vw, 350px);
   }
 
   .title {
