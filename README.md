@@ -32,7 +32,7 @@ Este repositório reúne projetos desenvolvidos com [Astro](https://astro.build/
 
 ### 🧪 Astro Sample <a name="astro-sample"></a>
 
-**📁 Pasta:** `astro-sample/`  
+**📁 Pasta:** `projects/astro-sample/`  
 **🎯 Descrição:** Projeto de exemplo e experimentação com Astro, demonstrando a integração entre componentes React e Astro, uso de Tailwind CSS e estruturação básica de um projeto web moderno.
 
 ![Banner - Astro Sample](/resources/images/docs/project-highlights/astro-sample/astro-sample.png)
@@ -87,7 +87,7 @@ src/
 
 ### 🎭 ATARASHII GAKKO! Landing Page <a name="atarashii-gakko"></a>
 
-**📁 Pasta:** `atarashii-gakko/`  
+**📁 Pasta:** `projects/atarashii-gakko/`  
 **🎯 Descrição:** Clone da landing page oficial do grupo japonês ATARASHII GAKKO!, apresentando sua discografia mais recente, datas da turnê mundial e cadastro de newsletter.
 
 ![Banner - Atarashii Gakko](/resources/images/docs/project-highlights/atarashii-gakko/atarashii-gakko.png)
@@ -135,7 +135,7 @@ src/
 
 ### 🛒 Product Management <a name="product-management"></a>
 
-**📁 Pasta:** `product-management/`  
+**📁 Pasta:** `projects/product-management/`  
 **🎯 Descrição:** Sistema completo para cadastro, edição e listagem de produtos, com autenticação de usuários e integração ao Firebase. O projeto utiliza Astro com React, SCSS modular, tipagem TypeScript e layout centralizado, focando em boas práticas de UX e arquitetura escalável.
 
 ![Banner - Product Management](/resources/images/docs/project-highlights/product-management/product-management.png)
@@ -192,7 +192,7 @@ src/
 
 ### 📝 Scriptora <a name="scriptora"></a>
 
-**📁 Pasta:** `scriptora/`  
+**📁 Pasta:** `projects/scriptora/`  
 **🎯 Descrição:** Blog e site de conteúdo construído com Astro, focado em publicação de artigos usando as Content Collections do Astro. O projeto reúne um conjunto de componentes reutilizáveis (cards, navbar, busca, paginação), uma API simples de busca (serverless) e uma organização de conteúdo em Markdown para facilitar criação e manutenção editorial.
 
 ![Banner - Scriptora](/resources/images/docs/project-highlights/scriptora/scriptora.png)
@@ -246,7 +246,7 @@ src/
 
 ### 👤 Profile <a name="profile"></a>
 
-**📁 Pasta:** `profile/`  
+**📁 Pasta:** `projects/profile/`  
 **🎯 Descrição:** Página de perfil pessoal construída com Astro, focada em centralizar links externos em uma experiência visual marcante. O projeto possui duas variações de interface (`/v1` e `/v2`) e redireciona a rota principal para a versão padrão.
 
 ![Banner - Profile - V1](/resources/images/docs/project-highlights/profile/profile-v1.png)
@@ -301,7 +301,7 @@ src/
 
 ### 🎨 p5.js Workspace <a name="p5js-workspace"></a>
 
-**📁 Pasta:** `p5js-workspace/`  
+**📁 Pasta:** `projects/p5js-workspace/`  
 **🎯 Descrição:** Landing page desenvolvida com Astro para selecionar rapidamente ambientes de execução de sketches p5.js, com foco em navegação direta para variações estática e dinâmica.
 
 ![Banner - p5.js Workspace](/resources/images/docs/project-highlights/p5js-workspace/homepage.png)

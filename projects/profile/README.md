@@ -83,7 +83,7 @@ As variáveis de tema estão em `src/styles/_variables.scss`.
 
 ## Como rodar localmente
 
-Na raiz do projeto (`src/profile`):
+Na raiz do projeto (`projects/profile`):
 
 ```bash
 npm install
