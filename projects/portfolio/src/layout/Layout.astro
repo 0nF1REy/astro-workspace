@@ -1,4 +1,5 @@
 ---
+import SpeedInsights from "@vercel/speed-insights/astro";
 import "@fontsource/poppins";
 import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import "@fortawesome/fontawesome-free/css/brands.min.css";
@@ -39,6 +40,8 @@ const showHeaderNav = Astro.url.pathname === "/";
       <slot />
     </main>
     <Footer />
+
+    <SpeedInsights />
 
     <style is:global>
       #bg-canvas {

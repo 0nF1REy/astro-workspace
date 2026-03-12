@@ -25,6 +25,8 @@ Este repositório reúne projetos desenvolvidos com [Astro](https://astro.build/
 
 Quer abrir um projeto sem perder o histórico do Git e sem deixar o VS Code pesado? Confira o guia completo em [docs/guides/make-workspaces.md](./docs/guides/make-workspaces.md).
 
+Para auditar os cabeçalhos de segurança HTTP de um site em produção, veja [docs/guides/security-headers.md](./docs/guides/security-headers.md).
+
 Comandos principais:
 
 ```bash

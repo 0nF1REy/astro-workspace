@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "type": "module",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Personal portfolio built with Astro and TypeScript, using Astro Collections for project content and optimized images with astro:assets",
   "scripts": {
     "dev": "astro dev",
@@ -40,6 +40,7 @@
     "@astrojs/vercel": "^10.0.0",
     "@fontsource/poppins": "^5.2.7",
     "@fortawesome/fontawesome-free": "^7.2.0",
+    "@vercel/speed-insights": "^2.0.0",
     "astro": "^6.0.4",
     "gsap": "^3.13.0",
     "react": "^19.2.0",
