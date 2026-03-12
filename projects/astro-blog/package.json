@@ -1,7 +1,7 @@
 {
   "name": "astro-blog",
   "type": "module",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A simple Astro-powered blog featuring reusable components, Markdown posts, global styles, and React integration. Includes sample pages, layouts, and assets for rapid static site development.",
   "scripts": {
     "dev": "astro dev",
