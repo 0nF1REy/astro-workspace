@@ -1,11 +1,13 @@
 {
   "name": "portfolio",
   "type": "module",
-  "version": "5.0.2",
+  "version": "5.1.0",
   "description": "Personal portfolio built with Astro and TypeScript, using Astro Collections for project content and optimized images with astro:assets",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:secure": "npm run build && npm run csp:sync",
+    "csp:sync": "node ./configs/sync-csp.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "lint:css": "stylelint \"src/**/*.{css,astro,html,scss}\" --allow-empty-input",

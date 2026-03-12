@@ -13,6 +13,7 @@ Este guia explica como auditar os cabeçalhos HTTP de segurança de um site em p
 - [O que cada header significa](#o-que-cada-header-significa)
 - [Tabela de notas](#tabela-de-notas)
 - [Onde configurar no projeto](#onde-configurar-no-projeto)
+- [Fluxo de manutenção recomendado](#fluxo-de-manutencao-recomendado)
 - [Importante: cache do scanner](#importante-cache-do-scanner)
 
 ---
@@ -52,9 +53,10 @@ curl -sSI https://alan-ryan.vercel.app/
 
 ```
 HTTP/2 200
-content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline'; ...
+content-security-policy: default-src 'self'; script-src 'self' 'sha256-...'; style-src 'self' 'sha256-...'; ...
 cross-origin-opener-policy: same-origin
 cross-origin-resource-policy: same-origin
+cross-origin-embedder-policy: require-corp
 permissions-policy: camera=(), microphone=(), geolocation=(), browsing-topics=()
 referrer-policy: strict-origin-when-cross-origin
 strict-transport-security: max-age=63072000; includeSubDomains; preload
@@ -178,6 +180,24 @@ export default defineConfig({
 ```
 
 > O `vercel.json` tem prioridade sobre o meta tag do Astro para o header HTTP real. O `csp: true` do Astro serve como fallback e também gera hashes de script automaticamente, o que permite remover `'unsafe-inline'` da CSP futuramente.
+
+---
+
+## Fluxo de manutenção recomendado
+
+Para evitar manutenção manual dos hashes da CSP em cada alteração de build, o projeto possui uma automação dedicada:
+
+- `npm run csp:sync`: lê os hashes CSP gerados no `dist/*.html` e atualiza automaticamente o `Content-Security-Policy` no `vercel.json`
+- `npm run build:secure`: executa `astro build` e, em seguida, sincroniza a CSP automaticamente
+
+Fluxo sugerido antes de publicar:
+
+1. `npm run build:secure`
+2. revisar o diff do `vercel.json`
+3. commitar as alterações
+4. realizar deploy
+
+Com isso, a política continua estrita (sem `unsafe-inline`) e permanece alinhada ao conteúdo real gerado no build.
 
 ---
 
