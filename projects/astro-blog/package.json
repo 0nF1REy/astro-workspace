@@ -1,7 +1,7 @@
 {
   "name": "astro-blog",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A simple Astro-powered blog featuring reusable components, Markdown posts, global styles, and React integration. Includes sample pages, layouts, and assets for rapid static site development.",
   "scripts": {
     "dev": "astro dev",
@@ -26,11 +26,11 @@
     "url": "https://github.com/0nF1REy/astro-projects/issues"
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/vercel": "^9.0.4",
+    "@astrojs/react": "^5.0.0",
+    "@astrojs/vercel": "^10.0.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.1",
-    "astro": "^5.18.0",
+    "astro": "^6.0.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   }
