@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "type": "module",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "description": "Personal portfolio built with Astro and TypeScript, using Astro Collections for project content and optimized images with astro:assets",
   "scripts": {
     "dev": "astro dev",
@@ -36,10 +36,10 @@
     "url": "https://github.com/0nF1REy/astro-projects/issues"
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/vercel": "^9.0.4",
+    "@astrojs/react": "^5.0.0",
+    "@astrojs/vercel": "^10.0.0",
     "@fontsource/poppins": "^5.2.7",
-    "astro": "^5.18.0",
+    "astro": "^6.0.4",
     "gsap": "^3.13.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"

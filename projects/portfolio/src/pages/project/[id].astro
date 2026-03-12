@@ -12,7 +12,9 @@ export async function getStaticPaths() {
     params: { id: project.id },
     props: {
       project,
-      otherProjects: projects.filter((item) => item.id !== project.id),
+      otherProjects: projects.filter(
+        (item: CollectionEntry<"projects">) => item.id !== project.id,
+      ),
     },
   }));
 }
@@ -29,6 +31,7 @@ const {
   storyTitle,
   storyContent,
 } = project.data;
+
 const relatedProjects = otherProjects.slice(0, 3);
 ---
 
@@ -65,7 +68,7 @@ const relatedProjects = otherProjects.slice(0, 3);
       {
         otherImages.length > 0 && (
           <div class="project-detail__gallery">
-            {otherImages.map((image) => (
+            {otherImages.map((image: any) => (
               <Image
                 src={image}
                 alt={title}
@@ -85,7 +88,7 @@ const relatedProjects = otherProjects.slice(0, 3);
             <h2>Outros projetos</h2>
 
             <div class="project-detail__related-grid">
-              {relatedProjects.map((item) => (
+              {relatedProjects.map((item: CollectionEntry<"projects">) => (
                 <a
                   class="project-detail__related-card"
                   href={`/project/${item.id}`}
