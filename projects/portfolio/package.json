@@ -39,6 +39,7 @@
     "@astrojs/react": "^5.0.0",
     "@astrojs/vercel": "^10.0.0",
     "@fontsource/poppins": "^5.2.7",
+    "@fortawesome/fontawesome-free": "^7.2.0",
     "astro": "^6.0.4",
     "gsap": "^3.13.0",
     "react": "^19.2.0",

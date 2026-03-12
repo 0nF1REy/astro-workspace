@@ -1,5 +1,8 @@
 ---
 import "@fontsource/poppins";
+import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
+import "@fortawesome/fontawesome-free/css/brands.min.css";
+import "@fortawesome/fontawesome-free/css/solid.min.css";
 import "../styles/global.css";
 import Header from "../components/Header.tsx";
 import Footer from "../components/Footer.astro";
@@ -25,10 +28,6 @@ const showHeaderNav = Astro.url.pathname === "/";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    />
     <title>{title}</title>
     <ClientRouter />
   </head>
