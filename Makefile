@@ -4,9 +4,9 @@ WORKSPACE_DIR := projects
 PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 
 .PHONY: help list open \
-	astro-blog astro-sample atarashii-gakko clerk-auth cloudinary-form-upload \
+	astro-sample atarashii-gakko clerk-auth cloudinary-form-upload \
 	jashin-chan-dropkick p5js-workspace portfolio product-management profile scriptora \
-	blog
+
 
 help:
 	@printf "Uso:\n"
@@ -15,8 +15,6 @@ help:
 	@printf "  make <nome-do-projeto>             Abre o atalho direto do projeto\n"
 	@printf "\nAtalhos disponiveis:\n"
 	@for project in $(PROJECTS); do printf "  - %s\n" "$$project"; done
-	@printf "\nAlias extras:\n"
-	@printf "  - blog\n"
 
 list:
 	@printf "Projetos disponiveis:\n"
@@ -32,12 +30,6 @@ open:
 		exit 1; \
 	fi
 	@code "$(WORKSPACE_DIR)/$(p)/$(p).code-workspace"
-
-blog:
-	@code "$(WORKSPACE_DIR)/astro-blog/astro-blog.code-workspace"
-
-astro-blog:
-	@code "$(WORKSPACE_DIR)/astro-blog/astro-blog.code-workspace"
 
 astro-sample:
 	@code "$(WORKSPACE_DIR)/astro-sample/astro-sample.code-workspace"

@@ -32,8 +32,8 @@ Comandos principais:
 ```bash
 make help
 make list
-make open p=astro-blog
-make astro-blog
+make open p=scriptora
+make scriptora
 ```
 
 ## 🚀 Projetos <a name="projetos"></a>

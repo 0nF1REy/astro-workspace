@@ -19,10 +19,9 @@ Na raiz do repositório, execute:
 ```bash
 make help
 make list
-make open p=astro-blog
+make open p=scriptora
 
 # atalhos diretos
-make astro-blog
 make scriptora
 make profile
 ```
@@ -46,7 +45,6 @@ Cada arquivo `.code-workspace` abre duas pastas no VS Code:
 - `make list`: lista os projetos detectados automaticamente
 - `make open p=<nome-do-projeto>`: abre um projeto pelo nome
 - `make <nome-do-projeto>`: abre o atalho direto do projeto
-- `make blog`: alias curto para `astro-blog`
 
 ## Observação importante
 
