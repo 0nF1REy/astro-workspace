@@ -40,14 +40,13 @@ make scriptora
 
 Documentação detalhada de cada projeto em [docs/guides/projects.md](./docs/guides/projects.md).
 
-| Projeto                                               | Descrição                                    | Stack                    |
-| ----------------------------------------------------- | -------------------------------------------- | ------------------------ |
-| [🧪 Astro Sample](projects/astro-sample/)             | Experimentos com Astro, React e Tailwind CSS | Astro · React · Tailwind |
-| [🎭 ATARASHII GAKKO!](projects/atarashii-gakko/)      | Clone da landing page do grupo japonês       | Astro · SCSS             |
-| [🛒 Product Management](projects/product-management/) | CRUD de produtos com Firebase Auth           | Astro · React · Firebase |
-| [📝 Scriptora](projects/scriptora/)                   | Blog com Content Collections e busca         | Astro · Tailwind         |
-| [👤 Profile](projects/profile/)                       | Página de perfil com link hub pessoal        | Astro · SCSS             |
-| [🎨 p5.js Workspace](projects/p5js-workspace/)        | Seletor de ambientes para sketches p5.js     | Astro · SCSS             |
+| Projeto                                               | Descrição                                | Stack                    |
+| ----------------------------------------------------- | ---------------------------------------- | ------------------------ |
+| [🎭 ATARASHII GAKKO!](projects/atarashii-gakko/)      | Clone da landing page do grupo japonês   | Astro · SCSS             |
+| [🛒 Product Management](projects/product-management/) | CRUD de produtos com Firebase Auth       | Astro · React · Firebase |
+| [📝 Scriptora](projects/scriptora/)                   | Blog com Content Collections e busca     | Astro · Tailwind         |
+| [👤 Profile](projects/profile/)                       | Página de perfil com link hub pessoal    | Astro · SCSS             |
+| [🎨 p5.js Workspace](projects/p5js-workspace/)        | Seletor de ambientes para sketches p5.js | Astro · SCSS             |
 
 ---
 

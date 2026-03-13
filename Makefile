@@ -4,9 +4,8 @@ WORKSPACE_DIR := projects
 PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 
 .PHONY: help list open \
-	astro-sample atarashii-gakko clerk-auth cloudinary-form-upload \
+	atarashii-gakko clerk-auth cloudinary-form-upload \
 	jashin-chan-dropkick p5js-workspace portfolio product-management profile scriptora \
-
 
 help:
 	@printf "Uso:\n"
@@ -30,9 +29,6 @@ open:
 		exit 1; \
 	fi
 	@code "$(WORKSPACE_DIR)/$(p)/$(p).code-workspace"
-
-astro-sample:
-	@code "$(WORKSPACE_DIR)/astro-sample/astro-sample.code-workspace"
 
 atarashii-gakko:
 	@code "$(WORKSPACE_DIR)/atarashii-gakko/atarashii-gakko.code-workspace"
