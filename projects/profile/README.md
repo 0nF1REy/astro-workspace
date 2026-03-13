@@ -1,4 +1,16 @@
-# Profile
+<p align="center">
+    <img src="../../docs/images/showcases/profile/logotype.png" width="200" alt="Logotipo — Profile" />
+</p>
+
+<div align="center">
+
+![Maintenance](https://img.shields.io/maintenance/yes/2026?style=for-the-badge)
+![License MIT](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/status-finished-brightgreen?style=for-the-badge)
+
+</div>
+
+## 📖 Descrição <a name="descricao"></a>
 
 Projeto em **Astro** para página de perfil pessoal com foco em links externos (Rate Your Music, MyAnimeList e Letterboxd), com duas propostas visuais acessíveis por rota:
 
