@@ -8,16 +8,10 @@ interface Props {
 
 const { label, url, image, index } = Astro.props;
 
-const colors = ["#5ba5d9", "#2e51a2", "#14181c"];
-const bgColor = colors[index] || "#000";
+const variant = index >= 0 && index <= 2 ? index : "default";
 ---
 
-<a
-  href={url}
-  target="_blank"
-  class="card-v2"
-  style={`background-color: ${bgColor}`}
->
+<a href={url} target="_blank" class={`card-v2 card-v2--${variant}`}>
   <div class="content">
     <img src={image} alt="" class="logo" />
     <span class="label">{label}</span>
@@ -30,6 +24,7 @@ const bgColor = colors[index] || "#000";
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #000;
     text-decoration: none;
     position: relative;
     z-index: 1;
@@ -48,6 +43,18 @@ const bgColor = colors[index] || "#000";
         letter-spacing: 4px;
       }
     }
+  }
+
+  .card-v2--0 {
+    background-color: #5ba5d9;
+  }
+
+  .card-v2--1 {
+    background-color: #2e51a2;
+  }
+
+  .card-v2--2 {
+    background-color: #14181c;
   }
 
   .content {
