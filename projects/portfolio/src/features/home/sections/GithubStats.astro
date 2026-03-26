@@ -1,0 +1,283 @@
+---
+interface GithubUser {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+  bio: string;
+  public_repos: number;
+  followers: number;
+}
+
+interface GithubRepo {
+  id: number;
+  name: string;
+  description: string;
+  html_url: string;
+  stargazers_count: number;
+  language: string;
+  updated_at: string;
+}
+
+const GITHUB_USERNAME = "0nF1REy";
+let userData: GithubUser | null = null;
+let repos: GithubRepo[] = [];
+
+try {
+  // Fetch Perfil
+  const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+  if (userRes.ok) userData = await userRes.json();
+
+  // Fetch Repos (Ordenados por atualização, pegando os 4 primeiros)
+  const reposRes = await fetch(
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`
+  );
+  if (reposRes.ok) repos = await reposRes.json();
+} catch (error) {
+  console.error("Erro ao buscar dados do GitHub:", error);
+}
+---
+
+{userData && (
+<div class="capsule">
+  <section id="github" class="github-stats pt-section pb-section">
+    <div class="content-wrapper">
+      <div class="github-stats__header">
+        <h2>Atividade no GitHub</h2>
+        <p class="subtitle">Explorando meus repositórios mais recentes e contribuições open source.</p>
+      </div>
+
+      <div class="github-stats__grid">
+        <!-- Card de Perfil -->
+        <aside class="profile-card">
+          <div class="profile-card__content">
+            <img src={userData.avatar_url} alt={userData.login} class="profile-card__avatar" />
+            <h3>@{userData.login}</h3>
+            <p>{userData.bio}</p>
+            <div class="profile-card__info">
+              <span><strong>{userData.public_repos}</strong> Repos</span>
+              <span><strong>{userData.followers}</strong> Seguidores</span>
+            </div>
+            <a href={userData.html_url} target="_blank" rel="noopener noreferrer" class="github-btn">
+              <i class="fa-brands fa-github"></i> Ver Perfil Completo
+            </a>
+          </div>
+        </aside>
+
+        <!-- Lista de Repos -->
+        <div class="repos-grid">
+          {repos.map((repo) => (
+            <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="repo-card">
+              <div class="repo-card__header">
+                <i class="fa-regular fa-folder-open repo-icon"></i>
+                <span class="repo-lang">{repo.language || 'Markdown'}</span>
+              </div>
+              <h4>{repo.name}</h4>
+              <p>{repo.description || 'Sem descrição disponível.'}</p>
+              <div class="repo-card__footer">
+                <span class="stars">
+                  <i class="fa-regular fa-star"></i> {repo.stargazers_count}
+                </span>
+                <span class="date">
+                  Atualizado em {new Date(repo.updated_at).toLocaleDateString('pt-BR')}
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+)}
+
+<style>
+  .capsule {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--secondary-clr-400);
+    border-bottom: 1px solid var(--secondary-clr-400);
+  }
+
+    .pb-section {
+    padding-bottom: 7rem;
+  }
+
+  .github-stats {
+    position: relative;
+    background-color: rgba(17, 24, 39, 0.4) !important;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
+  }
+
+  .github-stats__header {
+    text-align: center;
+    margin-bottom: 3rem;
+    background:
+      linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.85)),
+      url("../../../assets/images/testimonial/bg.png");
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 1rem;
+    position: relative;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .subtitle {
+    color: var(--secondary-clr-200);
+    margin-top: -1.5rem;
+  }
+
+  .github-stats__grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  /* Profile Card */
+  .profile-card {
+    background: rgba(17, 24, 39, 0.4);
+    border: 1px solid var(--secondary-clr-400);
+    border-radius: 1rem;
+    padding: 3rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    height: fit-content;
+  }
+
+  .profile-card__avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    border: 2px solid var(--primary-clr-400);
+  }
+
+  .profile-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-clr-400);
+  }
+
+  .profile-card p {
+    font-size: 0.95rem;
+    color: var(--secondary-clr-200);
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-card__info {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--secondary-clr-400);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .github-btn:hover {
+    background: var(--primary-clr-400);
+    transform: translateY(-2px);
+  }
+
+  /* Repos Grid */
+  .repos-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .repo-card {
+    background:
+      linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.85)),
+      url("../../../assets/images/testimonial/bg.png");
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--secondary-clr-400);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .repo-card:hover {
+    border-color: var(--primary-clr-400);
+    background: rgba(30, 113, 183, 0.05);
+    transform: translateY(-4px);
+  }
+
+  .repo-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .repo-icon {
+    font-size: 1.2rem;
+    color: var(--primary-clr-400);
+  }
+
+  .repo-lang {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: var(--secondary-clr-400);
+    padding: 0.2rem 0.6rem;
+    border-radius: 1rem;
+    color: var(--secondary-clr-100);
+  }
+
+  .repo-card h4 {
+    margin-bottom: 0.75rem;
+    color: var(--secondary-clr-100);
+  }
+
+  .repo-card p {
+    font-size: 0.85rem;
+    color: var(--secondary-clr-200);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .repo-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--secondary-clr-300);
+  }
+
+  .stars {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  @media (width >= 992px) {
+    .github-stats__grid {
+      grid-template-columns: 320px 1fr;
+    }
+  }
+</style>
