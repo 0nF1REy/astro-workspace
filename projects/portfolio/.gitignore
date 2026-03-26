@@ -23,3 +23,6 @@ pnpm-debug.log*
 
 # Vercel config/cache
 .vercel/
+
+# Context
+contexto.txt
