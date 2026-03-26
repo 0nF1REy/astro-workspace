@@ -36,10 +36,7 @@ const testimonialData = [
                 {Array(data.rating)
                   .fill(0)
                   .map((_) => (
-                    <i
-                      class="fas fa-star"
-                      style={{ color: "var(--primary-clr-400)" }}
-                    />
+                    <i class="fas fa-star star-active" aria-hidden="true" />
                   ))}
               </div>
 
@@ -95,6 +92,10 @@ const testimonialData = [
     position: relative;
     display: grid;
     gap: 2rem;
+  }
+
+  .star-active {
+    color: var(--primary-clr-400) !important;
   }
 
   .rating {
