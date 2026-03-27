@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "type": "module",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "Personal portfolio built with Astro and TypeScript, using Astro Collections for project content and optimized images with astro:assets",
   "scripts": {
     "dev": "astro dev",
