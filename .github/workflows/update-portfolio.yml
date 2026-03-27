@@ -1,0 +1,22 @@
+name: Agendamento de Build do Portfólio
+
+on:
+  # 1. Roda todos os dias à meia-noite
+  schedule:
+    - cron: "0 0 * * *"
+
+  # 2. Roda sempre que você der push em arquivos dentro da pasta do portfólio
+  push:
+    paths:
+      - "projects/portfolio/**"
+
+  # 3. Permite rodar manualmente
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disparar Deploy Hook da Vercel
+        run: |
+          curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK_URL }}"
