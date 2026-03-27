@@ -1,0 +1,187 @@
+---
+import { Image } from "astro:assets";
+
+// Importação do Sol (Tux)
+import TuxIcon from "../../../../assets/images/tech-galaxy/tux.svg";
+
+// Importação dos ícones locais
+import AngularIcon from "../../../../assets/images/tech-galaxy/frameworks/angular.svg";
+import AstroIcon from "../../../../assets/images/tech-galaxy/frameworks/astro.svg";
+import ComposeIcon from "../../../../assets/images/tech-galaxy/frameworks/compose.svg";
+import ElectronIcon from "../../../../assets/images/tech-galaxy/frameworks/electron.svg";
+import NextIcon from "../../../../assets/images/tech-galaxy/frameworks/nextjs.svg";
+import SpringIcon from "../../../../assets/images/tech-galaxy/frameworks/spring-boot.svg";
+
+import FortranIcon from "../../../../assets/images/tech-galaxy/languages/fortran.svg";
+import GoIcon from "../../../../assets/images/tech-galaxy/languages/go.svg";
+import JavaIcon from "../../../../assets/images/tech-galaxy/languages/java.svg";
+import JsIcon from "../../../../assets/images/tech-galaxy/languages/javascript.svg";
+import KotlinIcon from "../../../../assets/images/tech-galaxy/languages/kotlin.svg";
+import TsIcon from "../../../../assets/images/tech-galaxy/languages/typescript.svg";
+
+const innerRing = [
+  { name: "Spring Boot", icon: SpringIcon },
+  { name: "Angular", icon: AngularIcon },
+  { name: "Compose", icon: ComposeIcon },
+  { name: "Astro", icon: AstroIcon },
+  { name: "Next.js", icon: NextIcon },
+  { name: "Electron", icon: ElectronIcon },
+];
+
+const outerRing = [
+  { name: "Fortran", icon: FortranIcon },
+  { name: "Go", icon: GoIcon },
+  { name: "Java", icon: JavaIcon },
+  { name: "TypeScript", icon: TsIcon },
+  { name: "Kotlin", icon: KotlinIcon },
+  { name: "JavaScript", icon: JsIcon },
+];
+---
+
+<div class="capsule">
+  <section id="stack" class="tech-galaxy pt-section pb-section">
+    <div class="content-wrapper">
+      <div class="galaxy__header">
+        <h2>Minha Stack</h2>
+        <p class="subtitle">
+          Principais tecnologias utilizadas por mim.
+        </p>
+      </div>
+
+      <div class="galaxy__container">
+        <!-- O SOL (TUX) -->
+        <div class="galaxy__sun">
+          <Image src={TuxIcon} alt="Linux Core" width={120} height={120} />
+          <div class="sun-glow"></div>
+        </div>
+
+        <!-- Anel Interno -->
+        {
+          innerRing.map((tech) => (
+            <div class="galaxy__item" data-orbit="inner">
+              <Image src={tech.icon} alt={tech.name} width={45} height={45} />
+              <span class="tech-label">{tech.name}</span>
+            </div>
+          ))
+        }
+
+        <!-- Anel Externo -->
+        {
+          outerRing.map((tech) => (
+            <div class="galaxy__item" data-orbit="outer">
+              <Image src={tech.icon} alt={tech.name} width={40} height={40} />
+              <span class="tech-label">{tech.name}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .tech-galaxy {
+    overflow: hidden;
+    perspective: 1000px;
+  }
+
+  .galaxy__header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .galaxy__container {
+    position: relative;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+  }
+
+  /* O SOL */
+  .galaxy__sun {
+    position: relative;
+    z-index: 5;
+    filter: drop-shadow(0 0 25px var(--primary-clr-400));
+    animation: pulse 4s infinite ease-in-out;
+  }
+
+  .sun-image {
+    width: clamp(80px, 10vw, 120px);
+    height: auto;
+  }
+
+  .sun-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(
+      circle,
+      var(--primary-clr-400) 0%,
+      transparent 70%
+    );
+    opacity: 0.3;
+    filter: blur(15px);
+    z-index: -1;
+  }
+
+  /* ITENS EM ÓRBITA */
+  .galaxy__item {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: all;
+    cursor: pointer;
+  }
+
+  .galaxy__item img {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease;
+  }
+
+  .galaxy__item:hover img {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 12px var(--primary-clr-400));
+  }
+
+  .tech-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--secondary-clr-200);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .galaxy__item:hover .tech-label {
+    opacity: 1;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 20px var(--primary-clr-400));
+    }
+    50% {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 40px var(--primary-clr-400));
+    }
+  }
+
+  @media (width < 768px) {
+    .galaxy__container {
+      height: 400px;
+    }
+  }
+</style>
+
+<script>
+  import { initTechGalaxy } from "./tech-galaxy-animation";
+  document.addEventListener("astro:page-load", initTechGalaxy);
+</script>
