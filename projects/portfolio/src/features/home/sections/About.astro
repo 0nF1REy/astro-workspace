@@ -1,10 +1,16 @@
 ---
 import Button from "../../../components/Button.astro";
 import AboutImage from "../../../assets/images/about/alan-ryan-02.jpg";
+
+interface Props {
+  isZebra?: boolean;
+}
+
+const { isZebra = false } = Astro.props;
 ---
 
-<div class="capsule">
-  <section id="about" class="about pt-section pb-section">
+<div class:list={[isZebra && "section-zebra"]}>
+  <section id="about" class="about">
     <div class="content-wrapper">
       <div class="about__grid">
         <div class="about__content">
@@ -35,36 +41,6 @@ import AboutImage from "../../../assets/images/about/alan-ryan-02.jpg";
 </div>
 
 <style>
-  .capsule {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    border-top: 1px solid var(--secondary-clr-400);
-    border-bottom: 1px solid var(--secondary-clr-400);
-  }
-
-  .pb-section {
-    padding-bottom: 7rem;
-  }
-
-  .about {
-    position: relative;
-    background-color: rgba(17, 24, 39, 0.4) !important;
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(10px);
-    overflow: hidden;
-  }
-
-  .about::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background-size: cover;
-    background-position: center;
-    opacity: 0.2;
-    z-index: -1;
-  }
-
   h2 {
     margin-bottom: 1rem;
     color: #fff;

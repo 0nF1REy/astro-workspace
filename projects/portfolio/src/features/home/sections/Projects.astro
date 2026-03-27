@@ -3,21 +3,29 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import ProjectListing from "../../../components/ProjectListing.astro";
 
 const projects: CollectionEntry<"projects">[] = await getCollection("projects");
+
+interface Props {
+  isZebra?: boolean;
+}
+
+const { isZebra = false } = Astro.props;
 ---
 
-<section id="work" class="projects">
-  <div class="content-wrapper">
-    <h2>Projetos em Destaque</h2>
+<div class:list={[isZebra && "section-zebra"]}>
+  <section id="work" class="projects">
+    <div class="content-wrapper">
+      <h2>Projetos em Destaque</h2>
 
-    <div class="projects__grid">
-      {
-        projects.map((project) => {
-          return <ProjectListing project={project} />;
-        })
-      }
+      <div class="projects__grid">
+        {
+          projects.map((project) => {
+            return <ProjectListing project={project} />;
+          })
+        }
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <style>
   .projects__grid {

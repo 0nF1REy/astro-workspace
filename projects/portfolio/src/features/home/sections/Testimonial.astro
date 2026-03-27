@@ -21,10 +21,16 @@ const testimonialData = [
       "Eu estava tendo dificuldade em encontrar um designer que conseguisse capturar a essência da minha marca até conhecer o Alan. O design dele foi exatamente o que eu procurava.",
   },
 ];
+
+interface Props {
+  isZebra?: boolean;
+}
+
+const { isZebra = false } = Astro.props;
 ---
 
-<div class="capsule">
-  <section class="testimonial-section pt-section pb-section">
+<div class:list={[isZebra && "section-zebra"]}>
+  <section class="testimonial-section">
     <div class="content-wrapper">
       <h2>O que as pessoas estão dizendo</h2>
 
@@ -66,19 +72,6 @@ const testimonialData = [
 </div>
 
 <style>
-  .capsule {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .pt-section {
-    padding-top: 1rem;
-  }
-
-  .pb-section {
-    padding-bottom: 7rem;
-  }
-
   .testimonial-section__grid {
     background:
       linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.85)),
