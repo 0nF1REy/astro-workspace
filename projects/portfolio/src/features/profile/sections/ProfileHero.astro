@@ -12,8 +12,8 @@ import ProfileImage from "../../../assets/images/about/alan-ryan-02.jpg";
         <Image src={ProfileImage} alt="Alan Ryan" class="avatar" />
       </div>
       <div class="info">
-        <h1>Alan Ryan da Silva Domingues</h1>
-        <p>Desenvolvedor Full Stack & Técnico em Sistemas</p>
+        <h1 class="name">Alan Ryan da Silva Domingues</h1>
+        <p class="role">Desenvolvedor Full Stack & Técnico em Desenvolvimento de Sistemas</p>
       </div>
     </div>
   </div>
@@ -27,11 +27,7 @@ import ProfileImage from "../../../assets/images/about/alan-ryan-02.jpg";
 
   .wallpaper {
     height: 320px;
-    background: linear-gradient(
-      135deg,
-      #131313 0%,
-      var(--primary-clr-400) 100%
-    );
+    background: linear-gradient(135deg, #131313 0%, var(--primary-clr-400) 100%);
     border-bottom: 1px solid var(--secondary-clr-400);
   }
 
@@ -39,11 +35,10 @@ import ProfileImage from "../../../assets/images/about/alan-ryan-02.jpg";
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -100px;
+    margin-top: -140px;
     text-align: center;
     position: relative;
     z-index: 2;
-    gap: 1.5rem;
   }
 
   .avatar-container {
@@ -51,26 +46,34 @@ import ProfileImage from "../../../assets/images/about/alan-ryan-02.jpg";
     background: #050505;
     border-radius: 50%;
     border: 1px solid var(--secondary-clr-400);
+    margin-bottom: 1.5rem;
   }
 
   .avatar {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid var(--primary-clr-400);
   }
 
-  h1 {
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name {
     font-size: clamp(1.8rem, 4vw, 2.8rem);
-    margin-bottom: 0.5rem;
     color: #fff;
     line-height: 1.1;
     font-weight: 800;
+    margin: 0;
   }
-  p {
+
+  .role {
     color: var(--secondary-clr-200);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    margin: 0;
   }
 
   @media (width >= 768px) {
@@ -79,7 +82,26 @@ import ProfileImage from "../../../assets/images/about/alan-ryan-02.jpg";
       text-align: left;
       align-items: flex-end;
       padding-left: 2rem;
-      margin-top: -110px;
+      margin-top: -125px;
+      gap: 2.5rem;
+    }
+
+    .avatar-container {
+      margin-bottom: 0;
+    }
+
+    .avatar {
+      width: 200px;
+      height: 200px;
+    }
+
+    .name {
+      margin-bottom: 1rem;
+    }
+
+    .role {
+      font-size: 1.2rem;
+      margin-bottom: 3.5rem;
     }
   }
 </style>
