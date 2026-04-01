@@ -61,28 +61,41 @@ const socials = [
 </footer>
 
 <style>
+  footer {
+    position: relative;
+    padding-top: 6rem;
+    background: linear-gradient(10deg, #152037 0%, #0b2666 50%, #1e71b7 100%);
+  }
+
   .contact__content {
     padding-bottom: 0.75rem;
   }
 
   .title {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     text-align: center;
   }
 
   h3 {
-    font-size: 1.25rem;
-    margin: 0 0 0.5rem;
+    font-size: 1.3rem;
+    margin: 0 0 0.75rem;
+    color: #fff;
+    font-weight: 700;
   }
 
   .mail {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.05rem;
+    gap: 0.6rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    color: var(--primary-clr-400);
+    color: #a8b71e;
     text-decoration: none;
+    transition: filter 0.3s ease;
+  }
+
+  .mail:hover {
+    filter: brightness(1.2);
   }
 
   .mail span {
@@ -90,35 +103,38 @@ const socials = [
   }
 
   .logo-footer {
-    height: 100px;
+    height: 85px;
     width: auto;
     display: block;
+    filter: drop-shadow(0 0 10px rgba(30, 113, 183, 0.1));
   }
 
   .address-info {
-    border-top: 1px solid var(--secondary-clr-400);
-    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 3.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
   }
 
   .address-info > div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1.25rem;
   }
 
   .phone {
     color: var(--secondary-clr-100);
     font-size: 1.05rem;
     text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
   }
 
   .phone:hover {
-    color: var(--primary-clr-400);
+    color: #a8b71e;
   }
 
   .social-links {
@@ -126,36 +142,37 @@ const socials = [
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 1rem;
-  }
-
-  .social-links li {
-    display: inline-flex;
+    gap: 1.5rem;
   }
 
   .social-links a {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     color: var(--secondary-clr-100);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition:
+      transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      color 0.3s ease;
   }
 
   .social-links a:hover {
-    color: var(--primary-clr-400);
-    transform: translateY(-2px);
+    color: #a8b71e;
+    transform: translateY(-5px);
   }
 
   .copyright {
-    padding: 1rem 0;
+    padding: 4rem 0 2.5rem;
     text-align: center;
     color: var(--secondary-clr-300);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
   }
 
   @media (width >= 768px) {
     .title {
       text-align: left;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
     }
 
     .address-info {
