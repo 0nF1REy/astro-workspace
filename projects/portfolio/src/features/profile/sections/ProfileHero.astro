@@ -1,0 +1,85 @@
+---
+import { Image } from "astro:assets";
+import ProfileImage from "../../../assets/images/about/alan-ryan-02.jpg";
+---
+
+<section class="profile-hero">
+  <div class="wallpaper"></div>
+
+  <div class="content-wrapper">
+    <div class="profile-header">
+      <div class="avatar-container">
+        <Image src={ProfileImage} alt="Alan Ryan" class="avatar" />
+      </div>
+      <div class="info">
+        <h1>Alan Ryan da Silva Domingues</h1>
+        <p>Desenvolvedor Full Stack & Técnico em Sistemas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .profile-hero {
+    position: relative;
+    padding-bottom: 3rem;
+  }
+
+  .wallpaper {
+    height: 320px;
+    background: linear-gradient(
+      135deg,
+      #131313 0%,
+      var(--primary-clr-400) 100%
+    );
+    border-bottom: 1px solid var(--secondary-clr-400);
+  }
+
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -100px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    gap: 1.5rem;
+  }
+
+  .avatar-container {
+    padding: 6px;
+    background: #050505;
+    border-radius: 50%;
+    border: 1px solid var(--secondary-clr-400);
+  }
+
+  .avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-clr-400);
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 0.5rem;
+    color: #fff;
+    line-height: 1.1;
+    font-weight: 800;
+  }
+  p {
+    color: var(--secondary-clr-200);
+    font-size: 1.2rem;
+  }
+
+  @media (width >= 768px) {
+    .profile-header {
+      flex-direction: row;
+      text-align: left;
+      align-items: flex-end;
+      padding-left: 2rem;
+      margin-top: -110px;
+    }
+  }
+</style>
