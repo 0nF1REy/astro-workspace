@@ -14,8 +14,14 @@ const Nav = ({ isClicked }: { isClicked: boolean }) => {
     const targetElement = document.getElementById(targetId);
 
     if (targetElement) {
+      const headerOffset = 88;
+      const elementTop =
+        targetElement.getBoundingClientRect().top +
+        window.scrollY -
+        headerOffset;
+
       window.scrollTo({
-        top: targetElement.offsetTop - 70,
+        top: elementTop,
         behavior: "smooth",
       });
     }
