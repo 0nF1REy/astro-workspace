@@ -3,9 +3,15 @@ import Nav from "./Nav";
 
 type HeaderProps = {
   showNav?: boolean;
+  backHref?: string;
+  backLabel?: string;
 };
 
-const Header = ({ showNav = true }: HeaderProps) => {
+const Header = ({
+  showNav = true,
+  backHref = "/",
+  backLabel = "Voltar para a home",
+}: HeaderProps) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
 
@@ -44,7 +50,14 @@ const Header = ({ showNav = true }: HeaderProps) => {
           </a>
 
           {/* Navbar */}
-          {showNav && <Nav isClicked={isClicked} />}
+          {showNav ? (
+            <Nav isClicked={isClicked} />
+          ) : (
+            <a href={backHref} className="header__back-link">
+              <i className="fa-solid fa-arrow-left" aria-hidden="true"></i>
+              <span>{backLabel}</span>
+            </a>
+          )}
 
           {/* Menu icons */}
           {showNav && (

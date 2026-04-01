@@ -120,6 +120,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   min-height: 88px;
 }
 
@@ -130,6 +131,23 @@ h2 {
 
 .header__content .logo img {
   width: 90px;
+}
+
+.header__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--secondary-clr-100);
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.header__back-link:hover {
+  color: var(--accent-clr-400);
+  transform: translateX(-2px);
 }
 
 /* icons */
@@ -258,7 +276,6 @@ button:focus-visible {
   box-shadow: 0 8px 20px rgba(30, 113, 183, 0.12);
 }
 
-/* Ensure primary buttons are visible above hero backgrounds and not accidentally hidden */
 .hero .btn,
 .btn {
   display: inline-block;
@@ -281,7 +298,6 @@ button:focus-visible {
   transform: translateY(-3px);
 }
 
-/* Estilo Utilitário para o Padrão Zebra */
 .section-zebra {
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -304,7 +320,6 @@ button:focus-visible {
   z-index: -1;
 }
 
-/* Garante que o padding interno seja consistente em todas as seções zebra */
 .section-zebra section {
   padding-block: 7rem;
   background: transparent !important;

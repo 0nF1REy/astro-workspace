@@ -19,7 +19,7 @@ const {
   description = "Portfólio profissional de Alan Ryan — criação e desenvolvimento de soluções digitais sob medida, com foco em performance e tecnologia web",
 } = Astro.props;
 
-const showHeaderNav = Astro.url.pathname === "/";
+const isHomePage = Astro.url.pathname === "/";
 ---
 
 <html lang="pt-BR">
@@ -35,7 +35,12 @@ const showHeaderNav = Astro.url.pathname === "/";
   <body>
     <canvas id="bg-canvas"></canvas>
 
-    <Header client:load showNav={showHeaderNav} />
+    <Header
+      client:load
+      showNav={isHomePage}
+      backHref="/"
+      backLabel="Voltar para a home"
+    />
     <main>
       <slot />
     </main>
