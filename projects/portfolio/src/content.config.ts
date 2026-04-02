@@ -10,8 +10,8 @@ const projectCollection = defineCollection({
   schema: ({ image }: { image: any }) =>
     z.object({
       title: z.string(),
-      client: z.string(),
-      work: z.string(),
+      client: z.string().optional(),
+      work: z.string().optional(),
       mainImage: image(),
       otherImages: z.array(image()).optional(),
       storyTitle: z.string(),

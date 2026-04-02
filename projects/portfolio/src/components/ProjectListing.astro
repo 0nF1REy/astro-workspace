@@ -19,18 +19,6 @@ const { title, mainImage, client, work } = project.data;
   <a href={`/project/${project.id}`} class="title" aria-label={title}>
     <h3>{title}</h3>
   </a>
-
-  <div class="details">
-    <div class="flex">
-      <p>Cliente:</p>
-      <span>{client}</span>
-    </div>
-
-    <div class="flex">
-      <p>Trabalho:</p>
-      <span>{work}</span>
-    </div>
-  </div>
 </article>
 
 <style>
@@ -80,22 +68,16 @@ const { title, mainImage, client, work } = project.data;
     color: var(--primary-clr-400);
   }
 
+  .project:hover .title {
+    color: var(--accent-clr-400);
+  }
+
+  .project:hover .title::after {
+    background-color: var(--accent-clr-400);
+  }
+
   .title:hover::after {
     transform: translateY(-4px);
-  }
-
-  .flex {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .flex:not(:last-child) {
-    margin-bottom: 0.5rem;
-  }
-
-  .details p {
-    color: var(--secondary-clr-300);
   }
 
   @media (width >= 768px) {

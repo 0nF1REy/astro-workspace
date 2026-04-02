@@ -1,7 +1,5 @@
 {
   "title": "Holographic Hand Study",
-  "client": "Digital Arts Magazine",
-  "work": "3D Visualization",
   "mainImage": "./images/project-1.jpg",
   "otherImages": ["./images/project-1.jpg", "./images/project-3.jpg"],
   "storyTitle": "Project Story",

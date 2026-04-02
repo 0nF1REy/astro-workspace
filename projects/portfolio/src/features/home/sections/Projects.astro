@@ -14,7 +14,7 @@ const { isZebra = false } = Astro.props;
 <div class:list={[isZebra && "section-zebra"]}>
   <section id="work" class="projects">
     <div class="content-wrapper">
-      <h2>Projetos em Destaque</h2>
+      <h2 class="title">Projetos em Destaque</h2>
 
       <div class="projects__grid">
         {
@@ -28,6 +28,10 @@ const { isZebra = false } = Astro.props;
 </div>
 
 <style>
+  .title {
+    color: var(--primary-clr-400);
+  }
+
   .projects__grid {
     display: grid;
     gap: 2.5rem;

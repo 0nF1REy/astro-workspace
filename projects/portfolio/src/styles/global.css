@@ -272,6 +272,8 @@ button:focus-visible {
 }
 
 .btn:hover {
+  color: var(--secondary-clr-900);
+  background-color: var(--accent-clr-400);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(30, 113, 183, 0.12);
 }
@@ -286,6 +288,11 @@ button:focus-visible {
   color: var(--secondary-clr-100);
   opacity: 1;
   visibility: visible;
+}
+
+.hero .btn:hover {
+  color: var(--secondary-clr-900);
+  background-color: var(--accent-clr-400);
 }
 
 .social-links a {
