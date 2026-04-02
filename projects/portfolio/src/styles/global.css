@@ -215,7 +215,7 @@ button:focus-visible {
 }
 
 .menu .active {
-  color: var(--accent-clr-400);
+  color: var(--primary-clr-400);
 }
 
 /* Media query */

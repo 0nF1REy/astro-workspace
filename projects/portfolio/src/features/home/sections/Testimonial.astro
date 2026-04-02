@@ -32,7 +32,7 @@ const { isZebra = false } = Astro.props;
 <div class:list={[isZebra && "section-zebra"]}>
   <section class="testimonial-section">
     <div class="content-wrapper">
-      <h2>O que as pessoas estão dizendo</h2>
+      <h2 class="title">O que as pessoas estão dizendo</h2>
 
       <div class="testimonial-section__grid">
         {
@@ -72,6 +72,10 @@ const { isZebra = false } = Astro.props;
 </div>
 
 <style>
+  .title {
+    color: var(--primary-clr-400);
+  }
+
   .testimonial-section__grid {
     background:
       linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.85)),

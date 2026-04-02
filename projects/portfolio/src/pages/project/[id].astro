@@ -39,14 +39,6 @@ const relatedProjects = otherProjects.slice(0, 3);
   <section class="project-detail pt-section">
     <div class="content-wrapper">
       <div class="project-detail__header">
-        <a
-          class="project-detail__back"
-          href="/#work"
-          aria-label="Retornar à seção de projetos"
-        >
-          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-          Retornar aos projetos
-        </a>
         <h1>{title}</h1>
       </div>
 
@@ -127,23 +119,6 @@ const relatedProjects = otherProjects.slice(0, 3);
     border-bottom: 1px solid var(--secondary-clr-400);
   }
 
-  .project-detail__back {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    margin-bottom: 1rem;
-    color: var(--secondary-clr-200);
-    font-weight: 500;
-    transition:
-      color 0.3s ease-in-out,
-      transform 0.3s ease-in-out;
-  }
-
-  .project-detail__back:hover {
-    color: var(--primary-clr-400);
-    transform: translateX(-2px);
-  }
-
   .project-detail h1 {
     text-align: left;
     margin: 0;
@@ -168,7 +143,7 @@ const relatedProjects = otherProjects.slice(0, 3);
   }
 
   .project-detail__story {
-    max-width: 75ch;
+    width: 100%;
     margin-bottom: clamp(2rem, 4vw, 3rem);
   }
 
