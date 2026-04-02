@@ -33,58 +33,122 @@ const systemData = [
 ];
 ---
 
-<div class="terminal">
-  <div class="terminal__header">
-    <div class="terminal__buttons">
-      <span></span>
-      <span></span>
-      <span></span>
+<div class="terminals-container">
+  <div class="terminal terminal--system">
+    <div class="terminal__header">
+      <div class="terminal__buttons">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="terminal__title">system_diagnostics.sh — 80×24</div>
     </div>
-    <div class="terminal__title">system_info.sh — 80×24</div>
+
+    <div class="terminal__body">
+      <div class="terminal__line">
+        <span class="prompt">alan@portfolio:~$</span>
+        <span class="command">fetch --system-diagnostics</span>
+      </div>
+
+      <div class="terminal__content">
+        {
+          systemData.map((data) => (
+            <div class="info-row">
+              <span class="label">{data.label}:</span>
+              <span
+                class:list={[
+                  "value",
+                  { highlight: data.highlight },
+                  { "status-ok": data.status },
+                ]}
+              >
+                {data.value}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="terminal__line footer-line">
+        <span class="prompt">alan@portfolio:~$</span>
+        <span class="cursor">_</span>
+      </div>
+    </div>
   </div>
 
-  <div class="terminal__body">
-    <div class="terminal__line">
-      <span class="prompt">alan@portfolio:~$</span>
-      <span class="command">fetch --system-diagnostics</span>
+  <div class="terminal terminal--mascot">
+    <div class="terminal__header">
+      <div class="terminal__buttons">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="terminal__title">brew_coffee.sh — 32×10</div>
     </div>
 
-    <div class="terminal__content">
-      {
-        systemData.map((data) => (
-          <div class="info-row">
-            <span class="label">{data.label}:</span>
-            <span
-              class:list={[
-                "value",
-                { highlight: data.highlight },
-                { "status-ok": data.status },
-              ]}
-            >
-              {data.value}
-            </span>
-          </div>
-        ))
-      }
+    <div class="terminal__body terminal__body--mascot">
+      <pre
+        class="coffee-ascii">{`
+( (
+   ) )
+........
+ |      |]
+    \\      /    
+ \`----'
+`}</pre>
+    </div>
+  </div>
+
+  <div class="terminal terminal--aln">
+    <div class="terminal__header">
+      <div class="terminal__buttons">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="terminal__title">display_identity.sh — 32×10</div>
     </div>
 
-    <div class="terminal__line footer-line">
-      <span class="prompt">alan@portfolio:~$</span>
-      <span class="cursor">_</span>
+    <div class="terminal__body terminal__body--aln">
+      <pre
+        class="ascii-art">{`
+█████╗ ██╗     ███╗   ██╗
+██╔══██╗██║     ████╗  ██║
+███████║██║     ██╔██╗ ██║
+██╔══██║██║     ██║╚██╗██║
+██║  ██║███████╗██║ ╚████║
+╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝
+        `}</pre>
     </div>
   </div>
 </div>
 
 <style>
-  .terminal {
-    max-width: 700px;
+  .terminals-container {
+    max-width: 1200px;
     margin: 2rem auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .terminal--system {
+    grid-row: 1 / 3;
+  }
+
+  .terminal {
+    flex: 1;
+    min-width: 300px;
     background: #0d0d0d;
     border-radius: 0.75rem;
     border: 1px solid var(--secondary-clr-400);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     font-family: "Courier New", Courier, monospace;
+    display: flex;
+    flex-direction: column;
   }
 
   .terminal__header {
@@ -128,6 +192,8 @@ const systemData = [
     color: #fff;
     font-size: 0.95rem;
     line-height: 1.6;
+    flex-grow: 1;
+    overflow-y: auto;
   }
 
   .terminal__line {
@@ -195,7 +261,53 @@ const systemData = [
     }
   }
 
+  .terminal__body--mascot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+  }
+
+  .terminal__body--aln {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+  }
+
+  .coffee-ascii {
+    margin: 0;
+    padding: 0;
+    color: var(--primary-clr-400);
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: bold;
+    white-space: pre;
+    text-align: center;
+  }
+
+  .ascii-art {
+    margin: 0;
+    padding: 0.6rem 0;
+    color: var(--primary-clr-400);
+    font-size: 1rem;
+    line-height: 1.2;
+    font-weight: bold;
+    white-space: pre;
+    text-align: center;
+  }
+
   @media (max-width: 600px) {
+    .terminals-container {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+      gap: 1rem;
+    }
+
+    .terminal--system {
+      grid-row: auto;
+    }
+
     .info-row {
       grid-template-columns: 1fr;
       margin-bottom: 0.5rem;
