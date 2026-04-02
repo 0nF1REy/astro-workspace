@@ -1,0 +1,208 @@
+---
+import pkg from "../../../../package.json";
+
+declare const process: {
+  version: string;
+};
+
+const buildDate = new Date().toLocaleString("pt-BR", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+});
+
+const branch = import.meta.env.VERCEL_GIT_COMMIT_REF || "main";
+
+const systemData = [
+  { label: "Project", value: pkg.name },
+  { label: "Version", value: `v${pkg.version}`, highlight: true },
+  { label: "Branch", value: branch },
+  {
+    label: "Environment",
+    value: import.meta.env.PROD ? "production" : "development",
+  },
+  { label: "Astro Core", value: pkg.dependencies.astro },
+  { label: "Build Time", value: buildDate },
+  { label: "Node Runtime", value: process.version },
+  { label: "Platform", value: "Vercel Edge Network" },
+  { label: "License", value: pkg.license },
+  { label: "Status", value: "Operational", status: true },
+];
+---
+
+<div class="terminal">
+  <div class="terminal__header">
+    <div class="terminal__buttons">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="terminal__title">system_info.sh — 80×24</div>
+  </div>
+
+  <div class="terminal__body">
+    <div class="terminal__line">
+      <span class="prompt">alan@portfolio:~$</span>
+      <span class="command">fetch --system-diagnostics</span>
+    </div>
+
+    <div class="terminal__content">
+      {
+        systemData.map((data) => (
+          <div class="info-row">
+            <span class="label">{data.label}:</span>
+            <span
+              class:list={[
+                "value",
+                { highlight: data.highlight },
+                { "status-ok": data.status },
+              ]}
+            >
+              {data.value}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="terminal__line footer-line">
+      <span class="prompt">alan@portfolio:~$</span>
+      <span class="cursor">_</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .terminal {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: #0d0d0d;
+    border-radius: 0.75rem;
+    border: 1px solid var(--secondary-clr-400);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    font-family: "Courier New", Courier, monospace;
+  }
+
+  .terminal__header {
+    background: #1a1a1a;
+    padding: 0.75rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    border-bottom: 1px solid var(--secondary-clr-400);
+  }
+
+  .terminal__buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .terminal__buttons span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .terminal__buttons span:nth-child(1) {
+    background: #ff5f56;
+  }
+  .terminal__buttons span:nth-child(2) {
+    background: #ffbd2e;
+  }
+  .terminal__buttons span:nth-child(3) {
+    background: #27c93f;
+  }
+
+  .terminal__title {
+    color: var(--secondary-clr-300);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .terminal__body {
+    padding: 1.5rem;
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .terminal__line {
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .prompt {
+    color: var(--accent-clr-400);
+    font-weight: bold;
+  }
+  .command {
+    color: #fff;
+  }
+
+  .terminal__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+  }
+
+  .info-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+  }
+
+  .label {
+    color: var(--secondary-clr-300);
+  }
+
+  .value {
+    color: var(--secondary-clr-100);
+  }
+
+  .highlight {
+    color: var(--primary-clr-400);
+    font-weight: bold;
+  }
+
+  .status-ok {
+    color: #27c93f;
+    font-weight: bold;
+  }
+
+  .footer-line {
+    margin-bottom: 0;
+  }
+
+  .cursor {
+    animation: blink 1s step-end infinite;
+    color: var(--primary-clr-400);
+    font-weight: bold;
+  }
+
+  @keyframes blink {
+    from,
+    to {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .info-row {
+      grid-template-columns: 1fr;
+      margin-bottom: 0.5rem;
+    }
+    .label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+  }
+</style>
