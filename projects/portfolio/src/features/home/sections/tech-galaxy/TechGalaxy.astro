@@ -38,43 +38,39 @@ const outerRing = [
 ];
 ---
 
-<div class="capsule">
-  <section id="stack" class="tech-galaxy pt-section pb-section">
-    <div class="content-wrapper">
-      <div class="galaxy__header">
-        <h2>Minha Stack</h2>
-        <p class="subtitle">Principais tecnologias utilizadas por mim.</p>
-      </div>
+<div class="tech-galaxy">
+  <div class="galaxy__header">
+    <h2>Minha Stack</h2>
+    <p class="subtitle">Principais tecnologias utilizadas por mim.</p>
+  </div>
 
-      <div class="galaxy__container">
-        <!-- O SOL (TUX) -->
-        <div class="galaxy__sun">
-          <Image src={TuxIcon} alt="Linux Core" width={120} height={120} />
-          <div class="sun-glow"></div>
-        </div>
-
-        <!-- Anel Interno -->
-        {
-          innerRing.map((tech) => (
-            <div class="galaxy__item" data-orbit="inner">
-              <Image src={tech.icon} alt={tech.name} width={45} height={45} />
-              <span class="tech-label">{tech.name}</span>
-            </div>
-          ))
-        }
-
-        <!-- Anel Externo -->
-        {
-          outerRing.map((tech) => (
-            <div class="galaxy__item" data-orbit="outer">
-              <Image src={tech.icon} alt={tech.name} width={40} height={40} />
-              <span class="tech-label">{tech.name}</span>
-            </div>
-          ))
-        }
-      </div>
+  <div class="galaxy__container">
+    <!-- O SOL (TUX) -->
+    <div class="galaxy__sun">
+      <Image src={TuxIcon} alt="Linux Core" width={120} height={120} />
+      <div class="sun-glow"></div>
     </div>
-  </section>
+
+    <!-- Anel Interno -->
+    {
+      innerRing.map((tech) => (
+        <div class="galaxy__item" data-orbit="inner">
+          <Image src={tech.icon} alt={tech.name} width={45} height={45} />
+          <span class="tech-label">{tech.name}</span>
+        </div>
+      ))
+    }
+
+    <!-- Anel Externo -->
+    {
+      outerRing.map((tech) => (
+        <div class="galaxy__item" data-orbit="outer">
+          <Image src={tech.icon} alt={tech.name} width={40} height={40} />
+          <span class="tech-label">{tech.name}</span>
+        </div>
+      ))
+    }
+  </div>
 </div>
 
 <style>

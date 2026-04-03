@@ -1,43 +1,33 @@
 ---
 import Button from "../../../components/Button.astro";
 import AboutImage from "../../../assets/images/about/alan-ryan-02.jpg";
-
-interface Props {
-  isZebra?: boolean;
-}
-
-const { isZebra = false } = Astro.props;
 ---
 
-<div class:list={[isZebra && "section-zebra"]}>
-  <section id="about" class="about">
-    <div class="content-wrapper">
-      <div class="about__grid">
-        <div class="about__content">
-          <h2>Sobre mim</h2>
-          <p>
-            Olá, sou Alan Ryan — desenvolvedor de sistemas, natural de
-            Itapeva-SP. Tenho interesse por tecnologia e design, buscando sempre
-            unir o lado técnico e humano em meus projetos. Gosto de criar
-            soluções práticas, organizadas e com propósito, explorando o
-            aprendizado constante em programação e inovação digital.
-          </p>
-          <Button text="Conhecer minha trajetória" href="/perfil" />
-        </div>
-
-        <div class="about__image">
-          <img
-            src={AboutImage.src}
-            alt="Foto de Alan Ryan"
-            width={AboutImage.width}
-            height={AboutImage.height}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      </div>
+<div class="about">
+  <div class="about__grid">
+    <div class="about__content">
+      <h2>Sobre mim</h2>
+      <p>
+        Olá, sou Alan Ryan — desenvolvedor de sistemas, natural de Itapeva-SP.
+        Tenho interesse por tecnologia e design, buscando sempre unir o lado
+        técnico e humano em meus projetos. Gosto de criar soluções práticas,
+        organizadas e com propósito, explorando o aprendizado constante em
+        programação e inovação digital.
+      </p>
+      <Button text="Conhecer minha trajetória" href="/perfil" />
     </div>
-  </section>
+
+    <div class="about__image">
+      <img
+        src={AboutImage.src}
+        alt="Foto de Alan Ryan"
+        width={AboutImage.width}
+        height={AboutImage.height}
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
 </div>
 
 <style>

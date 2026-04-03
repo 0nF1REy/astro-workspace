@@ -1,4 +1,5 @@
 ---
+import Section from "../../components/Section.astro";
 import Hero from "./sections/hero/Hero.astro";
 import About from "./sections/About.astro";
 import Projects from "./sections/Projects.astro";
@@ -7,9 +8,24 @@ import GithubStats from "./sections/GithubStats.astro";
 import TechGalaxy from "./sections/tech-galaxy/TechGalaxy.astro";
 ---
 
-<Hero /> 
-<About isZebra={true} /> 
-<TechGalaxy />
-<Projects isZebra={true} />
-<GithubStats />
-<Testimonial isZebra={true} />
+<Hero />
+
+<Section id="about" isZebra={true}>
+  <About />
+</Section>
+
+<Section id="stack">
+  <TechGalaxy />
+</Section>
+
+<Section id="work" isZebra={true}>
+  <Projects />
+</Section>
+
+<Section id="github">
+  <GithubStats />
+</Section>
+
+<Section id="testimonials" isZebra={true}>
+  <Testimonial />
+</Section>

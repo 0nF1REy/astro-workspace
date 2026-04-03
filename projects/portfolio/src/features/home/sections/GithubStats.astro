@@ -38,65 +38,57 @@ try {
 ---
 
 {userData && (
-<div class="capsule">
-  <section id="github" class="github-stats pt-section pb-section">
-    <div class="content-wrapper">
-      <div class="github-stats__header">
-        <h2 class="title">Atividade no GitHub</h2>
-        <p class="subtitle">Explorando meus repositórios mais recentes e contribuições open source.</p>
-      </div>
+<div class="github-stats">
+  <div class="github-stats__header">
+    <h2 class="title">Atividade no GitHub</h2>
+    <p class="subtitle">Explorando meus repositórios mais recentes e contribuições open source.</p>
+  </div>
 
-      <div class="github-stats__grid">
-        <!-- Card de Perfil -->
-        <aside class="profile-card">
-          <div class="profile-card__content">
-            <img src={userData.avatar_url} alt={userData.login} class="profile-card__avatar" />
-            <h3>@{userData.login}</h3>
-            <p>{userData.bio}</p>
-            <div class="profile-card__info">
-              <span><strong>{userData.public_repos}</strong> Repos</span>
-              <span><strong>{userData.followers}</strong> Seguidores</span>
-            </div>
-            <a href={userData.html_url} target="_blank" rel="noopener noreferrer" class="github-btn">
-              <i class="fa-brands fa-github"></i> Ver Perfil Completo
-            </a>
-          </div>
-        </aside>
-
-        <!-- Lista de Repos -->
-        <div class="repos-grid">
-          {repos.map((repo) => (
-            <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="repo-card">
-              <div class="repo-card__header">
-                <i class="fa-regular fa-folder-open repo-icon"></i>
-                <span class="repo-lang">{repo.language || 'Markdown'}</span>
-              </div>
-              <h4>{repo.name}</h4>
-              <p>{repo.description || 'Sem descrição disponível.'}</p>
-              <div class="repo-card__footer">
-                <span class="stars">
-                  <i class="fa-regular fa-star"></i> {repo.stargazers_count}
-                </span>
-                <span class="date">
-                  Atualizado em {new Date(repo.updated_at).toLocaleDateString('pt-BR')}
-                </span>
-              </div>
-            </a>
-          ))}
+  <div class="github-stats__grid">
+    <!-- Card de Perfil -->
+    <aside class="profile-card">
+      <div class="profile-card__content">
+        <img src={userData.avatar_url} alt={userData.login} class="profile-card__avatar" />
+        <h3>@{userData.login}</h3>
+        <p>{userData.bio}</p>
+        <div class="profile-card__info">
+          <span><strong>{userData.public_repos}</strong> Repos</span>
+          <span><strong>{userData.followers}</strong> Seguidores</span>
         </div>
+        <a href={userData.html_url} target="_blank" rel="noopener noreferrer" class="github-btn">
+          <i class="fa-brands fa-github"></i> Ver Perfil Completo
+        </a>
       </div>
+    </aside>
+
+    <!-- Lista de Repos -->
+    <div class="repos-grid">
+      {repos.map((repo) => (
+        <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="repo-card">
+          <div class="repo-card__header">
+            <i class="fa-regular fa-folder-open repo-icon"></i>
+            <span class="repo-lang">{repo.language || 'Markdown'}</span>
+          </div>
+          <h4>{repo.name}</h4>
+          <p>{repo.description || 'Sem descrição disponível.'}</p>
+          <div class="repo-card__footer">
+            <span class="stars">
+              <i class="fa-regular fa-star"></i> {repo.stargazers_count}
+            </span>
+            <span class="date">
+              Atualizado em {new Date(repo.updated_at).toLocaleDateString('pt-BR')}
+            </span>
+          </div>
+        </a>
+      ))}
     </div>
-  </section>
+  </div>
 </div>
 )}
 
 <style>
   .title {
     color: var(--primary-clr-400);
-  }
-
-  .pb-section {
-    padding-bottom: 7rem;
   }
 
   .github-stats__header {

@@ -21,54 +21,44 @@ const testimonialData = [
       "Eu estava tendo dificuldade em encontrar um designer que conseguisse capturar a essência da minha marca até conhecer o Alan. O design dele foi exatamente o que eu procurava.",
   },
 ];
-
-interface Props {
-  isZebra?: boolean;
-}
-
-const { isZebra = false } = Astro.props;
 ---
 
-<div class:list={[isZebra && "section-zebra"]}>
-  <section class="testimonial-section">
-    <div class="content-wrapper">
-      <h2 class="title">O que as pessoas estão dizendo</h2>
+<div class="testimonial-section">
+  <h2 class="title">O que as pessoas estão dizendo</h2>
 
-      <div class="testimonial-section__grid">
-        {
-          testimonialData.map((data) => (
-            <div class="testimonial">
-              <div class="rating" aria-label={`${data.rating} stars`}>
-                {Array(data.rating)
-                  .fill(0)
-                  .map((_) => (
-                    <i class="fas fa-star star-active" aria-hidden="true" />
-                  ))}
-              </div>
+  <div class="testimonial-section__grid">
+    {
+      testimonialData.map((data) => (
+        <div class="testimonial">
+          <div class="rating" aria-label={`${data.rating} stars`}>
+            {Array(data.rating)
+              .fill(0)
+              .map((_) => (
+                <i class="fas fa-star star-active" aria-hidden="true" />
+              ))}
+          </div>
 
-              <p class="description">{data.description}</p>
+          <p class="description">{data.description}</p>
 
-              <div class="person">
-                <img
-                  src={data.image.src}
-                  width={data.image.width}
-                  height={data.image.height}
-                  alt={data.name}
-                  loading="lazy"
-                  decoding="async"
-                />
+          <div class="person">
+            <img
+              src={data.image.src}
+              width={data.image.width}
+              height={data.image.height}
+              alt={data.name}
+              loading="lazy"
+              decoding="async"
+            />
 
-                <div class="name">
-                  <h4>{data.name}</h4>
-                  <p>{data.handle}</p>
-                </div>
-              </div>
+            <div class="name">
+              <h4>{data.name}</h4>
+              <p>{data.handle}</p>
             </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 </div>
 
 <style>
