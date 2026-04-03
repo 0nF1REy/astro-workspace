@@ -67,6 +67,32 @@ const socials = [
     background: linear-gradient(10deg, #152037 0%, #0b2666 50%, #1e71b7 100%);
   }
 
+  footer::before {
+    content: "";
+    position: absolute;
+    top: -2rem;
+    left: 0;
+    width: 100%;
+    height: 2rem;
+    background: linear-gradient(
+      190deg,
+      #ff4d6d 0%,
+      #ff7a59 8%,
+      #ffb347 16%,
+      #ffe066 24%,
+      #8ac926 32%,
+      #2ec4b6 40%,
+      #00bbf9 48%,
+      #3a86ff 56%,
+      #4361ee 64%,
+      #8338ec 72%,
+      #ff006e 80%,
+      #ff4d6d 88%,
+      #1e71b7 100%
+    );
+    pointer-events: none;
+  }
+
   .contact__content {
     padding-bottom: 0.75rem;
   }

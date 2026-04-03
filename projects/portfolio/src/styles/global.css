@@ -317,6 +317,10 @@ button:focus-visible {
   position: relative;
 }
 
+.section-zebra:last-child {
+  margin-bottom: 0;
+}
+
 .section-zebra::before {
   content: "";
   position: absolute;
