@@ -51,7 +51,7 @@
       timeline.fromTo(
         [".hero__content p", ".hero__content a"],
         { y: 18, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.12 }
+        { y: 0, opacity: 1, stagger: 0.12 },
       );
     })();
 
@@ -92,7 +92,7 @@
                 enterAnim.to(
                   img,
                   { scale: 1.03, duration: 0.6, ease: "power2.out" },
-                  0
+                  0,
                 );
             });
             card.addEventListener("mouseleave", () => {
@@ -109,7 +109,7 @@
                 leaveAnim.to(
                   img,
                   { scale: 1, duration: 0.6, ease: "power2.out" },
-                  0
+                  0,
                 );
             });
           });
@@ -140,7 +140,7 @@
       if (!contactRoot) return;
       gsap.fromTo(
         contactRoot.querySelectorAll(
-          ".title, .mail, .social-links li, .address-info"
+          ".title, .mail, .social-links li, .address-info",
         ),
         { y: 28, opacity: 0 },
         {
@@ -155,7 +155,7 @@
           duration: 0.8,
           ease: "power3.out",
           immediateRender: false,
-        }
+        },
       );
     })();
 
@@ -175,6 +175,26 @@
           end: "bottom top",
           scrub: 0.6,
         },
+      });
+    })();
+
+    (function sectionParallax() {
+      if (
+        !(window.matchMedia && window.matchMedia("(min-width: 768px)").matches)
+      )
+        return;
+      const sections = gsap.utils.toArray(".section-zebra");
+      sections.forEach((section) => {
+        gsap.to(section, {
+          backgroundPosition: "center 20%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            end: "bottom 20%",
+            scrub: 0.6,
+          },
+        });
       });
     })();
 

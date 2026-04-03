@@ -7,7 +7,7 @@ interface Props {
 const { id, isZebra = false } = Astro.props;
 ---
 
-<div class:list={["section-outer", { "is-zebra": isZebra }]}>
+<div class:list={["section-outer", { "section-zebra": isZebra }]}>
   <section id={id} class="standard-section">
     <div class="content-wrapper">
       <slot />
@@ -16,15 +16,6 @@ const { id, isZebra = false } = Astro.props;
 </div>
 
 <style>
-  .section-outer.is-zebra {
-    margin-block: 2rem;
-    border-top: 1px solid var(--secondary-clr-400);
-    border-bottom: 1px solid var(--secondary-clr-400);
-    background-color: rgba(17, 24, 39, 0.4);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
   .standard-section {
     padding-block: clamp(4rem, 8vw, 7rem);
     position: relative;
