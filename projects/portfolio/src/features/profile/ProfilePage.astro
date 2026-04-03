@@ -2,6 +2,7 @@
 import Section from "../../components/Section.astro";
 import ProfileHero from "./sections/ProfileHero.astro";
 import ProfileEducation from "./sections/ProfileEducation.astro";
+import ProfileAchievements from "./sections/ProfileAchievements.astro";
 ---
 
 <ProfileHero />
@@ -10,12 +11,6 @@ import ProfileEducation from "./sections/ProfileEducation.astro";
   <ProfileEducation />
 </Section>
 
-<Section id="education" isZebra={true}>
-  <div>
-    <h3>Seção em Construção</h3>
-    <p>
-      Estou preparando um conteúdo detalhado sobre minha trajetória acadêmica.
-      Novidades em breve!
-    </p>
-  </div>
+<Section id="achievements" isZebra={true}>
+  <ProfileAchievements />
 </Section>

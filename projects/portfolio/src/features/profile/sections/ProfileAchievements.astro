@@ -1,0 +1,252 @@
+---
+import { Image } from "astro:assets";
+
+import AspireCertImg from "../../../assets/images/achievements/aspire/aspire-certificate.jpg";
+import AspireAckImg from "../../../assets/images/achievements/aspire/aspire-acknowledgement.jpg";
+
+const achievements = [
+  {
+    title: "Aspire Leaders Program",
+    institution: "Aspire Institute (Founded at Harvard University)",
+    date: "Dezembro 2025",
+    description: "Finalista Global entre 54.337 candidatos (Top 18%).",
+    details:
+      "Programa interdisciplinar focado em liderança, inteligência artificial e impacto social, desenhado por professores da Harvard Business School.",
+    icon: "fa-award",
+    documents: [
+      {
+        name: "Certificado",
+        file: "/documents/achievements/aspire/aspire-certificate.pdf",
+        image: AspireCertImg,
+      },
+      {
+        name: "Reconhecimento",
+        file: "/documents/achievements/aspire/aspire-acknowledgement.pdf",
+        image: AspireAckImg,
+      },
+    ],
+  },
+];
+---
+
+<div class="achievements-header">
+  <i class="fa-solid fa-medal"></i>
+  <h2>Certificações e Conquistas</h2>
+</div>
+
+<div class="achievements-grid">
+  {
+    achievements.map((item) => (
+      <div class="achievement-card">
+        <div class="card-content">
+          <div class="card-main">
+            <div class="achievement-icon">
+              <i class={`fa-solid ${item.icon}`} />
+            </div>
+            <div class="achievement-info">
+              <span class="date">{item.date}</span>
+              <h3>{item.title}</h3>
+              <p class="institution">{item.institution}</p>
+            </div>
+          </div>
+
+          <div class="card-text">
+            <p class="highlight">{item.description}</p>
+            <p>{item.details}</p>
+          </div>
+
+          <div class="documents-preview">
+            {item.documents.map((doc) => (
+              <div class="doc-item">
+                <a href={doc.file} target="_blank" class="image-link">
+                  <div class="image-wrapper">
+                    <div class="zoom-overlay">
+                      <i class="fa-solid fa-magnifying-glass-plus" />
+                    </div>
+                    <Image
+                      src={doc.image}
+                      alt={doc.name}
+                      width={400}
+                      height={280}
+                      class="preview-img"
+                    />
+                  </div>
+                </a>
+                <a href={doc.file} target="_blank" class="pdf-link">
+                  <i class="fa-solid fa-file-pdf" />
+                  <span>{doc.name} (PDF)</span>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .achievements-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .achievements-header i {
+    color: var(--primary-clr-400);
+    font-size: 1.8rem;
+  }
+
+  .achievements-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .achievement-card {
+    background: rgba(17, 24, 39, 0.4);
+    border: 1px solid var(--secondary-clr-400);
+    border-radius: 1rem;
+    padding: 2rem;
+  }
+
+  .card-main {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .achievement-icon {
+    min-width: 60px;
+    height: 60px;
+    background: rgba(168, 183, 30, 0.1);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--accent-clr-400);
+    font-size: 1.6rem;
+    border: 1px solid rgba(168, 183, 30, 0.2);
+  }
+
+  .achievement-info .date {
+    font-size: 0.8rem;
+    color: var(--accent-clr-400);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .achievement-info h3 {
+    font-size: 1.4rem;
+    color: #fff;
+    margin: 0.2rem 0;
+  }
+
+  .achievement-info .institution {
+    color: var(--secondary-clr-200);
+  }
+
+  .card-text {
+    margin-bottom: 2.5rem;
+  }
+
+  .highlight {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text p {
+    color: var(--secondary-clr-200);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .documents-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+  }
+
+  .doc-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .image-wrapper {
+    position: relative;
+    border-radius: 0.5rem;
+    border: 1px solid var(--secondary-clr-400);
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 1.4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .zoom-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 113, 183, 0.4);
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    color: #fff;
+    font-size: 2rem;
+  }
+
+  .image-wrapper:hover .zoom-overlay {
+    opacity: 1;
+  }
+
+  .image-wrapper:hover .preview-img {
+    transform: scale(1.05);
+  }
+
+  .image-wrapper:hover {
+    border-color: var(--primary-clr-400);
+  }
+
+  .pdf-link {
+    font-size: 0.9rem;
+    color: var(--secondary-clr-200);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .pdf-link:hover {
+    color: var(--primary-clr-400);
+  }
+
+  .pdf-link i {
+    font-size: 1.1rem;
+  }
+
+  @media (width >= 768px) {
+    .achievement-card {
+      padding: 2.5rem;
+    }
+
+    .documents-preview {
+      grid-template-columns: repeat(2, 300px);
+    }
+  }
+</style>
