@@ -1,12 +1,29 @@
 ---
 import { Image } from "astro:assets";
 
+import AspireBadgeImg from "../../../assets/images/achievements/aspire/aspire-badge.svg";
 import AspireCertImg from "../../../assets/images/achievements/aspire/aspire-certificate.jpg";
 import AspireAckImg from "../../../assets/images/achievements/aspire/aspire-acknowledgement.jpg";
-import OracleCertImg from "../../../assets/images/achievements/oracle/oci-foundations/oracle-certificate.jpg";
-import OracleBadgeImg from "../../../assets/images/achievements/oracle/oci-foundations/oracle-badge.svg";
 
-const achievements = [
+import OracleBadgeImg from "../../../assets/images/achievements/oracle/oci-foundations/oracle-badge.svg";
+import OracleCertImg from "../../../assets/images/achievements/oracle/oci-foundations/oracle-certificate.jpg";
+
+interface Achievement {
+  title: string;
+  institution: string;
+  date: string;
+  description: string;
+  details: string;
+  badge?: any;
+  icon: string;
+  documents: {
+    name: string;
+    file: string;
+    image: any;
+  }[];
+}
+
+const achievements: Achievement[] = [
   {
     title: "OCI 2025 Certified Foundations Associate",
     institution: "Oracle",
@@ -16,6 +33,7 @@ const achievements = [
     details:
       "Demonstra competência técnica em conceitos core de Oracle Cloud Infrastructure (OCI), abrangendo arquitetura, computação, armazenamento, rede, segurança e conformidade no ambiente de nuvem.",
     badge: OracleBadgeImg,
+    icon: "fa-cloud",
     documents: [
       {
         name: "Certificado",
@@ -31,6 +49,7 @@ const achievements = [
     description: "Finalista Global entre 54.337 candidatos (Top 18%).",
     details:
       "Programa interdisciplinar focado em liderança, inteligência artificial e impacto social, desenhado por professores da Harvard Business School.",
+    badge: AspireBadgeImg,
     icon: "fa-award",
     documents: [
       {
@@ -59,14 +78,18 @@ const achievements = [
       <div class="achievement-card">
         <div class="card-content">
           <div class="card-main">
-            <div class="achievement-visual">
+            <div
+              class="achievement-visual"
+              title={item.badge ? `Selo oficial ${item.title}` : item.title}
+            >
               {item.badge ? (
                 <Image
                   src={item.badge}
-                  alt="Badge"
+                  alt={`Badge oficial da conquista: ${item.title}`}
                   class="badge-img"
-                  width={60}
-                  height={60}
+                  width={65}
+                  height={65}
+                  loading="eager"
                 />
               ) : (
                 <div class="achievement-icon">
@@ -156,8 +179,10 @@ const achievements = [
 
   .achievement-visual {
     min-width: 65px;
+    height: 65px;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   .badge-img {
