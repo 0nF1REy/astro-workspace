@@ -3,8 +3,27 @@ import { Image } from "astro:assets";
 
 import AspireCertImg from "../../../assets/images/achievements/aspire/aspire-certificate.jpg";
 import AspireAckImg from "../../../assets/images/achievements/aspire/aspire-acknowledgement.jpg";
+import OracleCertImg from "../../../assets/images/achievements/oracle/oci-foundations/oracle-certificate.jpg";
+import OracleBadgeImg from "../../../assets/images/achievements/oracle/oci-foundations/oracle-badge.svg";
 
 const achievements = [
+  {
+    title: "OCI 2025 Certified Foundations Associate",
+    institution: "Oracle",
+    date: "Abril 2026",
+    description:
+      "Certificação oficial que valida o conhecimento fundamental em serviços de nuvem pública.",
+    details:
+      "Demonstra competência técnica em conceitos core de Oracle Cloud Infrastructure (OCI), abrangendo arquitetura, computação, armazenamento, rede, segurança e conformidade no ambiente de nuvem.",
+    badge: OracleBadgeImg,
+    documents: [
+      {
+        name: "Certificado",
+        file: "/documents/achievements/oracle/oci-foundations/oracle-certificate.pdf",
+        image: OracleCertImg,
+      },
+    ],
+  },
   {
     title: "Aspire Leaders Program",
     institution: "Aspire Institute (Founded at Harvard University)",
@@ -40,8 +59,20 @@ const achievements = [
       <div class="achievement-card">
         <div class="card-content">
           <div class="card-main">
-            <div class="achievement-icon">
-              <i class={`fa-solid ${item.icon}`} />
+            <div class="achievement-visual">
+              {item.badge ? (
+                <Image
+                  src={item.badge}
+                  alt="Badge"
+                  class="badge-img"
+                  width={60}
+                  height={60}
+                />
+              ) : (
+                <div class="achievement-icon">
+                  <i class={`fa-solid ${item.icon}`} />
+                </div>
+              )}
             </div>
             <div class="achievement-info">
               <span class="date">{item.date}</span>
@@ -112,11 +143,27 @@ const achievements = [
     padding: 2rem;
   }
 
+  .achievement-card:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
   .card-main {
     display: flex;
     gap: 1.5rem;
     align-items: center;
     margin-bottom: 1.5rem;
+  }
+
+  .achievement-visual {
+    min-width: 65px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .badge-img {
+    width: 65px;
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(30, 113, 183, 0.3));
   }
 
   .achievement-icon {
@@ -143,6 +190,7 @@ const achievements = [
     font-size: 1.4rem;
     color: #fff;
     margin: 0.2rem 0;
+    line-height: 1.2;
   }
 
   .achievement-info .institution {
@@ -246,7 +294,7 @@ const achievements = [
     }
 
     .documents-preview {
-      grid-template-columns: repeat(2, 300px);
+      grid-template-columns: repeat(auto-fit, 300px);
     }
   }
 </style>
