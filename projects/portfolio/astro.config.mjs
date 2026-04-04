@@ -4,9 +4,12 @@ import react from "@astrojs/react";
 import vercel from "@astrojs/vercel";
 import { viteCleaner } from "./configs/vite-cleaner.mjs";
 
+import sitemap from "@astrojs/sitemap";
+
 export default defineConfig({
+  site: "https://alan-ryan.vercel.app",
   output: "static",
-  integrations: [react()],
+  integrations: [react(), sitemap()],
   adapter: vercel(),
 
   security: {
