@@ -130,7 +130,10 @@ h2 {
 }
 
 .header__content .logo img {
-  width: 90px;
+  width: auto; 
+  height: 58px; 
+  display: block;
+  object-fit: contain; 
 }
 
 .header__back-link {
