@@ -19,26 +19,14 @@ const socials = [
 <footer id="contact">
   <div class="content-wrapper">
     <div class="contact__content">
-      <div class="title">
-        <h3>Entre em Contato Comigo</h3>
-        <a class="mail" href={`mailto:${email}`} target="_blank">
-          <i class="fa-solid fa-envelope"></i>
-          <span>{email}</span>
-        </a>
-      </div>
-
-      <div class="address-info">
-        <img
-          src="/brand-kit/logo/sm-logo.png"
-          alt="isotipo"
-          class="logo-footer-sm"
-        />
-
-        <img
-          src="/brand-kit/logo/md-logo.png"
-          alt="Alan Ryan"
-          class="logo-footer-md"
-        />
+      <div class="contact__header">
+        <div class="title">
+          <h3>Entre em Contato Comigo</h3>
+          <a class="mail" href={`mailto:${email}`} target="_blank">
+            <i class="fa-solid fa-envelope"></i>
+            <span>{email}</span>
+          </a>
+        </div>
 
         <div class="contact-details">
           <a class="phone" href="tel:+5515996209364">+55 15 99620-9364</a>
@@ -60,6 +48,26 @@ const socials = [
             }
           </ul>
         </div>
+      </div>
+
+      <div class="address-info">
+        <img
+          src="/brand-kit/logo/sm-logo.png"
+          alt="isotipo"
+          class="logo-footer-sm"
+        />
+
+        <img
+          src="/brand-kit/logo/md-logo.png"
+          alt="Alan Ryan"
+          class="logo-footer-md"
+        />
+
+        <img
+          src="/brand-kit/logo/lg-logo.png"
+          alt="Alan Ryan Full Logo"
+          class="logo-footer-lg"
+        />
       </div>
     </div>
 
@@ -107,8 +115,14 @@ const socials = [
     padding-bottom: 0.75rem;
   }
 
-  .title {
+  .contact__header {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     margin-bottom: 3rem;
+  }
+
+  .title {
     text-align: center;
   }
 
@@ -136,27 +150,6 @@ const socials = [
 
   .mail span {
     text-decoration: underline;
-  }
-
-  .logo-footer-sm {
-    height: 80px;
-    width: auto;
-    filter: drop-shadow(0 0 10px rgba(30, 113, 183, 0.1));
-  }
-
-  .logo-footer-md {
-    height: 80px;
-    width: auto;
-    filter: drop-shadow(0 0 10px rgba(30, 113, 183, 0.1));
-  }
-
-  .address-info {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 3.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
   }
 
   .contact-details {
@@ -202,6 +195,24 @@ const socials = [
     transform: translateY(-5px);
   }
 
+  .address-info {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+  }
+
+  .logo-footer-sm,
+  .logo-footer-md,
+  .logo-footer-lg {
+    height: 60px;
+    width: auto;
+    filter: drop-shadow(0 0 10px rgba(30, 113, 183, 0.15));
+  }
+
   .copyright {
     padding: 4rem 0 2.5rem;
     text-align: center;
@@ -211,8 +222,18 @@ const socials = [
   }
 
   @media (width >= 768px) {
+    .contact__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
     .title {
       text-align: left;
+    }
+
+    .contact-details {
+      align-items: flex-end;
     }
 
     .address-info {
@@ -220,14 +241,16 @@ const socials = [
       justify-content: space-between;
     }
 
-    .contact-details {
-      align-items: flex-end;
-    }
-
     .logo-footer-md {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
+    }
+
+    .logo-footer-sm,
+    .logo-footer-md,
+    .logo-footer-lg {
+      height: 70px;
     }
   }
 </style>
