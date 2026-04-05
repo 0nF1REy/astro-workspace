@@ -28,9 +28,19 @@ const socials = [
       </div>
 
       <div class="address-info">
-        <img src="/favicon.png" alt="logotipo" class="logo-footer" />
+        <img
+          src="/brand-kit/logo/sm-logo.png"
+          alt="isotipo"
+          class="logo-footer-sm"
+        />
 
-        <div>
+        <img
+          src="/brand-kit/logo/md-logo.svg"
+          alt="Alan Ryan"
+          class="logo-footer-md"
+        />
+
+        <div class="contact-details">
           <a class="phone" href="tel:+5515996209364">+55 15 99620-9364</a>
 
           <ul class="social-links" role="list">
@@ -128,10 +138,15 @@ const socials = [
     text-decoration: underline;
   }
 
-  .logo-footer {
-    height: 85px;
+  .logo-footer-sm {
+    height: 80px;
     width: auto;
-    display: block;
+    filter: drop-shadow(0 0 10px rgba(30, 113, 183, 0.1));
+  }
+
+  .logo-footer-md {
+    height: 80px;
+    width: auto;
     filter: drop-shadow(0 0 10px rgba(30, 113, 183, 0.1));
   }
 
@@ -141,10 +156,10 @@ const socials = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
-  .address-info > div {
+  .contact-details {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -198,17 +213,21 @@ const socials = [
   @media (width >= 768px) {
     .title {
       text-align: left;
-      margin-bottom: 2.5rem;
     }
 
     .address-info {
       flex-direction: row;
-      align-items: center;
       justify-content: space-between;
     }
 
-    .address-info > div {
+    .contact-details {
       align-items: flex-end;
+    }
+
+    .logo-footer-md {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 </style>
