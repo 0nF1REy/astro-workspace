@@ -1,0 +1,26 @@
+---
+title: "Meu presente de Páscoa: A Ressurreição do meu EndeavourOS"
+subtitle: "Guia técnico de recuperação de Kernel e Grub em sistemas Btrfs via Arch-Chroot"
+date: "2024-03-31"
+heroImage: "./images/banner-linux.jpg"
+tags: ["Linux", "EndeavourOS", "Btrfs", "SysAdmin", "Recovery"]
+---
+
+# O Problema: Quando o Cardio é melhor que o Boot
+
+Era um domingo de Páscoa tranquilo. Desliguei o PC, fui fazer meu cardio e, ao voltar, fui recebido por uma tela que nenhum usuário Linux gosta de ver:
+
+> `error: file '/@/boot/vmlinuz-linux' not found.`
+> `you need to load the kernel first.`
+
+O sistema simplesmente "esqueceu" como iniciar. O Kernel havia sumido ou o GRUB perdeu a referência. 
+
+![Estrutura das partições com lsblk](./images/erro-boot.jpg)
+
+Neste artigo, vou mostrar como recuperei meu sistema **EndeavourOS** sem formatar, garantindo a integridade dos meus dados e aprendendo muito no processo.
+
+---
+
+## Passo 1: O Diagnóstico via Live USB
+
+O primeiro passo foi dar boot por um pendrive do EndeavourOS. Através do terminal, usei o comando `lsblk` para identificar a estrutura do meu disco.

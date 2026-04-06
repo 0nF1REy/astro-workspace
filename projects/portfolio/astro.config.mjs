@@ -6,10 +6,12 @@ import { viteCleaner } from "./configs/vite-cleaner.mjs";
 
 import sitemap from "@astrojs/sitemap";
 
+import mdx from "@astrojs/mdx";
+
 export default defineConfig({
   site: "https://alan-ryan.vercel.app",
   output: "static",
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap(), mdx()],
   adapter: vercel(),
 
   security: {

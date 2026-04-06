@@ -3,6 +3,7 @@ import Section from "../../components/Section.astro";
 import Hero from "./sections/hero/Hero.astro";
 import About from "./sections/About.astro";
 import Projects from "./sections/Projects.astro";
+import Articles from "./sections/Articles.astro";
 import Testimonial from "./sections/Testimonial.astro";
 import GithubStats from "./sections/GithubStats.astro";
 import TechGalaxy from "./sections/tech-galaxy/TechGalaxy.astro";
@@ -22,10 +23,14 @@ import TechGalaxy from "./sections/tech-galaxy/TechGalaxy.astro";
   <Projects />
 </Section>
 
-<Section id="github">
+<Section id="articles">
+  <Articles />
+</Section>
+
+<Section id="github" isZebra={true}>
   <GithubStats />
 </Section>
 
-<Section id="testimonials" isZebra={true}>
+<Section id="testimonials">
   <Testimonial />
 </Section>

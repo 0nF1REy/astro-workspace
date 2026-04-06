@@ -1,0 +1,43 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layout/Layout.astro";
+import Section from "../../components/Section.astro";
+import ArticleListing from "../../components/ArticleListing.astro";
+
+const allArticles: CollectionEntry<"blog">[] = await getCollection("blog");
+
+const posts = allArticles.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Layout title="Blog | Alan Ryan">
+  <Section id="blog-list">
+    <div class="blog-header">
+      <h1>Todos os Artigos</h1>
+      <p>Explorações técnicas e guias sobre desenvolvimento e sistemas.</p>
+    </div>
+
+    <div class="blog-grid">
+      {posts.map((post) => <ArticleListing article={post} />)}
+    </div>
+  </Section>
+</Layout>
+
+<style>
+  .blog-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .blog-header h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+</style>
