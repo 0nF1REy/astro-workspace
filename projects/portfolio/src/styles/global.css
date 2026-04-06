@@ -59,7 +59,14 @@ li {
   list-style: none;
 }
 
-/* Utilities */
+.title {
+  color: var(--primary-clr-400);
+}
+
+.subtitle {
+  color: var(--secondary-clr-100);
+}
+
 .container {
   width: min(1200px, 100% - clamp(1.5rem, 4vw, 5rem));
   margin-inline: auto;
@@ -130,10 +137,10 @@ h2 {
 }
 
 .header__content .logo img {
-  width: auto; 
-  height: 58px; 
+  width: auto;
+  height: 58px;
   display: block;
-  object-fit: contain; 
+  object-fit: contain;
 }
 
 .header__back-link {

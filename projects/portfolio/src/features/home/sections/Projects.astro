@@ -6,7 +6,13 @@ const projects: CollectionEntry<"projects">[] = await getCollection("projects");
 ---
 
 <div class="projects">
-  <h2 class="title">Projetos em Destaque</h2>
+  <div class="section-header">
+    <h2 class="title">Projetos em Destaque</h2>
+    <p class="subtitle">
+      Explorando soluções digitais, do desenvolvimento de sistemas a interfaces
+      modernas.
+    </p>
+  </div>
 
   <div class="projects__grid">
     {
@@ -18,8 +24,14 @@ const projects: CollectionEntry<"projects">[] = await getCollection("projects");
 </div>
 
 <style>
-  .title {
-    color: var(--primary-clr-400);
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .subtitle {
+    margin-top: -1rem;
+    font-size: 1.1rem;
   }
 
   .projects__grid {
