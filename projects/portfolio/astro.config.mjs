@@ -10,18 +10,28 @@ export default defineConfig({
   output: "static",
   integrations: [react(), sitemap(), mdx()],
   adapter: vercel(),
+
   security: {
     csp: true,
   },
-  build: {
-    inlineStylesheets: "never",
-  },
+
   server: {
     port: 4321,
   },
+
   devToolbar: {
     enabled: false,
   },
+
+  build: {
+    inlineStylesheets: "never",
+  },
+
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "hover",
+  },
+
   vite: {
     ...viteCleaner,
   },
