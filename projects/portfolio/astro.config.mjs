@@ -13,6 +13,9 @@ export default defineConfig({
   security: {
     csp: true,
   },
+  build: {
+    inlineStylesheets: "never",
+  },
   server: {
     port: 4321,
   },

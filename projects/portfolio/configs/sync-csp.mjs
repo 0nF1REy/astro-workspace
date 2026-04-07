@@ -30,10 +30,9 @@ function collectHashesFromPolicy(policy, directive) {
     .filter((token) => token.startsWith("'sha256-"));
 }
 
-async function extractAllHashesFromDist() {
+async function extractScriptHashesFromDist() {
   const htmlFiles = await getHtmlFiles(DIST_DIR);
   const allScriptHashes = new Set();
-  const allStyleHashes = new Set();
 
   for (const filePath of htmlFiles) {
     const html = await readFile(filePath, "utf8");
@@ -46,22 +45,18 @@ async function extractAllHashesFromDist() {
       collectHashesFromPolicy(policy, "script-src").forEach((h) =>
         allScriptHashes.add(h),
       );
-      collectHashesFromPolicy(policy, "style-src").forEach((h) =>
-        allStyleHashes.add(h),
-      );
     }
   }
   return {
     scriptHashes: [...allScriptHashes].sort(),
-    styleHashes: [...allStyleHashes].sort(),
   };
 }
 
-function buildCspValue(scriptHashes, styleHashes) {
+function buildCspValue(scriptHashes) {
   return [
     "default-src 'self'",
     `script-src 'self' ${scriptHashes.join(" ")}`,
-    `style-src 'self' ${styleHashes.join(" ")}`,
+    "style-src 'self'",
     "font-src 'self'",
     "img-src 'self' data: https://avatars.githubusercontent.com",
     "connect-src 'self' https://api.github.com",
@@ -74,8 +69,8 @@ function buildCspValue(scriptHashes, styleHashes) {
 }
 
 async function syncVercelCsp() {
-  const { scriptHashes, styleHashes } = await extractAllHashesFromDist();
-  const cspValue = buildCspValue(scriptHashes, styleHashes);
+  const { scriptHashes } = await extractScriptHashesFromDist();
+  const cspValue = buildCspValue(scriptHashes);
   const rawConfig = await readFile(VERCEL_CONFIG, "utf8");
   const vercelConfig = JSON.parse(rawConfig);
 
@@ -89,7 +84,9 @@ async function syncVercelCsp() {
   }
 
   await writeFile(VERCEL_CONFIG, JSON.stringify(vercelConfig, null, 2) + "\n");
-  console.log(`CSP Global Synced: ${styleHashes.length} style hashes.`);
+  console.log(
+    `CSP Global Synced (External CSS Mode): ${scriptHashes.length} script hashes.`,
+  );
 }
 
 syncVercelCsp().catch((err) => {
