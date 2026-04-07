@@ -1,13 +1,12 @@
 ---
 import SpeedInsights from "@vercel/speed-insights/astro";
-// @ts-ignore
 import "@fontsource/poppins";
 import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 import "@fortawesome/fontawesome-free/css/brands.min.css";
 import "@fortawesome/fontawesome-free/css/solid.min.css";
-import "../styles/global.css";
-import Header from "../components/Header.tsx";
-import Footer from "../components/Footer.astro";
+import "@styles/global.css";
+import Header from "@components/Header.tsx";
+import Footer from "@components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
@@ -112,7 +111,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import {
         destroyLayoutParticles,
         initLayoutParticles,
-      } from "./layout-particles";
+      } from "@layout/layout-particles";
 
       document.addEventListener("astro:page-load", initLayoutParticles);
       document.addEventListener("astro:before-swap", destroyLayoutParticles);
