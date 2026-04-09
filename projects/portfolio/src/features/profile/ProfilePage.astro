@@ -1,16 +1,21 @@
 ---
 import Section from "../../components/Section.astro";
 import ProfileHero from "./sections/ProfileHero.astro";
+import ProfileExperience from "./sections/ProfileExperience.astro";
 import ProfileEducation from "./sections/ProfileEducation.astro";
 import ProfileAchievements from "./sections/ProfileAchievements.astro";
 ---
 
 <ProfileHero />
 
-<Section id="education">
+<Section id="experience">
+  <ProfileExperience />
+</Section>
+
+<Section id="education" isZebra={true}>
   <ProfileEducation />
 </Section>
 
-<Section id="achievements" isZebra={true}>
+<Section id="achievements">
   <ProfileAchievements />
 </Section>

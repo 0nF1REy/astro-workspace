@@ -1,0 +1,474 @@
+---
+import { Image } from "astro:assets";
+import AuxioIcon from "../../../assets/images/experience/auxio.png";
+
+interface Experience {
+  role: string;
+  company: string;
+  period: string;
+  description: string;
+  projectDescription: string;
+  achievements: string[];
+  tags: string[];
+  link?: string;
+  project_link?: string;
+  icon?: string;
+  icon_image?: any;
+}
+
+const experiences: Experience[] = [
+  {
+    role: "Contribuidor de Localização (Open Source)",
+    company: "Projeto Auxio",
+    period: "Abril 2026 - Presente",
+    description:
+      "Atuação voluntária na tradução e adaptação cultural da interface do usuário (UI) para o ecossistema Android.",
+    projectDescription:
+      "Auxio é um reprodutor de música local para Android focado em uma experiência simples e racional, priorizando a performance e a usabilidade.",
+    achievements: [
+      "Responsável pela tradução de strings e termos técnicos do inglês para o português brasileiro via Hosted Weblate.",
+      "Manutenção da consistência terminológica através da gestão de glossários técnicos.",
+      "Colaboração com a comunidade para garantir que as traduções respeitem os limites da interface e variáveis do sistema (%s, %d).",
+    ],
+    tags: ["Open Source", "L10n", "Weblate", "Android"],
+    link: "https://hosted.weblate.org/user/0nF1REy",
+    project_link: "https://github.com/OxygenCobalt/Auxio",
+    icon: "fa-language",
+    icon_image: AuxioIcon,
+  },
+];
+
+const auxioProjectDescription = experiences[0]?.projectDescription ?? "";
+---
+
+<div class="experience-header">
+  <i class="fa-solid fa-briefcase"></i>
+  <h2>Experiência & Open Source</h2>
+</div>
+
+<div class="experience-list">
+  {
+    experiences.map((exp) => (
+      <div class="experience-card">
+        <div class="card-side">
+          <div class="icon-box">
+            {exp.icon_image ? (
+              <Image
+                src={exp.icon_image}
+                alt={exp.company}
+                width={40}
+                height={40}
+              />
+            ) : (
+              <i class={`fa-solid ${exp.icon}`} />
+            )}
+          </div>
+          <div class="line" />
+        </div>
+
+        <div class="card-main">
+          <header>
+            <span class="period">{exp.period}</span>
+            <h3>{exp.role}</h3>
+            <p class="company">{exp.company}</p>
+          </header>
+
+          <div class="content">
+            <p class="description">{exp.description}</p>
+            <ul class="achievements-list">
+              {exp.achievements.map((item) => (
+                <li>
+                  <i class="fa-solid fa-check" /> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="footer">
+            <div class="tags">
+              {exp.tags.map((tag) => (
+                <span>{tag}</span>
+              ))}
+            </div>
+
+            <div class="links-group">
+              <button
+                type="button"
+                class="project-btn"
+                data-dialog-open
+                aria-haspopup="dialog"
+                aria-controls="auxio-project-dialog"
+              >
+                <i class="fa-solid fa-circle-info" />
+                <span>O que é o Auxio?</span>
+              </button>
+              {exp.link && (
+                <a href={exp.link} target="_blank" class="link-btn">
+                  <i class="fa-solid fa-user-pen" />
+                  <span>Perfil Weblate</span>
+                </a>
+              )}
+              {exp.project_link && (
+                <a
+                  href={exp.project_link}
+                  target="_blank"
+                  class="link-btn secondary"
+                >
+                  <i class="fa-brands fa-github" />
+                  <span>Repositório</span>
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<dialog id="auxio-project-dialog" class="project-dialog" data-project-dialog>
+  <div class="project-dialog__content">
+    <header class="project-dialog__header">
+      <h3>O que é o Auxio?</h3>
+      <button
+        type="button"
+        class="dialog-close"
+        data-dialog-close
+        aria-label="Fechar diálogo"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </header>
+
+    <p class="project-dialog__description">
+      {auxioProjectDescription}
+    </p>
+  </div>
+</dialog>
+
+<script is:inline>
+  const dialog = document.querySelector("[data-project-dialog]");
+  const openButton = document.querySelector("[data-dialog-open]");
+  const closeButton = document.querySelector("[data-dialog-close]");
+
+  openButton?.addEventListener("click", () => {
+    dialog?.showModal();
+  });
+
+  closeButton?.addEventListener("click", () => {
+    dialog?.close();
+  });
+
+  dialog?.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+</script>
+
+<style>
+  .experience-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .experience-header i {
+    color: var(--primary-clr-400);
+    font-size: 1.8rem;
+  }
+  .experience-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .experience-card {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+  }
+
+  .card-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .icon-box {
+    width: 50px;
+    height: 50px;
+    background: rgba(30, 113, 183, 0.1);
+    border: 1px solid var(--secondary-clr-400);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--primary-clr-400);
+    font-size: 1.2rem;
+    overflow: hidden;
+  }
+
+  .icon-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .links-group {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .project-btn,
+  .link-btn {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: var(--primary-clr-400);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+    padding: 0;
+  }
+
+  .link-btn {
+    background: transparent;
+  }
+
+  .link-btn.secondary {
+    color: var(--secondary-clr-200);
+  }
+
+  .project-btn {
+    color: var(--secondary-clr-200);
+  }
+
+  .project-btn:hover,
+  .link-btn:hover {
+    color: var(--accent-clr-400);
+  }
+
+  .project-btn:hover span,
+  .link-btn:hover span {
+    text-decoration: underline;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  @media (width >= 768px) {
+    .footer {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .line {
+    flex-grow: 1;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      var(--secondary-clr-400),
+      transparent
+    );
+    margin-top: 1rem;
+  }
+
+  .card-main {
+    background: rgba(17, 24, 39, 0.4);
+    border: 1px solid var(--secondary-clr-400);
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .experience-card:hover .card-main {
+    border-color: var(--primary-clr-400);
+  }
+
+  .period {
+    font-size: 0.8rem;
+    color: var(--accent-clr-400);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    color: #fff;
+    margin: 0.3rem 0;
+  }
+
+  .company {
+    color: var(--primary-clr-400);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    color: var(--secondary-clr-100);
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+  }
+
+  .achievements-list {
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .achievements-list li {
+    font-size: 0.95rem;
+    color: var(--secondary-clr-200);
+    margin-bottom: 0.6rem;
+    display: flex;
+    gap: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .achievements-list i {
+    color: var(--accent-clr-400);
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tags span {
+    font-size: 0.75rem;
+    background: var(--secondary-clr-400);
+    color: var(--secondary-clr-200);
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .project-dialog {
+    width: min(36rem, calc(100% - 2rem));
+    border: 1px solid var(--secondary-clr-400);
+    border-radius: 1rem;
+    padding: 0;
+    background: rgba(10, 15, 25, 0.98);
+    color: #fff;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    margin: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: calc(100vh - 2rem);
+  }
+
+  .project-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+  }
+
+  .project-dialog__content {
+    padding: 1.5rem;
+    max-height: calc(100vh - 2rem);
+    overflow: auto;
+  }
+
+  .project-dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-dialog__header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  .project-dialog__header h3,
+  .project-dialog__description {
+    text-wrap: pretty;
+  }
+
+  .dialog-close {
+    border: 1px solid var(--secondary-clr-400);
+    background: transparent;
+    color: var(--secondary-clr-200);
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    display: inline-grid;
+    place-items: center;
+    cursor: pointer;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .dialog-close:hover {
+    color: var(--accent-clr-400);
+    border-color: var(--accent-clr-400);
+  }
+
+  .project-dialog__description {
+    margin: 0;
+    color: var(--secondary-clr-100);
+    line-height: 1.7;
+    font-weight: 500;
+  }
+
+  @media (width <= 640px) {
+    .experience-card {
+      grid-template-columns: 44px 1fr;
+      gap: 1rem;
+    }
+
+    .icon-box {
+      width: 42px;
+      height: 42px;
+    }
+
+    .card-main {
+      padding: 1.25rem;
+    }
+
+    .links-group {
+      gap: 1rem;
+    }
+
+    .project-btn,
+    .link-btn {
+      font-size: 0.85rem;
+    }
+
+    .project-dialog {
+      width: calc(100% - 1rem);
+      max-height: calc(100vh - 1rem);
+    }
+
+    .project-dialog__content {
+      padding: 1.1rem;
+      max-height: calc(100vh - 1rem);
+    }
+  }
+</style>
