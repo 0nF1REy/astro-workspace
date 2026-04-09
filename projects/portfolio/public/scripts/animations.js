@@ -1,12 +1,4 @@
 (function () {
-  function safeRegister() {
-    if (window.gsap && window.gsap.registerPlugin && window.ScrollTrigger) {
-      try {
-        window.gsap.registerPlugin(window.ScrollTrigger);
-      } catch (e) {}
-    }
-  }
-
   function initAnimations() {
     if (typeof window === "undefined") return;
     if (!window.gsap) return;

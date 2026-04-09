@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
 const projectCollection = defineCollection({
@@ -19,15 +20,16 @@ const projectCollection = defineCollection({
 });
 
 const blogCollection = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.mdx', base: "./src/content/blog" }),
-  schema: ({ image }: { image: any }) => z.object({
-    title: z.string(),
-    subtitle: z.string().optional(),
-    date: z.coerce.date(),
-    heroImage: image().optional(),
-    tags: z.array(z.string()).default([]),
-    author: z.string().default("Alan Ryan da Silva Domingues"),
-  }),
+  loader: glob({ pattern: "**/[^_]*.mdx", base: "./src/content/blog" }),
+  schema: ({ image }: { image: any }) =>
+    z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      date: z.coerce.date(),
+      heroImage: image().optional(),
+      tags: z.array(z.string()).default([]),
+      author: z.string().default("Alan Ryan da Silva Domingues"),
+    }),
 });
 
 export const collections = {
