@@ -164,6 +164,11 @@ const achievements: Achievement[] = [
     border: 1px solid var(--secondary-clr-400);
     border-radius: 1rem;
     padding: 2rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .achievement-card:hover {
+    border-color: var(--primary-clr-400);
   }
 
   .achievement-card:not(:last-child) {
