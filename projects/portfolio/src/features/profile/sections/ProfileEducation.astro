@@ -1,10 +1,28 @@
 ---
-const education = [
+import { Image } from "astro:assets";
+import EtecIcon from "../../../assets/images/education/cps.svg";
+
+interface EducationItem {
+  title: string;
+  period: string;
+  school: string;
+  location: string;
+  parentInstitution: string;
+  type: string;
+  icon?: string;
+  icon_image?: any;
+}
+
+const education: EducationItem[] = [
   {
     title: "Técnico em Desenvolvimento de Sistemas",
-    institution: "Etec Dr Demetrio Azevedo Jr — Itapeva (SP)",
+    period: "2024 - 2025",
+    school: "Etec Dr Demetrio Azevedo Jr",
+    location: "Itapeva (SP)",
+    parentInstitution: "Centro Paula Souza",
     type: "Formação Técnica",
     icon: "fa-laptop",
+    icon_image: EtecIcon,
   },
 ];
 ---
@@ -19,11 +37,28 @@ const education = [
     education.map((item) => (
       <div class="edu-card">
         <div class="edu-icon">
-          <i class={`fa-solid ${item.icon}`} />
+          {item.icon_image ? (
+            <Image
+              src={item.icon_image}
+              alt={`${item.school} — ${item.location}`}
+              width={65}
+              height={65}
+              loading="eager"
+              class="edu-icon-image"
+            />
+          ) : (
+            <div class="edu-icon-fallback">
+              <i class={`fa-solid ${item.icon}`} />
+            </div>
+          )}
         </div>
         <div class="edu-info">
+          <p class="edu-period">{item.period}</p>
           <h3>{item.title}</h3>
-          <p>{item.institution}</p>
+          <p class="edu-school">
+            {item.school} — {item.location}
+          </p>
+          <p class="edu-parent">{item.parentInstitution}</p>
           <span class="edu-type">{item.type}</span>
         </div>
       </div>
@@ -74,15 +109,29 @@ const education = [
   }
 
   .edu-icon {
-    min-width: 54px;
-    height: 54px;
-    background: rgba(30, 113, 183, 0.1);
-    border-radius: 0.6rem;
+    min-width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  :global(.edu-icon-image) {
+    width: 65px;
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(30, 113, 183, 0.3));
+  }
+
+  .edu-icon-fallback {
+    min-width: 60px;
+    height: 60px;
+    background: rgba(168, 183, 30, 0.1);
+    border-radius: 50%;
     display: grid;
     place-items: center;
-    color: var(--primary-clr-400);
-    font-size: 1.4rem;
-    border: 1px solid rgba(30, 113, 183, 0.2);
+    color: var(--accent-clr-400);
+    font-size: 1.6rem;
+    border: 1px solid rgba(168, 183, 30, 0.2);
   }
 
   .edu-info h3 {
@@ -91,10 +140,27 @@ const education = [
     color: #fff;
     line-height: 1.3;
   }
-  .edu-info p {
+
+  .edu-period {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-clr-400);
+    margin-bottom: 0.35rem;
+    font-weight: 700;
+  }
+
+  .edu-school {
     font-size: 0.9rem;
     color: var(--secondary-clr-200);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .edu-parent {
+    font-size: 0.86rem;
+    color: var(--secondary-clr-100);
+    margin-bottom: 0.55rem;
+    font-weight: 500;
   }
   .edu-type {
     font-size: 0.8rem;
