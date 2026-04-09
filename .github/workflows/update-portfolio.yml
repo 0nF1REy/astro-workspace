@@ -1,22 +1,61 @@
-name: Agendamento de Build do Portfólio
+name: Agendamento de Build e Sync de CSP do Portfólio
 
 on:
-  # 1. Roda todos os dias à meia-noite
   schedule:
     - cron: "0 0 * * *"
-
-  # 2. Roda sempre que você der push em arquivos dentro da pasta do portfólio
   push:
+    branches: [main]
     paths:
       - "projects/portfolio/**"
-
-  # 3. Permite rodar manualmente
   workflow_dispatch:
 
 jobs:
-  deploy:
+  build-and-sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
-      - name: Disparar Deploy Hook da Vercel
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: projects/portfolio/package-lock.json
+
+      - name: Install Dependencies
+        run: |
+          cd projects/portfolio
+          npm ci
+
+      - name: Build and Sync CSP
+        run: |
+          cd projects/portfolio
+          npm run build:secure
+
+      - name: Commit and Push CSP Updates
+        id: commit_step
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          FILE_PATH="projects/portfolio/vercel.json"
+
+          if git diff --exit-code "$FILE_PATH"; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "Nenhuma mudança no CSP detectada."
+          else
+            git add "$FILE_PATH"
+            git commit -m "main: chore (portfolio/hash) - Updated CSP hashes [skip ci]"
+            git push
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      # Este passo garante que a seção de repositórios atualize se o bot NÃO commitar.
+      - name: Disparar Deploy Hook (Fallback para Repositórios)
+        if: steps.commit_step.outputs.changed == 'false'
         run: |
           curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK_URL }}"
