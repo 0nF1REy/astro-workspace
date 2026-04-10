@@ -21,7 +21,7 @@ send: contexto ## Copia o contexto para o clipboard
 	@cat contexto.txt | xclip -selection clipboard
 	@echo "Copiado! Agora é só colar."
 
-sync: ## Sincroniza mudanças (Puxa do GitHub e envia local)
+sync: ## Sincroniza mudanças (Pull + Push)
 	@echo "Indo para a raiz do repositorio..."
 	@cd ../../ && $(MAKE) sync
 	@echo "Sincronizacao concluida!"

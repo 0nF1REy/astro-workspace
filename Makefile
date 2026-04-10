@@ -30,12 +30,15 @@ open: ## Abre o workspace de um projeto (use p=<nome-do-projeto>)
 	fi
 	@code "$(WORKSPACE_DIR)/$(p)/$(p).code-workspace"
 
-sync: ## Sincroniza mudanças (Puxa do GitHub e envia local)
+sync: ## Sincroniza mudanças (Pull + Push)
 	@echo "Buscando atualizações remotas (Pull)..."
-	git pull origin main
+	@git pull origin main
 	@echo "Enviando atualizações locais (Push)..."
-	git push origin main
+	@git push origin main
 	@echo "Sincronização completa!"
+	@echo ""
+	@echo "Status atual do repositório:"
+	@git status
 
 atarashii-gakko:
 	@code "$(WORKSPACE_DIR)/atarashii-gakko/atarashii-gakko.code-workspace"
