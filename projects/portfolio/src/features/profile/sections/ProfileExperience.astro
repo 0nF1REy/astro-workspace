@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import AuxioIcon from "../../../assets/images/experience/auxio.png";
+import OrbotIcon from "../../../assets/images/experience/orbot.png";
 
 interface Experience {
   role: string;
@@ -17,14 +18,33 @@ interface Experience {
 }
 
 const experiences: Experience[] = [
+    {
+    role: "Contribuidor Open Source (Localização)",
+    company: "Projeto Orbot (Guardian Project)",
+    period: "Abril 2026",
+    description:
+      "Contribuição direta via código para a melhoria e padronização das traduções em português brasileiro do aplicativo de privacidade Orbot.",
+    projectDescription:
+      "O Orbot é um aplicativo de proxy e VPN gratuito que capacita outros aplicativos a usar a internet com mais segurança. O Orbot usa o Tor para criptografar seu tráfego de Internet e, em seguida, o oculta saltando por uma série de computadores ao redor do mundo. O Tor é um software livre e uma rede aberta que ajuda você a se defender contra uma forma de vigilância de rede que ameaça a liberdade pessoal e a privacidade, atividades comerciais confidenciais e relacionamentos, e a segurança do estado, conhecida como análise de tráfego.",
+    achievements: [
+      "Identificação e correção de inconsistências regionais (PT-PT para PT-BR) e erros gramaticais diretamente no arquivo 'strings.xml'.",
+      "Padronização de termos da Interface do Usuário (UI), unificando expressões como 'Kindness Mode' para 'Modo Bondade'.",
+      "Envio de Pull Request (#1659) aprovado e mesclado pelos mantenedores do projeto no repositório oficial do Guardian Project.",
+    ],
+    tags: ["Open Source", "GitHub", "Git", "Android", "XML"],
+    link: "https://github.com/guardianproject/orbot-android/pull/1659",
+    project_link: "https://github.com/guardianproject/orbot-android",
+    icon: "fa-code-branch",
+    icon_image: OrbotIcon,
+  },
   {
-    role: "Contribuidor de Localização (Open Source)",
-    company: "Projeto Auxio",
-    period: "Abril 2026 - Presente",
+    role: "Contribuidor Open Source (Localização)",
+    company: "Projeto Auxio (OxygenCobalt)",
+    period: "Abril 2026",
     description:
       "Atuação voluntária na tradução e adaptação cultural da interface do usuário (UI) para o ecossistema Android.",
     projectDescription:
-      "Auxio é um reprodutor de música local para Android focado em uma experiência simples e racional, priorizando a performance e a usabilidade.",
+      "O Auxio é um reprodutor de música local com uma interface rápida e confiável, sem as inúmeras funções inúteis presentes em outros players. Construído sobre bibliotecas modernas de reprodução de mídia, o Auxio possui suporte de biblioteca e qualidade de áudio superiores em comparação a outros aplicativos que utilizam funcionalidades obsoletas do Android. Em resumo: ele toca música.",
     achievements: [
       "Responsável pela tradução de strings e termos técnicos do inglês para o português brasileiro via Hosted Weblate.",
       "Manutenção da consistência terminológica através da gestão de glossários técnicos.",
@@ -48,85 +68,110 @@ const auxioProjectDescription = experiences[0]?.projectDescription ?? "";
 
 <div class="experience-list">
   {
-    experiences.map((exp) => (
-      <div class="experience-card">
-        <div class="card-side">
-          <div class="icon-box">
-            {exp.icon_image ? (
-              <Image
-                src={exp.icon_image}
-                alt={exp.company}
-                width={40}
-                height={40}
-                loading="eager"
-                class="experience-icon-image"
-              />
-            ) : (
-              <div class="experience-icon-fallback">
-                <i class={`fa-solid ${exp.icon}`} />
-              </div>
-            )}
-          </div>
-          <div class="line" />
-        </div>
-
-        <div class="card-main">
-          <header>
-            <span class="period">{exp.period}</span>
-            <h3>{exp.role}</h3>
-            <p class="company">{exp.company}</p>
-          </header>
-
-          <div class="content">
-            <p class="description">{exp.description}</p>
-            <ul class="achievements-list">
-              {exp.achievements.map((item) => (
-                <li>
-                  <i class="fa-solid fa-check" /> {item}
-                </li>
-              ))}
-            </ul>
+    experiences.map((exp) => {
+      // Cria um ID único baseado no nome da empresa (ex: projeto-orbot)
+      const dialogId = exp.company.split('(')[0].trim().replace(/\s+/g, '-').toLowerCase();
+      
+      return (
+        <div class="experience-card">
+          <div class="card-side">
+            <div class="icon-box">
+              {exp.icon_image ? (
+                <Image
+                  src={exp.icon_image}
+                  alt={exp.company}
+                  width={40}
+                  height={40}
+                  loading="eager"
+                  class="experience-icon-image"
+                />
+              ) : (
+                <div class="experience-icon-fallback">
+                  <i class={`fa-solid ${exp.icon}`} />
+                </div>
+              )}
+            </div>
+            <div class="line" />
           </div>
 
-          <div class="footer">
-            <div class="tags">
-              {exp.tags.map((tag) => (
-                <span>{tag}</span>
-              ))}
+          <div class="card-main">
+            <header>
+              <span class="period">{exp.period}</span>
+              <h3>{exp.role}</h3>
+              <p class="company">{exp.company}</p>
+            </header>
+
+            <div class="content">
+              <p class="description">{exp.description}</p>
+              <ul class="achievements-list">
+                {exp.achievements.map((item) => (
+                  <li>
+                    <i class="fa-solid fa-check" /> {item}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div class="links-group">
+            <div class="footer">
+              <div class="tags">
+                {exp.tags.map((tag) => (
+                  <span>{tag}</span>
+                ))}
+              </div>
+
+              <div class="links-group">
+                <button
+                  type="button"
+                  class="project-btn"
+                  data-dialog-open={dialogId}
+                  aria-haspopup="dialog"
+                  aria-controls={dialogId}
+                >
+                  <i class="fa-solid fa-circle-info" />
+                  <span>Sobre o projeto</span>
+                </button>
+                {exp.link && (
+                  <a href={exp.link} target="_blank" class="link-btn">
+                    <i class="fa-solid fa-up-right-from-square" />
+                    <span>Ver Contribuição</span>
+                  </a>
+                )}
+                {exp.project_link && (
+                  <a
+                    href={exp.project_link}
+                    target="_blank"
+                    class="link-btn secondary"
+                  >
+                    <i class="fa-brands fa-github" />
+                    <span>Repositório</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <dialog id={dialogId} class="project-dialog" data-project-dialog>
+          <div class="project-dialog__content">
+            <header class="project-dialog__header">
+              <h3>O que é o {exp.company.split('(')[0].trim()}?</h3>
               <button
                 type="button"
-                class="project-btn"
-                data-dialog-open
-                aria-haspopup="dialog"
-                aria-controls="auxio-project-dialog"
+                class="dialog-close"
+                data-dialog-close
+                aria-label="Fechar diálogo"
               >
-                <i class="fa-solid fa-circle-info" />
-                <span>O que é o Auxio?</span>
+                <i class="fa-solid fa-xmark"></i>
               </button>
-              {exp.link && (
-                <a href={exp.link} target="_blank" class="link-btn">
-                  <i class="fa-solid fa-user-pen" />
-                  <span>Perfil Weblate</span>
-                </a>
-              )}
-              {exp.project_link && (
-                <a
-                  href={exp.project_link}
-                  target="_blank"
-                  class="link-btn secondary"
-                >
-                  <i class="fa-brands fa-github" />
-                  <span>Repositório</span>
-                </a>
-              )}
-            </div>
+            </header>
+
+            <p class="project-dialog__description">
+              {exp.projectDescription}
+            </p>
           </div>
-        </div>
-      </div>
-    ))
+        </dialog>
+      )
+    })
   }
 </div>
 
@@ -154,33 +199,31 @@ const auxioProjectDescription = experiences[0]?.projectDescription ?? "";
   const handleDialogClicks = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
 
-    // Lógica para ABRIR o modal
-    if (target.closest("[data-dialog-open]")) {
-      const dialog = document.querySelector(
-        "[data-project-dialog]",
-      ) as HTMLDialogElement;
-      if (dialog) {
-        dialog.showModal();
-        document.body.style.overflow = "hidden";
+    // Lógica para ABRIR o modal correto
+    const openBtn = target.closest("[data-dialog-open]");
+    if (openBtn) {
+      const dialogId = openBtn.getAttribute("data-dialog-open");
+      
+      if (dialogId) { 
+        const dialog = document.getElementById(dialogId) as HTMLDialogElement;
+        if (dialog) {
+          dialog.showModal();
+          document.body.style.overflow = "hidden";
+        }
       }
     }
 
-    // Lógica para FECHAR o modal (Botão X)
+    // Lógica para FECHAR o modal ativo
     if (target.closest("[data-dialog-close]")) {
-      const dialog = document.querySelector(
-        "[data-project-dialog]",
-      ) as HTMLDialogElement;
+      const dialog = target.closest("dialog") as HTMLDialogElement;
       if (dialog) {
         dialog.close();
         document.body.style.overflow = "";
       }
     }
 
-    // Lógica para FECHAR ao clicar no BACKDROP (fora do conteúdo)
-    if (
-      target.nodeName === "DIALOG" &&
-      target.hasAttribute("data-project-dialog")
-    ) {
+    // Fechar ao clicar no BACKDROP
+    if (target.nodeName === "DIALOG" && target.hasAttribute("data-project-dialog")) {
       if (event.target === target) {
         (target as HTMLDialogElement).close();
         document.body.style.overflow = "";
@@ -188,7 +231,6 @@ const auxioProjectDescription = experiences[0]?.projectDescription ?? "";
     }
   };
 
-  // Removemos o listener antigo antes de adicionar (para evitar duplicatas em navegação)
   document.removeEventListener("click", handleDialogClicks);
   document.addEventListener("click", handleDialogClicks);
 </script>
