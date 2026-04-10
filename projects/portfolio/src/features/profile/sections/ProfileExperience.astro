@@ -151,35 +151,46 @@ const auxioProjectDescription = experiences[0]?.projectDescription ?? "";
 </dialog>
 
 <script>
-  function initDialog() {
-    const dialog = document.querySelector(
-      "[data-project-dialog]",
-    ) as HTMLDialogElement;
-    const openButton = document.querySelector("[data-dialog-open]");
-    const closeButton = document.querySelector("[data-dialog-close]");
+  const handleDialogClicks = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
 
-    if (!dialog || !openButton) return;
-
-    // Abrir modal
-    openButton.addEventListener("click", () => {
-      dialog.showModal();
-    });
-
-    // Fechar modal pelo botão X
-    closeButton?.addEventListener("click", () => {
-      dialog.close();
-    });
-
-    // Fechar modal ao clicar fora (no backdrop)
-    dialog.addEventListener("click", (event) => {
-      if (event.target === dialog) {
-        dialog.close();
+    // Lógica para ABRIR o modal
+    if (target.closest("[data-dialog-open]")) {
+      const dialog = document.querySelector(
+        "[data-project-dialog]",
+      ) as HTMLDialogElement;
+      if (dialog) {
+        dialog.showModal();
+        document.body.style.overflow = "hidden";
       }
-    });
-  }
+    }
 
-  // Executa na primeira carga e em todas as navegações subsequentes
-  document.addEventListener("astro:page-load", initDialog);
+    // Lógica para FECHAR o modal (Botão X)
+    if (target.closest("[data-dialog-close]")) {
+      const dialog = document.querySelector(
+        "[data-project-dialog]",
+      ) as HTMLDialogElement;
+      if (dialog) {
+        dialog.close();
+        document.body.style.overflow = "";
+      }
+    }
+
+    // Lógica para FECHAR ao clicar no BACKDROP (fora do conteúdo)
+    if (
+      target.nodeName === "DIALOG" &&
+      target.hasAttribute("data-project-dialog")
+    ) {
+      if (event.target === target) {
+        (target as HTMLDialogElement).close();
+        document.body.style.overflow = "";
+      }
+    }
+  };
+
+  // Removemos o listener antigo antes de adicionar (para evitar duplicatas em navegação)
+  document.removeEventListener("click", handleDialogClicks);
+  document.addEventListener("click", handleDialogClicks);
 </script>
 
 <style>
