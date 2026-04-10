@@ -22,8 +22,6 @@ send: contexto ## Copia o contexto para o clipboard
 	@echo "Copiado! Agora é só colar."
 
 sync: ## Sincroniza mudanças (Puxa do GitHub e envia local)
-	@echo "Buscando atualizações remotas (Pull)..."
-	git pull origin main
-	@echo "Enviando atualizações locais (Push)..."
-	git push origin main
-	@echo "Sincronização completa!"
+	@echo "Indo para a raiz do repositorio..."
+	@cd ../../ && $(MAKE) sync
+	@echo "Sincronizacao concluida!"

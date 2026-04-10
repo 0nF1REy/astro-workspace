@@ -3,23 +3,23 @@
 WORKSPACE_DIR := projects
 PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 
-.PHONY: help list open \
+.PHONY: help list open sync \
 	atarashii-gakko clerk-auth cloudinary-form-upload \
-	jashin-chan-dropkick p5js-workspace portfolio product-management profile scriptora \
+	jashin-chan-dropkick p5js-workspace portfolio product-management profile scriptora
 
-help:
-	@printf "Uso:\n"
-	@printf "  make list                          Lista os projetos disponiveis\n"
-	@printf "  make open p=<nome-do-projeto>      Abre o workspace de um projeto\n"
-	@printf "  make <nome-do-projeto>             Abre o atalho direto do projeto\n"
-	@printf "\nAtalhos disponiveis:\n"
+help: ## Mostra os comandos disponíveis
+	@echo "Comandos disponíveis:"
+	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
+	awk 'BEGIN {FS = ":.*?## "}; {printf "  %-10s %s\n", $$1, $$2}'
+	@echo ""
+	@printf "Atalhos disponíveis:\n"
 	@for project in $(PROJECTS); do printf "  - %s\n" "$$project"; done
 
-list:
+list: ## Lista os projetos disponíveis
 	@printf "Projetos disponiveis:\n"
 	@for project in $(PROJECTS); do printf " - %s\n" "$$project"; done
 
-open:
+open: ## Abre o workspace de um projeto (use p=<nome-do-projeto>)
 	@if [ -z "$(p)" ]; then \
 		echo "Erro: use 'make open p=nome-do-projeto'"; \
 		exit 1; \
@@ -29,6 +29,13 @@ open:
 		exit 1; \
 	fi
 	@code "$(WORKSPACE_DIR)/$(p)/$(p).code-workspace"
+
+sync: ## Sincroniza mudanças (Puxa do GitHub e envia local)
+	@echo "Buscando atualizações remotas (Pull)..."
+	git pull origin main
+	@echo "Enviando atualizações locais (Push)..."
+	git push origin main
+	@echo "Sincronização completa!"
 
 atarashii-gakko:
 	@code "$(WORKSPACE_DIR)/atarashii-gakko/atarashii-gakko.code-workspace"
