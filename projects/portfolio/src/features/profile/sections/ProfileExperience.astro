@@ -150,24 +150,36 @@ const auxioProjectDescription = experiences[0]?.projectDescription ?? "";
   </div>
 </dialog>
 
-<script is:inline>
-  const dialog = document.querySelector("[data-project-dialog]");
-  const openButton = document.querySelector("[data-dialog-open]");
-  const closeButton = document.querySelector("[data-dialog-close]");
+<script>
+  function initDialog() {
+    const dialog = document.querySelector(
+      "[data-project-dialog]",
+    ) as HTMLDialogElement;
+    const openButton = document.querySelector("[data-dialog-open]");
+    const closeButton = document.querySelector("[data-dialog-close]");
 
-  openButton?.addEventListener("click", () => {
-    dialog?.showModal();
-  });
+    if (!dialog || !openButton) return;
 
-  closeButton?.addEventListener("click", () => {
-    dialog?.close();
-  });
+    // Abrir modal
+    openButton.addEventListener("click", () => {
+      dialog.showModal();
+    });
 
-  dialog?.addEventListener("click", (event) => {
-    if (event.target === dialog) {
+    // Fechar modal pelo botão X
+    closeButton?.addEventListener("click", () => {
       dialog.close();
-    }
-  });
+    });
+
+    // Fechar modal ao clicar fora (no backdrop)
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+  }
+
+  // Executa na primeira carga e em todas as navegações subsequentes
+  document.addEventListener("astro:page-load", initDialog);
 </script>
 
 <style>
