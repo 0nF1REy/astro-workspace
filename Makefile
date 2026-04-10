@@ -3,7 +3,7 @@
 WORKSPACE_DIR := projects
 PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 
-.PHONY: help list open sync \
+.PHONY: help list open add status sync \
 	atarashii-gakko clerk-auth cloudinary-form-upload \
 	jashin-chan-dropkick p5js-workspace portfolio product-management profile scriptora
 
@@ -30,7 +30,15 @@ open: ## Abre o workspace de um projeto (use p=<nome-do-projeto>)
 	fi
 	@code "$(WORKSPACE_DIR)/$(p)/$(p).code-workspace"
 
-sync: ## Sincroniza mudanças (Pull + Push)
+add: ## Adiciona todas as mudanças ao stage
+	@git add .
+	@echo "Todas as mudanças do repositório foram adicionadas ao stage."
+
+status: ## Mostra o status atual do repositório
+	@echo "Status atual do repositório:"
+	@git status
+
+sync: ## Sincroniza o repositório
 	@echo "Buscando atualizações remotas (Pull)..."
 	@git pull origin main
 	@echo "Enviando atualizações locais (Push)..."
