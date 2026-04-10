@@ -1,7 +1,11 @@
 {
   "name": "portfolio",
   "type": "module",
-  "version": "6.0.0",
+  "version": "7.0.0",
+  "packageManager": "npm@11.11.0",
+  "engines": {
+    "node": ">=24.14.0"
+  },
   "description": "Personal portfolio built with Astro and TypeScript, using Astro Collections for project content and optimized images with astro:assets",
   "scripts": {
     "dev": "astro dev",
