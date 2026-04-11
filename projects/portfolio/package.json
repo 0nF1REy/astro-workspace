@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "type": "module",
-  "version": "7.0.1",
+  "version": "8.0.0",
   "packageManager": "npm@11.11.0",
   "engines": {
     "node": ">=24.14.0"
@@ -44,13 +44,13 @@
   "dependencies": {
     "@astrojs/check": "^0.9.8",
     "@astrojs/mdx": "^5.0.3",
-    "@astrojs/react": "^5.0.0",
+    "@astrojs/react": "^5.0.3",
     "@astrojs/sitemap": "^3.7.2",
-    "@astrojs/vercel": "^10.0.0",
+    "@astrojs/vercel": "^10.0.4",
     "@fontsource/poppins": "^5.2.7",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@vercel/speed-insights": "^2.0.0",
-    "astro": "^6.0.4",
+    "astro": "^6.1.5",
     "gsap": "^3.13.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
