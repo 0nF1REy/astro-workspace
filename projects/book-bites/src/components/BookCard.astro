@@ -1,0 +1,33 @@
+---
+interface Props {
+  book: {
+    title: string;
+    author: string;
+  };
+}
+
+const { book } = Astro.props;
+---
+
+<div class="book-card">
+  <p class="book-title">{book.title}</p>
+  <p class="book-author">por {book.author}</p>
+  <a href="">Ler Resenha</a>
+</div>
+
+<style>
+  .book-card {
+    background-color: #f9f6fc;
+    padding: 16px 20px;
+    margin: 20px auto;
+    box-shadow: 8px 8px 0 #ebe5f2;
+  }
+  .book-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 0;
+  }
+  .book-author {
+    margin-top: 0;
+  }
+</style>

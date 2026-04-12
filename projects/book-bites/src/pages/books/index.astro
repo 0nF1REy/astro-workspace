@@ -1,12 +1,8 @@
 ---
+import BookCard from "../../components/BookCard.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-interface Book {
-  title: string;
-  author: string;
-}
-
-const books: Book[] = [
+const books = [
   // Machado de Assis
   { title: "Dom Casmurro", author: "Machado de Assis" },
   { title: "Memórias Póstumas de Brás Cubas", author: "Machado de Assis" },
@@ -70,23 +66,13 @@ const books: Book[] = [
   { title: "A Flecha de Deus", author: "Chinua Achebe" },
   { title: "Formigueiro da Savana", author: "Chinua Achebe" },
 ];
-
-// const books: Book[] = []
 ---
 
 <BaseLayout>
   <div class="content">
     <h2>Livros</h2>
 
-    {
-      books.map((book) => (
-        <div class="book-card">
-          <p class="book-title">{book.title}</p>
-          <p class="book-author">por {book.author}</p>
-          <a href="">Ler Resenha</a>
-        </div>
-      ))
-    }
+    {books.map((book) => <BookCard book={book} />)}
 
     {!books.length && <p>Nenhum livro para exibir.</p>}
   </div>
@@ -99,19 +85,5 @@ const books: Book[] = [
     border-bottom: 8px solid #f9f6fc;
     margin-bottom: 40px;
     text-align: right;
-  }
-  .book-card {
-    background-color: #f9f6fc;
-    padding: 16px 20px;
-    margin: 20px auto;
-    box-shadow: 8px 8px 0 #ebe5f2;
-  }
-  .book-title {
-    font-size: 1.4em;
-    font-weight: bold;
-    margin: 0;
-  }
-  .book-author {
-    margin-top: 0;
   }
 </style>
