@@ -1,15 +1,37 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+// const user = { name: 'Mario', email: 'mario@bookbites.com' }
+
+const getUser = () => {
+  return Math.random() < 0.5
+    ? null
+    : {
+        name: "mario",
+        email: "mario@bookbites.com",
+      };
+};
+
+let user = getUser();
 ---
 
 <BaseLayout>
   <div class="content">
-    <h2>Bem-vindo</h2>
+    {
+      user && (
+        <>
+          <h2>Bem-vindo, {user.name}</h2>
+          <p>Conectado como {user.email}</p>
+        </>
+      )
+    }
+
     <p>
-      Texto de exemplo em design e desenvolvimento, usado apenas como
-      preenchimento.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos,
+      quas!
     </p>
-    <a href="/books">Dê uma olhada nas minhas avaliações</a>
+
+    <a href="/books">Veja minhas resenhas</a>
   </div>
 </BaseLayout>
 
