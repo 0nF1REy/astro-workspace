@@ -4,7 +4,7 @@ WORKSPACE_DIR := projects
 PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 
 .PHONY: help list open add status sync \
-	atarashii-gakko clerk-auth cloudinary-form-upload \
+	atarashii-gakko book-bites clerk-auth cloudinary-form-upload \
 	jashin-chan-dropkick p5js-workspace portfolio product-management profile scriptora
 
 help: ## Mostra os comandos disponíveis
@@ -50,6 +50,9 @@ sync: ## Sincroniza o repositório
 
 atarashii-gakko:
 	@code "$(WORKSPACE_DIR)/atarashii-gakko/atarashii-gakko.code-workspace"
+
+book-bites:
+	@code "$(WORKSPACE_DIR)/book-bites/book-bites.code-workspace"
 
 clerk-auth:
 	@code "$(WORKSPACE_DIR)/clerk-auth/clerk-auth.code-workspace"
