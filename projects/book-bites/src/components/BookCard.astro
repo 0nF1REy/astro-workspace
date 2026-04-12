@@ -1,17 +1,17 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 interface Props {
-  book: {
-    title: string;
-    author: string;
-  };
+  book: CollectionEntry<"books">;
 }
 
 const { book } = Astro.props;
 ---
 
 <div class="book-card">
-  <p class="book-title">{book.title}</p>
-  <p class="book-author">por {book.author}</p>
+  <p class="book-title">{book.data.title}, {book.data.rating}/10</p>
+  <p class="book-author">por {book.data.author}</p>
+  <p class="book-summary">{book.data.summary}</p>
   <a href="">Ler Resenha</a>
 </div>
 
@@ -29,5 +29,8 @@ const { book } = Astro.props;
   }
   .book-author {
     margin-top: 0;
+  }
+  .book-summary {
+    font-size: 1em;
   }
 </style>

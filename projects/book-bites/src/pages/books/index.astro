@@ -1,78 +1,17 @@
 ---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import BookCard from "../../components/BookCard.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const books = [
-  // Machado de Assis
-  { title: "Dom Casmurro", author: "Machado de Assis" },
-  { title: "Memórias Póstumas de Brás Cubas", author: "Machado de Assis" },
-  { title: "Quincas Borba", author: "Machado de Assis" },
-  { title: "O Alienista", author: "Machado de Assis" },
-
-  // Shakespeare
-  { title: "Hamlet", author: "William Shakespeare" },
-  { title: "Macbeth", author: "William Shakespeare" },
-  { title: "Romeu e Julieta", author: "William Shakespeare" },
-  { title: "Otelo", author: "William Shakespeare" },
-
-  // Dostoiévski
-  { title: "Crime e Castigo", author: "Fiódor Dostoiévski" },
-  { title: "Os Irmãos Karamázov", author: "Fiódor Dostoiévski" },
-  { title: "O Idiota", author: "Fiódor Dostoiévski" },
-  { title: "Notas do Subsolo", author: "Fiódor Dostoiévski" },
-
-  // Victor Hugo
-  { title: "Os Miseráveis", author: "Victor Hugo" },
-  { title: "O Corcunda de Notre-Dame", author: "Victor Hugo" },
-  { title: "O Homem que Ri", author: "Victor Hugo" },
-  { title: "Noventa e Três", author: "Victor Hugo" },
-
-  // Mark Twain
-  { title: "As Aventuras de Tom Sawyer", author: "Mark Twain" },
-  { title: "As Aventuras de Huckleberry Finn", author: "Mark Twain" },
-  { title: "O Príncipe e o Mendigo", author: "Mark Twain" },
-  { title: "Vida no Mississippi", author: "Mark Twain" },
-
-  // Haruki Murakami
-  { title: "Norwegian Wood", author: "Haruki Murakami" },
-  { title: "Kafka à Beira-Mar", author: "Haruki Murakami" },
-  { title: "1Q84", author: "Haruki Murakami" },
-  { title: "Caçando Carneiros", author: "Haruki Murakami" },
-
-  // Gabriel García Márquez
-  { title: "Cem Anos de Solidão", author: "Gabriel García Márquez" },
-  { title: "O Amor nos Tempos do Cólera", author: "Gabriel García Márquez" },
-  { title: "Crônica de uma Morte Anunciada", author: "Gabriel García Márquez" },
-  { title: "O Outono do Patriarca", author: "Gabriel García Márquez" },
-
-  // Goethe
-  { title: "Fausto", author: "Johann Wolfgang von Goethe" },
-  {
-    title: "Os Sofrimentos do Jovem Werther",
-    author: "Johann Wolfgang von Goethe",
-  },
-  { title: "Afinidades Eletivas", author: "Johann Wolfgang von Goethe" },
-  { title: "Viagem à Itália", author: "Johann Wolfgang von Goethe" },
-
-  // Tagore
-  { title: "Gitanjali", author: "Rabindranath Tagore" },
-  { title: "O Carteiro do Rei", author: "Rabindranath Tagore" },
-  { title: "A Casa e o Mundo", author: "Rabindranath Tagore" },
-  { title: "O Jardim do Amor", author: "Rabindranath Tagore" },
-
-  // Chinua Achebe
-  { title: "O Mundo se Despedaça", author: "Chinua Achebe" },
-  { title: "Sem Mais Em Casa", author: "Chinua Achebe" },
-  { title: "A Flecha de Deus", author: "Chinua Achebe" },
-  { title: "Formigueiro da Savana", author: "Chinua Achebe" },
-];
+const books: CollectionEntry<"books">[] = await getCollection("books");
 ---
 
 <BaseLayout>
   <div class="content">
     <h2>Livros</h2>
 
-    {books.map((book) => <BookCard book={book} />)}
+    {books.map((book: CollectionEntry<"books">) => <BookCard book={book} />)}
 
     {!books.length && <p>Nenhum livro para exibir.</p>}
   </div>
