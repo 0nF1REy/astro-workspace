@@ -53,11 +53,13 @@ const isHttpUrl = (value?: string) =>
   Boolean(value && /^https?:\/\//.test(value));
 
 const initialPoster = mainImageRemote || mainImage.src;
-const initialPreview = videoPreviewRemote || videoPreview || "";
+const previewPrimary = videoPreviewRemote || videoPreview || "";
+const previewFallback =
+  previewPrimary === videoPreviewRemote ? videoPreview : videoPreviewRemote;
 
 const liveProjectHref = isHttpUrl(liveProjectUrl) ? liveProjectUrl : undefined;
 const repositoryHref = isHttpUrl(repositoryUrl) ? repositoryUrl : undefined;
-const hasPreviewVideo = Boolean(initialPreview);
+const hasPreviewVideo = Boolean(previewPrimary);
 const hasFullVideo = Boolean(videoUrl);
 ---
 
@@ -115,7 +117,7 @@ const hasFullVideo = Boolean(videoUrl);
         <div
           class="project-detail__media-panel project-detail__media-panel--image"
         >
-          <a name="project-anchor"></a>
+          <a name="project-anchor" class="project-anchor-target"></a>
           <img
             src={initialPoster}
             alt={title}
@@ -140,9 +142,9 @@ const hasFullVideo = Boolean(videoUrl);
                   class="video-element"
                 >
                   <source
-                    src={initialPreview}
+                    src={previewPrimary}
                     type="video/mp4"
-                    data-fallback={videoPreview}
+                    data-fallback={previewFallback}
                   />
                 </video>
 
@@ -238,7 +240,15 @@ const hasFullVideo = Boolean(videoUrl);
   if (videoPlayer && videoSource) {
     videoSource.addEventListener("error", () => {
       const fallback = videoSource.dataset.fallback;
-      if (fallback && videoPlayer.dataset.state !== "full") {
+      const fallbackAlreadyApplied =
+        videoPlayer.dataset.previewFallbackApplied === "1";
+
+      if (
+        fallback &&
+        !fallbackAlreadyApplied &&
+        videoPlayer.dataset.state !== "full"
+      ) {
+        videoPlayer.dataset.previewFallbackApplied = "1";
         videoPlayer.src = fallback;
         videoPlayer.load();
         void videoPlayer.play();
@@ -347,6 +357,16 @@ const hasFullVideo = Boolean(videoUrl);
     background: rgba(17, 24, 39, 0.3);
   }
 
+  .project-anchor-target {
+    display: block;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
   .project-detail__media-grid {
     display: grid;
     gap: 1.25rem;
@@ -397,6 +417,8 @@ const hasFullVideo = Boolean(videoUrl);
     position: relative;
     aspect-ratio: 16 / 9;
     width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
   }
 
   .video-element {
