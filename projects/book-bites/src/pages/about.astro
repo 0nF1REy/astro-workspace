@@ -3,18 +3,134 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-  <div class="content">
-    <h2>Sobre</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. In harum
-      mollitia inventore accusamus excepturi similique magni quo saepe quis
-      rerum maxime, pariatur ducimus nostrum reprehenderit repudiandae ratione
-      tempora corporis culpa.
-    </p>
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos vero
-      corrupti quis velit! Sed sint mollitia error natus inventore temporibus,
-      architecto rem ipsam libero, in ad reiciendis. Laboriosam, vel maxime.
-    </p>
+  <div class="content about-page">
+    <section class="hero">
+      <p class="eyebrow">Sobre o projeto</p>
+      <h2></h2>
+      <p>
+        Um espaço para reunir leituras marcantes em resenhas curtas, diretas e
+        fáceis de explorar. A proposta é ajudar você a descobrir livros sem
+        precisar navegar por páginas longas demais.
+      </p>
+    </section>
+
+    <section class="highlights" aria-label="Destaques do projeto">
+      <article>
+        <h3>Resenhas objetivas</h3>
+        <p>
+          Cada livro recebe uma visão rápida sobre enredo, tema e impressão
+          geral, com foco no que realmente ajuda na escolha da próxima leitura.
+        </p>
+      </article>
+
+      <article>
+        <h3>Curadoria simples</h3>
+        <p>
+          O catálogo foi pensado para destacar obras que valem atenção, com uma
+          navegação leve entre lista, detalhe e conteúdo complementar.
+        </p>
+      </article>
+
+      <article>
+        <h3>Leitura com contexto</h3>
+        <p>
+          As páginas mantêm um padrão visual consistente para que o foco fique
+          no conteúdo e não na interface.
+        </p>
+      </article>
+    </section>
+
+    <section class="cta">
+      <div>
+        <p class="eyebrow">Próximo passo</p>
+        <h3>Quer começar pelas resenhas?</h3>
+      </div>
+      <a href="/books">Ver livros</a>
+    </section>
   </div>
 </BaseLayout>
+
+<style>
+  .about-page {
+    display: grid;
+    gap: 32px;
+  }
+
+  .hero h2 {
+    padding-right: 10px;
+    border-right: 8px solid #ebe5f2;
+    border-bottom: 8px solid #f9f6fc;
+    margin-bottom: 20px;
+    text-align: right;
+  }
+
+  .eyebrow {
+    margin: 0 0 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7a49c5;
+  }
+
+  .hero p {
+    max-width: 760px;
+  }
+
+  .highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .highlights article {
+    background-color: #f9f6fc;
+    border: 1px solid #ebe5f2;
+    box-shadow: 8px 8px 0 #ebe5f2;
+    padding: 20px;
+  }
+
+  .highlights h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  .highlights p {
+    margin-bottom: 0;
+  }
+
+  .cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f6fc;
+    border-left: 8px solid #ebe5f2;
+  }
+
+  .cta h3 {
+    margin: 0;
+  }
+
+  .cta a {
+    display: inline-block;
+    background-color: #7a49c5;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 2px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .cta a:hover {
+    background-color: #965ee9;
+  }
+
+  @media (max-width: 640px) {
+    .cta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
