@@ -34,13 +34,13 @@ type ProjectData = CollectionEntry<"projects">["data"] & {
 
 const {
   title,
-  mainImage,       
+  mainImage,
   mainImageRemote,
   otherImages = [],
   storyTitle,
   storyContent,
-  videoUrl,        
-  videoFallback, 
+  videoUrl,
+  videoFallback,
   liveProjectUrl,
   repositoryUrl,
 } = project.data as ProjectData;
@@ -48,76 +48,111 @@ const {
 const relatedProjects = otherProjects.slice(0, 3);
 
 const initialImage = mainImageRemote || mainImage.src;
-const liveProjectHref = liveProjectUrl || "#";
-const repositoryHref = repositoryUrl || "#";
+const isHttpUrl = (value?: string) =>
+  Boolean(value && /^https?:\/\//.test(value));
+
+const liveProjectHref = isHttpUrl(liveProjectUrl) ? liveProjectUrl : undefined;
+const repositoryHref = isHttpUrl(repositoryUrl) ? repositoryUrl : undefined;
+const previewVideoSrc = videoFallback || videoUrl || "";
+const hasPreviewVideo = previewVideoSrc.length > 0;
+const hasFullVideo = Boolean(videoUrl);
 ---
 
 <Layout {title}>
   <section class="project-detail pt-section">
     <div class="content-wrapper">
-      <div class="project-detail__header">
+      <header class="project-detail__header">
         <h1>{title}</h1>
 
         <div class="project-detail__actions" aria-label="Links do projeto">
-          <a
-            class="project-action project-action--primary"
-            href={liveProjectHref}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            Ver projeto no ar
-          </a>
+          {
+            liveProjectHref && (
+              <a
+                class="project-action project-action--primary"
+                href={liveProjectHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-solid fa-arrow-up-right-from-square" />
+                Ver projeto no ar
+              </a>
+            )
+          }
+
+          {
+            repositoryHref && (
+              <a
+                class="project-action project-action--secondary"
+                href={repositoryHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fa-brands fa-github" />
+                Ver repositório
+              </a>
+            )
+          }
 
           <a
-            class="project-action project-action--secondary"
-            href={repositoryHref}
-            target="_blank"
-            rel="noopener noreferrer"
+            class="project-action project-action--ghost"
+            href="#project-anchor"
           >
-            <i class="fa-brands fa-github"></i>
-            Ver repositório
-          </a>
-
-          <a class="project-action project-action--ghost" href="#project-anchor">
             <i class="fa-solid fa-book-open"></i>
             Ler conteúdo
           </a>
         </div>
+      </header>
 
-        <!-- VERIFICAÇÃO DE VÍDEO -->
-          {videoUrl && (
-          <div class="video-container">
-            <video 
-              id="project-video-player"
-              controls 
-              poster={mainImage.src} 
-              preload="metadata"
-              class="video-element"
-            >
-              <!-- O source inicia com o vídeo curto (local) -->
-              <source src={videoFallback} type="video/mp4" id="video-source" />
-            </video>
-            
-            <div class="video-controls-overlay">
-              <button id="load-full-video" class="btn-play" data-full-url={videoUrl}>
-                <i class="fa-solid fa-play"></i> Assistir Vídeo Completo
-              </button>
+      <div class="project-detail__media-grid">
+        <div
+          class="project-detail__media-panel project-detail__media-panel--image"
+        >
+          <a name="project-anchor"></a>
+          <img
+            src={initialImage}
+            alt={title}
+            class="project-detail__main-image"
+            loading="eager"
+            onerror={`this.onerror=null;this.src='${mainImage.src}';`}
+          />
+        </div>
+
+        {
+          hasPreviewVideo && (
+            <div class="project-detail__media-panel project-detail__media-panel--video">
+              <div class="video-container">
+                <video
+                  data-role="project-video"
+                  muted
+                  loop
+                  autoplay
+                  playsinline
+                  poster={initialImage}
+                  preload="metadata"
+                  class="video-element"
+                >
+                  <source src={previewVideoSrc} type="video/mp4" />
+                </video>
+
+                {hasFullVideo && (
+                  <div class="video-controls-overlay">
+                    <button
+                      class="btn-play"
+                      data-role="load-full-video"
+                      data-full-url={videoUrl}
+                    >
+                      <i class="fa-solid fa-play" />
+                      Assistir Vídeo Completo
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )
+        }
       </div>
 
-      <a name="project-anchor"></a>
-
-      <!-- Imagem Principal com Lógica de Fallback -->
-      <img
-        src={initialImage}
-        alt={title}
-        class="project-detail__main-image"
-        loading="eager"
-        onerror={`this.onerror=null;this.src='${mainImage.src}';`}
-      />
+      <div class="project-detail__section-divider"></div>
 
       <div class="project-detail__story" id="project-story">
         <h3>{storyTitle}</h3>
@@ -171,19 +206,52 @@ const repositoryHref = repositoryUrl || "#";
 </Layout>
 
 <script>
-  const playBtn = document.getElementById('load-full-video');
-  const videoPlayer = document.getElementById('project-video-player') as HTMLVideoElement;
-  const videoSource = document.getElementById('video-source') as HTMLSourceElement;
+  type NavigatorWithConnection = Navigator & {
+    connection?: {
+      saveData?: boolean;
+    };
+  };
+
+  const playBtn = document.querySelector<HTMLButtonElement>(
+    '[data-role="load-full-video"]',
+  );
+  const videoPlayer = document.querySelector<HTMLVideoElement>(
+    '[data-role="project-video"]',
+  );
+  const videoSource = videoPlayer?.querySelector<HTMLSourceElement>("source");
+
+  if (videoPlayer) {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const saveData = (navigator as NavigatorWithConnection).connection
+      ?.saveData;
+
+    if (prefersReducedMotion || saveData) {
+      videoPlayer.autoplay = false;
+      videoPlayer.loop = false;
+      videoPlayer.controls = true;
+      videoPlayer.pause();
+    }
+  }
 
   if (playBtn && videoPlayer && videoSource) {
-    playBtn.addEventListener('click', () => {
-      const fullUrl = playBtn.getAttribute('data-full-url');
-      
-      if (fullUrl) {
-        videoSource.src = fullUrl;
-        videoPlayer.load();
-        videoPlayer.play();
-        playBtn.parentElement!.style.display = 'none';
+    playBtn.addEventListener("click", () => {
+      const fullUrl = playBtn.dataset.fullUrl;
+      if (!fullUrl) {
+        return;
+      }
+
+      videoSource.src = fullUrl;
+      videoPlayer.controls = true;
+      videoPlayer.loop = false;
+      videoPlayer.muted = false;
+      videoPlayer.load();
+      void videoPlayer.play();
+
+      const overlay = playBtn.closest(".video-controls-overlay");
+      if (overlay instanceof HTMLElement) {
+        overlay.style.display = "none";
       }
     });
   }
@@ -200,9 +268,9 @@ const repositoryHref = repositoryUrl || "#";
 
   .project-detail__header {
     padding-top: clamp(1rem, 2vw, 1.5rem);
-    padding-bottom: clamp(1.25rem, 2.5vw, 2rem);
-    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
-    border-bottom: 1px solid var(--secondary-clr-400);
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: 0;
   }
 
   .project-detail__actions {
@@ -210,7 +278,7 @@ const repositoryHref = repositoryUrl || "#";
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-top: 1rem;
-    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
   }
 
   .project-action {
@@ -233,6 +301,11 @@ const repositoryHref = repositoryUrl || "#";
 
   .project-action:hover {
     transform: translateY(-2px);
+  }
+
+  .project-action:focus-visible {
+    outline: 2px solid var(--primary-clr-400);
+    outline-offset: 2px;
   }
 
   .project-action--primary {
@@ -280,19 +353,42 @@ const repositoryHref = repositoryUrl || "#";
     height: auto;
   }
 
+  .project-detail__media-grid {
+    display: grid;
+    gap: 1.25rem;
+    align-items: stretch;
+    margin-bottom: clamp(1rem, 2.5vw, 1.75rem);
+  }
+
+  .project-detail__media-panel {
+    min-width: 0;
+  }
+
+  .project-detail__media-panel--video {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--secondary-clr-400);
+  }
+
   .project-detail__main-image {
     display: block;
-    max-width: min(100%, 880px);
+    width: 100%;
     max-height: clamp(260px, 58vh, 560px);
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    margin-inline: auto;
-    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+    margin: 0;
+  }
+
+  .project-detail__section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--secondary-clr-400);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
   }
 
   .project-detail__story {
     width: 100%;
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+    margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+    scroll-margin-top: clamp(1rem, 3vw, 2rem);
   }
 
   .project-detail__story h3 {
@@ -359,11 +455,9 @@ const repositoryHref = repositoryUrl || "#";
     object-fit: cover;
   }
 
-    .video-container {
+  .video-container {
     position: relative;
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto 3rem;
     border-radius: 1rem;
     overflow: hidden;
     background: #000;
@@ -371,6 +465,9 @@ const repositoryHref = repositoryUrl || "#";
 
   .video-element {
     width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
     display: block;
   }
 
@@ -380,22 +477,22 @@ const repositoryHref = repositoryUrl || "#";
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
     transition: opacity 0.3s;
   }
 
   .btn-play {
     background: var(--primary-clr-400);
-    color: white;
+    color: #fff;
     border: none;
     padding: 1rem 2rem;
     border-radius: 5rem;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   }
 
   .btn-play:hover {
@@ -404,6 +501,22 @@ const repositoryHref = repositoryUrl || "#";
   }
 
   @media (width >= 768px) {
+    .project-detail__media-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 1.5rem;
+    }
+
+    .project-detail__media-panel--video {
+      padding-top: 0;
+      border-top: 0;
+      padding-left: 1.5rem;
+      border-left: 1px solid var(--secondary-clr-400);
+    }
+
+    .project-detail__section-divider {
+      margin-bottom: clamp(2.25rem, 4vw, 3.25rem);
+    }
+
     .project-detail__gallery {
       grid-template-columns: repeat(2, 1fr);
       gap: clamp(1rem, 2vw, 1.5rem);
