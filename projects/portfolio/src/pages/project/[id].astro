@@ -28,6 +28,8 @@ type ProjectData = CollectionEntry<"projects">["data"] & {
   mainImageRemote?: string;
   videoUrl?: string;
   videoFallback?: string;
+  liveProjectUrl?: string;
+  repositoryUrl?: string;
 };
 
 const {
@@ -39,13 +41,15 @@ const {
   storyContent,
   videoUrl,        
   videoFallback, 
+  liveProjectUrl,
+  repositoryUrl,
 } = project.data as ProjectData;
 
 const relatedProjects = otherProjects.slice(0, 3);
 
 const initialImage = mainImageRemote || mainImage.src;
-const liveProjectUrl = "#";
-const repositoryUrl = "#";
+const liveProjectHref = liveProjectUrl || "#";
+const repositoryHref = repositoryUrl || "#";
 ---
 
 <Layout {title}>
@@ -57,17 +61,17 @@ const repositoryUrl = "#";
         <div class="project-detail__actions" aria-label="Links do projeto">
           <a
             class="project-action project-action--primary"
-            href={liveProjectUrl}
+            href={liveProjectHref}
             target="_blank"
             rel="noopener noreferrer"
           >
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            Ver projeto ao vivo
+            Ver projeto no ar
           </a>
 
           <a
             class="project-action project-action--secondary"
-            href={repositoryUrl}
+            href={repositoryHref}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -174,12 +178,9 @@ const repositoryUrl = "#";
       const fullUrl = playBtn.getAttribute('data-full-url');
       
       if (fullUrl) {
-        // Troca a fonte para o vídeo completo
         videoSource.src = fullUrl;
-        videoPlayer.load(); // Recarrega o player com a nova fonte
-        videoPlayer.play(); // Inicia o vídeo
-        
-        // Esconde o botão de overlay
+        videoPlayer.load();
+        videoPlayer.play();
         playBtn.parentElement!.style.display = 'none';
       }
     });

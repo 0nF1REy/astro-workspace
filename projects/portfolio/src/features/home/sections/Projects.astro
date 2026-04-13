@@ -14,7 +14,7 @@ const projects: CollectionEntry<"projects">[] = await getCollection("projects");
     </p>
   </div>
 
-  <div class="projects__grid">
+  <div class:list={["projects__grid", { "projects__grid--single": projects.length === 1 }]}>
     {
       projects.map((project) => {
         return <ProjectListing project={project} />;
@@ -39,10 +39,19 @@ const projects: CollectionEntry<"projects">[] = await getCollection("projects");
     gap: 2.5rem;
   }
 
+  .projects__grid--single {
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
   @media (width >= 768px) {
     .projects__grid {
       grid-template-columns: repeat(2, 1fr);
       gap: clamp(1.5rem, 3vw, 2.25rem);
+    }
+
+    .projects__grid--single {
+      grid-template-columns: 1fr;
     }
   }
 </style>

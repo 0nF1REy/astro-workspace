@@ -14,6 +14,8 @@ const projectCollection = defineCollection({
       work: z.string().optional(),
       mainImage: image(),
       mainImageRemote: z.string().url().optional(),
+      liveProjectUrl: z.string().url().optional(),
+      repositoryUrl: z.string().url().optional(),
       otherImages: z.array(image()).optional(),
       storyTitle: z.string(),
       storyContent: z.string(),
