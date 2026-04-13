@@ -12,16 +12,19 @@ const projectCollection = defineCollection({
       title: z.string(),
       client: z.string().optional(),
       work: z.string().optional(),
-      mainImage: image(),
-      mainImageRemote: z.url().optional(),
       liveProjectUrl: z.url().optional(),
       repositoryUrl: z.url().optional(),
       otherImages: z.array(image()).optional(),
       storyTitle: z.string(),
       storyContent: z.string(),
       tags: z.array(z.string()).optional(),
+
+      // MÍDIA
+      mainImage: image(),
+      mainImageRemote: z.url().optional(),
       videoUrl: z.url().optional(),
-      videoFallback: z.string().optional(),
+      videoPreview: z.string().optional(),
+      videoPreviewRemote: z.url().optional(),
     }),
 });
 

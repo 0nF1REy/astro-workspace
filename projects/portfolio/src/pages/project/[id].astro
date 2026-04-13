@@ -27,7 +27,8 @@ const { project, otherProjects } = Astro.props as {
 type ProjectData = CollectionEntry<"projects">["data"] & {
   mainImageRemote?: string;
   videoUrl?: string;
-  videoFallback?: string;
+  videoPreview?: string;
+  videoPreviewRemote?: string;
   liveProjectUrl?: string;
   repositoryUrl?: string;
 };
@@ -40,21 +41,23 @@ const {
   storyTitle,
   storyContent,
   videoUrl,
-  videoFallback,
+  videoPreview,
+  videoPreviewRemote,
   liveProjectUrl,
   repositoryUrl,
 } = project.data as ProjectData;
 
 const relatedProjects = otherProjects.slice(0, 3);
 
-const initialImage = mainImageRemote || mainImage.src;
 const isHttpUrl = (value?: string) =>
   Boolean(value && /^https?:\/\//.test(value));
 
+const initialPoster = mainImageRemote || mainImage.src;
+const initialPreview = videoPreviewRemote || videoPreview || "";
+
 const liveProjectHref = isHttpUrl(liveProjectUrl) ? liveProjectUrl : undefined;
 const repositoryHref = isHttpUrl(repositoryUrl) ? repositoryUrl : undefined;
-const previewVideoSrc = videoFallback || videoUrl || "";
-const hasPreviewVideo = previewVideoSrc.length > 0;
+const hasPreviewVideo = Boolean(initialPreview);
 const hasFullVideo = Boolean(videoUrl);
 ---
 
@@ -103,13 +106,18 @@ const hasFullVideo = Boolean(videoUrl);
         </div>
       </header>
 
+      <div
+        class="project-detail__media-divider project-detail__media-divider--top"
+      >
+      </div>
+
       <div class="project-detail__media-grid">
         <div
           class="project-detail__media-panel project-detail__media-panel--image"
         >
           <a name="project-anchor"></a>
           <img
-            src={initialImage}
+            src={initialPoster}
             alt={title}
             class="project-detail__main-image"
             loading="eager"
@@ -127,22 +135,26 @@ const hasFullVideo = Boolean(videoUrl);
                   loop
                   autoplay
                   playsinline
-                  poster={initialImage}
+                  poster={initialPoster}
                   preload="metadata"
                   class="video-element"
                 >
-                  <source src={previewVideoSrc} type="video/mp4" />
+                  <source
+                    src={initialPreview}
+                    type="video/mp4"
+                    data-fallback={videoPreview}
+                  />
                 </video>
 
                 {hasFullVideo && (
-                  <div class="video-controls-overlay">
+                  <div class="video-overlay">
                     <button
                       class="btn-play"
                       data-role="load-full-video"
                       data-full-url={videoUrl}
                     >
                       <i class="fa-solid fa-play" />
-                      Assistir Vídeo Completo
+                      Assistir Demonstração Completa
                     </button>
                   </div>
                 )}
@@ -152,7 +164,10 @@ const hasFullVideo = Boolean(videoUrl);
         }
       </div>
 
-      <div class="project-detail__section-divider"></div>
+      <div
+        class="project-detail__media-divider project-detail__media-divider--bottom"
+      >
+      </div>
 
       <div class="project-detail__story" id="project-story">
         <h3>{storyTitle}</h3>
@@ -220,7 +235,16 @@ const hasFullVideo = Boolean(videoUrl);
   );
   const videoSource = videoPlayer?.querySelector<HTMLSourceElement>("source");
 
-  if (videoPlayer) {
+  if (videoPlayer && videoSource) {
+    videoSource.addEventListener("error", () => {
+      const fallback = videoSource.dataset.fallback;
+      if (fallback && videoPlayer.dataset.state !== "full") {
+        videoPlayer.src = fallback;
+        videoPlayer.load();
+        void videoPlayer.play();
+      }
+    });
+
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -235,23 +259,23 @@ const hasFullVideo = Boolean(videoUrl);
     }
   }
 
-  if (playBtn && videoPlayer && videoSource) {
+  if (playBtn && videoPlayer) {
     playBtn.addEventListener("click", () => {
       const fullUrl = playBtn.dataset.fullUrl;
-      if (!fullUrl) {
-        return;
-      }
+      if (fullUrl) {
+        videoPlayer.dataset.state = "full";
+        videoPlayer.src = fullUrl;
+        videoPlayer.loop = false;
+        videoPlayer.muted = false;
+        videoPlayer.controls = true;
+        videoPlayer.load();
+        void videoPlayer.play();
 
-      videoSource.src = fullUrl;
-      videoPlayer.controls = true;
-      videoPlayer.loop = false;
-      videoPlayer.muted = false;
-      videoPlayer.load();
-      void videoPlayer.play();
-
-      const overlay = playBtn.closest(".video-controls-overlay");
-      if (overlay instanceof HTMLElement) {
-        overlay.style.display = "none";
+        const overlay = playBtn.closest(".video-overlay");
+        if (overlay instanceof HTMLElement) {
+          overlay.style.opacity = "0";
+          overlay.style.pointerEvents = "none";
+        }
       }
     });
   }
@@ -268,9 +292,6 @@ const hasFullVideo = Boolean(videoUrl);
 
   .project-detail__header {
     padding-top: clamp(1rem, 2vw, 1.5rem);
-    padding-bottom: 0;
-    margin-bottom: 0;
-    border-bottom: 0;
   }
 
   .project-detail__actions {
@@ -291,21 +312,11 @@ const hasFullVideo = Boolean(videoUrl);
     border-radius: 999px;
     text-decoration: none;
     font-weight: 700;
-    line-height: 1;
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease,
-      border-color 0.2s ease,
-      color 0.2s ease;
+    transition: all 0.2s ease;
   }
 
   .project-action:hover {
     transform: translateY(-2px);
-  }
-
-  .project-action:focus-visible {
-    outline: 2px solid var(--primary-clr-400);
-    outline-offset: 2px;
   }
 
   .project-action--primary {
@@ -325,39 +336,38 @@ const hasFullVideo = Boolean(videoUrl);
 
   .project-action--secondary:hover {
     border-color: var(--primary-clr-400);
-    color: #fff;
   }
 
   .project-action--ghost {
-    border: 1px solid transparent;
     color: var(--secondary-clr-200);
-    background: transparent;
   }
 
   .project-action--ghost:hover {
     color: var(--secondary-clr-100);
-    border-color: var(--secondary-clr-400);
     background: rgba(17, 24, 39, 0.3);
-  }
-
-  .project-detail h1 {
-    text-align: left;
-    margin: 0;
-    font-size: clamp(1.9rem, 4vw, 3rem);
-    line-height: 1.2;
-  }
-
-  .project-detail :global(img) {
-    border-radius: 0.9rem;
-    width: 100%;
-    height: auto;
   }
 
   .project-detail__media-grid {
     display: grid;
     gap: 1.25rem;
     align-items: stretch;
+    position: relative;
+    margin-top: 2rem;
     margin-bottom: clamp(1rem, 2.5vw, 1.75rem);
+  }
+
+  .project-detail__media-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--secondary-clr-400);
+  }
+
+  .project-detail__media-divider--top {
+    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .project-detail__media-divider--bottom {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
   }
 
   .project-detail__media-panel {
@@ -365,139 +375,106 @@ const hasFullVideo = Boolean(videoUrl);
   }
 
   .project-detail__media-panel--video {
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--secondary-clr-400);
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .project-detail__media-panel--image {
+    padding-top: 0;
+    border-top: 0;
   }
 
   .project-detail__main-image {
-    display: block;
     width: 100%;
     max-height: clamp(260px, 58vh, 560px);
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    margin: 0;
-  }
-
-  .project-detail__section-divider {
-    width: 100%;
-    height: 1px;
-    background: var(--secondary-clr-400);
-    margin-bottom: clamp(2rem, 4vw, 3rem);
-  }
-
-  .project-detail__story {
-    width: 100%;
-    margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
-    scroll-margin-top: clamp(1rem, 3vw, 2rem);
-  }
-
-  .project-detail__story h3 {
-    margin-bottom: 0.9rem;
-    font-size: clamp(1.35rem, 2.4vw, 1.8rem);
-    line-height: 1.25;
-  }
-
-  .project-detail__story p {
-    color: var(--secondary-clr-200);
-    line-height: 1.8;
-    font-size: clamp(1rem, 1.2vw, 1.05rem);
-  }
-
-  .project-detail__gallery {
-    display: grid;
-    gap: 1rem;
-    max-width: min(100%, 900px);
-    margin-inline: auto;
-    margin-bottom: 0;
-  }
-
-  .project-detail__gallery-image {
-    aspect-ratio: 16 / 9;
-    max-height: clamp(180px, 30vw, 300px);
-    object-fit: cover;
-  }
-
-  .project-detail__related {
-    margin-top: clamp(2rem, 5vw, 3.5rem);
-    padding-top: clamp(1.5rem, 4vw, 2.5rem);
-    border-top: 1px solid var(--secondary-clr-400);
-  }
-
-  .project-detail__related h2 {
-    text-align: left;
-    margin-bottom: clamp(1rem, 2.5vw, 1.8rem);
-    font-size: clamp(1.4rem, 3vw, 2rem);
-  }
-
-  .project-detail__related-grid {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .project-detail__related-card {
     display: block;
-    color: var(--secondary-clr-100);
-  }
-
-  .project-detail__related-card h3 {
-    margin-top: 0.75rem;
-    font-size: clamp(1rem, 1.8vw, 1.2rem);
-    line-height: 1.35;
-    transition: color 0.25s ease-in-out;
-  }
-
-  .project-detail__related-card:hover h3 {
-    color: var(--primary-clr-400);
-  }
-
-  .project-detail__related-card :global(img) {
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
+    border-radius: 1rem;
   }
 
   .video-container {
     position: relative;
+    aspect-ratio: 16 / 9;
     width: 100%;
-    border-radius: 1rem;
-    overflow: hidden;
-    background: #000;
   }
 
   .video-element {
     width: 100%;
     height: 100%;
-    aspect-ratio: 16 / 9;
     object-fit: cover;
     display: block;
   }
 
-  .video-controls-overlay {
+  .video-overlay {
     position: absolute;
     inset: 0;
+    background: rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.4);
-    transition: opacity 0.3s;
+    transition: opacity 0.5s ease;
+    z-index: 2;
   }
 
   .btn-play {
     background: var(--primary-clr-400);
-    color: #fff;
+    color: white;
     border: none;
-    padding: 1rem 2rem;
+    padding: 1.2rem 2.5rem;
     border-radius: 5rem;
-    font-weight: 700;
+    font-weight: 800;
+    font-size: 1.1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    gap: 0.75rem;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
   }
 
   .btn-play:hover {
+    transform: scale(1.08);
     background: var(--accent-clr-400);
-    transform: scale(1.05);
+  }
+
+  .project-detail h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .project-detail__story {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 4rem;
+    scroll-margin-top: 100px;
+  }
+
+  .project-detail__story h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-detail__story p {
+    color: var(--secondary-clr-200);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
+
+  .project-detail__gallery {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 5rem;
+  }
+
+  .project-detail__related-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
   @media (width >= 768px) {
@@ -507,24 +484,33 @@ const hasFullVideo = Boolean(videoUrl);
     }
 
     .project-detail__media-panel--video {
-      padding-top: 0;
-      border-top: 0;
-      padding-left: 1.5rem;
-      border-left: 1px solid var(--secondary-clr-400);
+      padding-bottom: 0;
+      border-bottom: 0;
+      padding-left: 0.75rem;
+      border-left: 0;
     }
 
-    .project-detail__section-divider {
-      margin-bottom: clamp(2.25rem, 4vw, 3.25rem);
+    .project-detail__media-panel--image {
+      padding-top: 0;
+      border-top: 0;
+      padding-right: 0.75rem;
+      border-right: 0;
+    }
+
+    .project-detail__media-grid::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      transform: translateX(-50%);
+      background: var(--secondary-clr-400);
+      pointer-events: none;
     }
 
     .project-detail__gallery {
       grid-template-columns: repeat(2, 1fr);
-      gap: clamp(1rem, 2vw, 1.5rem);
-    }
-
-    .project-detail__related-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(1rem, 2vw, 1.5rem);
     }
   }
 </style>
