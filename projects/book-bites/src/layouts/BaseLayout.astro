@@ -1,3 +1,7 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
@@ -15,31 +19,58 @@
   </head>
   <body>
     <header>
-      <h1><a href="/" aria-label="Ir para a página inicial">Book Bites</a></h1>
-      <nav>
-        <ul>
-          <li><a href="/">Início</a></li>
-          <li><a href="/about">Sobre</a></li>
-          <li><a href="/books">Livros</a></li>
-        </ul>
-      </nav>
+      <div class="layout-container">
+        <h1>
+          <a href="/" aria-label="Ir para a página inicial">Book Bites</a>
+        </h1>
+        <nav>
+          <ul>
+            <li><a href="/">Início</a></li>
+            <li><a href="/about">Sobre</a></li>
+            <li><a href="/books">Livros</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
     <main>
       <slot />
     </main>
+    <footer>
+      <div class="layout-container">
+        <div>
+          <p>&#169; {currentYear} Book Bites</p>
+          <p>Leituras, resenhas e descobertas literárias.</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
 
 <style>
   body {
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   header {
     background-color: #f9f6fc;
-    padding: 10px 20px;
+  }
+
+  header .layout-container,
+  footer .layout-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  header .layout-container {
+    min-height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 24px;
 
     h1 {
       margin: 0;
@@ -54,6 +85,47 @@
       list-style-type: none;
       gap: 16px;
     }
+    a {
+      text-decoration: none;
+      border-bottom: 1px dashed;
+    }
+  }
+  main {
+    flex: 1;
+  }
+  footer {
+    background-color: #f9f6fc;
+    border-top: 1px solid #ebe5f2;
+    padding: 24px 0;
+
+    .layout-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    p:first-child {
+      font-weight: 700;
+    }
+
+    nav {
+      margin-left: auto;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+      gap: 16px;
+      margin: 0;
+      padding: 0;
+    }
+
     a {
       text-decoration: none;
       border-bottom: 1px dashed;
