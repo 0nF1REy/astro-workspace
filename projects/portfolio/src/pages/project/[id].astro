@@ -24,15 +24,28 @@ const { project, otherProjects } = Astro.props as {
   otherProjects: CollectionEntry<"projects">[];
 };
 
+type ProjectData = CollectionEntry<"projects">["data"] & {
+  mainImageRemote?: string;
+  videoUrl?: string;
+  videoFallback?: string;
+};
+
 const {
   title,
-  mainImage,
+  mainImage,       
+  mainImageRemote,
   otherImages = [],
   storyTitle,
   storyContent,
-} = project.data;
+  videoUrl,        
+  videoFallback, 
+} = project.data as ProjectData;
 
 const relatedProjects = otherProjects.slice(0, 3);
+
+const initialImage = mainImageRemote || mainImage.src;
+const liveProjectUrl = "#";
+const repositoryUrl = "#";
 ---
 
 <Layout {title}>
@@ -40,19 +53,67 @@ const relatedProjects = otherProjects.slice(0, 3);
     <div class="content-wrapper">
       <div class="project-detail__header">
         <h1>{title}</h1>
+
+        <div class="project-detail__actions" aria-label="Links do projeto">
+          <a
+            class="project-action project-action--primary"
+            href={liveProjectUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            Ver projeto ao vivo
+          </a>
+
+          <a
+            class="project-action project-action--secondary"
+            href={repositoryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-github"></i>
+            Ver repositório
+          </a>
+
+          <a class="project-action project-action--ghost" href="#project-story">
+            <i class="fa-solid fa-book-open"></i>
+            Ler conteúdo
+          </a>
+        </div>
+
+        <!-- VERIFICAÇÃO DE VÍDEO -->
+          {videoUrl && (
+          <div class="video-container">
+            <video 
+              id="project-video-player"
+              controls 
+              poster={mainImage.src} 
+              preload="metadata"
+              class="video-element"
+            >
+              <!-- O source inicia com o vídeo curto (local) -->
+              <source src={videoFallback} type="video/mp4" id="video-source" />
+            </video>
+            
+            <div class="video-controls-overlay">
+              <button id="load-full-video" class="btn-play" data-full-url={videoUrl}>
+                <i class="fa-solid fa-play"></i> Assistir Vídeo Completo
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
-      <Image
-        src={mainImage}
+      <!-- Imagem Principal com Lógica de Fallback -->
+      <img
+        src={initialImage}
         alt={title}
-        widths={[400, 800, 1200]}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
         class="project-detail__main-image"
         loading="eager"
-        fetchpriority="high"
+        onerror={`this.onerror=null;this.src='${mainImage.src}';`}
       />
 
-      <div class="project-detail__story">
+      <div class="project-detail__story" id="project-story">
         <h3>{storyTitle}</h3>
         <p>{storyContent}</p>
       </div>
@@ -103,6 +164,28 @@ const relatedProjects = otherProjects.slice(0, 3);
   </section>
 </Layout>
 
+<script>
+  const playBtn = document.getElementById('load-full-video');
+  const videoPlayer = document.getElementById('project-video-player') as HTMLVideoElement;
+  const videoSource = document.getElementById('video-source') as HTMLSourceElement;
+
+  if (playBtn && videoPlayer && videoSource) {
+    playBtn.addEventListener('click', () => {
+      const fullUrl = playBtn.getAttribute('data-full-url');
+      
+      if (fullUrl) {
+        // Troca a fonte para o vídeo completo
+        videoSource.src = fullUrl;
+        videoPlayer.load(); // Recarrega o player com a nova fonte
+        videoPlayer.play(); // Inicia o vídeo
+        
+        // Esconde o botão de overlay
+        playBtn.parentElement!.style.display = 'none';
+      }
+    });
+  }
+</script>
+
 <style>
   .pb-section {
     padding-bottom: 5rem;
@@ -117,6 +200,68 @@ const relatedProjects = otherProjects.slice(0, 3);
     padding-bottom: clamp(1.25rem, 2.5vw, 2rem);
     margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
     border-bottom: 1px solid var(--secondary-clr-400);
+  }
+
+  .project-detail__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .project-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 2.75rem;
+    padding: 0.8rem 1.1rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    line-height: 1;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .project-action:hover {
+    transform: translateY(-2px);
+  }
+
+  .project-action--primary {
+    background: var(--primary-clr-400);
+    color: #fff;
+  }
+
+  .project-action--primary:hover {
+    background: var(--accent-clr-400);
+  }
+
+  .project-action--secondary {
+    border: 1px solid var(--secondary-clr-400);
+    color: var(--secondary-clr-100);
+    background: rgba(17, 24, 39, 0.4);
+  }
+
+  .project-action--secondary:hover {
+    border-color: var(--primary-clr-400);
+    color: #fff;
+  }
+
+  .project-action--ghost {
+    border: 1px solid transparent;
+    color: var(--secondary-clr-200);
+    background: transparent;
+  }
+
+  .project-action--ghost:hover {
+    color: var(--secondary-clr-100);
+    border-color: var(--secondary-clr-400);
+    background: rgba(17, 24, 39, 0.3);
   }
 
   .project-detail h1 {
@@ -209,6 +354,50 @@ const relatedProjects = otherProjects.slice(0, 3);
   .project-detail__related-card :global(img) {
     aspect-ratio: 16 / 10;
     object-fit: cover;
+  }
+
+    .video-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .video-element {
+    width: 100%;
+    display: block;
+  }
+
+  .video-controls-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.4);
+    transition: opacity 0.3s;
+  }
+
+  .btn-play {
+    background: var(--primary-clr-400);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+
+  .btn-play:hover {
+    background: var(--accent-clr-400);
+    transform: scale(1.05);
   }
 
   @media (width >= 768px) {

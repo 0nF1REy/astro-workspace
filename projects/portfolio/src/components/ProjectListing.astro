@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -8,17 +7,54 @@ interface Props {
 
 const { project } = Astro.props;
 
-const { title, mainImage } = project.data; // Adicionar no futuro: client, work
+type ProjectData = CollectionEntry<"projects">["data"] & {
+  mainImageRemote?: string;
+};
+
+// Destruturando os dados, incluindo o novo campo mainImageRemote
+const { title, mainImage, client, work, tags } = project.data as ProjectData;
+
+// Definimos qual será a imagem inicial (preferência para a remota do ImageKit)
+const initialImage =
+  (project.data as ProjectData).mainImageRemote || mainImage.src;
 ---
 
 <article class="project">
-  <a class="image" href={`/project/${project.id}`} aria-label={title}>
-    <Image width={900} src={mainImage} alt={title} />
+  <a class="image-link" href={`/project/${project.id}`} aria-label={title}>
+    <!-- Usamos a tag img padrão para suportar a lógica de onerror (fallback) -->
+    <img
+      src={initialImage}
+      alt={title}
+      class="project-img"
+      loading="lazy"
+      decoding="async"
+      onerror={`this.onerror=null;this.src='${mainImage.src}';`}
+    />
   </a>
 
-  <a href={`/project/${project.id}`} class="title" aria-label={title}>
-    <h3>{title}</h3>
-  </a>
+  <div class="content">
+    <!-- Bloco de Tags -->
+    {
+      tags && (
+        <div class="tags">
+          {tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      )
+    }
+
+    <a href={`/project/${project.id}`} class="title" aria-label={title}>
+      <h3>{title}</h3>
+    </a>
+
+    <!-- Bloco de Cliente e Trabalho -->
+    <div class="project-meta">
+      {work && <span class="work-label">{work}</span>}
+      {work && client && <span class="meta-separator">•</span>}
+      {client && <span class="client-label">{client}</span>}
+    </div>
+  </div>
 </article>
 
 <style>
@@ -26,58 +62,159 @@ const { title, mainImage } = project.data; // Adicionar no futuro: client, work
     display: flex;
     flex-direction: column;
     height: 100%;
+    transition:
+      transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.24s ease,
+      border-color 0.24s ease;
+    will-change: transform;
   }
 
   .project:not(:last-child) {
     margin-bottom: 3rem;
   }
 
-  .image {
-    width: 100%;
+  .project:hover {
+    transform: translate3d(0, -4px, 0);
   }
 
-  img {
-    margin-bottom: 1.5rem;
+  .image-link {
+    width: 100%;
+    display: block;
+    overflow: hidden;
     border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--secondary-clr-900);
+  }
+
+  .project-img {
     width: 100%;
     height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
     max-height: clamp(180px, 24vw, 350px);
+    transition: transform 0.5s ease;
+    will-change: transform;
+  }
+
+  .project:hover .project-img {
+    transform: scale(1.03);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    background: var(--secondary-clr-400);
+    color: var(--accent-clr-400);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid var(--secondary-clr-400);
+    letter-spacing: 0.5px;
   }
 
   .title {
     position: relative;
     color: var(--secondary-clr-100);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     font-size: 1.25rem;
-    transition: color 0.3s ease-in-out;
+    width: fit-content;
   }
 
+  .title h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    transition: color 0.3s ease;
+  }
+
+  /* Linha decorativa no título */
   .title::after {
     content: "";
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -4px;
+    right: -250px;
     width: 100px;
     height: 4px;
     border-radius: 0.4rem;
     background-color: var(--primary-clr-400);
-    transition: transform 0.3s ease-in-out;
+    transition:
+      transform 0.3s ease,
+      background-color 0.3s ease;
   }
 
-  .title:hover {
+  .project:hover .title h3 {
     color: var(--primary-clr-400);
-  }
-
-  .project:hover .title {
-    color: var(--accent-clr-400);
   }
 
   .project:hover .title::after {
     background-color: var(--accent-clr-400);
+    transform: translateX(10px);
   }
 
-  .title:hover::after {
-    transform: translateY(-4px);
+  /* Estilos para Cliente e Work */
+  .project-meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 0.5rem;
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  .work-label,
+  .client-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.28rem 0.65rem;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+
+  .work-label {
+    background: color-mix(in srgb, var(--primary-clr-400) 14%, transparent);
+    color: var(--secondary-clr-100);
+  }
+
+  .client-label {
+    background: color-mix(in srgb, var(--secondary-clr-400) 18%, transparent);
+    color: var(--secondary-clr-200);
+  }
+
+  .meta-separator {
+    grid-column: 2;
+    color: var(--primary-clr-400);
+    font-weight: 700;
+    line-height: 1;
+    justify-self: center;
+  }
+
+  .meta-separator::selection,
+  .work-label::selection,
+  .client-label::selection {
+    color: var(--primary-clr-400);
+  }
+
+  @supports not (background: color-mix(in srgb, white, black)) {
+    .work-label {
+      background: rgba(30, 113, 183, 0.14);
+    }
   }
 
   @media (width >= 768px) {

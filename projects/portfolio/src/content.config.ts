@@ -4,7 +4,7 @@ import { glob } from "astro/loaders";
 
 const projectCollection = defineCollection({
   loader: glob({
-    pattern: "**/*.json",
+    pattern: "**/index.json",
     base: "./src/content/projects",
   }),
   schema: ({ image }: { image: any }) =>
@@ -13,9 +13,13 @@ const projectCollection = defineCollection({
       client: z.string().optional(),
       work: z.string().optional(),
       mainImage: image(),
+      mainImageRemote: z.string().url().optional(),
       otherImages: z.array(image()).optional(),
       storyTitle: z.string(),
       storyContent: z.string(),
+      tags: z.array(z.string()).optional(),
+      videoUrl: z.string().url().optional(),
+      videoFallback: z.string().optional(),
     }),
 });
 

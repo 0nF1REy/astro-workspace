@@ -1,0 +1,12 @@
+{
+  "title": "ATARASHII GAKKO! Landing Page",
+  "client": "Projeto de Estudo",
+  "work": "Frontend Development & UI Design",
+  "mainImage": "./assets/hero.png",
+  "mainImageRemote": "https://ik.imagekit.io/0nF1REy/projects/portfolio/projects/atarashii-gakko/hero.png",
+  "storyTitle": "Recriando a energia do J-Pop com Performance",
+  "storyContent": "Este projeto é um clone técnico da landing page oficial da banda japonesa ATARASHII GAKKO!. O objetivo principal foi exercitar a componentização modular e a estilização avançada com SCSS. Utilizei o Astro para garantir um carregamento extremamente rápido (Zero JS por padrão) e integrei funcionalidades interativas como um sistema de newsletter com validação via JavaScript puro e uma agenda de turnê mundial responsiva. O maior desafio foi manter a fidelidade visual da marca, utilizando tipografias customizadas e uma paleta de cores vibrante, garantindo que a experiência fosse fluida tanto em desktops quanto em dispositivos móveis.",
+  "tags": ["Landing Page", "Astro", "SCSS"],
+  "videoUrl": "https://ik.imagekit.io/0nF1REy/projects/portfolio/projects/atarashii-gakko/homepage.mp4",
+  "videoFallback": "./assets/homepage-preview.mp4"
+}
