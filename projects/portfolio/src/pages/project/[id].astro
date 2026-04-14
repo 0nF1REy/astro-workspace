@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import Layout from "../../layout/Layout.astro";
+import Layout from "@layout/Layout.astro";
 import { Image } from "astro:assets";
 
 export const prerender = true;
@@ -123,7 +123,8 @@ const hasFullVideo = Boolean(videoUrl);
             alt={title}
             class="project-detail__main-image"
             loading="eager"
-            onerror={`this.onerror=null;this.src='${mainImage.src}';`}
+            crossorigin="anonymous"
+            data-fallback-src={mainImage.src}
           />
         </div>
 
@@ -133,6 +134,7 @@ const hasFullVideo = Boolean(videoUrl);
               <div class="video-container">
                 <video
                   data-role="project-video"
+                  data-preview-fallback-src={previewFallback || ""}
                   muted
                   loop
                   autoplay
@@ -140,12 +142,9 @@ const hasFullVideo = Boolean(videoUrl);
                   poster={initialPoster}
                   preload="metadata"
                   class="video-element"
+                  crossorigin="anonymous"
                 >
-                  <source
-                    src={previewPrimary}
-                    type="video/mp4"
-                    data-fallback={previewFallback}
-                  />
+                  <source src={previewPrimary} type="video/mp4" />
                 </video>
 
                 {hasFullVideo && (
@@ -235,11 +234,10 @@ const hasFullVideo = Boolean(videoUrl);
   const videoPlayer = document.querySelector<HTMLVideoElement>(
     '[data-role="project-video"]',
   );
-  const videoSource = videoPlayer?.querySelector<HTMLSourceElement>("source");
 
-  if (videoPlayer && videoSource) {
-    videoSource.addEventListener("error", () => {
-      const fallback = videoSource.dataset.fallback;
+  if (videoPlayer) {
+    videoPlayer.addEventListener("error", () => {
+      const fallback = videoPlayer.dataset.previewFallbackSrc;
       const fallbackAlreadyApplied =
         videoPlayer.dataset.previewFallbackApplied === "1";
 

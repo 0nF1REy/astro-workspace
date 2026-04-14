@@ -116,5 +116,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       document.addEventListener("astro:page-load", initLayoutParticles);
       document.addEventListener("astro:before-swap", destroyLayoutParticles);
     </script>
+    <script type="module" src="/scripts/media-fallback.js"></script>
   </body>
 </html>

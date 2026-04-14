@@ -19,14 +19,14 @@ const initialImage =
 
 <article class="project">
   <a class="image-link" href={`/project/${project.id}`} aria-label={title}>
-    <!-- Usamos a tag img padrão para suportar a lógica de onerror (fallback) -->
     <img
       src={initialImage}
       alt={title}
       class="project-img"
       loading="lazy"
       decoding="async"
-      onerror={`this.onerror=null;this.src='${mainImage.src}';`}
+      crossorigin="anonymous"
+      data-fallback-src={mainImage.src}
     />
   </a>
 
