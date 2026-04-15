@@ -40,7 +40,7 @@ status: ## Mostra o status atual do repositório
 
 sync: ## Sincroniza o repositório
 	@echo "Buscando atualizações remotas (Pull)..."
-	@git pull origin main
+	@git pull --rebase --autostash origin main
 	@echo "Enviando atualizações locais (Push)..."
 	@git push origin main
 	@echo "Sincronização completa!"

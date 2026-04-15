@@ -48,7 +48,8 @@ jobs:
           else
             git add "$FILE_PATH"
             git commit -m "main: chore (portfolio/hash) - Updated CSP hashes [skip ci]"
-            git push
+            git pull --rebase origin main
+            git push origin main
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
