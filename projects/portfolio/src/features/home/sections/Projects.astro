@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import ProjectListing from "../../../components/ProjectListing.astro";
+import ProjectListing from "@components/ProjectListing.astro";
 
 const projects: CollectionEntry<"projects">[] = await getCollection("projects");
 ---

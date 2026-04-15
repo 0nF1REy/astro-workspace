@@ -1,8 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import Layout from "../../layout/Layout.astro";
-import Section from "../../components/Section.astro";
-import ArticleListing from "../../components/ArticleListing.astro";
+import Layout from "@layout/Layout.astro";
+import Section from "@components/Section.astro";
+import ArticleListing from "@components/ArticleListing.astro";
 
 const allArticles: CollectionEntry<"blog">[] = await getCollection("blog");
 
@@ -14,8 +14,8 @@ const posts = allArticles.sort(
 <Layout title="Blog | Alan Ryan">
   <Section id="blog-list">
     <div class="blog-header">
-      <h1>Todos os Artigos</h1>
-      <p>Explorações técnicas e guias sobre desenvolvimento e sistemas.</p>
+      <h1 class="title">Todos os Artigos</h1>
+      <p class="subtitle">Explorações técnicas e guias sobre desenvolvimento e sistemas.</p>
     </div>
 
     <div class="blog-grid">
