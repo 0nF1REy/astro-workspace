@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-
 // Importação do Sol (Tux)
 import TuxIcon from "@assets/images/tech-galaxy/tux.svg";
 
@@ -19,22 +17,47 @@ import JsIcon from "@assets/images/tech-galaxy/languages/javascript.svg";
 import KotlinIcon from "@assets/images/tech-galaxy/languages/kotlin.svg";
 import TsIcon from "@assets/images/tech-galaxy/languages/typescript.svg";
 
+const IMAGEKIT_BASE_URL =
+  "https://ik.imagekit.io/0nF1REy/projects/portfolio/features/home/sections/tech-galaxy";
+
+const resolveLocalAssetSrc = (asset: string | { src: string }) =>
+  typeof asset === "string" ? asset : asset.src;
+
+const buildImageKitUrl = (relativePath: string) =>
+  `${IMAGEKIT_BASE_URL}/${relativePath}`;
+
+const sun = {
+  name: "Linux Core",
+  src: buildImageKitUrl("tux.svg"),
+  fallbackSrc: resolveLocalAssetSrc(TuxIcon),
+};
+
+const createTechItem = (
+  name: string,
+  icon: string | { src: string },
+  remotePath: string,
+) => ({
+  name,
+  src: buildImageKitUrl(remotePath),
+  fallbackSrc: resolveLocalAssetSrc(icon),
+});
+
 const innerRing = [
-  { name: "Spring Boot", icon: SpringIcon },
-  { name: "Angular", icon: AngularIcon },
-  { name: "Compose", icon: ComposeIcon },
-  { name: "Astro", icon: AstroIcon },
-  { name: "Next.js", icon: NextIcon },
-  { name: "Electron", icon: ElectronIcon },
+  createTechItem("Spring Boot", SpringIcon, "frameworks/spring-boot.svg"),
+  createTechItem("Angular", AngularIcon, "frameworks/angular.svg"),
+  createTechItem("Compose", ComposeIcon, "frameworks/compose.svg"),
+  createTechItem("Astro", AstroIcon, "frameworks/astro.svg"),
+  createTechItem("Next.js", NextIcon, "frameworks/nextjs.svg"),
+  createTechItem("Electron", ElectronIcon, "frameworks/electron.svg"),
 ];
 
 const outerRing = [
-  { name: "Fortran", icon: FortranIcon },
-  { name: "Go", icon: GoIcon },
-  { name: "Java", icon: JavaIcon },
-  { name: "TypeScript", icon: TsIcon },
-  { name: "Kotlin", icon: KotlinIcon },
-  { name: "JavaScript", icon: JsIcon },
+  createTechItem("Fortran", FortranIcon, "languages/fortran.svg"),
+  createTechItem("Go", GoIcon, "languages/go.svg"),
+  createTechItem("Java", JavaIcon, "languages/java.svg"),
+  createTechItem("TypeScript", TsIcon, "languages/typescript.svg"),
+  createTechItem("Kotlin", KotlinIcon, "languages/kotlin.svg"),
+  createTechItem("JavaScript", JsIcon, "languages/javascript.svg"),
 ];
 ---
 
@@ -47,7 +70,16 @@ const outerRing = [
   <div class="galaxy__container">
     <!-- O SOL (TUX) -->
     <div class="galaxy__sun">
-      <Image src={TuxIcon} alt="Linux Core" width={120} height={120} />
+      <img
+        class="sun-image"
+        src={sun.src}
+        alt={sun.name}
+        width="120"
+        height="120"
+        crossorigin="anonymous"
+        data-fallback-src={sun.fallbackSrc}
+        decoding="async"
+      />
       <div class="sun-glow"></div>
     </div>
 
@@ -55,7 +87,16 @@ const outerRing = [
     {
       innerRing.map((tech) => (
         <div class="galaxy__item" data-orbit="inner">
-          <Image src={tech.icon} alt={tech.name} width={45} height={45} />
+          <img
+            src={tech.src}
+            alt={tech.name}
+            width="45"
+            height="45"
+            loading="lazy"
+            decoding="async"
+            crossorigin="anonymous"
+            data-fallback-src={tech.fallbackSrc}
+          />
           <span class="tech-label">{tech.name}</span>
         </div>
       ))
@@ -65,7 +106,16 @@ const outerRing = [
     {
       outerRing.map((tech) => (
         <div class="galaxy__item" data-orbit="outer">
-          <Image src={tech.icon} alt={tech.name} width={40} height={40} />
+          <img
+            src={tech.src}
+            alt={tech.name}
+            width="40"
+            height="40"
+            loading="lazy"
+            decoding="async"
+            crossorigin="anonymous"
+            data-fallback-src={tech.fallbackSrc}
+          />
           <span class="tech-label">{tech.name}</span>
         </div>
       ))

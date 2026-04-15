@@ -4,7 +4,7 @@ function applyImageFallback(img) {
 
   img.dataset.fallbackBound = "1";
 
-  img.addEventListener("error", () => {
+  const applyFallbackSource = () => {
     const fallbackSrc = img.dataset.fallbackSrc;
     const fallbackAlreadyApplied = img.dataset.fallbackApplied === "1";
 
@@ -12,7 +12,15 @@ function applyImageFallback(img) {
 
     img.dataset.fallbackApplied = "1";
     img.src = fallbackSrc;
+  };
+
+  img.addEventListener("error", () => {
+    applyFallbackSource();
   });
+
+  if (img.complete && img.naturalWidth === 0) {
+    applyFallbackSource();
+  }
 }
 
 function bindMediaFallbacks(root = document) {
