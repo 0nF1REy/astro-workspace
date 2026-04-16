@@ -42,7 +42,7 @@ const initialImage =
       )
     }
 
-    <a href={`/project/${project.id}`} class="title" aria-label={title}>
+    <a href={`/project/${project.id}`} class="title-project" aria-label={title}>
       <h3>{title}</h3>
     </a>
 
@@ -128,7 +128,7 @@ const initialImage =
     border-color: var(--primary-clr-400);
   }
 
-  .title {
+  .title-project {
     position: relative;
     color: var(--secondary-clr-100);
     margin-bottom: 0.5rem;
@@ -136,7 +136,7 @@ const initialImage =
     width: fit-content;
   }
 
-  .title h3 {
+  .title-project h3 {
     font-size: 1.4rem;
     font-weight: 700;
     line-height: 1.2;
@@ -144,7 +144,7 @@ const initialImage =
   }
 
   /* Linha decorativa no título */
-  .title::after {
+  .title-project::after {
     content: "";
     position: absolute;
     top: -4px;
@@ -158,11 +158,11 @@ const initialImage =
       background-color 0.3s ease;
   }
 
-  .project:hover .title h3 {
+  .project:hover .title-project h3 {
     color: var(--primary-clr-400);
   }
 
-  .project:hover .title::after {
+  .project:hover .title-project::after {
     background-color: var(--accent-clr-400);
     transform: translateX(10px);
   }
