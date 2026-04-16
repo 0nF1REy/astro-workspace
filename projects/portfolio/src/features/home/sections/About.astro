@@ -1,6 +1,22 @@
 ---
 import Button from "@components/Button.astro";
 import AboutImage from "@assets/images/about/alan-ryan-03.jpg";
+
+const IMAGEKIT_BASE_URL =
+  "https://ik.imagekit.io/0nF1REy/projects/portfolio/features/home/sections/about";
+
+const resolveLocalAssetSrc = (asset: string | { src: string }) =>
+  typeof asset === "string" ? asset : asset.src;
+
+const buildImageKitUrl = (relativePath: string) =>
+  `${IMAGEKIT_BASE_URL}/${relativePath}`;
+
+const aboutImage = {
+  src: buildImageKitUrl("alan-ryan-03.jpg"),
+  fallbackSrc: resolveLocalAssetSrc(AboutImage),
+  width: AboutImage.width,
+  height: AboutImage.height,
+};
 ---
 
 <div class="about">
@@ -19,12 +35,14 @@ import AboutImage from "@assets/images/about/alan-ryan-03.jpg";
 
     <div class="about__image">
       <img
-        src={AboutImage.src}
+        src={aboutImage.src}
         alt="Foto de Alan Ryan"
-        width={AboutImage.width}
-        height={AboutImage.height}
+        width={aboutImage.width}
+        height={aboutImage.height}
         loading="lazy"
         decoding="async"
+        crossorigin="anonymous"
+        data-fallback-src={aboutImage.fallbackSrc}
       />
     </div>
   </div>
