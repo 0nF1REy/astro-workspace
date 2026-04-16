@@ -1,6 +1,22 @@
 ---
 import Button from "@components/Button.astro";
 import HeroImage from "@assets/images/hero/alan-ryan-04.png";
+
+const IMAGEKIT_BASE_URL =
+  "https://ik.imagekit.io/0nF1REy/projects/portfolio/features/home/sections/hero";
+
+const resolveLocalAssetSrc = (asset: string | { src: string }) =>
+  typeof asset === "string" ? asset : asset.src;
+
+const buildImageKitUrl = (relativePath: string) =>
+  `${IMAGEKIT_BASE_URL}/${relativePath}`;
+
+const heroImage = {
+  src: buildImageKitUrl("alan-ryan-04.png"),
+  fallbackSrc: resolveLocalAssetSrc(HeroImage),
+  width: HeroImage.width,
+  height: HeroImage.height,
+};
 ---
 
 <section class="hero" id="home">
@@ -51,13 +67,15 @@ import HeroImage from "@assets/images/hero/alan-ryan-04.png";
 
       <div class="hero__media">
         <img
-          src={HeroImage.src}
+          src={heroImage.src}
           alt="Foto de Alan Ryan"
-          width={HeroImage.width}
-          height={HeroImage.height}
+          width={heroImage.width}
+          height={heroImage.height}
           loading="eager"
           fetchpriority="high"
           decoding="async"
+          crossorigin="anonymous"
+          data-fallback-src={heroImage.fallbackSrc}
         />
       </div>
     </div>
