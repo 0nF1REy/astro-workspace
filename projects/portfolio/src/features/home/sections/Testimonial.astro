@@ -2,24 +2,52 @@
 import Person1 from "@assets/images/testimonial/person-01.jpg";
 import Person2 from "@assets/images/testimonial/person-02.png";
 
-const testimonialData = [
-  {
-    name: "Emily C",
-    rating: 5,
-    handle: "@emilyc",
-    image: Person1,
-    description:
-      "Trabalhar com o Alan foi um verdadeiro prazer! Ele pegou minhas ideias vagas e as transformou em um logotipo incrível que representa perfeitamente minha marca.",
-  },
+const IMAGEKIT_BASE_URL =
+  "https://ik.imagekit.io/0nF1REy/projects/portfolio/features/home/sections/testimonial";
 
-  {
-    name: "Paul N",
-    rating: 5,
-    handle: "@pauln",
-    image: Person2,
-    description:
-      "Eu estava tendo dificuldade em encontrar um designer que conseguisse capturar a essência da minha marca até conhecer o Alan. O design dele foi exatamente o que eu procurava.",
+const resolveLocalAssetSrc = (asset: string | { src: string }) =>
+  typeof asset === "string" ? asset : asset.src;
+
+const buildImageKitUrl = (relativePath: string) =>
+  `${IMAGEKIT_BASE_URL}/${relativePath}`;
+
+const createTestimonialItem = (
+  name: string,
+  rating: number,
+  handle: string,
+  image: string | { src: string; width: number; height: number },
+  imageRemotePath: string,
+  description: string,
+) => ({
+  name,
+  rating,
+  handle,
+  image: {
+    src: buildImageKitUrl(imageRemotePath),
+    fallbackSrc: resolveLocalAssetSrc(image),
+    width: typeof image === "string" ? 40 : image.width,
+    height: typeof image === "string" ? 40 : image.height,
   },
+  description,
+});
+
+const testimonialData = [
+  createTestimonialItem(
+    "Emily C",
+    5,
+    "@emilyc",
+    Person1,
+    "person-01.jpg",
+    "Transformou nossas ideias em uma solução fullstack robusta e performática.",
+  ),
+  createTestimonialItem(
+    "Paul N",
+    5,
+    "@pauln",
+    Person2,
+    "person-02.png",
+    "Solução completa de ponta a ponta, com arquitetura sólida e integração impecável.",
+  ),
 ];
 ---
 
@@ -48,6 +76,8 @@ const testimonialData = [
               alt={data.name}
               loading="lazy"
               decoding="async"
+              crossorigin="anonymous"
+              data-fallback-src={data.image.fallbackSrc}
             />
 
             <div class="name">
@@ -62,13 +92,33 @@ const testimonialData = [
 </div>
 
 <style>
+  .testimonial-section {
+    transition: transform 280ms ease;
+  }
+
   .title {
     color: var(--primary-clr-400);
+    transition:
+      color 240ms ease,
+      text-shadow 280ms ease;
   }
 
   .testimonial-section__grid {
     background:
-      linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.85)),
+      radial-gradient(
+        circle at 15% 10%,
+        rgba(var(--primary-clr-400-rgb), 0.16),
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 85% 100%,
+        rgba(var(--accent-clr-400-rgb), 0.14),
+        transparent 42%
+      ),
+      linear-gradient(
+        rgba(var(--surface-deep-850-rgb), 0.9),
+        rgba(var(--surface-deep-900-rgb), 0.9)
+      ),
       url("../../../assets/images/testimonial/bg.png");
     background-size: cover;
     background-position: center;
@@ -76,9 +126,17 @@ const testimonialData = [
     -webkit-backdrop-filter: blur(10px);
     padding: 2rem;
     border-radius: 1rem;
+    border: 1px solid transparent;
+    box-shadow:
+      inset 0 1px 0 rgba(var(--primary-clr-400-rgb), 0),
+      0 18px 35px rgba(var(--surface-deep-950-rgb), 0.35);
     position: relative;
     display: grid;
     gap: 2rem;
+    transition:
+      border-color 280ms ease,
+      box-shadow 280ms ease,
+      transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   .star-active {
@@ -97,11 +155,98 @@ const testimonialData = [
     margin-bottom: 0;
   }
 
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    isolation: isolate;
+    padding: 1rem;
+    border-radius: 0.85rem;
+    border: 1px solid rgba(var(--primary-clr-400-rgb), 0.2);
+    background: rgba(var(--surface-deep-950-rgb), 0.45);
+    box-shadow:
+      0 10px 24px rgba(var(--shadow-black-rgb), 0.3),
+      0 0 0 1px rgba(var(--primary-clr-400-rgb), 0.08);
+    transition:
+      transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 240ms ease,
+      border-color 220ms ease,
+      background-color 220ms ease;
+    will-change: transform, box-shadow;
+  }
+
+  .testimonial::before {
+    content: "";
+    position: absolute;
+    top: -0.55rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      var(--accent-clr-400),
+      var(--primary-clr-400)
+    );
+    opacity: 0;
+    transform: translateY(4px) scaleX(0.75);
+    transform-origin: center;
+    filter: blur(1px);
+    transition:
+      opacity 220ms ease,
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 260ms ease;
+    pointer-events: none;
+  }
+
+  @media (hover: hover) {
+    .testimonial-section:hover .title,
+    .testimonial-section.is-inview .title,
+    .testimonial-section:focus-within .title {
+      color: var(--secondary-clr-100);
+      text-shadow: 0 0 18px rgba(var(--primary-clr-400-rgb), 0.35);
+    }
+
+    .testimonial-section:hover .testimonial-section__grid,
+    .testimonial-section:focus-within .testimonial-section__grid {
+      transform: translateY(-3px);
+      border-color: rgba(var(--primary-clr-400-rgb), 0.4);
+      box-shadow:
+        inset 0 1px 0 rgba(var(--primary-clr-400-rgb), 0.24),
+        0 24px 42px rgba(var(--surface-deep-950-rgb), 0.48);
+    }
+
+    .testimonial:hover,
+    .testimonial:focus-within {
+      transform: translateY(-5px);
+      border-color: rgba(var(--primary-clr-400-rgb), 0.42);
+      background: rgba(var(--surface-deep-875-rgb), 0.72);
+      box-shadow:
+        0 16px 34px rgba(var(--shadow-black-rgb), 0.42),
+        0 0 0 1px rgba(var(--primary-clr-400-rgb), 0.18);
+    }
+
+    .testimonial:hover::before,
+    .testimonial:focus-within::before {
+      opacity: 1;
+      transform: translateY(0) scaleX(1);
+      filter: blur(0);
+    }
+  }
+
   .description {
     margin-bottom: 1rem;
     font-weight: 500;
     font-size: 1.1rem;
     line-height: 1.6;
+    text-align: justify;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    max-height: clamp(5rem, 10vw, 5.6rem);
+    overflow: hidden;
   }
 
   img {
@@ -113,14 +258,45 @@ const testimonialData = [
     border-radius: 50%;
   }
 
+  .person img {
+    transition:
+      transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 220ms ease;
+  }
+
   .person {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
   }
 
   .name p {
     color: var(--secondary-clr-200);
+    transition: color 220ms ease;
+  }
+
+  .name h4 {
+    transition: color 220ms ease;
+  }
+
+  @media (hover: hover) {
+    .testimonial:hover .person img,
+    .testimonial:focus-within .person img {
+      transform: scale(1.08);
+      box-shadow: 0 0 0 2px rgba(var(--primary-clr-400-rgb), 0.3);
+    }
+
+    .testimonial:hover .name h4,
+    .testimonial:focus-within .name h4 {
+      color: var(--secondary-clr-100);
+    }
+
+    .testimonial:hover .name p,
+    .testimonial:focus-within .name p {
+      color: rgba(var(--primary-clr-400-rgb), 0.9);
+    }
   }
 
   @media (width >= 768px) {
@@ -131,3 +307,5 @@ const testimonialData = [
     }
   }
 </style>
+
+<script is:inline type="module" src="/scripts/testimonial-inview.js"></script>
