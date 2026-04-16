@@ -69,10 +69,32 @@ li {
 
 .title {
   color: var(--primary-clr-400);
+  transition:
+    color 240ms ease,
+    text-shadow 280ms ease;
 }
 
 .subtitle {
   color: var(--secondary-clr-100);
+  transition:
+    color 240ms ease,
+    text-shadow 280ms ease,
+    opacity 240ms ease;
+}
+
+.title.is-inview {
+  color: var(--primary-clr-400);
+  text-shadow:
+    0 0 20px rgba(var(--primary-clr-400-rgb), 0.4),
+    0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+.subtitle.is-inview {
+  color: var(--secondary-clr-100);
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.3),
+    0 0 6px rgba(var(--primary-clr-400-rgb), 0.12);
+  opacity: 1;
 }
 
 .container {
@@ -293,7 +315,10 @@ button:focus-visible {
   color: var(--secondary-clr-900);
   background-color: var(--accent-clr-400);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(30, 113, 183, 0.12);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.12),
+    0 8px 16px rgba(30, 113, 183, 0.15),
+    0 16px 32px rgba(30, 113, 183, 0.1);
 }
 
 .hero .btn,

@@ -96,13 +96,6 @@ const testimonialData = [
     transition: transform 280ms ease;
   }
 
-  .title {
-    color: var(--primary-clr-400);
-    transition:
-      color 240ms ease,
-      text-shadow 280ms ease;
-  }
-
   .testimonial-section__grid {
     background:
       radial-gradient(
@@ -202,7 +195,7 @@ const testimonialData = [
 
   @media (hover: hover) {
     .testimonial-section:hover .title,
-    .testimonial-section.is-inview .title,
+    .title.is-inview,
     .testimonial-section:focus-within .title {
       color: var(--secondary-clr-100);
       text-shadow: 0 0 18px rgba(var(--primary-clr-400-rgb), 0.35);
@@ -307,5 +300,3 @@ const testimonialData = [
     }
   }
 </style>
-
-<script is:inline type="module" src="/scripts/testimonial-inview.js"></script>
