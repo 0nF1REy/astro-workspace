@@ -34,10 +34,41 @@ body {
 
 html {
   background-color: #050505;
+  scrollbar-color: var(--primary-clr-400)
+    rgba(var(--surface-deep-900-rgb), 0.85);
+  scrollbar-width: thin;
 }
 
 main {
   background: transparent;
+}
+
+/* Global scrollbar theme */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(var(--surface-deep-900-rgb), 0.85);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--accent-clr-400),
+    var(--primary-clr-400)
+  );
+  border-radius: 999px;
+  border: 2px solid rgba(var(--surface-deep-900-rgb), 0.9);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-clr-400) 88%, white),
+    color-mix(in srgb, var(--primary-clr-400) 88%, white)
+  );
 }
 
 img {
