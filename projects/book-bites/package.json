@@ -1,11 +1,24 @@
 {
   "name": "book-bites",
   "type": "module",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "packageManager": "npm@11.11.0",
   "engines": {
     "node": ">=24.14.0"
   },
+  "description": "A curated collection of concise book reviews with quick insights and ratings",
+  "keywords": [
+    "books",
+    "book reviews",
+    "literature",
+    "reading",
+    "summaries",
+    "recommendations",
+    "astro",
+    "react",
+    "classic literature",
+    "machado de assis"
+  ],
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
