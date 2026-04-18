@@ -18,25 +18,23 @@ const Likes = () => {
 
   return (
     <div className="likes">
-      <p>
-        <p>
-          <i
-            className="fa-solid fa-heart"
-            style={{ color: "var(--color-primary)" }}
-            aria-hidden="true"
-          ></i>{" "}
-          {likes === 0 ? (
-            <span className="likes-none">
-              Seja o primeiro a curtir esta avaliação!
-            </span>
-          ) : (
-            <>
-              <span className={pop ? "likes-pop" : undefined}>{likes}</span>
-              {` pessoa${likes > 1 ? "s" : ""} ${likes > 1 ? "curtiram" : "curtiu"} esta avaliação.`}
-            </>
-          )}
-        </p>
-      </p>
+      <div className="likes-container">
+        <i
+          className="fa-solid fa-heart"
+          style={{ color: "var(--color-primary)" }}
+          aria-hidden="true"
+        ></i>{" "}
+        {likes === 0 ? (
+          <span className="likes-none">
+            Seja o primeiro a curtir esta avaliação!
+          </span>
+        ) : (
+          <span className="likes-text">
+            <span className={pop ? "likes-pop" : undefined}>{likes}</span>
+            {` pessoa${likes > 1 ? "s" : ""} ${likes > 1 ? "curtiram" : "curtiu"} esta avaliação.`}
+          </span>
+        )}
+      </div>
       <LoadingButton
         className="like-btn"
         onClick={handleClick}
@@ -65,7 +63,8 @@ const Likes = () => {
           max-width: 100%;
           min-width: 220px;
         }
-        .likes p {
+
+        .likes-container {
           margin: 0 0 12px 0;
           font-size: 1.06em;
           color: var(--color-text-lead);
@@ -73,24 +72,22 @@ const Likes = () => {
           align-items: center;
           gap: 8px;
         }
+
         .likes-pop {
           display: inline-block;
           animation: pop 0.3s cubic-bezier(.42,1.52,.58,1) both;
+          margin-right: 4px;
         }
+
         .likes-none {
           color: var(--color-text-muted);
           font-style: italic;
         }
+
         @keyframes pop {
-          0% {
-            transform: scale(1);
-          }
-          40% {
-            transform: scale(1.25);
-          }
-          100% {
-            transform: scale(1);
-          }
+          0% { transform: scale(1); }
+          40% { transform: scale(1.25); }
+          100% { transform: scale(1); }
         }
 
         .like-btn .like-icon {
