@@ -1,5 +1,7 @@
 ---
+
 import type { CollectionEntry } from "astro:content";
+import Button from "./Button.astro";
 
 interface Props {
   book: CollectionEntry<"books">;
@@ -12,7 +14,7 @@ const { book } = Astro.props;
   <p class="book-title">{book.data.title}, {book.data.rating}/10</p>
   <p class="book-author">por {book.data.author}</p>
   <p class="book-summary">{book.data.summary}</p>
-  <a href={`/books/${book.id}`}>Ler Resenha</a>
+  <Button href={`/books/${book.id}`} variant="secondary">Ler Resenha</Button>
 </div>
 
 <style>

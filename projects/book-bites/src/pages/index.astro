@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
 
 // const user = { name: 'Mario', email: 'mario@bookbites.com' }
 
@@ -32,8 +33,8 @@ let user = getUser();
       </p>
 
       <div class="hero-actions">
-        <a class="primary-action" href="/books">Explorar resenhas</a>
-        <a class="secondary-action" href="/about">Conhecer o projeto</a>
+        <Button href="/books" variant="primary">Explorar resenhas</Button>
+        <Button href="/about" variant="secondary">Conhecer o projeto</Button>
       </div>
     </section>
   </div>
@@ -94,69 +95,6 @@ let user = getUser();
     justify-content: center;
     gap: 12px;
     flex-wrap: wrap;
-  }
-
-  .primary-action,
-  .secondary-action {
-    position: relative;
-    display: inline-block;
-    padding: 10px 16px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
-    transition:
-      transform 160ms ease,
-      box-shadow 160ms ease,
-      color 160ms ease,
-      background-color 160ms ease;
-  }
-
-  .primary-action {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    box-shadow: 0 8px 20px rgba(122, 73, 197, 0.3);
-  }
-
-  .primary-action:hover {
-    background-color: var(--color-primary-light);
-    transform: translateY(-1px);
-    box-shadow: 0 12px 24px rgba(122, 73, 197, 0.35);
-  }
-
-  .primary-action::after,
-  .secondary-action::after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    width: 38px;
-    height: 24px;
-    background: url("/pt-blood.png") no-repeat center center / contain;
-    opacity: 0;
-    pointer-events: none;
-    transform: rotate(18deg);
-    transition: opacity 180ms ease;
-    z-index: 2;
-  }
-
-  .primary-action:hover::after,
-  .primary-action:focus-visible::after,
-  .secondary-action:hover::after,
-  .secondary-action:focus-visible::after {
-    opacity: 1;
-  }
-
-  .secondary-action {
-    background-color: var(--color-bg-card-alt);
-    color: var(--color-primary);
-    border: 1px solid var(--color-border-alt);
-  }
-
-  .secondary-action:hover {
-    background-color: var(--color-bg-card-alt-hover);
-    color: var(--color-primary-dark);
-    transform: translateY(-1px);
   }
 
   @media (max-width: 640px) {

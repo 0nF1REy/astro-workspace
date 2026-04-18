@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BookCard from "../../components/BookCard.astro";
+import Button from "../../components/Button.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const books: CollectionEntry<"books">[] = await getCollection("books");
