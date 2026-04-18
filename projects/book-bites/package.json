@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "packageManager": "npm@11.11.0",
   "engines": {
-    "node": ">=24.14.0"
+    "node": "24.x"
   },
   "description": "A curated collection of concise book reviews with quick insights and ratings",
   "keywords": [
