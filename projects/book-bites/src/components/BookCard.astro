@@ -1,5 +1,4 @@
 ---
-
 import type { CollectionEntry } from "astro:content";
 import Button from "./Button.astro";
 
@@ -19,20 +18,42 @@ const { book } = Astro.props;
 
 <style>
   .book-card {
-    background-color: #f9f6fc;
-    padding: 16px 20px;
-    margin: 20px auto;
-    box-shadow: 8px 8px 0 #ebe5f2;
+    box-sizing: border-box;
+    padding: 22px 28px 20px 28px;
+    margin: 1.5rem 0;
+    border-radius: 18px;
+    border: 1.5px solid var(--color-border);
+    box-shadow:
+      0 6px 32px 0 rgba(122, 73, 197, 0.1),
+      8px 8px 0 var(--color-border);
+    color: var(--color-text-main);
+    width: 100%;
+    transition:
+      box-shadow 0.18s,
+      transform 0.18s;
+  }
+  .book-card:hover {
+    box-shadow:
+      0 12px 40px 0 rgba(122, 73, 197, 0.16),
+      12px 12px 0 var(--color-border-alt);
+    transform: translateY(-2px) scale(1.012);
   }
   .book-title {
-    font-size: 1.4em;
-    font-weight: bold;
-    margin: 0;
+    font-size: 1.35em;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: var(--color-primary-dark);
+    letter-spacing: 0.01em;
   }
   .book-author {
     margin-top: 0;
+    color: var(--color-text-muted);
+    font-size: 1em;
+    margin-bottom: 8px;
   }
   .book-summary {
-    font-size: 1em;
+    font-size: 1.04em;
+    color: var(--color-text-lead);
+    margin-bottom: 18px;
   }
 </style>
