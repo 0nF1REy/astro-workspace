@@ -1,7 +1,7 @@
 {
   "name": "jashin-chan-dropkick",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,8 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^9.0.4",
-    "astro": "^5.18.0"
+    "@astrojs/vercel": "^10.0.4",
+    "astro": "^6.1.7"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",
