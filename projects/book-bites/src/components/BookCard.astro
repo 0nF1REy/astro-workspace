@@ -10,7 +10,10 @@ const { book } = Astro.props;
 ---
 
 <div class="book-card">
-  <p class="book-title">{book.data.title}, {book.data.rating}/10</p>
+  <p class="book-title">
+    <i class="fa-solid fa-book" aria-hidden="true"></i>
+    {book.data.title}, {book.data.rating}/10
+  </p>
   <p class="book-author">por {book.data.author}</p>
   <p class="book-summary">{book.data.summary}</p>
   <Button href={`/books/${book.id}`} variant="secondary">Ler Resenha</Button>
@@ -32,12 +35,14 @@ const { book } = Astro.props;
       box-shadow 0.18s,
       transform 0.18s;
   }
+
   .book-card:hover {
     box-shadow:
       0 12px 40px 0 rgba(122, 73, 197, 0.16),
       12px 12px 0 var(--color-border-alt);
     transform: translateY(-2px) scale(1.012);
   }
+
   .book-title {
     font-size: 1.35em;
     font-weight: 700;
@@ -45,12 +50,14 @@ const { book } = Astro.props;
     color: var(--color-primary-dark);
     letter-spacing: 0.01em;
   }
+
   .book-author {
     margin-top: 0;
     color: var(--color-text-muted);
     font-size: 1em;
     margin-bottom: 8px;
   }
+
   .book-summary {
     font-size: 1.04em;
     color: var(--color-text-lead);

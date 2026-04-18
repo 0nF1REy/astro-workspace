@@ -16,6 +16,7 @@ const currentYear = new Date().getFullYear();
     <meta name="generator" content={Astro.generator} />
     <title>Book Bites</title>
     <link rel="stylesheet" href="/src/styles/style.css" />
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
   </head>
   <body>
     <header>
@@ -41,9 +42,9 @@ const currentYear = new Date().getFullYear();
         </h1>
         <nav>
           <ul>
-            <li><a href="/">Início</a></li>
-            <li><a href="/about">Sobre</a></li>
-            <li><a href="/books">Livros</a></li>
+            <li><a href="/"><i class="fa-solid fa-home" aria-hidden="true"></i> Início</a></li>
+            <li><a href="/about"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Sobre</a></li>
+            <li><a href="/books"><i class="fa-solid fa-book" aria-hidden="true"></i> Livros</a></li>
           </ul>
         </nav>
       </div>
