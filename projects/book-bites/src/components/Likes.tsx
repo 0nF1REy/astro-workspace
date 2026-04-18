@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import LoadingButton from "./LoadingButton";
 
 const Likes = () => {
   const [likes, setLikes] = useState(0);
   const [pop, setPop] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   const handleClick = () => {
     setLikes((prev) => prev + 1);
@@ -31,14 +37,21 @@ const Likes = () => {
           )}
         </p>
       </p>
-      <button className="like-btn" onClick={handleClick}>
+      <LoadingButton
+        className="like-btn"
+        onClick={handleClick}
+        loading={loading}
+        loadingText="Carregando"
+        spinnerColor="#fff"
+        aria-label={loading ? "Carregando..." : "Curtir"}
+      >
         <i
           className="fa-solid fa-thumbs-up like-icon"
           style={{ color: "#fff" }}
           aria-hidden="true"
         ></i>{" "}
         Curtir
-      </button>
+      </LoadingButton>
       <style>{`
         .likes {
           background: var(--color-bg-card-alt);
@@ -80,32 +93,11 @@ const Likes = () => {
           }
         }
 
-        .like-btn {
-          background: var(--color-primary);
-          color: var(--color-white);
-          border: none;
-          border-radius: 999px;
-          padding: 8px 18px;
-          font-weight: 600;
-          font-size: 1em;
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          box-shadow: 0 4px 16px rgba(122, 73, 197, 0.10);
-          transition: background 0.18s, transform 0.18s;
-        }
         .like-btn .like-icon {
           font-size: 1.1em;
           vertical-align: middle;
           line-height: 1;
           display: inline-block;
-        }
-        .like-btn:hover, .like-btn:focus-visible {
-          background: var(--color-primary-light);
-          color: var(--color-white);
-          transform: translateY(-1px) scale(1.03);
-          outline: none;
         }
       `}</style>
     </div>
