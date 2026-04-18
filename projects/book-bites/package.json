@@ -20,12 +20,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/0nF1REy/astro-projects.git"
+    "url": "https://github.com/0nF1REy/astro-workspace.git"
   },
   "bugs": {
-    "url": "https://github.com/0nF1REy/astro-projects/issues"
+    "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "astro": "^6.1.5"
+    "@astrojs/check": "^0.9.8",
+    "astro": "^6.1.5",
+    "typescript": "^5.9.3"
   }
 }
