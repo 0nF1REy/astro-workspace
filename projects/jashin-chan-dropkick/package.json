@@ -1,12 +1,29 @@
 {
   "name": "jashin-chan-dropkick",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "packageManager": "npm@11.11.0",
+  "engines": {
+    "node": ">=24.14.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
+  },
+  "author": {
+    "name": "Alan Ryan da Silva Domingues",
+    "email": "alanryan619@gmail.com",
+    "url": "https://github.com/0nF1REy"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0nF1REy/astro-workspace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
     "@astrojs/vercel": "^10.0.4",
