@@ -26,3 +26,6 @@ pnpm-debug.log*
 
 # Context
 contexto.txt
+
+# Local Netlify folder
+.netlify
