@@ -15,6 +15,7 @@ const currentYear = new Date().getFullYear();
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Book Bites</title>
+    <link rel="stylesheet" href="/src/styles/style.css" />
   </head>
   <body>
     <header>
@@ -69,7 +70,7 @@ const currentYear = new Date().getFullYear();
     flex-direction: column;
   }
   header {
-    background-color: #f9f6fc;
+    background-color: var(--color-bg);
   }
 
   header .layout-container,
@@ -132,7 +133,7 @@ const currentYear = new Date().getFullYear();
       display: inline-flex;
       align-items: center;
       text-decoration: none;
-      color: #333;
+      color: var(--color-text-main);
       font-weight: 500;
       padding: 6px 10px;
       border-radius: 999px;
@@ -148,7 +149,7 @@ const currentYear = new Date().getFullYear();
       right: 10px;
       bottom: 4px;
       height: 2px;
-      background-color: #7a49c5;
+      background-color: var(--color-primary);
       transform: scaleX(0);
       transform-origin: center;
       transition: transform 200ms ease;
@@ -156,8 +157,8 @@ const currentYear = new Date().getFullYear();
 
     nav a:hover,
     nav a:focus-visible {
-      color: #7a49c5;
-      background-color: #f1e9ff;
+      color: var(--color-primary);
+      background-color: var(--color-bg-card-alt);
       outline: none;
     }
 
@@ -170,8 +171,8 @@ const currentYear = new Date().getFullYear();
     flex: 1;
   }
   footer {
-    background-color: #f9f6fc;
-    border-top: 1px solid #ebe5f2;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
     padding: 24px 0;
 
     .layout-container {
@@ -187,7 +188,7 @@ const currentYear = new Date().getFullYear();
 
     p:first-child {
       font-weight: 700;
-      color: #7a49c5;
+      color: var(--color-primary);
     }
 
     nav {
@@ -213,7 +214,7 @@ const currentYear = new Date().getFullYear();
 <style is:global>
   * {
     font-family: "Poppins", sans-serif;
-    color: #333;
+    color: var(--color-text-main);
   }
   .content {
     width: 100%;

@@ -48,11 +48,11 @@ let user = getUser();
   .hero {
     width: min(760px, 100%);
     text-align: center;
-    background-color: #f7f1ff;
+    background-color: var(--color-bg-card);
     background:
       url("/bg-card.png") center center / cover no-repeat,
-      linear-gradient(160deg, #ffffff 0%, #f7f1ff 100%);
-    border: 1px solid #ebe5f2;
+      linear-gradient(160deg, var(--color-white) 0%, var(--color-bg-card) 100%);
+    border: 1px solid var(--color-border);
     border-radius: 16px;
     box-shadow: 0 12px 32px rgba(122, 73, 197, 0.12);
     padding: clamp(24px, 5vw, 40px);
@@ -64,26 +64,26 @@ let user = getUser();
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #7a49c5;
+    color: var(--color-primary);
   }
 
   h2 {
     margin: 0;
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     line-height: 1.1;
-    color: #2a2038;
+    color: var(--color-text-dark);
   }
 
   .session {
     margin: 12px 0 0;
-    color: #6d5a8f;
+    color: var(--color-text-muted);
     font-size: 1rem;
   }
 
   .lead {
     margin: 16px auto 0;
     max-width: 62ch;
-    color: #4b3f63;
+    color: var(--color-text-lead);
     font-size: 1.1rem;
     line-height: 1.65;
   }
@@ -112,13 +112,13 @@ let user = getUser();
   }
 
   .primary-action {
-    background-color: #7a49c5;
-    color: #fff;
+    background-color: var(--color-primary);
+    color: var(--color-white);
     box-shadow: 0 8px 20px rgba(122, 73, 197, 0.3);
   }
 
   .primary-action:hover {
-    background-color: #965ee9;
+    background-color: var(--color-primary-light);
     transform: translateY(-1px);
     box-shadow: 0 12px 24px rgba(122, 73, 197, 0.35);
   }
@@ -132,7 +132,7 @@ let user = getUser();
     right: -5px;
     width: 38px;
     height: 24px;
-    background: url('/pt-blood.png') no-repeat center center / contain;
+    background: url("/pt-blood.png") no-repeat center center / contain;
     opacity: 0;
     pointer-events: none;
     transform: rotate(18deg);
@@ -148,14 +148,14 @@ let user = getUser();
   }
 
   .secondary-action {
-    background-color: #f1e9ff;
-    color: #7a49c5;
-    border: 1px solid #d9c8f5;
+    background-color: var(--color-bg-card-alt);
+    color: var(--color-primary);
+    border: 1px solid var(--color-border-alt);
   }
 
   .secondary-action:hover {
-    background-color: #e9dbff;
-    color: #5f35a5;
+    background-color: var(--color-bg-card-alt-hover);
+    color: var(--color-primary-dark);
     transform: translateY(-1px);
   }
 

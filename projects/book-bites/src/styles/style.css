@@ -1,0 +1,16 @@
+:root {
+  --color-primary: #7a49c5;
+  --color-primary-dark: #5f35a5;
+  --color-primary-light: #965ee9;
+  --color-bg: #f9f6fc;
+  --color-bg-card: #f7f1ff;
+  --color-bg-card-alt: #f1e9ff;
+  --color-bg-card-alt-hover: #e9dbff;
+  --color-border: #ebe5f2;
+  --color-border-alt: #d9c8f5;
+  --color-text-main: #333;
+  --color-text-dark: #2a2038;
+  --color-text-muted: #6d5a8f;
+  --color-text-lead: #4b3f63;
+  --color-white: #fff;
+}
