@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Likes from "../../components/Likes";
 
 export async function getStaticPaths() {
   const books = await getCollection("books");
@@ -20,5 +21,6 @@ const { Content } = await render(book);
 <BaseLayout>
   <div class="content">
     <Content />
+    <Likes client:visible />
   </div>
 </BaseLayout>
