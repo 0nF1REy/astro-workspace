@@ -16,39 +16,156 @@ let user = getUser();
 ---
 
 <BaseLayout>
-  <div class="content">
-    {
-      user && (
-        <>
-          <h2>Bem-vindo, {user.name}</h2>
-          <p>Conectado como {user.email}</p>
-        </>
-      )
-    }
+  <div class="content home-page">
+    <section class="hero" aria-label="Apresentacao do Book Bites">
+      <p class="eyebrow">Resenhas diretas para leitores curiosos</p>
 
-    <p>
-      Descubra resenhas objetivas, recomendações diretas e novas leituras para
-      escolher seu próximo livro com mais confiança.
-    </p>
+      <h2>
+        {user ? `Bem-vindo, ${user.name}` : "Descubra sua proxima leitura"}
+      </h2>
 
-    <a href="/books">Veja minhas resenhas</a>
+      {user && <p class="session">Conectado como {user.email}</p>}
+
+      <p class="lead">
+        Descubra resenhas objetivas, recomendacoes diretas e novas leituras para
+        escolher seu proximo livro com mais confianca.
+      </p>
+
+      <div class="hero-actions">
+        <a class="primary-action" href="/books">Explorar resenhas</a>
+        <a class="secondary-action" href="/about">Conhecer o projeto</a>
+      </div>
+    </section>
   </div>
 </BaseLayout>
 
 <style>
-  .content {
-    text-align: center;
+  .home-page {
+    display: grid;
+    place-items: center;
   }
-  a {
+
+  .hero {
+    width: min(760px, 100%);
+    text-align: center;
+    background-color: #f7f1ff;
+    background:
+      url("/bg-card.png") center center / cover no-repeat,
+      linear-gradient(160deg, #ffffff 0%, #f7f1ff 100%);
+    border: 1px solid #ebe5f2;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(122, 73, 197, 0.12);
+    padding: clamp(24px, 5vw, 40px);
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7a49c5;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    line-height: 1.1;
+    color: #2a2038;
+  }
+
+  .session {
+    margin: 12px 0 0;
+    color: #6d5a8f;
+    font-size: 1rem;
+  }
+
+  .lead {
+    margin: 16px auto 0;
+    max-width: 62ch;
+    color: #4b3f63;
+    font-size: 1.1rem;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    margin-top: 26px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .primary-action,
+  .secondary-action {
+    position: relative;
     display: inline-block;
+    padding: 10px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition:
+      transform 160ms ease,
+      box-shadow 160ms ease,
+      color 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .primary-action {
     background-color: #7a49c5;
     color: #fff;
-    padding: 6px 10px;
-    border-radius: 2px;
-    text-decoration: none;
-    margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(122, 73, 197, 0.3);
   }
-  a:hover {
+
+  .primary-action:hover {
     background-color: #965ee9;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(122, 73, 197, 0.35);
+  }
+
+  .primary-action::after,
+  .secondary-action::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 38px;
+    height: 24px;
+    background: url('/pt-blood.png') no-repeat center center / contain;
+    opacity: 0;
+    pointer-events: none;
+    transform: rotate(18deg);
+    transition: opacity 180ms ease;
+    z-index: 2;
+  }
+
+  .primary-action:hover::after,
+  .primary-action:focus-visible::after,
+  .secondary-action:hover::after,
+  .secondary-action:focus-visible::after {
+    opacity: 1;
+  }
+
+  .secondary-action {
+    background-color: #f1e9ff;
+    color: #7a49c5;
+    border: 1px solid #d9c8f5;
+  }
+
+  .secondary-action:hover {
+    background-color: #e9dbff;
+    color: #5f35a5;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      text-align: left;
+    }
+
+    .hero-actions {
+      justify-content: flex-start;
+    }
   }
 </style>
