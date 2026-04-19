@@ -1,22 +1,12 @@
 {
   "name": "portfolio",
   "type": "module",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "packageManager": "npm@11.11.0",
   "engines": {
-    "node": ">=24.14.0"
+    "node": "24.x"
   },
   "description": "Personal portfolio built with Astro and TypeScript, using Astro Collections for project content and optimized images with astro:assets",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "build:secure": "npm run build && npm run csp:sync",
-    "csp:sync": "node ./configs/sync-csp.mjs",
-    "preview": "astro preview",
-    "astro": "astro",
-    "lint:css": "stylelint \"src/**/*.{css,astro,html,scss}\" --allow-empty-input",
-    "lint:css:fix": "stylelint --fix \"src/**/*.{css,astro,html,scss}\""
-  },
   "keywords": [
     "astro",
     "portfolio",
@@ -27,6 +17,16 @@
     "projects",
     "responsive-images"
   ],
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:secure": "npm run build && npm run csp:sync",
+    "csp:sync": "node ./configs/sync-csp.mjs",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint:css": "stylelint \"src/**/*.{css,astro,html,scss}\" --allow-empty-input",
+    "lint:css:fix": "stylelint --fix \"src/**/*.{css,astro,html,scss}\""
+  },
   "author": {
     "name": "Alan Ryan da Silva Domingues",
     "email": "alanryan619@gmail.com",
@@ -36,10 +36,10 @@
   "homepage": "https://alan-ryan.vercel.app/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/0nF1REy/astro-projects.git"
+    "url": "https://github.com/0nF1REy/astro-workspace.git"
   },
   "bugs": {
-    "url": "https://github.com/0nF1REy/astro-projects/issues"
+    "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
