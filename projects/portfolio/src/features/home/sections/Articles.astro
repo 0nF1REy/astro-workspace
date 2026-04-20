@@ -20,7 +20,12 @@ const showAllArticlesButton = shouldShowArticlesButton(sortedArticles);
     </p>
   </div>
 
-  <div class="articles-grid">
+  <div
+    class:list={[
+      "articles-grid",
+      { "articles-grid--single": featuredArticles.length === 1 },
+    ]}
+  >
     {featuredArticles.map((article) => <ArticleListing article={article} />)}
   </div>
 
@@ -51,6 +56,11 @@ const showAllArticlesButton = shouldShowArticlesButton(sortedArticles);
     justify-content: center;
   }
 
+  .articles-grid--single {
+    max-width: 400px;
+    margin-inline: auto;
+  }
+
   .section-actions {
     display: flex;
     justify-content: center;
@@ -62,8 +72,8 @@ const showAllArticlesButton = shouldShowArticlesButton(sortedArticles);
       grid-template-columns: repeat(3, 1fr);
     }
 
-    .articles-grid:has(> :last-child:nth-child(1)) {
-      grid-template-columns: repeat(1, 400px);
+    .articles-grid--single {
+      grid-template-columns: 1fr;
     }
   }
 </style>
