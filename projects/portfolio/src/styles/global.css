@@ -513,6 +513,29 @@ button:focus-visible {
   outline: none;
 }
 
+body.particles-disabled {
+  background-image: url("/layout/bg.png") !important;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body.particles-disabled #bg-canvas {
+  display: none !important;
+}
+
+.bg-toggle-btn {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.bg-toggle-btn.active {
+  color: var(--accent-clr-400);
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     scroll-behavior: auto !important;

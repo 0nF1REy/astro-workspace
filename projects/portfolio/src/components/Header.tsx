@@ -44,37 +44,57 @@ const Header = ({
     <header className={isScrolling ? "header scrolling" : "header"}>
       <div className="header__wrapper">
         <div className="header__content">
-          {/* Logo */}
-          <a href="/" className="logo">
-            <img src="/brand-kit/logo/sm-logo.png" alt="Logo" />
-          </a>
+          {/* Esquerda: Logo ou Voltar */}
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            {showNav ? (
+              <a href="/" className="logo" title="Ir para a página inicial">
+                <img src="/brand-kit/logo/sm-logo.png" alt="Logo" />
+              </a>
+            ) : (
+              <a
+                href={backHref}
+                className="header__back-link"
+                title="{backLabel}"
+              >
+                <i className="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                <span>{backLabel}</span>
+              </a>
+            )}
+          </div>
 
-          {/* Navbar */}
-          {showNav ? (
-            <Nav isClicked={isClicked} />
-          ) : (
-            <a href={backHref} className="header__back-link">
-              <i className="fa-solid fa-arrow-left" aria-hidden="true"></i>
-              <span>{backLabel}</span>
-            </a>
-          )}
+          {/* Centro: Navbar (quando showNav) */}
+          {showNav && <Nav isClicked={isClicked} />}
 
-          {/* Menu icons */}
-          {showNav && (
+          {/* Direita: Toggle, Voltar (quando !showNav) e Menu */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <button
-              className="menu-icons"
-              aria-controls="primary-navigation"
-              aria-expanded={isClicked}
-              aria-label={`${isClicked ? "Close menu" : "Open menu"}`}
-              onClick={handleNavClick}
+              className="bg-toggle-btn"
+              title="Alternar fundo animado"
+              aria-label="Toggle Background"
             >
-              {isClicked ? (
-                <i className="fa-solid fa-close" aria-label="true"></i>
-              ) : (
-                <i className="fa-solid fa-bars" aria-label="true"></i>
-              )}
+              <i className="fa-solid fa-wand-magic-sparkles"></i>
             </button>
-          )}
+            {showNav && (
+              <button
+                className="menu-icons"
+                aria-controls="primary-navigation"
+                aria-expanded={isClicked}
+                aria-label={`${isClicked ? "Close menu" : "Open menu"}`}
+                title={
+                  isClicked
+                    ? "Fechar menu de navegação"
+                    : "Abrir menu de navegação"
+                }
+                onClick={handleNavClick}
+              >
+                {isClicked ? (
+                  <i className="fa-solid fa-close" aria-label="true"></i>
+                ) : (
+                  <i className="fa-solid fa-bars" aria-label="true"></i>
+                )}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </header>

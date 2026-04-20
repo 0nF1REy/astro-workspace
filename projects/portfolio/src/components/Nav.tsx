@@ -41,6 +41,7 @@ const Nav = ({ isClicked }: { isClicked: boolean }) => {
             <a
               className={`${active === id ? "active" : ""}`}
               href={href}
+              title={`Ir para a seção ${label}`}
               onClick={(e) => {
                 e.preventDefault();
                 smoothScrollTo(id);

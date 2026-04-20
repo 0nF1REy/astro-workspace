@@ -35,6 +35,11 @@ class Particle {
 }
 
 export function initLayoutParticles() {
+  if (localStorage.getItem("particles-disabled") === "true") {
+    destroyLayoutParticles();
+    return;
+  }
+
   cleanupParticles?.();
 
   const canvasElement = document.getElementById("bg-canvas");
@@ -59,9 +64,8 @@ export function initLayoutParticles() {
 
   function animate() {
     context.clearRect(0, 0, canvasEl.width, canvasEl.height);
-
-    context.strokeStyle = "rgba(0, 255, 180, 0.1)";
-    context.fillStyle = "rgba(0, 255, 180, 0.4)";
+    context.strokeStyle = "rgba(30, 113, 183, 0.15)";
+    context.fillStyle = "rgba(30, 113, 183, 0.5)";
 
     particles.forEach((p, i) => {
       p.update(canvasEl.width, canvasEl.height);
@@ -102,7 +106,7 @@ export function initLayoutParticles() {
   cleanupParticles = () => {
     window.removeEventListener("resize", resize);
     gsap.ticker.remove(animate);
-    parallaxTween.scrollTrigger?.kill();
+    if (parallaxTween.scrollTrigger) parallaxTween.scrollTrigger.kill();
     parallaxTween.kill();
   };
 }
@@ -110,4 +114,9 @@ export function initLayoutParticles() {
 export function destroyLayoutParticles() {
   cleanupParticles?.();
   cleanupParticles = null;
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener("particles:stop", destroyLayoutParticles);
+  window.addEventListener("particles:start", initLayoutParticles);
 }
