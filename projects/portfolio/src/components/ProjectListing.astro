@@ -42,6 +42,7 @@ const initialImage =
       )
     }
 
+    <div class="title-underline" aria-hidden="true"></div>
     <a href={`/project/${project.id}`} class="title-project" aria-label={title}>
       <h3>{title}</h3>
     </a>
@@ -144,18 +145,30 @@ const initialImage =
   }
 
   /* Linha decorativa no título */
-  .title-project::after {
-    content: "";
-    position: absolute;
-    top: -4px;
-    right: -230px;
-    width: 100px;
+  .title-project {
+    color: var(--secondary-clr-100);
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    width: 100%;
+    display: block;
+  }
+
+  .title-underline {
+    width: 16%;
+    max-width: 16%;
     height: 4px;
     border-radius: 0.4rem;
     background-color: var(--primary-clr-400);
+    margin: 0.5em 0 0.5em auto;
     transition:
       transform 0.3s ease,
       background-color 0.3s ease;
+    display: block;
+  }
+
+  .project:hover .title-underline {
+    background-color: var(--accent-clr-400);
+    transform: translateX(10px);
   }
 
   .project:hover .title-project h3 {

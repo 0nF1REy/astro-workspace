@@ -1,0 +1,47 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "@layout/Layout.astro";
+import Section from "@components/Section.astro";
+import ProjectListing from "@components/ProjectListing.astro";
+
+const allProjects: CollectionEntry<"projects">[] =
+  await getCollection("projects");
+
+const projects = allProjects.sort((a, b) =>
+  a.data.title.localeCompare(b.data.title),
+);
+---
+
+<Layout title="Projetos | Alan Ryan">
+  <Section id="projects-list">
+    <div class="projects-header">
+      <h1 class="title">Todos os Projetos</h1>
+      <p class="subtitle">
+        Portfólio de projetos profissionais, estudos e experimentos em
+        desenvolvimento web.
+      </p>
+    </div>
+
+    <div class="projects-grid">
+      {projects.map((project) => <ProjectListing project={project} />)}
+    </div>
+  </Section>
+</Layout>
+
+<style>
+  .projects-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .projects-header h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+</style>
