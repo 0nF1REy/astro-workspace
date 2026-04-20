@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "@layout/Layout.astro";
 import Section from "@components/Section.astro";
 import { Image } from "astro:assets";
+import { shouldShowArticlesButton } from "@utils/articles";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -45,6 +46,7 @@ const rankedPosts: SimilarPost[] = allPosts
       b.entry.data.date.getTime() - a.entry.data.date.getTime(),
   );
 const similarPosts: SimilarPost[] = rankedPosts.slice(0, 3);
+const showMoreArticlesButton = shouldShowArticlesButton(allPosts);
 ---
 
 <Layout title={title}>
@@ -96,7 +98,9 @@ const similarPosts: SimilarPost[] = rankedPosts.slice(0, 3);
           Curtiu este conteúdo? Continue explorando mais textos e projetos.
         </p>
         <div class="post-actions">
-          <a href="/blog" class="post-action">Ver mais artigos</a>
+          {showMoreArticlesButton && (
+            <a href="/blog" class="post-action">Ver mais artigos</a>
+          )}
           <a href="/" class="post-action post-action-secondary"
             >Ir para a home</a
           >
