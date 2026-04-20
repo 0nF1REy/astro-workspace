@@ -2,6 +2,8 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "@layout/Layout.astro";
 import { Image } from "astro:assets";
+import Button from "@components/Button.astro";
+import { shouldShowProjectsButton } from "@utils/projects";
 
 export const prerender = true;
 
@@ -23,6 +25,11 @@ const { project, otherProjects } = Astro.props as {
   project: CollectionEntry<"projects">;
   otherProjects: CollectionEntry<"projects">[];
 };
+
+const showMoreProjectsButton = shouldShowProjectsButton([
+  ...otherProjects,
+  project,
+]);
 
 type ProjectData = CollectionEntry<"projects">["data"] & {
   mainImageRemote?: string;
@@ -214,6 +221,11 @@ const hasFullVideo = Boolean(videoUrl);
                 </a>
               ))}
             </div>
+            {showMoreProjectsButton && (
+              <div class="more-projects-action">
+                <Button text="Ver mais projetos" href="/project" />
+              </div>
+            )}
           </div>
         )
       }
@@ -427,6 +439,12 @@ const hasFullVideo = Boolean(videoUrl);
     display: grid;
     gap: 1.5rem;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .more-projects-action {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
   }
 
   @media (width >= 768px) {

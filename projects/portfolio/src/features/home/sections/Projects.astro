@@ -1,8 +1,13 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import ProjectListing from "@components/ProjectListing.astro";
+import Button from "@components/Button.astro";
+import { shouldShowProjectsButton, getProjectsGrid } from "@utils/projects";
 
-const projects: CollectionEntry<"projects">[] = await getCollection("projects");
+const allProjects: CollectionEntry<"projects">[] =
+  await getCollection("projects");
+const featuredProjects = getProjectsGrid(allProjects);
+const showAllProjectsButton = shouldShowProjectsButton(allProjects);
 ---
 
 <div class="projects">
@@ -14,13 +19,22 @@ const projects: CollectionEntry<"projects">[] = await getCollection("projects");
     </p>
   </div>
 
-  <div class:list={["projects__grid", { "projects__grid--single": projects.length === 1 }]}>
-    {
-      projects.map((project) => {
-        return <ProjectListing project={project} />;
-      })
-    }
+  <div
+    class:list={[
+      "projects__grid",
+      { "projects__grid--single": featuredProjects.length === 1 },
+    ]}
+  >
+    {featuredProjects.map((project) => <ProjectListing project={project} />)}
   </div>
+
+  {
+    showAllProjectsButton ? (
+      <div class="section-actions">
+        <Button text="Ver todos os projetos" href="/project" />
+      </div>
+    ) : null
+  }
 </div>
 
 <style>
@@ -42,6 +56,12 @@ const projects: CollectionEntry<"projects">[] = await getCollection("projects");
   .projects__grid--single {
     max-width: 600px;
     margin-inline: auto;
+  }
+
+  .section-actions {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4rem;
   }
 
   @media (width >= 768px) {
