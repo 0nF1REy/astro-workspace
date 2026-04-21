@@ -1,7 +1,7 @@
 {
   "name": "jashin-chan-dropkick",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "packageManager": "npm@11.11.0",
   "engines": {
     "node": "24.x"
@@ -26,7 +26,7 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "astro": "^6.1.7"
+    "astro": "^6.1.8"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
