@@ -1,0 +1,55 @@
+---
+import "@styles/globals.scss";
+import JdHeader from "@components/jd-header.astro";
+import JdFooter from "@components/jd-footer.astro";
+
+const { title, showChrome = true } = Astro.props;
+const siteName = "邪神ちゃんドロップキックX DROPKICK ON MY DEVIL!!! X";
+const fullTitle = title ? `${title} | ${siteName}` : siteName;
+---
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicons/favicon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/assets/favicons/favicon-192x192.png"
+    />
+    <title>{fullTitle}</title>
+  </head>
+  <body id="index">
+    {showChrome && <JdHeader />}
+    <main class="main-content">
+      <slot />
+    </main>
+    <JdFooter />
+  </body>
+</html>
+
+<style lang="scss">
+  #index {
+    background-color: #fff;
+    color: #212529;
+
+    .main-content {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+  }
+</style>

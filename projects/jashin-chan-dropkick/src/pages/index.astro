@@ -1,12 +1,11 @@
 ---
-import JdBaseLayout from "../layouts/jd-base-layout.astro";
-import JdHero from "../components/home/hero/jd-hero.astro";
-import JdPromos from "../components/home/promos/jd-promos.astro";
+import BaseLayout from "@layouts/base-layout.astro";
+import Hero from "@components/home/hero/hero.astro";
+import Promos from "@components/home/promos/promos.astro";
 
-const pageTitle = "Jashinchan - Home";
 ---
 
-<JdBaseLayout title={pageTitle} showChrome={false}>
-  <JdHero />
-  <JdPromos />
-</JdBaseLayout>
+<BaseLayout showChrome={false}>
+  <Hero />
+  <Promos />
+</BaseLayout>
