@@ -1,10 +1,10 @@
 {
   "name": "jashin-chan-dropkick",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "packageManager": "npm@11.11.0",
   "engines": {
-    "node": ">=24.14.0"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "astro dev",
@@ -26,10 +26,11 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "@astrojs/vercel": "^10.0.4",
     "astro": "^6.1.7"
   },
   "devDependencies": {
-    "sass-embedded": "^1.97.1"
+    "@astrojs/check": "^0.9.8",
+    "sass-embedded": "^1.97.1",
+    "typescript": "^5.9.3"
   }
 }

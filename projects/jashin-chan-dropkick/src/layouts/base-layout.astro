@@ -1,7 +1,7 @@
 ---
 import "@styles/globals.scss";
-import JdHeader from "@components/jd-header.astro";
-import JdFooter from "@components/jd-footer.astro";
+import Header from "@components/header.astro";
+import Footer from "@components/footer.astro";
 
 const { title, showChrome = true } = Astro.props;
 const siteName = "邪神ちゃんドロップキックX DROPKICK ON MY DEVIL!!! X";
@@ -32,11 +32,11 @@ const fullTitle = title ? `${title} | ${siteName}` : siteName;
     <title>{fullTitle}</title>
   </head>
   <body id="index">
-    {showChrome && <JdHeader />}
+    {showChrome && <Header />}
     <main class="main-content">
       <slot />
     </main>
-    <JdFooter />
+    <Footer />
   </body>
 </html>
 

@@ -1,0 +1,21 @@
+---
+import { menuItems } from "@data/menu";
+import type { MenuItem } from "@data/menu";
+---
+
+<header>
+  <div>HEADER</div>
+  <nav>
+    <ul>
+      {
+        menuItems.map((item: MenuItem) => (
+          <li>
+            <a href={item.href || "#"}>
+              <img src={item.img} alt={item.id} class="nav-img" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
