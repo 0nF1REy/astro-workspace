@@ -1,22 +1,36 @@
 ---
-import "./jd-base-layout.scss";
-import "../styles/tailwind.css";
 import "../styles/globals.scss";
-const { title, showChrome = true } = Astro.props;
 import JdHeader from "../components/jd-header.astro";
 import JdFooter from "../components/jd-footer.astro";
+
+const { title, showChrome = true } = Astro.props;
 ---
 
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
   </head>
   <body id="index">
     {showChrome && <JdHeader />}
-    <main class="container mx-auto p-4">
+    <main class="main-content">
       <slot />
     </main>
     <JdFooter />
   </body>
 </html>
+
+<style lang="scss">
+  #index {
+    background-color: #fff;
+    color: #212529;
+
+    .main-content {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+  }
+</style>
