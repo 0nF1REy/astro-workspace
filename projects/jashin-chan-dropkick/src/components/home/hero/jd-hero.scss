@@ -1,13 +1,10 @@
 #hero-header {
-  .nav-item {
-    @apply text-xl lg:text-[1.5rem] font-black text-[#333] uppercase transition-colors duration-200 block;
-    font-family: "Arial Black", "Arial Bold", sans-serif;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-
-    &:hover {
-      @apply text-pink-500;
-    }
+  .nav-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: auto;
+    user-select: none;
   }
 
   .twitter-link {
