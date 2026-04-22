@@ -1,0 +1,201 @@
+---
+import { newsItems } from "@data/news";
+import type { NewsItem } from "@data/news";
+
+const titleImage = "/assets/images/home/news/ttl_new.png";
+const bgWave = "/assets/images/home/news/bg_news_wave.png";
+const bgStar = "/assets/images/home/news/bg_news_star.png";
+---
+
+<section
+  id="news"
+  class="news-section"
+  style={`background-image: url(${bgStar});`}
+>
+  <div class="container content-wrapper">
+    <div class="header-row">
+      <h1 class="page-title">
+        <img src={titleImage} alt="NEWS" class="title-image" />
+      </h1>
+    </div>
+
+    <div class="news-grid">
+      {
+        newsItems.map((item: NewsItem) => (
+          <article class="news-card">
+            <a href={item.href} class="card-link">
+              <div class="thumbnail">
+                <img
+                  src={item.image.src}
+                  srcset={item.image.srcset}
+                  alt={item.image.alt}
+                  width="300"
+                  height="169"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="content">
+                <span class="date">{item.date}</span>
+                <h6 class="title">{item.title}</h6>
+                <p class="description">{item.description}</p>
+              </div>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="more-actions">
+      <a href="/news" class="btn-more"> もっと読む </a>
+    </div>
+  </div>
+
+  <img src={bgWave} alt="" class="bg-wave-bottom" aria-hidden="true" />
+</section>
+
+<style lang="scss">
+  @use "../../../styles/globals.scss" as *;
+
+  .news-section {
+    position: relative;
+    background-color: #fff;
+    background-repeat: repeat;
+    background-position: top center;
+    padding-top: 6rem;
+    padding-bottom: 120px;
+    overflow: hidden;
+
+    .content-wrapper {
+      position: relative;
+      z-index: 5;
+    }
+
+    .bg-wave-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      pointer-events: none;
+      display: block;
+      height: auto;
+      max-width: 100vw;
+      user-select: none;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 4rem;
+
+      .page-title {
+        margin: 0;
+
+        .title-image {
+          max-width: 100%;
+          height: auto;
+          display: block;
+        }
+      }
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+
+      @media (min-width: 640px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .news-card {
+      background: $primary-color;
+      color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+      .card-link {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: inherit;
+        height: 100%;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    .thumbnail {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .content {
+      padding: 1.25rem;
+
+      .date {
+        font-size: 0.85rem;
+        color: #999;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      .title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        line-height: 1.4;
+        margin-bottom: 0.75rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        transition: color 0.3s ease;
+      }
+
+      .description {
+        font-size: 0.95rem;
+        color: #666;
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+
+    .more-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 5rem;
+    }
+
+    .btn-more {
+      display: inline-block;
+      background-color: $primary-color;
+      color: #ffffff;
+      padding: 1.2rem 5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+</style>
