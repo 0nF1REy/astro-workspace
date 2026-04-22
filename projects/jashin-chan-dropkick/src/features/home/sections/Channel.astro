@@ -92,15 +92,11 @@ const channelVideos = [
     .header-row {
       display: flex;
       justify-content: center;
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
 
       .title-link {
         display: inline-block;
         transition: transform 0.3s ease;
-
-        &:hover {
-          transform: scale(1.02);
-        }
 
         .title-image {
           max-width: 100%;
@@ -112,7 +108,7 @@ const channelVideos = [
     .video-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 7rem;
 
       @media (min-width: 992px) {
         grid-template-columns: repeat(3, 1fr);
@@ -123,6 +119,11 @@ const channelVideos = [
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
+      max-width: 270px;
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+      border: 4px solid #f6ef94;
 
       iframe {
         position: absolute;
@@ -132,7 +133,6 @@ const channelVideos = [
         height: 100%;
         border: none;
         border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
       }
     }
   }
