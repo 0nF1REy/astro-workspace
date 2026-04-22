@@ -3,19 +3,49 @@ import { menuItems } from "@data/menu";
 import type { MenuItem } from "@data/menu";
 ---
 
-<header>
-  <div>HEADER</div>
-  <nav>
-    <ul>
-      {
-        menuItems.map((item: MenuItem) => (
-          <li>
-            <a href={item.href || "#"}>
-              <img src={item.img} alt={item.id} class="nav-img" />
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
+<header id="site-header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo-text">HEADER</div>
+      <nav>
+        <ul>
+          {
+            menuItems.map((item: MenuItem) => (
+              <li>
+                <a href={item.href || "#"}>
+                  <img src={item.img} alt={item.id} class="nav-img" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </div>
 </header>
+
+<style lang="scss">
+  #site-header {
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+    }
+
+    .nav-img {
+      height: 30px;
+      width: auto;
+    }
+  }
+</style>

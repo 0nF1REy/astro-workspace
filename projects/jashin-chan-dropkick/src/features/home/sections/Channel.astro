@@ -1,11 +1,12 @@
 ---
-const titleImageUrl =
-  "https://jashinchan.com/wp-content/themes/jashin2/assets/images/ttl_jashinch.png";
+const titleImage = "/assets/images/home/channel/ttl_jashinch.png";
+const bgWaveTop = `url("/assets/images/home/channel/bg_wave_top.png")`;
+const bgWaveBottom = `url("/assets/images/home/channel/bg_wave_bottom.png")`;
 
-const promoVideos = [
-  "https://www.youtube.com/embed/example1",
-  "https://www.youtube.com/embed/example2",
-  "https://www.youtube.com/embed/example3",
+const channelVideos = [
+  "https://www.youtube.com/embed/tEK9HjWKjx4",
+  "https://www.youtube.com/embed/GQSX6jbTw2g",
+  "https://www.youtube.com/embed/9K-2Qj0s4HY",
 ];
 ---
 
@@ -15,10 +16,14 @@ const promoVideos = [
   <div class="foreground">
     <div class="container">
       <div class="header-row">
-        <a href="https://jashinchan.com" class="title-link">
+        <a
+          href="https://www.youtube.com/channel/UChu8Yu_w9z8DGFtXzuGvDlg"
+          class="title-link"
+          target="_blank"
+        >
           <img
             class="title-image"
-            src={titleImageUrl}
+            src={titleImage}
             alt="Jashin-chan Logo"
             loading="lazy"
           />
@@ -27,7 +32,7 @@ const promoVideos = [
 
       <div class="video-grid">
         {
-          promoVideos.map((videoUrl) => (
+          channelVideos.map((videoUrl) => (
             <div class="iframe-wrapper">
               <iframe
                 src={videoUrl}
@@ -45,29 +50,39 @@ const promoVideos = [
   <div class="bg-wave-bottom"></div>
 </section>
 
-<style lang="scss">
+<style lang="scss" define:vars={{ bgWaveTop, bgWaveBottom }}>
   #channel {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
+    background-image: linear-gradient(#75b370, #a9d08d);
 
-    .bg-wave-top,
-    .bg-wave-bottom {
+    .bg-wave-top {
+      position: absolute;
+      background-image: var(--bgWaveTop);
+      background-repeat: repeat-x;
+      background-size: 338px 120px;
+      background-position: center;
       width: 100%;
-      height: 100px;
-      background-size: cover;
-      background-repeat: no-repeat;
+      height: 120px;
+    }
+
+    .bg-wave-bottom {
+      background-image: var(--bgWaveBottom);
+      margin-top: -120px;
+      position: relative;
+      z-index: 10;
     }
 
     .foreground {
-      padding: 2rem 0;
-      background-color: transparent;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+      padding: 160px 0;
+      width: 100%;
+      background-image:
+        radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 0),
+        radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 0);
+      background-size: 12px 12px;
+      background-position:
+        0 0,
+        6px 6px;
     }
 
     .header-row {
@@ -80,7 +95,7 @@ const promoVideos = [
         transition: transform 0.3s ease;
 
         &:hover {
-          transform: scale(1.05);
+          transform: scale(1.02);
         }
 
         .title-image {
@@ -113,7 +128,7 @@ const promoVideos = [
         height: 100%;
         border: none;
         border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
       }
     }
   }
