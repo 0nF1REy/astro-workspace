@@ -1,0 +1,120 @@
+---
+const titleImageUrl =
+  "https://jashinchan.com/wp-content/themes/jashin2/assets/images/ttl_jashinch.png";
+
+const promoVideos = [
+  "https://www.youtube.com/embed/example1",
+  "https://www.youtube.com/embed/example2",
+  "https://www.youtube.com/embed/example3",
+];
+---
+
+<section id="channel">
+  <div class="bg-wave-top"></div>
+
+  <div class="foreground">
+    <div class="container">
+      <div class="header-row">
+        <a href="https://jashinchan.com" class="title-link">
+          <img
+            class="title-image"
+            src={titleImageUrl}
+            alt="Jashin-chan Logo"
+            loading="lazy"
+          />
+        </a>
+      </div>
+
+      <div class="video-grid">
+        {
+          promoVideos.map((videoUrl) => (
+            <div class="iframe-wrapper">
+              <iframe
+                src={videoUrl}
+                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                title="YouTube video player"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-wave-bottom"></div>
+</section>
+
+<style lang="scss">
+  #channel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    .bg-wave-top,
+    .bg-wave-bottom {
+      width: 100%;
+      height: 100px;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .foreground {
+      padding: 2rem 0;
+      background-color: transparent;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 3rem;
+
+      .title-link {
+        display: inline-block;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        .title-image {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+
+      @media (min-width: 992px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+</style>
