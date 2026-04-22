@@ -1,3 +1,24 @@
+@font-face {
+  font-family: "Noto Sans JP";
+  src: url("/assets/fonts/sub_NotoSansJP-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans JP";
+  src: url("/assets/fonts/sub_NotoSansJP-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans JP";
+  src: url("/assets/fonts/sub_NotoSansJP-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
 $primary-color: #facc15;
 $bg-dark: #0f1115;
 $text-white: #ffffff;
@@ -8,8 +29,14 @@ $text-white: #ffffff;
   box-sizing: border-box;
 }
 
+html,
 body {
-  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
   background-color: $bg-dark;
   color: $text-white;
   line-height: 1.5;
@@ -36,5 +63,19 @@ body {
 
   &:hover {
     opacity: 0.9;
+  }
+}
+
+@media (min-width: 1440px) {
+  html,
+  body {
+    background-size: 100%;
+  }
+}
+
+@media (max-width: 1440px) {
+  html,
+  body {
+    min-width: 100vw;
   }
 }

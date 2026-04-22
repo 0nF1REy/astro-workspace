@@ -65,24 +65,28 @@ const channelVideos = [
     }
 
     .bg-wave-bottom {
-      background-image: var(--bgWaveBottom);
-      margin-top: -120px;
       position: relative;
+      background-image: var(--bgWaveBottom);
+      background-repeat: repeat-x;
+      background-size: 338px 120px;
+      background-position: center;
+      width: 100%;
+      height: 120px;
+      margin-top: -120px;
       z-index: 10;
     }
 
     .foreground {
-      position: relative;
-      z-index: 1;
-      padding: 160px 0;
-      width: 100%;
+      padding: 220px;
       background-image:
-        radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 0),
-        radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 0);
+        radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0),
+        radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0);
       background-size: 12px 12px;
       background-position:
         0 0,
-        6px 6px;
+        18px 18px;
+      width: 100%;
+      height: 100%;
     }
 
     .header-row {
