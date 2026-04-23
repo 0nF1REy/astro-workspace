@@ -69,25 +69,30 @@ const bgStar = "/assets/images/home/news/bg_news_star.png";
     .content-wrapper {
       position: relative;
       z-index: 5;
+      padding-bottom: 2.7rem;
     }
 
     .bg-wave-bottom {
       position: absolute;
       bottom: 0;
-      left: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
       width: 100%;
+      margin-top: -215px;
+      margin-left: 33px;
       z-index: 1;
       pointer-events: none;
       display: block;
       height: auto;
       max-width: 100vw;
       user-select: none;
+      width: 1462px;
     }
 
     .header-row {
       display: flex;
       justify-content: center;
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
 
       .page-title {
         margin: 0;
@@ -103,7 +108,8 @@ const bgStar = "/assets/images/home/news/bg_news_star.png";
     .news-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      gap: 1.3rem;
+      padding-bottom: 4rem;
 
       @media (min-width: 640px) {
         grid-template-columns: repeat(2, 1fr);
@@ -115,11 +121,13 @@ const bgStar = "/assets/images/home/news/bg_news_star.png";
     }
 
     .news-card {
+      max-width: 300px;
+      width: 100%;
+      margin: auto;
       background: $primary-color;
       color: #ffffff;
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 
       .card-link {
         display: flex;
@@ -132,32 +140,36 @@ const bgStar = "/assets/images/home/news/bg_news_star.png";
     }
 
     .thumbnail {
-      width: 100%;
-      aspect-ratio: 16 / 9;
+      height: 147px;
+      border: solid 1px #979797;
       overflow: hidden;
 
       img {
+        height: auto;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
       }
     }
 
     .content {
       padding: 1.25rem;
 
+      .title,
+      .description {
+        line-height: 1.2;
+      }
+
       .date {
-        font-size: 0.85rem;
-        color: #999;
+        font-size: 16px;
+        font-weight: lighter;
+        color: #e1e0e0;
         margin-bottom: 0.5rem;
         display: block;
       }
 
       .title {
-        font-size: 1.15rem;
+        font-size: 1rem;
         font-weight: 700;
-        line-height: 1.4;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -166,11 +178,11 @@ const bgStar = "/assets/images/home/news/bg_news_star.png";
       }
 
       .description {
-        font-size: 0.95rem;
-        color: #666;
-        line-height: 1.6;
+        font-size: 16px;
+        font-weight: lighter;
+        color: #e1e0e0;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
