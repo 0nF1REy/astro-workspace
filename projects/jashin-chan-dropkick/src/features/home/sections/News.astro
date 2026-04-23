@@ -1,6 +1,7 @@
 ---
 import { newsItems } from "@data/news";
 import type { NewsItem } from "@data/news";
+import Button from "@components/Button.astro";
 
 const titleImage = "/assets/images/home/news/ttl_new.png";
 const bgWave = "/assets/images/home/news/bg_news_wave.png";
@@ -46,9 +47,7 @@ const bgStar = "/assets/images/home/news/bg_news_star.png";
       }
     </div>
 
-    <div class="more-actions">
-      <a href="/news" class="btn-more"> もっと読む </a>
-    </div>
+    <Button href="/news">もっと読む</Button>
   </div>
 
   <img src={bgWave} alt="" class="bg-wave-bottom" aria-hidden="true" />
@@ -109,7 +108,7 @@ const bgStar = "/assets/images/home/news/bg_news_star.png";
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.3rem;
-      padding-bottom: 4rem;
+      padding-bottom: 9.5rem;
 
       @media (min-width: 640px) {
         grid-template-columns: repeat(2, 1fr);
@@ -185,34 +184,6 @@ const bgStar = "/assets/images/home/news/bg_news_star.png";
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
-      }
-    }
-
-    .more-actions {
-      display: flex;
-      justify-content: center;
-      margin-top: 5rem;
-    }
-
-    .btn-more {
-      display: inline-block;
-      max-width: 300px;
-      width: 100%;
-      font-size: 20px;
-      text-align: center;
-      padding: 10px 15px;
-      margin: auto;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      background: $primary-color;
-      color: #ffffff;
-      text-decoration: none;
-      cursor: pointer;
-      transition: 0.2s all;
-
-      &:hover {
-        opacity: 0.8;
       }
     }
   }

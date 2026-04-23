@@ -1,0 +1,48 @@
+---
+interface Props {
+  href: string;
+  className?: string;
+}
+
+const { href, className } = Astro.props;
+---
+
+<div class:list={["more-wrapper", className]}>
+  <a href={href} class="more-btn">
+    <slot />
+  </a>
+</div>
+
+<style lang="scss">
+  @use "../styles/globals.scss" as *;
+
+  .more-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .more-btn {
+    display: inline-block;
+    max-width: 300px;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 15px;
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    background: $primary-color;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s all;
+    user-select: none;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+</style>
