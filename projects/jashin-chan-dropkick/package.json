@@ -1,7 +1,7 @@
 {
   "name": "jashin-chan-dropkick",
   "type": "module",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "packageManager": "npm@11.11.0",
   "engines": {
     "node": "24.x"
