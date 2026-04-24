@@ -6,10 +6,11 @@ export interface NewsItem {
   description: string;
   image: {
     src: string;
-    srcset: string;
     alt: string;
   };
 }
+
+const IMAGE_BASE_PATH = "/assets/images/home/news/thumbnails";
 
 export const newsItems: NewsItem[] = [
   {
@@ -20,80 +21,96 @@ export const newsItems: NewsItem[] = [
     description:
       "アニメ「邪神ちゃんドロップキック」のパチスロリリースを記念し、ファン参加型の大型企画として「3大キャンペーン」と、併...",
     image: {
-      src: "https://jashinchan.com/wp-content/uploads/2026/04/image-1-300x169.jpeg",
-      srcset:
-        "https://jashinchan.com/wp-content/uploads/2026/04/image-1-300x169.jpeg 300w, https://jashinchan.com/wp-content/uploads/2026/04/image-1-1024x576.jpeg 1024w",
-      alt: "Release Event",
+      src: `${IMAGE_BASE_PATH}/news_13582.jpg`,
+      alt: "Pachislo Event 2026",
     },
   },
   {
-    id: "13538",
-    href: "/news/13538",
-    date: "2026-3-12",
-    title: "【4/3-5】台北「秋葉原動漫祭」に邪神ちゃんブース出展決定...",
+    id: "13379",
+    href: "/news/13379",
+    date: "2025-12-31",
+    title: "【1/4】読書会参加者リスト",
     description:
-      "24年9月の台湾イベントに続き、この度「秋葉原動漫祭2026 IN TAIPEI」に邪神ちゃんブースを出展することが...",
+      "参加希望erの方にはメールをお送りしていますが、メールが届かない方がいらっしゃるため参加者リストをこちらに一覧で表記し...",
     image: {
-      src: "https://jashinchan.com/wp-content/uploads/2026/03/スクリーンショット-2026-03-12-11.06.35-300x207.png",
-      srcset:
-        "https://jashinchan.com/wp-content/uploads/2026/03/スクリーンショット-2026-03-12-11.06.35-300x207.png 300w, https://jashinchan.com/wp-content/uploads/2026/03/スクリーンショット-2026-03-12-11.06.35-1024x708.png 1024w",
-      alt: "Taipei Event",
+      src: `${IMAGE_BASE_PATH}/news_13379.jpg`,
+      alt: "Reading Event 2025",
     },
   },
   {
-    id: "13497",
-    href: "/news/13497",
-    date: "2026-2-5",
-    title: "痛車天国公式版権無料配布キャンペーン第１弾",
+    id: "11702",
+    href: "/news/11702",
+    date: "2024-09-12",
+    title: "「邪神ちゃん」&「スライム倒して300年」コラボボイスドラマ...",
     description:
-      "2025年11月、北九州ポップカルチャーフェスティバルにて開催されたトークイベント「走るポップカルチャー！痛車文化の...",
+      "2024年6月に発表となったアニメ「邪神ちゃんドロップキック」と「スライム倒して300年、知らないうちにレベルMAX...」のコラボボイスドラマがついに公開！",
     image: {
-      src: "https://jashinchan.com/wp-content/uploads/2026/02/『邪神ちゃんドロップキック』『おねがいティーチャー』-痛車提供画像-300x169.jpg",
-      srcset:
-        "https://jashinchan.com/wp-content/uploads/2026/02/『邪神ちゃんドロップキック』『おねがいティーチャー』-痛車提供画像-300x169.jpg 300w",
-      alt: "Itasha Campaign",
+      src: `${IMAGE_BASE_PATH}/news_11702.jpg`,
+      alt: "Collaboration 2024",
     },
   },
   {
-    id: "13490",
-    href: "/news/13490",
-    date: "2026-2-4",
-    title: "邪神ちゃんドロップキック 同時視聴プロジェクトスタート！",
+    id: "10154",
+    href: "/news/10154",
+    date: "2023-12-25",
+    title: "新作ゲーム「邪神ちゃんドロップキック ケイオス」正式サービス...",
     description:
-      "■ プロジェクト概要 邪神ちゃんのパチスロ化に向けて、もっと多くの人に邪神ちゃんを知ってもらいたいということで、「邪...",
+      "新作ゲームが正式サービス開始！ねばねばウォーズに続くブラウザゲームが登場し、現在様々なキャンペーンを実施中です。",
     image: {
-      src: "https://jashinchan.com/wp-content/uploads/2026/02/13-300x169.png",
-      srcset:
-        "https://jashinchan.com/wp-content/uploads/2026/02/13-300x169.png 300w",
-      alt: "Viewing Project",
+      src: `${IMAGE_BASE_PATH}/news_10154.jpg`,
+      alt: "Jashin Chaos Game 2023",
     },
   },
   {
-    id: "13476",
-    href: "/news/13476",
-    date: "2026-1-16",
-    title: "邪神ちゃん巡回POP UP SHOP企画スタート！",
+    id: "9013",
+    href: "/news/9013",
+    date: "2022-12-28",
+    title: "12/30冬コミケユキヲ先生ブース",
     description:
-      "邪神ちゃんが秋葉原、博多、大阪を巡るポップアップストア企画がスタート！ コトブキヤ秋葉原▶1/30(金)～2/8(日...",
+      "ユキヲ先生がコミケに帰還！頒布する本は大ボリュームの５冊！グッズセットなど豪華なラインナップでお待ちしております。",
     image: {
-      src: "https://jashinchan.com/wp-content/uploads/2026/01/告知用画像ポスター_3店舗記載：B2-212x300.jpg",
-      srcset:
-        "https://jashinchan.com/wp-content/uploads/2026/01/告知用画像ポスター_3店舗記載：B2-212x300.jpg 212w",
-      alt: "Pop Up Shop",
+      src: `${IMAGE_BASE_PATH}/news_9013.jpg`,
+      alt: "Comiket 2022",
     },
   },
   {
-    id: "13425",
-    href: "/news/13425",
-    date: "2026-1-9",
-    title: "邪神ちゃん法人向け情報ページを開設しました！",
+    id: "7576",
+    href: "/news/7576",
+    date: "2021-12-28",
+    title: "1/23邪神ちゃんドロップキック×絵恋ちゃんスペシャルコラボ...",
     description:
-      "この度、邪神ちゃんドロップキックの法人向け情報をまとめた専用ページを開設いたしました。 法人向け情報ページはこちら：...",
+      "とても面白いと評判の「絵恋ちゃんライブ」と「邪神ちゃんサバト」を合体させたヤバいイベントを1月23日に秋葉原で開催！",
     image: {
-      src: "https://jashinchan.com/wp-content/uploads/2026/01/邪神ちゃんんドロップキック_BUSINESS-INFO-300x169.png",
-      srcset:
-        "https://jashinchan.com/wp-content/uploads/2026/01/邪神ちゃんんドロップキック_BUSINESS-INFO-300x169.png 300w",
-      alt: "Business Info",
+      src: `${IMAGE_BASE_PATH}/news_7576.jpg`,
+      alt: "Eren Collaboration 2021",
+    },
+  },
+  {
+    id: "4406",
+    href: "/news/4406",
+    date: "2020-12-29",
+    title: "12月30日 富良野ワイン酒場「千明」１日限定オンライン開店",
+    description:
+      "いよいよ年の瀬。今年はコミケもなくてがっかりなあなたを富良野ワイン酒場「千明」にご招待いたします。",
+    image: {
+      src: `${IMAGE_BASE_PATH}/news_4406.jpg`,
+      alt: "Furano Online 2020",
+    },
+  },
+  {
+    id: "1413",
+    href: "/news/1413",
+    date: "2019-12-27",
+    title: "神保町哀歌紹介マンガ紹介",
+    description:
+      "おいつきさんが描いて下さった神保町哀歌紹介マンガが素晴らしいので皆さまにご紹介します！",
+    image: {
+      src: `${IMAGE_BASE_PATH}/news_1413.jpg`,
+      alt: "Jinbocho Manga 2019",
     },
   },
 ];
+
+export const getLatestNews = (limit: number = 6): NewsItem[] => {
+  return newsItems.slice(0, limit);
+};
