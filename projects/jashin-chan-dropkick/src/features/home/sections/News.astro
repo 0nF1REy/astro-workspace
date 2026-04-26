@@ -5,9 +5,11 @@ import Button from "@components/Button.astro";
 
 const displayNews = getLatestNews(6);
 
-const titleImage = "/assets/images/home/news/ttl_new.png";
-const bgWave = "/assets/images/home/news/bg_news_wave.png";
-const bgStar = "/assets/images/home/news/bg_news_star.png";
+const titleImage = "/assets/images/home/news/titles/ttl_new.png";
+const titleImageMobile = "/assets/images/home/news/titles/ttl_sp_news.png";
+
+const bgWave = "/assets/images/home/news/backgrounds/bg_news_wave.png";
+const bgStar = "/assets/images/home/news/backgrounds/bg_news_star.png";
 ---
 
 <section
@@ -18,7 +20,10 @@ const bgStar = "/assets/images/home/news/bg_news_star.png";
   <div class="container content-wrapper">
     <div class="header-row">
       <h1 class="page-title">
-        <img src={titleImage} alt="NEWS" class="title-image" />
+        <picture>
+          <source srcset={titleImageMobile} media="(max-width: 750px)" />
+          <img src={titleImage} alt="NEWS" class="title-image" />
+        </picture>
       </h1>
     </div>
 
@@ -186,6 +191,25 @@ const bgStar = "/assets/images/home/news/bg_news_star.png";
         -webkit-box-orient: vertical;
         overflow: hidden;
         flex-grow: 1;
+      }
+    }
+
+    @media screen and (max-width: 750px) {
+      padding-top: 4rem;
+
+      .header-row {
+        margin-bottom: 2rem;
+        .title-image {
+          max-width: 280px;
+        }
+      }
+
+      .news-grid {
+        padding-bottom: 4rem;
+      }
+
+      .bg-wave-bottom {
+        bottom: -10px;
       }
     }
   }
