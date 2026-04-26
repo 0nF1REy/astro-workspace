@@ -16,11 +16,33 @@ const heroImageTwitterBtn = {
   alt: "Twitter Button",
 };
 
+const hamburgerImg = "/assets/images/global/hamburger.png";
+
 const colLeft: MenuItem[] = menuItems.slice(0, 5);
 const colRight: MenuItem[] = menuItems.slice(5);
 ---
 
 <section id="hero">
+  <button id="hero-menu-toggle" class="mobile-menu-trigger">
+    <img src={hamburgerImg} alt="Menu" />
+  </button>
+
+  <div id="hero-mobile-overlay" class="mobile-menu-overlay">
+    <div class="menu-dialog">
+      <ul class="mobile-nav-list">
+        {
+          menuItems.map((item) => (
+            <li>
+              <a href={item.href || "#"}>
+                <img src={item.img} alt={item.id} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
   <div class="container">
     <div class="hero-wrapper">
       <div class="hero-content">
@@ -32,7 +54,7 @@ const colRight: MenuItem[] = menuItems.slice(5);
           />
         </div>
 
-        <nav class="nav-wrapper">
+        <nav class="nav-wrapper pc-only-nav">
           <div class="nav-grid">
             <ul class="nav-column">
               {
@@ -42,13 +64,11 @@ const colRight: MenuItem[] = menuItems.slice(5);
                       href={item.href || "#"}
                       class="nav-img-item"
                       id={item.id}
-                      aria-label={item.id}
                     >
                       <img
                         src={item.img}
                         alt={item.id}
                         class="nav-img"
-                        id={`img-${item.id}`}
                         data-img={item.img}
                         data-imghover={item.imgHover}
                       />
@@ -65,13 +85,11 @@ const colRight: MenuItem[] = menuItems.slice(5);
                       href={item.href || "#"}
                       class="nav-img-item"
                       id={item.id}
-                      aria-label={item.id}
                     >
                       <img
                         src={item.img}
                         alt={item.id}
                         class="nav-img"
-                        id={`img-${item.id}`}
                         data-img={item.img}
                         data-imghover={item.imgHover}
                       />
@@ -113,7 +131,7 @@ const colRight: MenuItem[] = menuItems.slice(5);
     align-items: center;
     background-color: white;
     overflow: hidden;
-    padding: 1rem 0;
+    position: relative;
 
     .hero-wrapper {
       display: grid;
@@ -168,19 +186,11 @@ const colRight: MenuItem[] = menuItems.slice(5);
       align-items: center;
     }
 
-    .twitter-link {
-      transition: transform 0.3s ease;
-
-      &:hover {
-        opacity: 0.8;
-      }
-
-      .twitter-btn-img {
-        max-width: 410px;
-        min-width: 300px;
-        width: 30vw;
-        height: auto;
-      }
+    .twitter-btn-img {
+      max-width: 410px;
+      min-width: 300px;
+      width: 30vw;
+      height: auto;
     }
 
     .hero-character {
@@ -193,35 +203,128 @@ const colRight: MenuItem[] = menuItems.slice(5);
       height: auto;
       vertical-align: middle;
     }
+
+    .mobile-menu-trigger {
+      display: none;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 3000;
+      background: none;
+      border: none;
+      width: 60px;
+      cursor: pointer;
+    }
+
+    .mobile-menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+
+      &.active {
+        display: flex;
+      }
+
+      .menu-dialog {
+        background: rgba(255, 255, 255, 0.9);
+        width: 85%;
+        max-width: 320px;
+        max-height: 80vh;
+        border-radius: 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        padding: 40px 20px;
+        position: relative;
+        overflow-y: auto;
+      }
+
+      .mobile-nav-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        list-style: none;
+
+        li a img {
+          height: 32px;
+          width: auto;
+          display: block;
+        }
+      }
+    }
+
+    @media screen and (max-width: 750px) {
+      .pc-only-nav {
+        display: none;
+      }
+
+      .mobile-menu-trigger {
+        display: block;
+      }
+
+      .logo-wrapper {
+        margin-top: 120px;
+        .logo-img {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+
+      .twitter-btn-img {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .hero-character {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .character-img {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
   }
 </style>
 
 <script>
-  const setupHoverImages = () => {
-    const navLinks = document.querySelectorAll(".nav-img-item");
+  function initHeroMobileMenu() {
+    const toggleBtn = document.getElementById("hero-menu-toggle");
+    const overlay = document.getElementById("hero-mobile-overlay");
+    const body = document.body;
 
+    toggleBtn?.addEventListener("click", () => {
+      const isActive = overlay?.classList.toggle("active");
+      body.style.overflow = isActive ? "hidden" : "";
+    });
+
+    const navLinks = document.querySelectorAll(".nav-img-item");
     navLinks.forEach((link) => {
       const img = link.querySelector(".nav-img") as HTMLImageElement;
       if (!img) return;
-
       const originalSrc = img.dataset.img;
       const hoverSrc = img.dataset.imghover;
-
       if (hoverSrc) {
         const preload = new Image();
         preload.src = hoverSrc;
       }
-
       link.addEventListener("mouseenter", () => {
         if (hoverSrc) img.src = hoverSrc;
       });
-
       link.addEventListener("mouseleave", () => {
         if (originalSrc) img.src = originalSrc;
       });
     });
-  };
+  }
 
-  setupHoverImages();
-  document.addEventListener("astro:after-swap", setupHoverImages);
+  initHeroMobileMenu();
+  document.addEventListener("astro:after-swap", initHeroMobileMenu);
 </script>
