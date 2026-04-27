@@ -1,51 +1,292 @@
 ---
 import { menuItems } from "@data/menu";
 import type { MenuItem } from "@data/menu";
+
+const logoImg = "/assets/images/header/nav_logo5.svg";
+const hamburgerImg = "/assets/images/global/hamburger.png";
+const navBarBg = `url("/assets/images/header/navbar_top.png")`;
+
+const topRow = menuItems.slice(0, 5);
+const bottomRow = menuItems.slice(5, 10);
 ---
 
-<header id="site-header">
+<header id="navbar-primary-second" class="header nav-wave bg-wave-top">
   <div class="container">
-    <div class="header-content">
-      <div class="logo-text">HEADER</div>
-      <nav>
-        <ul>
+    <div class="header-flex">
+      <div class="logo-row">
+        <a href="/">
+          <img src={logoImg} alt="Logo" class="main-logo" />
+        </a>
+      </div>
+
+      <div class="menu-row pc-view">
+        <div class="nav-grid-row">
           {
-            menuItems.map((item: MenuItem) => (
-              <li>
-                <a href={item.href || "#"}>
-                  <img src={item.img} alt={item.id} class="nav-img" />
-                </a>
-              </li>
+            topRow.map((item: MenuItem) => (
+              <a href={item.href || "#"} class="menu-item">
+                <img src={item.img} alt={item.id} />
+              </a>
             ))
           }
-        </ul>
-      </nav>
+        </div>
+        <div class="nav-grid-row">
+          {
+            bottomRow.map((item: MenuItem) => (
+              <a href={item.href || "#"} class="menu-item">
+                <img src={item.img} alt={item.id} />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="hamburger-row sp-view">
+        <button id="nav-open-btn">
+          <img src={hamburgerImg} alt="Menu" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-nav-overlay" class="menu-box">
+    <button id="nav-close-btn" class="btn-menu-close">
+      <span>×</span>
+    </button>
+
+    <div class="menu-content-wrapper">
+      <ul class="menu-list">
+        {
+          menuItems.map((item) => (
+            <li>
+              <a href={item.href || "#"}>
+                <img src={item.img} alt={item.id} class="mobile-nav-img" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
 </header>
 
-<style lang="scss">
-  #site-header {
+<style lang="scss" define:vars={{ navBarBg }}>
+  @use "../styles/globals.scss" as *;
+
+  #navbar-primary-second {
+    position: sticky;
+    top: 0;
     width: 100%;
-    background-color: #fff;
-    border-bottom: 1px solid #eee;
+    height: 105px;
+    background-image: linear-gradient(#75b370, #a9d08d);
+    z-index: 5000;
 
-    .header-content {
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 105px;
+      background: var(--navBarBg) repeat-x 0 0;
+      background-size: 236px 105px;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+    }
+
+    .header-flex {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 1rem 0;
+      justify-content: center;
+      height: 100%;
+      gap: 30px;
     }
+  }
 
-    ul {
-      display: flex;
-      list-style: none;
-      gap: 1rem;
-    }
-
-    .nav-img {
-      height: 30px;
+  .logo-row {
+    .main-logo {
+      height: 70px;
       width: auto;
     }
   }
+
+  .menu-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+
+    .nav-grid-row {
+      display: flex;
+      gap: 20px;
+
+      .menu-item {
+        display: block;
+        height: 22px;
+        transition: opacity 0.2s;
+
+        img {
+          height: 100%;
+          width: auto;
+        }
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+
+  .hamburger-row {
+    display: none;
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 45px;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  .menu-box {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 6000;
+    overflow-y: auto;
+
+    &.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border: 2px solid #fff;
+      background: transparent;
+      border-radius: 50%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 6001;
+
+      span {
+        font-size: 40px;
+        line-height: 1;
+        margin-top: -4px;
+      }
+    }
+
+    .menu-content-wrapper {
+      width: 100%;
+      padding: 60px 0;
+    }
+
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        text-align: center;
+        list-style: none;
+
+        a {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          color: #fff;
+          text-decoration: none;
+          cursor: default;
+
+          .mobile-nav-img {
+            height: 28px;
+            width: auto;
+            display: block;
+          }
+
+          .coming-soon {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 4px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    #navbar-primary-second {
+      height: 80px;
+      &::before {
+        height: 80px;
+        background-size: auto 80px;
+      }
+
+      .header-flex {
+        justify-content: space-between;
+        padding: 0 20px;
+      }
+    }
+
+    .pc-view {
+      display: none;
+    }
+
+    .hamburger-row {
+      display: block;
+    }
+
+    .logo-row .main-logo {
+      height: 50px;
+    }
+  }
 </style>
+
+<script>
+  function initHeader() {
+    const openBtn = document.getElementById("nav-open-btn");
+    const closeBtn = document.getElementById("nav-close-btn");
+    const overlay = document.getElementById("mobile-nav-overlay");
+    const body = document.body;
+
+    const toggle = (state: boolean) => {
+      overlay?.classList.toggle("active", state);
+      body.style.overflow = state ? "hidden" : "";
+    };
+
+    openBtn?.addEventListener("click", () => toggle(true));
+    closeBtn?.addEventListener("click", () => toggle(false));
+
+    overlay?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => toggle(false));
+    });
+  }
+
+  initHeader();
+  document.addEventListener("astro:after-swap", initHeader);
+</script>
