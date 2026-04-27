@@ -33,7 +33,7 @@ const colRight: MenuItem[] = menuItems.slice(5);
         {
           menuItems.map((item) => (
             <li>
-              <a href={item.href || "#"}>
+              <a href={item.href}>
                 <img src={item.img} alt={item.id} />
               </a>
             </li>
@@ -60,11 +60,7 @@ const colRight: MenuItem[] = menuItems.slice(5);
               {
                 colLeft.map((item: MenuItem) => (
                   <li>
-                    <a
-                      href={item.href || "#"}
-                      class="nav-img-item"
-                      id={item.id}
-                    >
+                    <a href={item.href} class="nav-img-item" id={item.id}>
                       <img
                         src={item.img}
                         alt={item.id}
@@ -81,11 +77,7 @@ const colRight: MenuItem[] = menuItems.slice(5);
               {
                 colRight.map((item: MenuItem) => (
                   <li>
-                    <a
-                      href={item.href || "#"}
-                      class="nav-img-item"
-                      id={item.id}
-                    >
+                    <a href={item.href} class="nav-img-item" id={item.id}>
                       <img
                         src={item.img}
                         alt={item.id}

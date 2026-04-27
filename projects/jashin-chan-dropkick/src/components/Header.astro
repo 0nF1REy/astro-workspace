@@ -23,7 +23,7 @@ const bottomRow = menuItems.slice(5, 10);
         <div class="nav-grid-row">
           {
             topRow.map((item: MenuItem) => (
-              <a href={item.href || "#"} class="menu-item">
+              <a href={item.href} class="menu-item">
                 <img src={item.img} alt={item.id} />
               </a>
             ))
@@ -32,7 +32,7 @@ const bottomRow = menuItems.slice(5, 10);
         <div class="nav-grid-row">
           {
             bottomRow.map((item: MenuItem) => (
-              <a href={item.href || "#"} class="menu-item">
+              <a href={item.href} class="menu-item">
                 <img src={item.img} alt={item.id} />
               </a>
             ))
@@ -58,7 +58,7 @@ const bottomRow = menuItems.slice(5, 10);
         {
           menuItems.map((item) => (
             <li>
-              <a href={item.href || "#"}>
+              <a href={item.href}>
                 <img src={item.img} alt={item.id} class="mobile-nav-img" />
               </a>
             </li>
