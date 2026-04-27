@@ -132,16 +132,12 @@ const colRight: MenuItem[] = menuItems.slice(5);
     background-color: white;
     overflow: hidden;
     position: relative;
+    padding-top: 2rem;
 
     .hero-wrapper {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
       align-items: start;
-
-      @media (min-width: 1024px) {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.5rem;
-      }
     }
 
     .hero-content {
@@ -156,6 +152,7 @@ const colRight: MenuItem[] = menuItems.slice(5);
       width: 100%;
       margin-bottom: 4rem;
       margin-top: 6.5rem;
+      text-align: center;
 
       .logo-img {
         width: 100%;
@@ -186,6 +183,10 @@ const colRight: MenuItem[] = menuItems.slice(5);
       align-items: center;
     }
 
+    .twitter-wrapper {
+      text-align: center;
+    }
+
     .twitter-btn-img {
       max-width: 410px;
       min-width: 300px;
@@ -202,6 +203,8 @@ const colRight: MenuItem[] = menuItems.slice(5);
       max-width: 700px;
       height: auto;
       vertical-align: middle;
+      display: block;
+      margin: 0 auto;
     }
 
     .mobile-menu-trigger {
@@ -233,12 +236,11 @@ const colRight: MenuItem[] = menuItems.slice(5);
       }
 
       .menu-dialog {
-        background: rgba(255, 255, 255, 0.9);
+        background: transparent;
         width: 85%;
         max-width: 320px;
         max-height: 80vh;
         border-radius: 0;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         padding: 40px 20px;
         position: relative;
         overflow-y: auto;
@@ -260,20 +262,40 @@ const colRight: MenuItem[] = menuItems.slice(5);
     }
 
     @media screen and (max-width: 750px) {
-      .pc-only-nav {
-        display: none;
+      .hero-wrapper {
+        display: flex;
+        flex-direction: column;
       }
 
-      .mobile-menu-trigger {
-        display: block;
+      .hero-character {
+        order: 1;
+        width: 100%;
+        margin-top: 60px;
+        margin-bottom: 2rem;
+
+        .character-img {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+
+      .hero-content {
+        order: 2;
+        width: 100%;
       }
 
       .logo-wrapper {
-        margin-top: 120px;
+        margin-top: 0;
+        margin-bottom: 2rem;
+
         .logo-img {
           width: 100%;
           max-width: 300px;
         }
+      }
+
+      .twitter-wrapper {
+        margin-bottom: 2rem;
       }
 
       .twitter-btn-img {
@@ -281,15 +303,12 @@ const colRight: MenuItem[] = menuItems.slice(5);
         max-width: 300px;
       }
 
-      .hero-character {
-        margin-top: 2rem;
-        display: flex;
-        justify-content: center;
+      .pc-only-nav {
+        display: none;
       }
 
-      .character-img {
-        width: 100%;
-        max-width: 300px;
+      .mobile-menu-trigger {
+        display: block;
       }
     }
   }

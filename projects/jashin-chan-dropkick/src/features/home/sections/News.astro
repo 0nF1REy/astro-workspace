@@ -152,6 +152,7 @@ const bgStar = "/assets/images/home/news/backgrounds/bg_news_star.png";
 
       img {
         width: 100%;
+        height: 100%;
         object-fit: cover;
         display: block;
       }
@@ -179,6 +180,7 @@ const bgStar = "/assets/images/home/news/backgrounds/bg_news_star.png";
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        min-height: 2.6em;
       }
 
       .description {
@@ -196,6 +198,11 @@ const bgStar = "/assets/images/home/news/backgrounds/bg_news_star.png";
 
     @media screen and (max-width: 750px) {
       padding-top: 4rem;
+      padding-bottom: 4rem;
+
+      .content-wrapper {
+        padding-bottom: 2rem;
+      }
 
       .header-row {
         margin-bottom: 2rem;
@@ -209,7 +216,7 @@ const bgStar = "/assets/images/home/news/backgrounds/bg_news_star.png";
       }
 
       .bg-wave-bottom {
-        bottom: -10px;
+        display: none;
       }
     }
   }
