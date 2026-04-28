@@ -26,11 +26,11 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "astro": "^6.1.8"
+    "astro": "^6.1.10"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.8",
+    "@astrojs/check": "^0.9.9",
     "sass-embedded": "^1.97.1",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   }
 }
