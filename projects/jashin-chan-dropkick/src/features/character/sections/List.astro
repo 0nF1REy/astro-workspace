@@ -1,14 +1,33 @@
 ---
+import { characters } from "@data/characters";
+
 const bgPattern = `url("/assets/images/global/bg_pattern.png")`;
 const bgGirl = `url("/assets/images/global/bg_character01.png")`;
 const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
+const ttlCharacter = "/assets/images/character/titles/ttl_character.png";
+const ttlSpCharacter = "/assets/images/character/titles/ttl_sp_character.png";
 ---
 
 <section id="list">
   <div class="bg-image-girl"></div>
   <div class="container">
     <div class="page-character">
-      <p>Hello World!</p>
+      <h1 class="page-title">
+        <picture>
+          <source srcset={ttlSpCharacter} media="(max-width: 750px)" />
+          <img src={ttlCharacter} alt="CHARACTER" />
+        </picture>
+      </h1>
+
+      <ul class="section-content-item">
+        {
+          characters.map((char) => (
+            <li>
+              <img src={char.image} alt={char.id} loading="lazy" />
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
   <div class="list-wave"></div>
@@ -66,13 +85,11 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
       background-image:
         radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0),
         radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0);
-      background-size:
-        12px 12px,
-        12px 12px;
+      background-size: 12px 12px;
       background-position:
         0 0,
         18px 18px;
-      background-repeat: repeat, repeat;
+      background-repeat: repeat;
       -webkit-mask-image: var(--bgWave);
       mask-image: var(--bgWave);
       -webkit-mask-size: 338px 120px;
@@ -88,13 +105,58 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
       max-width: 954px;
       text-align: center;
       margin: 0 auto;
-      padding: 135px 0 147px 0;
+      padding: 135px 0 185px 0;
       z-index: 3;
+
+      .page-title {
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+
+      .section-content-item {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 3.1rem;
+          img {
+            width: 450px;
+            height: auto;
+            display: block;
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      .page-character .section-content-item {
+        justify-content: center;
+
+        li img {
+          width: 100%;
+          max-width: 450px;
+        }
+      }
     }
 
     @media screen and (max-width: 750px) {
       .bg-image-girl {
         display: none;
+      }
+      .page-character {
+        padding: 80px 0 100px 0;
+        .page-title img {
+          max-width: 280px;
+        }
       }
     }
   }
