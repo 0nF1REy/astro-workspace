@@ -1,25 +1,17 @@
 ---
-const ttlGoods = "/assets/images/goods/hero/ttl_goods.png";
-const ttlSpGoods = "/assets/images/goods/hero/ttl_sp_goods.png";
 const bgPattern = `url("/assets/images/global/bg_pattern.png")`;
 const bgGirl = `url("/assets/images/global/bg_character01.png")`;
 const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
 ---
 
-<section id="hero">
+<section id="list">
   <div class="bg-image-girl"></div>
   <div class="container">
-    <div class="page-goods">
-      <h1 class="page-title">
-        <picture>
-          <source srcset={ttlSpGoods} media="(max-width: 750px)" />
-          <img src={ttlGoods} alt="GOODS" />
-        </picture>
-      </h1>
-      <p class="centered">COMING SOON...</p>
+    <div class="page-character">
+      <p>Hello World!</p>
     </div>
   </div>
-  <div class="hero-wave"></div>
+  <div class="list-wave"></div>
 </section>
 
 <style lang="scss" is:global>
@@ -42,7 +34,7 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
 <style lang="scss" define:vars={{ bgPattern, bgGirl, bgWave }}>
   @use "../../../styles/globals.scss" as *;
 
-  #hero {
+  #list {
     position: relative;
     background-image: var(--bgPattern);
     background-repeat: repeat;
@@ -63,7 +55,7 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
       z-index: 11;
     }
 
-    .hero-wave {
+    .list-wave {
       position: absolute;
       bottom: 0;
       left: 0;
@@ -91,40 +83,18 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
       mask-position: center bottom;
     }
 
-    .page-goods {
+    .page-character {
       position: relative;
       max-width: 954px;
       text-align: center;
       margin: 0 auto;
       padding: 135px 0 147px 0;
       z-index: 3;
-
-      .page-title {
-        margin-bottom: 1.5rem;
-        display: flex;
-        justify-content: center;
-
-        img {
-          max-width: 100%;
-          height: auto;
-        }
-      }
-
-      .centered {
-        text-align: center;
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #493f3e;
-      }
     }
 
     @media screen and (max-width: 750px) {
       .bg-image-girl {
         display: none;
-      }
-
-      .page-goods {
-        padding: 80px 0 160px 0;
       }
     }
   }
