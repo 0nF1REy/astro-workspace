@@ -2,13 +2,77 @@
 const bgPattern = `url("/assets/images/global/bg_pattern.png")`;
 const bgGirl = `url("/assets/images/global/bg_character01.png")`;
 const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
+const ttlSpecial = "/assets/images/special/info/ttl_special.png";
+const ttlSpSpecial = "/assets/images/special/info/ttl_sp_special.png";
+const bannerSpecial = "/assets/images/special/info/banner_special.jpg";
 ---
 
 <section id="info">
   <div class="bg-image-girl"></div>
   <div class="container">
     <div class="page-special">
-      <h1 class="page-title">Hello World!</h1>
+      <h1 class="page-title">
+        <picture>
+          <source srcset={ttlSpSpecial} media="(max-width: 750px)" />
+          <img src={ttlSpecial} alt="SPECIAL" />
+        </picture>
+      </h1>
+
+      <figure class="main-banner">
+        <img src={bannerSpecial} alt="Special Visual" />
+      </figure>
+
+      <div class="guideline-container">
+        <p>
+          邪神ちゃんドロップキック （アニメ「邪神ちゃんドロップキック
+          」「邪神ちゃんドロップキック’」「邪神ちゃんドロップキックX」「邪神ちゃんドロップキック【世紀末編】」含む。以下「邪神ちゃん」）は、視聴者やファンの皆さまによる二次創作を応援しております。そこで、皆さまが安心して二次創作を行っていただけるよう、このガイドラインを公開します。
+        </p>
+
+        <p>
+          このガイドラインの範囲内であれば、事前に別途確認をいただくことなく、邪神ちゃんの本編映像を用いた新たなコンテンツを創作（以下「二次創作」※）して、そのコンテンツ（以下「二次적コンテンツ」）を、YouTubeまたはニコニコで公開していただくこと、並びに、YouTubeまたはニコニコで公開した二次的コンテンツへ誘導する目的で、各種SNSにおいて二次的コンテンツの一部を公開すること（以下「SNSでの誘導」）ができます。
+        </p>
+
+        <p class="example-note">
+          ※「二次創作」の例：<br />
+          ・アニメ本編の「切り抜き」動画<br />
+          ・アニメ本編やキャラクター画像を使った「考察」「解説」「紹介」動画<br
+          />
+          ・コンテンツの「MAD」動画　など
+        </p>
+
+        <div class="guideline-block">
+          <h3>■このガイドラインにより二次創作ができるコンテンツ</h3>
+          <p>
+            ・邪神ちゃんドロップキック【世紀末編】（全1話）<br />
+            <strong
+              >※こちらの映像のみテレビ放送後（2023年12月26日0時5分以降）に使用可能</strong
+            >
+          </p>
+          <p>
+            以下の対象コンテンツは、二次적コンテンツ1件あたり、1話最大10分までの利用に限ります。<br
+            />
+            ・邪神ちゃんドロップキック （全12話）<br />
+            ・邪神ちゃんドロップキック’（全12話）<br />
+            ・邪神ちゃんドロップキックX（全12話）
+          </p>
+        </div>
+
+        <div class="english-guidelines">
+          <p>
+            <strong
+              >The Guideline for the Derivative Creation of the “DROPKICK ON MY
+              DEVIL!!! X”</strong
+            >
+          </p>
+          <p>
+            KADOKAWA CORPORATION (“we” or “us”), acting on behalf of the
+            rights-holders of “Jashinchan Dropkick X” (the “Anime”), would like
+            to support a derivative creation by viewers and fans of the Anime.
+            Therefore, in order to ensure that everyone may use the Anime
+            derivatively free from anxiety, we release this guideline.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="info-wave"></div>
@@ -35,6 +99,7 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
   @use "../../../styles/globals.scss" as *;
 
   #info {
+    font-family: HiraKakuPro-W3;
     position: relative;
     background-image: var(--bgPattern);
     background-repeat: repeat;
@@ -66,13 +131,11 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
       background-image:
         radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0),
         radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0);
-      background-size:
-        12px 12px,
-        12px 12px;
+      background-size: 12px 12px;
       background-position:
         0 0,
         18px 18px;
-      background-repeat: repeat, repeat;
+      background-repeat: repeat;
       -webkit-mask-image: var(--bgWave);
       mask-image: var(--bgWave);
       -webkit-mask-size: 338px 120px;
@@ -86,15 +149,81 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
     .page-special {
       position: relative;
       max-width: 954px;
-      text-align: center;
       margin: 0 auto;
-      padding: 135px 0 147px 0;
+      padding: 135px 0 185px 0;
       z-index: 3;
+      text-align: left;
+
+      .page-title {
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+
+      .main-banner {
+        margin: 0 0 18px 0;
+        img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+      }
+
+      .guideline-container {
+        color: #212529;
+        font-size: 16px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 10px;
+
+        p {
+          margin-bottom: 1.5rem;
+        }
+
+        .example-note {
+          font-size: 14px;
+          color: #555;
+          border-left: 4px solid #b4d69a;
+          padding-left: 15px;
+        }
+
+        .guideline-block {
+          margin-top: 40px;
+          h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #493f3e;
+          }
+        }
+
+        .english-guidelines {
+          margin-top: 60px;
+          padding-top: 40px;
+          border-top: 1px solid #ccc;
+        }
+      }
     }
 
     @media screen and (max-width: 750px) {
       .bg-image-girl {
         display: none;
+      }
+
+      .page-special {
+        padding: 80px 15px 185px 15px;
+
+        .page-title img {
+          max-width: 280px;
+        }
+
+        .guideline-container {
+          padding: 15px;
+          font-size: 14px;
+        }
       }
     }
   }
