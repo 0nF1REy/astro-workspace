@@ -2,13 +2,204 @@
 const bgPattern = `url("/assets/images/global/bg_pattern.png")`;
 const bgGirl = `url("/assets/images/global/bg_character01.png")`;
 const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
+const ttlOnair = "/assets/images/onair/info/ttl_onair.png";
+const ttlSpOnair = "/assets/images/onair/info/ttl_sp_onair.png";
 ---
 
 <section id="info">
   <div class="bg-image-girl"></div>
   <div class="container">
     <div class="page-onair">
-      <h1 class="page-title">Hello World!</h1>
+      <h1 class="page-title">
+        <picture>
+          <source srcset={ttlSpOnair} media="(max-width: 750px)" />
+          <img src={ttlOnair} alt="ON AIR" />
+        </picture>
+      </h1>
+
+      <section class="onair-section">
+        <h2>3期 テレビ放送情報！</h2>
+        <div class="section-content">
+          <table class="onair-table">
+            <tbody>
+              <tr><th>テレビ東京</th><td>2022年7月5日（火）26:05〜</td></tr>
+              <tr><th>北海道文化放送</th><td>2022年7月6日（水）25:40〜</td></tr>
+              <tr><th>テレビ長崎</th><td>2022年7月14日（木）25:00〜</td></tr>
+              <tr><th>BS日テレ</th><td>2022年7月6日（水）24:30〜</td></tr>
+              <tr><th>BSフジ</th><td>2022年7月7日（木）24:30〜</td></tr>
+              <tr>
+                <th>AT-X</th>
+                <td>
+                  2022年7月8日（金）22:00〜<br />
+                  毎週（火）10：00、（木）16：00リピート放送
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note">
+            ※放送・配信日時は編成の都合等により変更となる場合がございます。予めご了承ください。
+          </p>
+        </div>
+      </section>
+
+      <section class="onair-section">
+        <h2>3期 配信情報！</h2>
+        <div class="section-content">
+          <p class="highlight-text">
+            2022年7月6日（水）正午配信スタート！毎週（水）正午更新！
+          </p>
+          <h4 class="sub-heading sub-heading-left">
+            月額見放題サービス（SVOD）
+          </h4>
+          <ul class="link-list">
+            <li>
+              <a href="https://abema.tv/video/title/19-98" target="_blank"
+                >ABEMAプレミアム</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.amazon.co.jp/gp/video/detail/B0B5KP67W4/"
+                target="_blank">Amazon Prime Video</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://animestore.docomo.ne.jp/animestore/ci_pc?workId=25690"
+                target="_blank">dアニメストア</a
+              >
+            </li>
+            <li>
+              <a href="https://www.hulu.jp/watch/100116515" target="_blank"
+                >Hulu</a
+              >
+            </li>
+            <li>
+              <a href="https://video.unext.jp/title/SID0069681" target="_blank"
+                >U-NEXT</a
+              >
+            </li>
+          </ul>
+          <h4 class="sub-heading sub-heading-left">無料配信サービス</h4>
+          <ul class="link-list">
+            <li>
+              <a href="https://abema.tv/video/title/19-98" target="_blank"
+                >ABEMA</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://anime.nicovideo.jp/detail/jashinchan3/"
+                target="_blank">ニコニコチャンネル</a
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="onair-section">
+        <h2>2期 配信情報！</h2>
+        <div class="section-content">
+          <table class="onair-table">
+            <tbody>
+              <tr><th>TOKYO MX</th><td>2020年4月6日（月）25:15～</td></tr>
+              <tr><th>BSフジ</th><td>2020年4月7日（火）24:30～</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="onair-section">
+        <h2>2期 テレビ放送情報！</h2>
+        <div class="section-content">
+          <table class="onair-table">
+            <tbody>
+              <tr><th>TOKYO MX</th><td>2018年7月9日（月）から 25:05〜</td></tr>
+              <tr><th>BSフジ</th><td>2018年7月9日（月）から 24:00〜</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="onair-section">
+        <h2>1期 配信情報！</h2>
+        <div class="section-content">
+          <table class="onair-table">
+            <tbody>
+              <tr><th>TOKYO MX</th><td>2018年7月9日（月）から 25:05〜</td></tr>
+              <tr><th>BSフジ</th><td>2018年7月9日（月）から 24:00〜</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="onair-section">
+        <h2>1期 テレビ再放送情報！</h2>
+        <div class="section-content">
+          <table class="onair-table">
+            <tbody>
+              <tr><th>TOKYO MX</th><td>2018年7月9日（月）から 25:05〜</td></tr>
+              <tr><th>BSフジ</th><td>2018年7月9日（月）から 24:00〜</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="onair-section">
+        <h2>1期 テレビ放送情報！</h2>
+        <div class="section-content">
+          <table class="onair-table onair-table-3col">
+            <tbody>
+              <tr
+                ><th>TOKYOMX</th><td>2018年7月9日（月）から</td><td>25:05〜</td
+                ></tr
+              >
+              <tr
+                ><th>チバテレビ</th><td>2018年7月13日（金）から</td><td
+                  >25:00〜</td
+                ></tr
+              >
+              <tr
+                ><th>とちぎテレビ</th><td>2018年7月11日（水）から</td><td
+                  >24:00〜</td
+                ></tr
+              >
+              <tr
+                ><th>三重テレビ</th><td>2018年7月11日（水）から</td><td
+                  >26:20〜</td
+                ></tr
+              >
+              <tr
+                ><th>サンテレビ</th><td>2018年7月9日（月）から</td><td
+                  >25:30〜</td
+                ></tr
+              >
+              <tr
+                ><th>西日本放送</th><td>2018年7月15日（日）から</td><td
+                  >26:00〜</td
+                ></tr
+              >
+              <tr
+                ><th>BSフジ</th><td>2018年7月9日（月）から</td><td>24:00〜</td
+                ></tr
+              >
+              <tr
+                ><th>北海道文化放送</th><td>2018年7月15日（日）から</td><td
+                  >25:45〜</td
+                ></tr
+              >
+              <tr
+                ><th>びわ湖放送</th><td>2018年7月10日（火）から</td><td
+                  >26:45〜</td
+                ></tr
+              >
+              <tr
+                ><th>AT-X</th><td
+                  >2018年7月13日（金）から<br />※リピート放送 毎週（月）<br
+                  />毎週（水）</td
+                ><td>21:30〜<br />13:30〜<br />29:30〜</td></tr
+              >
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   </div>
   <div class="info-wave"></div>
@@ -18,11 +209,9 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
   #footer {
     background-color: transparent !important;
   }
-
   #footer .bg-wave-top {
     display: none !important;
   }
-
   #footer .foreground {
     background-color: #493f3e !important;
     position: relative;
@@ -88,7 +277,6 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
       margin: 0 auto;
       padding: 135px 0 185px 0;
       z-index: 3;
-      text-align: left;
 
       .page-title {
         margin-bottom: 30px;
@@ -99,11 +287,140 @@ const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
           height: auto;
         }
       }
+
+      .onair-section {
+        margin-bottom: 60px;
+
+        h2 {
+          text-align: center;
+          font-weight: bold;
+          font-size: 25px;
+          background: linear-gradient(#61ac69, #b4d69a);
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          color: #fff;
+          margin: 0;
+          padding: 21px;
+        }
+
+        .section-content {
+          background-color: #fffef1;
+          padding: 25px;
+          border: 3px solid #b4d69a;
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+
+          .highlight-text {
+            color: #fb4c69;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+          }
+
+          .sub-heading {
+            font-weight: bold;
+            font-size: 18px;
+            margin: 20px 0 15px;
+            text-align: right;
+          }
+
+          .sub-heading-left {
+            text-align: left;
+          }
+
+          .note {
+            font-size: 13px;
+            margin-top: 15px;
+            color: #666;
+          }
+        }
+      }
+
+      .onair-table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #b4d69a;
+
+        tr {
+          border-bottom: 2px dotted #62ad6a;
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+
+        th,
+        td {
+          padding: 15px;
+          border-right: 1px solid #b4d69a;
+        }
+
+        th:last-child,
+        td:last-child {
+          border-right: none;
+        }
+
+        th {
+          width: 30%;
+          font-weight: bold;
+          color: #fb4c69;
+        }
+
+        td {
+          text-align: right;
+          line-height: 1.6;
+        }
+
+        .onair-table-3col th {
+          width: 35%;
+        }
+
+        .onair-table-3col td {
+          width: 32.5%;
+        }
+      }
+
+      .link-list {
+        list-style: none;
+        padding: 0;
+        li {
+          text-align: right;
+          border-bottom: 2px dotted #62ad6a;
+          padding: 12px 15px;
+          a {
+            color: #fb4c69;
+            text-decoration: underline;
+            font-weight: bolder;
+            font-size: 15px;
+          }
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
     }
 
     @media screen and (max-width: 750px) {
       .bg-image-girl {
         display: none;
+      }
+      .page-onair {
+        padding: 80px 15px 185px 15px;
+        .page-title img {
+          max-width: 280px;
+        }
+        .onair-section h2 {
+          font-size: 18px;
+          padding: 15px;
+        }
+        .onair-table th {
+          width: 40%;
+          font-size: 14px;
+          padding: 10px 5px;
+        }
+        .onair-table td {
+          font-size: 14px;
+          padding: 10px 5px;
+        }
       }
     }
   }
