@@ -51,49 +51,48 @@ const ttlSpOnair = "/assets/images/onair/info/ttl_sp_onair.png";
           <h4 class="sub-heading sub-heading-left">
             月額見放題サービス（SVOD）
           </h4>
-          <ul class="link-list">
-            <li>
-              <a href="https://abema.tv/video/title/19-98" target="_blank"
-                >ABEMAプレミアム</a
+          <table class="onair-table onair-table-1col">
+            <tbody>
+              <tr
+                ><th
+                  ><a href="https://rateyourmusic.com" target="_blank"
+                    >ITEM 01</a
+                  ></th
+                ></tr
               >
-            </li>
-            <li>
-              <a
-                href="https://www.amazon.co.jp/gp/video/detail/B0B5KP67W4/"
-                target="_blank">Amazon Prime Video</a
+            </tbody>
+          </table>
+          <h4 class="sub-heading sub-heading-left">
+            無料配信サービス *各話期間限定（AVOD）
+          </h4>
+          <table class="onair-table onair-table-1col">
+            <tbody>
+              <tr
+                ><th
+                  ><a href="https://rateyourmusic.com" target="_blank"
+                    >ITEM 01</a
+                  ></th
+                ></tr
               >
-            </li>
-            <li>
-              <a
-                href="https://animestore.docomo.ne.jp/animestore/ci_pc?workId=25690"
-                target="_blank">dアニメストア</a
+            </tbody>
+          </table>
+          <h4 class="sub-heading sub-heading-left">
+            レンタル配信サービス（TVOD）
+          </h4>
+          <table class="onair-table onair-table-1col">
+            <tbody>
+              <tr
+                ><th
+                  ><a href="https://rateyourmusic.com" target="_blank"
+                    >ITEM 01</a
+                  ></th
+                ></tr
               >
-            </li>
-            <li>
-              <a href="https://www.hulu.jp/watch/100116515" target="_blank"
-                >Hulu</a
-              >
-            </li>
-            <li>
-              <a href="https://video.unext.jp/title/SID0069681" target="_blank"
-                >U-NEXT</a
-              >
-            </li>
-          </ul>
-          <h4 class="sub-heading sub-heading-left">無料配信サービス</h4>
-          <ul class="link-list">
-            <li>
-              <a href="https://abema.tv/video/title/19-98" target="_blank"
-                >ABEMA</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://anime.nicovideo.jp/detail/jashinchan3/"
-                target="_blank">ニコニコチャンネル</a
-              >
-            </li>
-          </ul>
+            </tbody>
+          </table>
+          <p class="note">
+            ※配信サービスによって配信開始日が異なる場合がございます。
+          </p>
         </div>
       </section>
 
@@ -458,6 +457,18 @@ const ttlSpOnair = "/assets/images/onair/info/ttl_sp_onair.png";
         }
 
         &.onair-table-1col a {
+          color: #fb4c69;
+          font-weight: bolder;
+          text-decoration: underline;
+        }
+
+        &.onair-table-1col th {
+          text-align: right;
+          width: 100%;
+          font-weight: normal;
+        }
+
+        &.onair-table-1col th a {
           color: #fb4c69;
           font-weight: bolder;
           text-decoration: underline;
