@@ -134,12 +134,32 @@ const ttlSpOnair = "/assets/images/onair/info/ttl_sp_onair.png";
       <section class="onair-section">
         <h2>1期 テレビ再放送情報！</h2>
         <div class="section-content">
-          <table class="onair-table">
+          <table class="onair-table onair-table-3col">
             <tbody>
-              <tr><th>TOKYO MX</th><td>2018年7月9日（月）から 25:05〜</td></tr>
-              <tr><th>BSフジ</th><td>2018年7月9日（月）から 24:00〜</td></tr>
+              <tr>
+                <th>TOKYOMX</th><td>2020年1月5日（日）から</td><td>25:05〜</td>
+              </tr>
+              <tr>
+                <th>BSフジ</th><td>2020年1月12日（日）から</td><td>24:00〜</td>
+              </tr>
+              <tr>
+                <th>北海道文化放送</th><td>2020年1月14日（火）から</td><td
+                  >25:45〜</td
+                >
+              </tr>
             </tbody>
           </table>
+          <p class="note">
+            ※放送日時は都合により変更になる場合がございます。<br />
+            ■BSフジ<br />
+            1月12日（日）24:25～24:55<br />
+            1月19日（日）24:50～25:20<br />
+            1月26日（日）24:35～25:05<br />
+            2月9日（日）25:30～26:00<br />
+            ■北海道文化放送<br />
+            1月14日（火）27:10-27:40<br />
+            2月4日（火）27:00～27:30
+          </p>
         </div>
       </section>
       <section class="onair-section">
@@ -370,11 +390,11 @@ const ttlSpOnair = "/assets/images/onair/info/ttl_sp_onair.png";
           line-height: 1.6;
         }
 
-        .onair-table-3col th {
+        &.onair-table-3col th {
           width: 35%;
         }
 
-        .onair-table-3col td {
+        &.onair-table-3col td {
           width: 32.5%;
         }
       }
