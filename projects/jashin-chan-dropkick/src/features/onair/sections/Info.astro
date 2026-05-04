@@ -123,12 +123,56 @@ const ttlSpOnair = "/assets/images/onair/info/ttl_sp_onair.png";
       <section class="onair-section">
         <h2>1期 配信情報！</h2>
         <div class="section-content">
-          <table class="onair-table">
+          <table class="onair-table onair-table-1col">
             <tbody>
-              <tr><th>TOKYO MX</th><td>2018年7月9日（月）から 25:05〜</td></tr>
-              <tr><th>BSフジ</th><td>2018年7月9日（月）から 24:00〜</td></tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://www.amazon.co.jp/gp/video/detail/B07F94QL52/ref=cm_sw_tw_r_pv_wb_U9a4EhHd8yv1o"
+                    target="_blank"
+                    rel="noopener noreferrer">Amazon Prime Video</a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://anime.dmkt-sp.jp/animestore/ci_pc?workId=23200&ref=twtr"
+                    target="_blank"
+                    rel="noopener noreferrer">dアニメストア</a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://video.unext.jp/title/SID0045432"
+                    target="_blank"
+                    rel="noopener noreferrer">U-NEXT/アニメ放題</a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://abema.tv/channels/anime-live/slots/BzM18TKxoWHmuy"
+                    target="_blank"
+                    rel="noopener noreferrer">AbemaTV</a
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://www.b-ch.com/titles/6810/"
+                    target="_blank"
+                    rel="noopener noreferrer">バンダイチャンネル</a
+                  >
+                </td>
+              </tr>
             </tbody>
           </table>
+          <p class="note">様々な配信サービスで大好評配信中！</p>
         </div>
       </section>
       <section class="onair-section">
@@ -396,6 +440,16 @@ const ttlSpOnair = "/assets/images/onair/info/ttl_sp_onair.png";
 
         &.onair-table-3col td {
           width: 32.5%;
+        }
+
+        &.onair-table-1col td {
+          text-align: right;
+        }
+
+        &.onair-table-1col a {
+          color: #fb4c69;
+          font-weight: bolder;
+          text-decoration: underline;
         }
       }
 
