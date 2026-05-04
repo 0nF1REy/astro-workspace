@@ -324,10 +324,24 @@ const ttlSpOnair = "/assets/images/onair/info/ttl_sp_onair.png";
       <section class="onair-section">
         <h2>2期 配信情報！</h2>
         <div class="section-content">
-          <table class="onair-table">
+          <h4 class="sub-heading sub-heading-left">見放題</h4>
+          <table class="onair-table onair-table-2col">
             <tbody>
-              <tr><th>TOKYO MX</th><td>2020年4月6日（月）25:15～</td></tr>
-              <tr><th>BSフジ</th><td>2020年4月7日（火）24:30～</td></tr>
+              <tr
+                ><th
+                  ><a href="https://item-01.com" target="_blank">ITEM 01</a></th
+                ><td>xxx</td></tr
+              >
+            </tbody>
+          </table>
+          <h4 class="sub-heading sub-heading-left">レンタル</h4>
+          <table class="onair-table onair-table-2col">
+            <tbody>
+              <tr
+                ><th
+                  ><a href="https://item-01.com" target="_blank">ITEM 01</a></th
+                ><td>xxx</td></tr
+              >
             </tbody>
           </table>
         </div>
@@ -694,6 +708,22 @@ const ttlSpOnair = "/assets/images/onair/info/ttl_sp_onair.png";
         }
 
         &.onair-table-1col th a {
+          color: #fb4c69;
+          font-weight: bolder;
+          text-decoration: underline;
+        }
+
+        &.onair-table-2col th {
+          width: 70%;
+          text-align: right;
+          font-weight: normal;
+        }
+
+        &.onair-table-2col td {
+          width: 30%;
+        }
+
+        &.onair-table-2col th a {
           color: #fb4c69;
           font-weight: bolder;
           text-decoration: underline;
