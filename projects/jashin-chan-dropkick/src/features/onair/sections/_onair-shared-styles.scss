@@ -1,0 +1,77 @@
+.onair-section {
+  margin-bottom: 60px;
+
+  h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    background: linear-gradient(#61ac69, #b4d69a);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #fff;
+    margin: 0;
+    padding: 21px;
+  }
+
+  .section-content {
+    background-color: #fffef1;
+    padding: 25px;
+    border: 3px solid #b4d69a;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    .note {
+      font-size: 13px;
+      margin-top: 15px;
+      color: #666;
+    }
+  }
+}
+
+.onair-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #b4d69a;
+
+  tr {
+    border-bottom: 2px dotted #62ad6a;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  th,
+  td {
+    padding: 15px;
+    border-right: 1px solid #b4d69a;
+  }
+
+  th:last-child,
+  td:last-child {
+    border-right: none;
+  }
+
+  th {
+    font-weight: bold;
+    color: #fb4c69;
+  }
+
+  td {
+    text-align: right;
+    line-height: 1.6;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .onair-section h2 {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .onair-table th,
+  .onair-table td {
+    font-size: 14px;
+    padding: 10px 5px;
+  }
+}

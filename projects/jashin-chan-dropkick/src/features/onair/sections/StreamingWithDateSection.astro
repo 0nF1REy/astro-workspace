@@ -1,0 +1,98 @@
+---
+interface LinkWithDate {
+  name: string;
+  url: string;
+  date: string;
+}
+
+interface Section {
+  title: string;
+  items: LinkWithDate[];
+}
+
+interface Props {
+  title: string;
+  sections: Section[];
+  note?: string;
+  tableClassName?: string;
+}
+
+const {
+  title,
+  sections,
+  note,
+  tableClassName = "onair-table-2col",
+} = Astro.props;
+---
+
+<section class="onair-section">
+  <h2>{title}</h2>
+  <div class="section-content">
+    {
+      sections.map((section) => (
+        <>
+          <h4 class="sub-heading sub-heading-left">{section.title}</h4>
+          <table class={`onair-table ${tableClassName}`}>
+            <tbody>
+              {section.items.map((item) => (
+                <tr>
+                  <th>
+                    <a href={item.url} target="_blank">
+                      {item.name}
+                    </a>
+                  </th>
+                  <td>{item.date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ))
+    }
+
+    {note && <p class="note">{note}</p>}
+  </div>
+</section>
+
+<style lang="scss">
+  @use './_onair-shared-styles.scss' as *;
+
+  .onair-section .section-content {
+    .sub-heading {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 20px 0 15px;
+      text-align: right;
+    }
+
+    .sub-heading-left {
+      text-align: left;
+    }
+  }
+
+  .onair-table th {
+    width: 70%;
+    text-align: right;
+    font-weight: normal;
+  }
+
+  .onair-table th a {
+    color: #fb4c69;
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+
+  .onair-table td {
+    width: 30%;
+  }
+
+  @media screen and (max-width: 750px) {
+    .onair-table th {
+      width: 70%;
+    }
+
+    .onair-table td {
+      width: 30%;
+    }
+  }
+</style>

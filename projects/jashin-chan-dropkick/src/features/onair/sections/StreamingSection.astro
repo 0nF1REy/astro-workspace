@@ -1,0 +1,122 @@
+---
+interface Link {
+  name: string;
+  url: string;
+}
+
+interface Section {
+  title: string;
+  links: Link[];
+  isWithDate?: boolean;
+  dateInfo?: Array<{ name: string; url: string; date: string }>;
+}
+
+interface Props {
+  title: string;
+  highlightText?: string;
+  sections: Section[];
+  note?: string;
+  tableClassName?: string;
+}
+
+const {
+  title,
+  highlightText,
+  sections,
+  note,
+  tableClassName = "onair-table-1col",
+} = Astro.props;
+---
+
+<section class="onair-section">
+  <h2>{title}</h2>
+  <div class="section-content">
+    {highlightText && <p class="highlight-text">{highlightText}</p>}
+
+    {
+      sections.map((section) => (
+        <>
+          <h4 class="sub-heading sub-heading-left">{section.title}</h4>
+          <table class={`onair-table ${tableClassName}`}>
+            <tbody>
+              {section.isWithDate && section.dateInfo
+                ? section.dateInfo.map((item) => (
+                    <tr>
+                      <th>
+                        <a href={item.url} target="_blank">
+                          {item.name}
+                        </a>
+                      </th>
+                      <td>{item.date}</td>
+                    </tr>
+                  ))
+                : section.links.map((link) => (
+                    <tr>
+                      <th>
+                        <a href={link.url} target="_blank">
+                          {link.name}
+                        </a>
+                      </th>
+                    </tr>
+                  ))}
+            </tbody>
+          </table>
+        </>
+      ))
+    }
+
+    {note && <p class="note">{note}</p>}
+  </div>
+</section>
+
+<style lang="scss">
+  @use './_onair-shared-styles.scss' as *;
+
+  .onair-section .section-content {
+    .highlight-text {
+      color: #fb4c69;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    .sub-heading {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 20px 0 15px;
+      text-align: right;
+    }
+
+    .sub-heading-left {
+      text-align: left;
+    }
+  }
+
+  .onair-table th {
+    width: 30%;
+    text-align: right;
+    font-weight: normal;
+  }
+
+  .onair-table th a {
+    color: #fb4c69;
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+
+    .onair-table.onair-table-2col th {
+    width: 70%;
+    text-align: right;
+    font-weight: normal;
+  }
+
+    .onair-table.onair-table-2col td {
+    width: 30%;
+  }
+
+    .onair-table.onair-table-2col th a {
+    color: #fb4c69;
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,46 @@
+---
+interface Link {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  title: string;
+  links: Link[];
+  note?: string;
+}
+
+const { title, links, note } = Astro.props;
+---
+
+<section class="onair-section">
+  <h2>{title}</h2>
+  <div class="section-content">
+    <table class="onair-table onair-table-1col">
+      <tbody>
+        {
+          links.map((link) => (
+            <tr>
+              <td>
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.name}
+                </a>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+    {note && <p class="note">{note}</p>}
+  </div>
+</section>
+
+<style lang="scss">
+  @use './_onair-shared-styles.scss' as *;
+
+  .onair-table.onair-table-1col a {
+    color: #fb4c69;
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+interface Row {
+  channel: string;
+  schedule: string;
+}
+
+interface Props {
+  title: string;
+  rows: Row[];
+  note?: string;
+}
+
+const { title, rows, note } = Astro.props;
+---
+
+<section class="onair-section">
+  <h2>{title}</h2>
+  <div class="section-content">
+    <table class="onair-table">
+      <tbody>
+        {
+          rows.map((row) => (
+            <tr>
+              <th>{row.channel}</th>
+              <td>{row.schedule}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+    {note && <p class="note">{note}</p>}
+  </div>
+</section>
+
+<style lang="scss">
+  @use './_onair-shared-styles.scss' as *;
+
+  .onair-table th {
+    width: 30%;
+  }
+
+  @media screen and (max-width: 750px) {
+    .onair-table th {
+      width: 40%;
+    }
+  }
+</style>
