@@ -6,7 +6,7 @@ export const movieAssets = {
   ttlSpMovie: "/assets/images/movie/list/ttl_sp_movie.png",
 } as const;
 
-export const movieVideos = [
+export const movieVideos: string[] = [
   "https://www.youtube.com/embed/R3_7vqdslZk",
   "https://www.youtube.com/embed/fUMqiEIkbBQ",
   "https://www.youtube.com/embed/Vjryf4u--Ww",

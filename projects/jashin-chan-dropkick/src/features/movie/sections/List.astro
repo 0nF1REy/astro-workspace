@@ -17,7 +17,7 @@ const { bgPattern, bgGirl, bgWave, ttlMovie, ttlSpMovie } = movieAssets;
 
       <div class="movies-container">
         {
-          movieVideos.map((url) => (
+          movieVideos.map((url: string) => (
             <div class="iframe-wrapper">
               <iframe
                 src={url}
