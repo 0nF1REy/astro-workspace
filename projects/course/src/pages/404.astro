@@ -17,7 +17,7 @@ const todos: Todo[] = await res.json();
     <ul role="list">
       {
         todos.slice(0, 10).map((todo: Todo) => (
-          <li>
+          <li class="todo-item">
             <div>
               <strong>{todo.title}</strong>
               <span>{todo.completed ? "Concluído" : "Pendente"}</span>
@@ -28,3 +28,13 @@ const todos: Todo[] = await res.json();
     </ul>
   </main>
 </Layout>
+
+<script>
+  const todoItems = document.querySelectorAll(".todo-item");
+
+  todoItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      console.log("Item clicado:", item.textContent?.trim());
+    });
+  });
+</script>
