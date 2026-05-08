@@ -5,7 +5,8 @@ PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 
 .PHONY: help list open add status sync \
 	atarashii-gakko book-bites clerk-auth cloudinary-form-upload \
-	jashin-chan-dropkick p5js-workspace portfolio product-management profile scriptora
+	course jashin-chan-dropkick p5js-workspace portfolio \
+	product-management profile scriptora
 
 help: ## Mostra os comandos disponíveis
 	@echo "Comandos disponíveis:"
@@ -59,6 +60,9 @@ clerk-auth:
 
 cloudinary-form-upload:
 	@code "$(WORKSPACE_DIR)/cloudinary-form-upload/cloudinary-form-upload.code-workspace"
+
+course:
+	@code "$(WORKSPACE_DIR)/course/course.code-workspace"
 
 jashin-chan-dropkick:
 	@code "$(WORKSPACE_DIR)/jashin-chan-dropkick/jashin-chan-dropkick.code-workspace"
