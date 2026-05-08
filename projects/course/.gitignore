@@ -1,7 +1,5 @@
 # build output
 dist/
-
-# generated types
 .astro/
 
 # dependencies
@@ -22,3 +20,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Vercel config/cache
+.vercel/
+
+# Context
+contexto.txt

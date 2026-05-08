@@ -1,9 +1,10 @@
 {
   "name": "course",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "packageManager": "npm@11.11.0",
   "engines": {
-    "node": ">=22.12.0"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "astro dev",
@@ -11,8 +12,25 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "author": {
+    "name": "Alan Ryan da Silva Domingues",
+    "email": "alanryan619@gmail.com",
+    "url": "https://github.com/0nF1REy"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0nF1REy/astro-workspace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0nF1REy/astro-workspace/issues"
+  },
   "dependencies": {
-    "astro": "^6.3.1",
-    "sass": "^1.99.0"
+    "astro": "^6.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "sass-embedded": "^1.99.0",
+    "typescript": "^6.0.3"
   }
 }
