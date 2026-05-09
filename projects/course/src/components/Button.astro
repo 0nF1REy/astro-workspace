@@ -1,0 +1,99 @@
+---
+const {
+  text,
+  icon,
+  isBordered,
+  classList = "blue red",
+  background = "var(--surface)",
+  color = "var(--text)",
+  ...rest
+} = Astro.props;
+---
+
+<button
+  class:list={[
+    "btn",
+    classList,
+    {
+      bordered: isBordered,
+    },
+  ]}
+  {...rest}
+>
+  <slot />
+</button>
+
+<script>
+  const button = document.querySelector(".btn");
+
+  if (button) {
+    button.addEventListener("click", () => {
+      alert("clicked");
+    });
+  }
+</script>
+
+<style
+  lang="scss"
+  define:vars={{
+    bg: background,
+    text: color,
+  }}
+>
+  .btn {
+    font: inherit;
+    max-width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    border: 1px solid rgba(253, 230, 138, 0.16);
+    padding: 0.85rem 1.25rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--bg), rgba(251, 146, 60, 0.22));
+    color: var(--text);
+    box-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease,
+      filter 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(251, 146, 60, 0.34);
+    background: linear-gradient(
+      135deg,
+      var(--surface-light),
+      rgba(251, 146, 60, 0.28)
+    );
+    box-shadow:
+      0 14px 28px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(251, 146, 60, 0.08);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+    filter: brightness(0.98);
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid rgba(253, 230, 138, 0.65);
+    outline-offset: 3px;
+  }
+
+  .bordered {
+    background: transparent;
+    border-color: rgba(251, 146, 60, 0.3);
+    box-shadow: none;
+  }
+
+  .bordered:hover {
+    background: rgba(251, 146, 60, 0.08);
+  }
+</style>

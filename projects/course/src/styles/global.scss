@@ -162,6 +162,7 @@ body {
 
 .title-gradient {
   background: linear-gradient(135deg, var(--orange), var(--cream));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: filter 0.2s ease;
