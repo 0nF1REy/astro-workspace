@@ -1,0 +1,68 @@
+[
+  {
+    "tier": "Grátis",
+    "most_popular": false,
+    "amount_per_month": 0,
+    "title": "Ideal para iniciantes",
+    "description": "Descubra como criar seus primeiros projetos",
+    "btn_text": "Começar agora",
+    "features": [
+      {
+        "title": "3 novos projetos/mês",
+        "checked": true
+      },
+      {
+        "title": "Interações básicas",
+        "checked": false
+      },
+      {
+        "title": "Biblioteca de recursos",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "tier": "Pro",
+    "most_popular": true,
+    "amount_per_month": 8,
+    "title": "Para equipes pequenas",
+    "description": "Crie projetos para diversos clientes",
+    "btn_text": "Assinar agora",
+    "features": [
+      {
+        "title": "6 novos projetos/mês",
+        "checked": true
+      },
+      {
+        "title": "Interações básicas",
+        "checked": true
+      },
+      {
+        "title": "Biblioteca de recursos",
+        "checked": true
+      }
+    ]
+  },
+  {
+    "tier": "Corporativo",
+    "most_popular": false,
+    "amount_per_month": 12,
+    "title": "Para agências de dev",
+    "description": "Expanda para uma agência de desenvolvimento web completa",
+    "btn_text": "Começar agora",
+    "features": [
+      {
+        "title": "10 novos projetos/mês",
+        "checked": true
+      },
+      {
+        "title": "Interações avançadas",
+        "checked": true
+      },
+      {
+        "title": "Biblioteca de recursos",
+        "checked": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+---
+import Layout from "../layouts/Layout.astro";
+import pricings from "../data/pricing.json";
+import PricingCard from "../components/PricingCard.astro";
+---
+
+<Layout title="Pricing">
+  <section aria-label="Pricing">
+    {pricings.map((card) => <PricingCard cardData={card} />)}
+  </section>
+</Layout>
