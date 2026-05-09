@@ -5,6 +5,138 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-  <a href="/blog">Back to Blog</a>
-  <slot />
+  <article class="blog-layout">
+    <header class="blog-layout__hero">
+      <a class="blog-layout__back" href="/blog">Back to Blog</a>
+      <p class="blog-layout__eyebrow">Blog post</p>
+      <h1 class="blog-layout__title">{frontmatter.title}</h1>
+    </header>
+
+    <div class="blog-layout__content">
+      <slot />
+    </div>
+  </article>
 </Layout>
+
+<style lang="scss">
+  .blog-layout {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 52rem;
+    margin: 0 auto;
+  }
+
+  .blog-layout__hero {
+    display: grid;
+    gap: 0.8rem;
+    padding: 2rem;
+    border-radius: 28px;
+    background: linear-gradient(
+      180deg,
+      rgba(38, 33, 29, 0.9),
+      rgba(20, 17, 14, 0.88)
+    );
+    border: 1px solid rgba(253, 230, 138, 0.08);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(10px);
+  }
+
+  .blog-layout__back {
+    width: fit-content;
+    color: var(--cream);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .blog-layout__back:hover {
+    color: var(--orange);
+    transform: translateX(-3px);
+  }
+
+  .blog-layout__eyebrow {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .blog-layout__title {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 0.95;
+    max-width: 12ch;
+    background: linear-gradient(135deg, var(--orange), var(--cream));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .blog-layout__content {
+    display: grid;
+    gap: 1rem;
+    padding: 1.75rem 2rem;
+    border-radius: 24px;
+    background: rgba(38, 33, 29, 0.6);
+    border: 1px solid rgba(251, 146, 60, 0.12);
+    color: var(--text);
+    line-height: 1.75;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.22);
+  }
+
+  .blog-layout__content :global(h2),
+  .blog-layout__content :global(h3),
+  .blog-layout__content :global(h4) {
+    line-height: 1.1;
+    margin-top: 0.75rem;
+  }
+
+  .blog-layout__content :global(p + p) {
+    margin-top: 0.85rem;
+  }
+
+  .blog-layout__content :global(a) {
+    color: var(--cream);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .blog-layout__content :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  .blog-layout__content :global(ul),
+  .blog-layout__content :global(ol) {
+    padding-left: 1.35rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .blog-layout__content :global(blockquote) {
+    margin: 0;
+    padding: 1rem 1.1rem;
+    border-left: 3px solid rgba(251, 146, 60, 0.55);
+    background: rgba(25, 22, 18, 0.55);
+    border-radius: 0 16px 16px 0;
+  }
+
+  .blog-layout__content :global(pre) {
+    overflow-x: auto;
+    padding: 1rem 1.1rem;
+    border-radius: 16px;
+    background: rgba(18, 15, 13, 0.9);
+    border: 1px solid rgba(253, 230, 138, 0.08);
+  }
+
+  .blog-layout__content :global(code) {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  }
+
+  @media (max-width: 640px) {
+    .blog-layout__hero,
+    .blog-layout__content {
+      padding: 1.25rem;
+      border-radius: 22px;
+    }
+  }
+</style>

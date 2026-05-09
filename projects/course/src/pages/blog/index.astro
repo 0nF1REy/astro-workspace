@@ -16,14 +16,94 @@ const posts = Object.values(
 ---
 
 <Layout title="Blog">
-  <h1>Blog Page</h1>
-  <ul>
-    {
-      posts.map((p: PostEntry) => (
-        <li>
-          <a href={p.url}>{p.frontmatter.title}</a>
-        </li>
-      ))
-    }
-  </ul>
+  <section class="blog-index">
+    <div class="blog-index__hero surface-card">
+      <p class="blog-index__eyebrow">Blog</p>
+      <h1 class="title-gradient">Blog Page</h1>
+      <p class="blog-index__lead">
+        Lista de posts carregados automaticamente a partir dos arquivos Markdown
+        e MDX dentro da pasta do blog.
+      </p>
+    </div>
+
+    <div class="blog-index__grid">
+      {
+        posts.map((p: PostEntry) => (
+          <article class="blog-index__card surface-card">
+            <p class="blog-index__label">Post</p>
+            <h2>{p.frontmatter.title}</h2>
+            <a class="blog-index__link" href={p.url}>
+              Abrir post
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 </Layout>
+
+<style lang="scss">
+  .blog-index {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .blog-index__hero {
+    display: grid;
+    gap: 0.85rem;
+    padding: 2rem;
+  }
+
+  .blog-index__eyebrow,
+  .blog-index__label {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .blog-index__lead {
+    max-width: 60ch;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  .blog-index__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .blog-index__card {
+    display: grid;
+    gap: 0.85rem;
+    padding: 1.5rem;
+    align-content: start;
+  }
+
+  .blog-index__card h2 {
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    line-height: 1.1;
+  }
+
+  .blog-index__link {
+    width: fit-content;
+    color: var(--cream);
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .blog-index__link:hover {
+    color: var(--orange);
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 640px) {
+    .blog-index__hero,
+    .blog-index__card {
+      padding: 1.25rem;
+    }
+  }
+</style>

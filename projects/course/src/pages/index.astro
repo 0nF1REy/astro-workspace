@@ -43,7 +43,7 @@ const routes = [
 
 <Layout title="Home">
   <section class="home-page">
-    <div class="home-page__hero card">
+    <div class="home-page__hero surface-card">
       <p class="home-page__eyebrow">Astro course workspace</p>
       <h1 class="title-gradient">Um hub para explorar o curso</h1>
       <p class="home-page__lead">
@@ -55,7 +55,7 @@ const routes = [
     <div class="home-page__grid">
       {
         routes.map((route) => (
-          <article class="home-page__panel card">
+          <article class="home-page__panel surface-card">
             <h2>{route.title}</h2>
             <p>{route.description}</p>
             <Link class="home-page__panel-link" href={route.href}>
@@ -66,7 +66,7 @@ const routes = [
       }
     </div>
 
-    <div class="home-page__footer card">
+    <div class="home-page__footer surface-card">
       <p>
         Comece por <Link class="home-page__inline-link" href="todos"
           >Tarefas</Link

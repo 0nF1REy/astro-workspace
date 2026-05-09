@@ -7,7 +7,91 @@ const renderedHTML = `<h1>hi</h1>`;
 ---
 
 <Layout title="Promo">
-  <h1>Homepage</h1>
-  <PromoBanner />
-  <Fragment set:html={renderedHTML} />
+  <section class="promo-page">
+    <div class="promo-page__hero surface-card">
+      <p class="promo-page__eyebrow">Promo page</p>
+      <h1 class="title-gradient">Homepage</h1>
+      <p class="promo-page__lead">
+        Uma página simples para testar conteúdo renderizado a partir de Markdown,
+        componentes e HTML injetado.
+      </p>
+    </div>
+
+    <div class="promo-page__grid">
+      <article class="promo-page__panel surface-card">
+        <p class="promo-page__label">Banner MDX</p>
+        <PromoBanner />
+      </article>
+
+      <article class="promo-page__panel surface-card">
+        <p class="promo-page__label">HTML bruto</p>
+        <Fragment set:html={renderedHTML} />
+      </article>
+    </div>
+  </section>
 </Layout>
+
+<style lang="scss">
+  .promo-page {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .promo-page__hero {
+    display: grid;
+    gap: 0.85rem;
+    padding: 2rem;
+  }
+
+  .promo-page__eyebrow,
+  .promo-page__label {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .promo-page__lead {
+    max-width: 60ch;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  .promo-page__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .promo-page__panel {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .promo-page__panel :global(h1),
+  .promo-page__panel :global(h2),
+  .promo-page__panel :global(h3) {
+    line-height: 1.05;
+  }
+
+  .promo-page__panel :global(p) {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 920px) {
+    .promo-page__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .promo-page__hero,
+    .promo-page__panel {
+      padding: 1.25rem;
+    }
+  }
+</style>
