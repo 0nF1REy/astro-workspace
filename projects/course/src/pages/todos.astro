@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+interface Todo {
+  title: string;
+  completed: boolean;
+}
+
+const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+const todos: Todo[] = await res.json();
+---
+
+<Layout title="Tarefas">
+  <main>
+    <h1>Lista de Todos</h1>
+
+    <ul role="list">
+      {
+        todos.slice(0, 10).map((todo: Todo) => (
+          <li class="todo-item">
+            <div>
+              <strong>{todo.title}</strong>
+              <span>{todo.completed ? "Concluído" : "Pendente"}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>
+
+<script>
+  const todoItems = document.querySelectorAll(".todo-item");
+
+  todoItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      console.log("Item clicado:", item.textContent?.trim());
+    });
+  });
+</script>
