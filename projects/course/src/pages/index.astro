@@ -1,5 +1,152 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Link from "../components/Link.astro";
+
+const routes = [
+  {
+    title: "Sobre",
+    href: "about",
+    description: "Contexto do projeto, objetivo e estrutura geral.",
+  },
+  {
+    title: "Tarefas",
+    href: "todos",
+    description: "Lista prática para testar fluxo, estados e interações.",
+  },
+  {
+    title: "Cards",
+    href: "card",
+    description: "Grid de cards com composição visual e autoria.",
+  },
+  {
+    title: "Button",
+    href: "button",
+    description: "Botão estilizado com variações e foco visual.",
+  },
+  {
+    title: "Heading",
+    href: "heading",
+    description: "Demonstração da escala tipográfica do projeto.",
+  },
+];
 ---
 
-<Layout title="Home"> Hello World! </Layout>
+<Layout title="Home">
+  <section class="home-page">
+    <div class="home-page__hero card">
+      <p class="home-page__eyebrow">Astro course workspace</p>
+      <h1 class="title-gradient">Um hub para explorar o curso</h1>
+      <p class="home-page__lead">
+        Use esta página como ponto de partida para navegar entre os exemplos do
+        projeto e testar cada componente em contexto.
+      </p>
+    </div>
+
+    <div class="home-page__grid">
+      {
+        routes.map((route) => (
+          <article class="home-page__panel card">
+            <h2>{route.title}</h2>
+            <p>{route.description}</p>
+            <Link class="home-page__panel-link" href={route.href}>
+              Acessar
+            </Link>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="home-page__footer card">
+      <p>
+        Comece por <Link class="home-page__inline-link" href="todos"
+          >Tarefas</Link
+        >, veja <Link class="home-page__inline-link" href="card">Cards</Link> e compare
+        a base visual em <Link class="home-page__inline-link" href="heading"
+          >Heading</Link
+        >.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .home-page {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .home-page__hero {
+    display: grid;
+    gap: 0.9rem;
+    padding: 2rem;
+  }
+
+  .home-page__eyebrow {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .home-page h1 {
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    line-height: 0.95;
+    max-width: 12ch;
+  }
+
+  .home-page h2 {
+    font-size: clamp(1.35rem, 2.8vw, 1.9rem);
+    line-height: 1.1;
+  }
+
+  .home-page__lead,
+  .home-page__panel p,
+  .home-page__footer p {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  .home-page__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .home-page__panel {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.5rem;
+  }
+
+  :global(a.home-page__panel-link),
+  :global(a.home-page__inline-link) {
+    color: var(--cream);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  :global(a.home-page__panel-link:hover),
+  :global(a.home-page__inline-link:hover) {
+    text-decoration: underline;
+  }
+
+  .home-page__footer {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  @media (max-width: 920px) {
+    .home-page__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .home-page__hero,
+    .home-page__panel,
+    .home-page__footer {
+      padding: 1.25rem;
+    }
+  }
+</style>
