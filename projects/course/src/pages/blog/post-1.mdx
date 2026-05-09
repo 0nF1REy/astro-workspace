@@ -1,0 +1,43 @@
+---
+title: Olá, Mundo
+layout: "../../layouts/BlogLayout.astro"
+---
+
+import Link from "../../components/Link.astro"
+import Blockquote from "../../components/Blockquote.astro"
+import Button from "../../components/Button.astro"
+
+export const customProp = "olá";
+export const components = { blockquote: Blockquote }
+
+> citações são incríveis
+
+<Link href="/blog">
+VOLTAAAAAAAAAAR
+</Link>
+
+<Button client:load>
+Um Botão
+</Button>
+
+# Olá!
+
+{customProp}
+
+Este arquivo Markdown cria uma página em `seu-dominio.com/pagina-1/`
+
+Provavelmente não tem muito estilo, mas o Markdown suporta:
+
+- **negrito** e _itálico._
+- listas
+- [links](https://astro.build)
+- e muito mais!
+
+```astro
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<BaseLayout title="Início">
+  <h1>Página Inicial</h1>
+</BaseLayout>

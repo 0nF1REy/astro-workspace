@@ -11,7 +11,7 @@ type PostEntry = {
 };
 
 const posts = Object.values(
-  (import.meta as any).glob("./*.md", { eager: true }),
+  (import.meta as any).glob("./*.{md,mdx}", { eager: true }),
 ) as PostEntry[];
 ---
 
