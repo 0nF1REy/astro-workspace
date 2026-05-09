@@ -1,0 +1,35 @@
+[
+  {
+    "author": {
+      "name": "Carrie Brewer",
+      "avatar": "assets/images/card/carrie-brewer.jpg"
+    },
+    "title": "Por que o Tesla Cybertruck foi projetado dessa forma?",
+    "description": "Uma exploração sobre o design polarizador da picape.",
+    "category": "Tecnologia",
+    "hero": "assets/images/card/car.jpg",
+    "time": "Há 2 horas"
+  },
+  {
+    "author": {
+      "name": "Jerome Walton",
+      "avatar": "assets/images/card/jerome-walton.jpg"
+    },
+    "title": "Como continuar quando você não sabe o que vem a seguir",
+    "description": "O futuro pode ser assustador, mas existem maneiras de lidar com esse medo.",
+    "category": "Popular",
+    "hero": "assets/images/card/balloon.jpg",
+    "time": "Ontem"
+  },
+  {
+    "author": {
+      "name": "Lewis Daniels",
+      "avatar": "assets/images/card/lewis-daniels.jpg"
+    },
+    "title": "10 Regras de Design de Dashboards",
+    "description": "Diretrizes para o Design de Painéis e Dashboards",
+    "category": "Design",
+    "hero": "assets/images/card/city.jpg",
+    "time": "23 de dez. de 2019"
+  }
+]
