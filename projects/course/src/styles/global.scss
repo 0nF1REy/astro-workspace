@@ -42,8 +42,6 @@ body {
   top: 0;
   z-index: 100;
   width: 100%;
-  display: flex;
-  justify-content: center;
   padding: 18px 24px;
   backdrop-filter: blur(12px);
   background: rgba(25, 22, 18, 0.82);
@@ -54,9 +52,14 @@ body {
     backdrop-filter 0.3s ease;
 }
 
-.site-nav {
+.site-shell {
   width: 100%;
   max-width: 1100px;
+  margin: 0 auto;
+}
+
+.site-nav {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -89,27 +92,52 @@ body {
 }
 
 .nav-link-home {
-  background: linear-gradient(135deg, var(--orange), var(--cream));
-  color: #2b211d;
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid rgba(253, 230, 138, 0.16);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--surface), rgba(251, 146, 60, 0.22));
+  color: var(--text);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
-    filter 0.2s ease;
+    border-color 0.2s ease,
+    filter 0.2s ease,
+    background 0.2s ease;
 }
 
 .nav-link-home:hover {
-  background-color: #80452e;
-  box-shadow: 0 14px 28px rgba(251, 146, 60, 0.2);
-  transform: translateY(-3px);
-  filter: brightness(1.05);
+  transform: translateY(-2px);
+  border-color: rgba(251, 146, 60, 0.34);
+  background: linear-gradient(
+    135deg,
+    var(--surface-light),
+    rgba(251, 146, 60, 0.28)
+  );
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(251, 146, 60, 0.08);
+}
+
+.nav-link-home:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+}
+
+.nav-link-home:focus-visible {
+  outline: 3px solid rgba(253, 230, 138, 0.65);
+  outline-offset: 3px;
 }
 
 .site-main {
   flex: 1;
   width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
   padding: 56px 24px;
 }
 
@@ -128,8 +156,7 @@ body {
 
 .site-footer-inner {
   width: 100%;
-  max-width: 1100px;
-  padding: 30px 24px;
+  padding: 30px 0;
   text-align: center;
 }
 

@@ -15,23 +15,29 @@ const { title = "default" } = Astro.props;
 
   <body>
     <header class="site-header">
-      <nav class="site-nav">
-        <Link class="nav-link nav-link-home" href="/">Inicio</Link>
-        <Link class="nav-link" href="about">Sobre</Link>
-        <Link class="nav-link" href="card">Card</Link>
-        <Link class="nav-link" href="button">Button</Link>
-      </nav>
+      <div class="site-shell">
+        <nav class="site-nav">
+          <Link class="nav-link nav-link-home" href="/">Inicio</Link>
+          <Link class="nav-link" href="about">Sobre</Link>
+          <Link class="nav-link" href="card">Card</Link>
+          <Link class="nav-link" href="button">Button</Link>
+        </nav>
+      </div>
     </header>
 
     <main class="site-main">
-      <slot />
+      <div class="site-shell">
+        <slot />
+      </div>
     </main>
 
     <footer class="site-footer">
-      <div class="site-footer-inner">
-        <p class="site-footer-text">
-          © {new Date().getFullYear()} Curso | Aprendendo Astro
-        </p>
+      <div class="site-shell">
+        <div class="site-footer-inner">
+          <p class="site-footer-text">
+            © {new Date().getFullYear()} Curso | Aprendendo Astro
+          </p>
+        </div>
       </div>
     </footer>
   </body>
