@@ -24,7 +24,7 @@
   {
     "tier": "Pro",
     "most_popular": true,
-    "amount_per_month": 8,
+    "amount_per_month": 39.36,
     "title": "Para equipes pequenas",
     "description": "Crie projetos para diversos clientes",
     "btn_text": "Assinar agora",
@@ -46,10 +46,10 @@
   {
     "tier": "Corporativo",
     "most_popular": false,
-    "amount_per_month": 12,
+    "amount_per_month": 59.04,
     "title": "Para agências de dev",
     "description": "Expanda para uma agência de desenvolvimento web completa",
-    "btn_text": "Começar agora",
+    "btn_text": "Assinar agora",
     "features": [
       {
         "title": "10 novos projetos/mês",
