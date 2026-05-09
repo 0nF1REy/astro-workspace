@@ -1,0 +1,62 @@
+---
+import { type HTMLAttributes } from "astro/types";
+
+const headingOptions = {
+  h1: "xxl",
+  h2: "xl",
+  h3: "lg",
+  h4: "md",
+  h5: "sm",
+  h6: "xs",
+};
+
+interface Props extends HTMLAttributes<keyof typeof headingOptions> {
+  tagName: keyof typeof headingOptions;
+  size: keyof typeof headingOptions;
+  classes?: string;
+}
+
+const { tagName, size, classes, ...rest } = Astro.props;
+const Tag = tagName;
+---
+
+<Tag {...rest} class:list={["heading", headingOptions[size], classes]}>
+  <slot />
+</Tag>
+
+<style lang="scss">
+  .heading {
+    margin: 0;
+    color: var(--text);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+    font-weight: 800;
+  }
+
+  .xxl {
+    font-size: clamp(3.4rem, 9vw, 6rem);
+  }
+
+  .xl {
+    font-size: clamp(2.8rem, 7vw, 5rem);
+  }
+
+  .lg {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+  }
+
+  .md {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+  }
+
+  .sm {
+    font-size: clamp(1.35rem, 3vw, 2rem);
+  }
+
+  .xs {
+    font-size: clamp(0.95rem, 1.8vw, 1rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+</style>

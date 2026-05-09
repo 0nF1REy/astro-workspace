@@ -1,0 +1,129 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeadingComponent from "../components/Heading.astro";
+
+type HeadingLevel = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+
+const headingLevels: Array<{
+  tagName: HeadingLevel;
+  size: HeadingLevel;
+  label: string;
+  sample: string;
+}> = [
+  { tagName: "h1", size: "h1", label: "Heading h1", sample: "Primary heading" },
+  { tagName: "h2", size: "h2", label: "Heading h2", sample: "Section title" },
+  {
+    tagName: "h3",
+    size: "h3",
+    label: "Heading h3",
+    sample: "Subsection title",
+  },
+  { tagName: "h4", size: "h4", label: "Heading h4", sample: "Card title" },
+  { tagName: "h5", size: "h5", label: "Heading h5", sample: "Small heading" },
+  { tagName: "h6", size: "h6", label: "Heading h6", sample: "Eyebrow heading" },
+];
+---
+
+<Layout title="Heading">
+  <section class="heading-page">
+    <div class="heading-page__hero">
+      <p class="heading-page__eyebrow">Typography system</p>
+      <HeadingComponent tagName="h1" size="h1" classes="title-gradient">
+        Heading
+      </HeadingComponent>
+      <p class="heading-page__lead">
+        Uma página de exemplo para testar a tipografia.
+      </p>
+    </div>
+
+    <div class="heading-page__stack">
+      {
+        headingLevels.map(
+          (heading: {
+            tagName: HeadingLevel;
+            size: HeadingLevel;
+            label: string;
+            sample: string;
+          }) => (
+            <article class="heading-page__item">
+              <p class="heading-page__label">{heading.label}</p>
+              <HeadingComponent
+                tagName={heading.tagName as HeadingLevel}
+                size={heading.size as HeadingLevel}
+              >
+                {heading.sample}
+              </HeadingComponent>
+            </article>
+          ),
+        )
+      }
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .heading-page {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .heading-page__hero,
+  .heading-page__item {
+    background: linear-gradient(
+      180deg,
+      rgba(38, 33, 29, 0.9),
+      rgba(20, 17, 14, 0.92)
+    );
+    border: 1px solid rgba(253, 230, 138, 0.08);
+    border-radius: 28px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(10px);
+  }
+
+  .heading-page__hero {
+    display: grid;
+    gap: 0.85rem;
+    padding: 2rem;
+  }
+
+  .heading-page__eyebrow,
+  .heading-page__label {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .heading-page__lead {
+    max-width: 60ch;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  .heading-page__stack {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .heading-page__item {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.4rem 1.6rem;
+  }
+
+  @media (max-width: 640px) {
+    .heading-page__hero,
+    .heading-page__item {
+      border-radius: 22px;
+    }
+
+    .heading-page__hero {
+      padding: 1.4rem;
+    }
+
+    .heading-page__item {
+      padding: 1.1rem 1.2rem;
+    }
+  }
+</style>
