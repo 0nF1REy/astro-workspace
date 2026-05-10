@@ -21,18 +21,23 @@ export const collections = {
   }),
   posts: defineCollection({
     loader: glob({
-      pattern: "src/content/post/*.{md,mdx}",
+      pattern: "src/content/post/**/*.{md,mdx}",
+      generateId: ({ entry }) =>
+        entry
+          .replace(/^\/?src\/content\/post\//, "")
+          .replace(/\.(md|mdx)$/, ""),
     }),
-    schema: z.object({
-      title: z.string().max(32),
-      tags: z.array(z.string()),
-      pubDate: z.coerce.date(),
-      isDraft: z.boolean(),
-      canonicalURL: z.string().url(),
-      cover: z.string(),
-      coverAlt: z.string(),
-      author: reference("team"),
-    }),
+    schema: ({ image }) =>
+      z.object({
+        title: z.string().max(32),
+        tags: z.array(z.string()),
+        pubDate: z.coerce.date(),
+        isDraft: z.boolean(),
+        canonicalURL: z.string().url().optional(),
+        cover: image(),
+        coverAlt: z.string().optional(),
+        author: reference("team"),
+      }),
   }),
   team: defineCollection({
     loader: file("src/data/team.json", {
