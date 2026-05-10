@@ -1,6 +1,6 @@
 ---
-title: Olá, Mundo - 02
-layout: "../../layouts/BlogLayout.astro"
+title: Olá, Mundo - 03
+layout: "@layouts/BlogLayout.astro"
 ---
 
 # Olá!
@@ -16,7 +16,7 @@ Provavelmente não tem muito estilo, mas o Markdown suporta:
 
 ```astro
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout title="Início">

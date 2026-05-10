@@ -1,5 +1,5 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import Layout from "../../../layouts/Layout.astro";
 
 type PostEntry = {
   slug: string;
@@ -40,7 +40,7 @@ const posts: PostEntry[] = modules.map(([path, mod]) => {
             <article class="blog-index__card surface-card">
               <p class="blog-index__label">Post</p>
               <h2>{p.title}</h2>
-              <a class="blog-index__link" href={`/post/${p.slug}`}>
+              <a class="blog-index__link" href={`/blog/v2/${p.slug}`}>
                 Abrir post
               </a>
             </article>

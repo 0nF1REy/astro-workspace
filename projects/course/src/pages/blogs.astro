@@ -1,0 +1,114 @@
+---
+import Layout from "@layouts/Layout.astro";
+---
+
+<Layout title="Blogs">
+  <section class="blogs-page">
+    <div class="blogs-page__hero surface-card">
+      <p class="blogs-page__eyebrow">Blogs</p>
+      <h1 class="title-gradient">Escolha uma versão do blog</h1>
+      <p class="blogs-page__lead">
+        Esta página centraliza as duas implementações do blog para facilitar a
+        navegação e a comparação entre as versões.
+      </p>
+    </div>
+
+    <div class="blogs-page__grid">
+      <a class="blogs-page__card surface-card" href="/blog/v1">
+        <p class="blogs-page__label">Blog V1</p>
+        <h2>Versão 1</h2>
+        <p>
+          Estrutura baseada em arquivos Markdown dentro de <code
+            >src/pages/blog/v1</code
+          >.
+        </p>
+        <span class="blogs-page__link">Abrir V1</span>
+      </a>
+
+      <a class="blogs-page__card surface-card" href="/blog/v2">
+        <p class="blogs-page__label">Blog V2</p>
+        <h2>Versão 2</h2>
+        <p>
+          Lista de posts carregados automaticamente a partir de <code
+            >src/content/post</code
+          >.
+        </p>
+        <span class="blogs-page__link">Abrir V2</span>
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .blogs-page {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .blogs-page__hero {
+    display: grid;
+    gap: 0.85rem;
+    padding: 2rem;
+  }
+
+  .blogs-page__eyebrow,
+  .blogs-page__label {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .blogs-page__lead {
+    max-width: 60ch;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  .blogs-page__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .blogs-page__card {
+    display: grid;
+    gap: 0.85rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    align-content: start;
+  }
+
+  .blogs-page__card h2 {
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    line-height: 1.1;
+  }
+
+  .blogs-page__card p {
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .blogs-page__link {
+    width: fit-content;
+    color: var(--cream);
+    font-weight: 700;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .blogs-page__card:hover .blogs-page__link {
+    color: var(--orange);
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 640px) {
+    .blogs-page__hero,
+    .blogs-page__card {
+      padding: 1.25rem;
+    }
+  }
+</style>

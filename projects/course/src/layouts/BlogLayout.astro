@@ -7,7 +7,7 @@ const { frontmatter } = Astro.props;
 <Layout title={frontmatter.title}>
   <article class="blog-layout">
     <header class="blog-layout__hero">
-      <a class="blog-layout__back" href="/blog">Back to Blog</a>
+      <a class="blog-layout__back" href="/blog/v1">Back to Blog</a>
       <p class="blog-layout__eyebrow">Blog post</p>
       <h1 class="blog-layout__title">{frontmatter.title}</h1>
     </header>
@@ -47,7 +47,9 @@ const { frontmatter } = Astro.props;
     font-size: 0.9rem;
     font-weight: 700;
     text-decoration: none;
-    transition: transform 0.2s ease, color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease;
   }
 
   .blog-layout__back:hover {
