@@ -1,20 +1,20 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Link from "../components/Link.astro";
-import Button from "../components/Button.astro";
-import Heading from "../components/Heading.astro";
-import Author from "../components/Author.astro";
-import CardComponent from "../components/Card.astro";
-import PricingCard from "../components/PricingCard.astro";
-import CounterComponent from "../components/Counter";
-import Blockquote from "../components/Blockquote.astro";
-import TodoList from "../components/TodoList.astro";
-import TeamGrid from "../components/TeamGrid.astro";
-import { Content as PromoBanner } from "../components/promoBanner.md";
+import Layout from "@layouts/Layout.astro";
+import Link from "@components/Link.astro";
+import Button from "@components/Button.astro";
+import Heading from "@components/Heading.astro";
+import Author from "@components/Author.astro";
+import CardComponent from "@components/Card.astro";
+import PricingCard from "@components/PricingCard.astro";
+import CounterComponent from "@components/Counter";
+import Blockquote from "@components/Blockquote.astro";
+import TodoList from "@components/TodoList.astro";
+import TeamGrid from "@components/TeamGrid.astro";
+import { Content as PromoBanner } from "@components/promoBanner.md";
 import { getCollection } from "astro:content";
 
-import cards from "../data/data.json";
-import pricings from "../data/pricing.json";
+import cards from "@data/data.json";
+import pricings from "@data/pricing.json";
 
 const teamCollection = await getCollection("team");
 type TeamEntry = (typeof teamCollection)[number];

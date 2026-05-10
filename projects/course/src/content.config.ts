@@ -36,7 +36,7 @@ export const collections = {
         canonicalURL: z.string().url().optional(),
         cover: image(),
         coverAlt: z.string().optional(),
-        author: reference("team"),
+        author: reference("team").optional(),
       }),
   }),
   team: defineCollection({
