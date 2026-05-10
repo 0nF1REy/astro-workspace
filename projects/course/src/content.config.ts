@@ -33,7 +33,7 @@ export const collections = {
         tags: z.array(z.string()),
         pubDate: z.coerce.date(),
         isDraft: z.boolean(),
-        canonicalURL: z.string().url().optional(),
+        canonicalURL: z.url().optional(),
         cover: image(),
         coverAlt: z.string().optional(),
         author: reference("team").optional(),
@@ -46,8 +46,8 @@ export const collections = {
     schema: z.object({
       name: z.string(),
       role: z.string(),
-      email: z.string().email(),
-      avatar: z.string().url(),
+      email: z.email(),
+      avatar: z.url(),
       todos: z.array(reference("todos")),
       department: z.enum([
         "Engenharia",

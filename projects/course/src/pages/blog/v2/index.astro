@@ -1,21 +1,8 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
-type PostEntry = {
-  slug: string;
-  title: string;
-};
-
-const modules = Object.entries(
-  (import.meta as any).glob("/src/content/post/*.{md,mdx}", { eager: true }),
-) as [string, any][];
-
-const posts: PostEntry[] = modules.map(([path, mod]) => {
-  const fileName = path.split("/").pop() || path;
-  const slug = fileName.replace(/\.(md|mdx)$/, "");
-  const title = mod.frontmatter?.title || mod.metadata?.title || slug;
-  return { slug, title };
-});
+const posts = await getCollection("posts");
 ---
 
 <Layout title="Blog">
@@ -36,11 +23,11 @@ const posts: PostEntry[] = modules.map(([path, mod]) => {
             Nenhum post encontrado em <code>src/content/post</code>.
           </div>
         ) : (
-          posts.map((p) => (
+          posts.map((post) => (
             <article class="blog-index__card surface-card">
               <p class="blog-index__label">Post</p>
-              <h2>{p.title}</h2>
-              <a class="blog-index__link" href={`/blog/v2/${p.slug}`}>
+              <h2>{post.data.title}</h2>
+              <a class="blog-index__link" href={`/blog/v2/${post.id}`}>
                 Abrir post
               </a>
             </article>

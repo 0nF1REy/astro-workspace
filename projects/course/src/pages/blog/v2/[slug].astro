@@ -1,44 +1,46 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const modules = Object.keys(
-    (import.meta as any).glob("/src/content/post/*.{md,mdx}"),
-  );
-  return modules.map((path: string) => {
-    const fileName = path.split("/").pop() || path;
-    const slug = fileName.replace(/\.(md|mdx)$/, "");
-    return { params: { slug } };
-  });
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({ params: { slug: post.id } }));
 }
 
 const { slug } = Astro.params as { slug: string };
 
-const modules = Object.entries(
-  (import.meta as any).glob("/src/content/post/*.{md,mdx}", { eager: true }),
-) as [string, any][];
-
-const match = modules.find(([path]) => {
-  const fileName = path.split("/").pop() || path;
-  const fileSlug = fileName.replace(/\.(md|mdx)$/, "");
-  return fileSlug === slug;
-});
+const posts = await getCollection("posts");
+const match = posts.find((post) => post.id === slug);
 
 if (!match) {
   throw new Error(`Post not found: ${slug}`);
 }
 
-const [, mod] = match;
-const Content = mod.default;
-const data = mod.frontmatter ?? mod.metadata ?? {};
+const data = match.data;
+const { Content } = await render(match);
+
+const coverImages = import.meta.glob(
+  "/src/content/post/images/*.{jpg,jpeg,png,webp,avif,gif}",
+  {
+    eager: true,
+    import: "default",
+  },
+) as Record<string, any>;
+
+const coverImage = Object.entries(coverImages).find(([path]) => {
+  const fileName = path.split("/").pop() || path;
+  const fileSlug = fileName.replace(/\.[^.]+$/, "");
+  return fileSlug === slug;
+})?.[1];
 ---
 
 <Layout title={data.title ?? slug}>
   <article class="post-page surface-card">
-    {data.cover && (
-      <img
+    {coverImage && (
+      <Image
         class="post-cover"
-        src={data.cover}
+        src={coverImage}
         alt={data.coverAlt ?? data.title ?? slug}
         loading="lazy"
       />
