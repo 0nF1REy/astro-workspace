@@ -9,10 +9,19 @@ import PricingCard from "../components/PricingCard.astro";
 import CounterComponent from "../components/Counter";
 import Blockquote from "../components/Blockquote.astro";
 import TodoList from "../components/TodoList.astro";
+import TeamGrid from "../components/TeamGrid.astro";
 import { Content as PromoBanner } from "../components/promoBanner.md";
+import { getCollection } from "astro:content";
 
 import cards from "../data/data.json";
 import pricings from "../data/pricing.json";
+
+const teamCollection = await getCollection("team");
+type TeamEntry = (typeof teamCollection)[number];
+
+const teamMembers = teamCollection.map((entry: TeamEntry) => ({
+  ...entry.data,
+}));
 ---
 
 <Layout title="Components">
@@ -66,6 +75,12 @@ import pricings from "../data/pricing.json";
           avatar="assets/images/card/carrie-brewer.jpg"
           time="Há 2 horas"
         />
+      </section>
+
+      <section class="components-page__section surface-card" id="team">
+        <p class="components-page__label">Team</p>
+        <Heading tagName="h2" size="h4">Equipe</Heading>
+        <TeamGrid members={teamMembers} />
       </section>
 
       <section class="components-page__section surface-card" id="card">
