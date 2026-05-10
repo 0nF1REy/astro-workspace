@@ -1,0 +1,75 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const modules = Object.keys(
+    (import.meta as any).glob("/src/content/post/*.{md,mdx}"),
+  );
+  return modules.map((path: string) => {
+    const fileName = path.split("/").pop() || path;
+    const slug = fileName.replace(/\.(md|mdx)$/, "");
+    return { params: { slug } };
+  });
+}
+
+const { slug } = Astro.params as { slug: string };
+
+const modules = Object.entries(
+  (import.meta as any).glob("/src/content/post/*.{md,mdx}", { eager: true }),
+) as [string, any][];
+
+const match = modules.find(([path]) => {
+  const fileName = path.split("/").pop() || path;
+  const fileSlug = fileName.replace(/\.(md|mdx)$/, "");
+  return fileSlug === slug;
+});
+
+if (!match) {
+  throw new Error(`Post not found: ${slug}`);
+}
+
+const [, mod] = match;
+const Content = mod.default;
+const data = mod.frontmatter ?? mod.metadata ?? {};
+---
+
+<Layout title={data.title ?? slug}>
+  <article class="post-page surface-card">
+    {data.cover && (
+      <img
+        class="post-cover"
+        src={data.cover}
+        alt={data.coverAlt ?? data.title ?? slug}
+        loading="lazy"
+      />
+    )}
+    <header>
+      <p class="post-eyebrow">Post</p>
+      <h1 class="post-title">{data.title ?? slug}</h1>
+    </header>
+    <section class="post-content">
+      <Content />
+    </section>
+  </article>
+</Layout>
+
+<style lang="scss">
+  .post-page {
+    padding: 1.5rem;
+    display: grid;
+    gap: 1rem;
+  }
+  .post-cover {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+  }
+  .post-title {
+    margin: 0 0 0.5rem 0;
+  }
+  .post-content {
+    margin-top: 1rem;
+  }
+</style>

@@ -1,26 +1,54 @@
-[
-  {
-    "id": 1,
-    "name": "Jordan Taylor",
-    "role": "Gerente de Projetos",
-    "email": "jordan.taylor@example.com",
-    "department": "Engenharia",
-    "avatar": "https://i.pravatar.cc/300"
-  },
-  {
-    "id": 2,
-    "name": "Casey Morgan",
-    "role": "Desenvolvedor Sênior",
-    "email": "casey.morgan@example.com",
-    "department": "Desenvolvimento de Software",
-    "avatar": "https://i.pravatar.cc/299"
-  },
-  {
-    "id": 3,
-    "name": "Charlie Reed",
-    "role": "Designer de UX",
-    "email": "charlie.reed@example.com",
-    "department": "Design de Produto",
-    "avatar": "https://i.pravatar.cc/298"
-  }
-]
+{
+  "team-1": [
+    {
+      "id": 1,
+      "name": "Alex Silva",
+      "role": "Gerente de Projetos",
+      "email": "alex.silva@example.com",
+      "department": "Engenharia",
+      "avatar": "https://i.pravatar.cc/300?u=alex-silva"
+    },
+    {
+      "id": 2,
+      "name": "Jordan Costa",
+      "role": "Desenvolvedor(a) Sênior",
+      "email": "jordan.costa@example.com",
+      "department": "Desenvolvimento de Software",
+      "avatar": "https://i.pravatar.cc/299?u=jordan-costa"
+    },
+    {
+      "id": 3,
+      "name": "Sam Pereira",
+      "role": "Designer de UX",
+      "email": "sam.pereira@example.com",
+      "department": "Design de Produto",
+      "avatar": "https://i.pravatar.cc/298?u=sam-pereira"
+    }
+  ],
+  "team-2": [
+    {
+      "id": 1,
+      "name": "Marina Alves",
+      "role": "Gerente de Projetos",
+      "email": "marina.alves@example.com",
+      "department": "Engenharia",
+      "avatar": "https://i.pravatar.cc/297?u=marina-alves"
+    },
+    {
+      "id": 2,
+      "name": "Taylor Lima",
+      "role": "Desenvolvedor(a) Sênior",
+      "email": "taylor.lima@example.com",
+      "department": "Desenvolvimento de Software",
+      "avatar": "https://i.pravatar.cc/296?u=taylor-lima"
+    },
+    {
+      "id": 3,
+      "name": "Casey Rocha",
+      "role": "Designer de UX",
+      "email": "casey.rocha@example.com",
+      "department": "Design de Produto",
+      "avatar": "https://i.pravatar.cc/295?u=casey-rocha"
+    }
+  ]
+}

@@ -22,7 +22,7 @@ export const collections = {
   }),
   team: defineCollection({
     loader: file("src/data/team.json", {
-      parser: (text) => JSON.parse(text),
+      parser: (text) => JSON.parse(text)["team-1"],
     }),
     schema: z.object({
       name: z.string(),

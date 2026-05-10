@@ -1,18 +1,21 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-type Frontmatter = {
+type PostEntry = {
+  slug: string;
   title: string;
 };
 
-type PostEntry = {
-  url: string;
-  frontmatter: Frontmatter;
-};
+const modules = Object.entries(
+  (import.meta as any).glob("/src/content/post/*.{md,mdx}", { eager: true }),
+) as [string, any][];
 
-const posts = Object.values(
-  (import.meta as any).glob("./*.{md,mdx}", { eager: true }),
-) as PostEntry[];
+const posts: PostEntry[] = modules.map(([path, mod]) => {
+  const fileName = path.split("/").pop() || path;
+  const slug = fileName.replace(/\.(md|mdx)$/, "");
+  const title = mod.frontmatter?.title || mod.metadata?.title || slug;
+  return { slug, title };
+});
 ---
 
 <Layout title="Blog">
@@ -28,15 +31,21 @@ const posts = Object.values(
 
     <div class="blog-index__grid">
       {
-        posts.map((p: PostEntry) => (
-          <article class="blog-index__card surface-card">
-            <p class="blog-index__label">Post</p>
-            <h2>{p.frontmatter.title}</h2>
-            <a class="blog-index__link" href={p.url}>
-              Abrir post
-            </a>
-          </article>
-        ))
+        posts.length === 0 ? (
+          <div class="surface-card" style="padding:1rem">
+            Nenhum post encontrado em <code>src/content/post</code>.
+          </div>
+        ) : (
+          posts.map((p) => (
+            <article class="blog-index__card surface-card">
+              <p class="blog-index__label">Post</p>
+              <h2>{p.title}</h2>
+              <a class="blog-index__link" href={`/post/${p.slug}`}>
+                Abrir post
+              </a>
+            </article>
+          ))
+        )
       }
     </div>
   </section>
@@ -92,7 +101,9 @@ const posts = Object.values(
     color: var(--cream);
     font-weight: 700;
     text-decoration: none;
-    transition: transform 0.2s ease, color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease;
   }
 
   .blog-index__link:hover {
