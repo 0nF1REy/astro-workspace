@@ -1,17 +1,19 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { getCollection, render } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+type PostEntry = CollectionEntry<"posts">;
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
-  return posts.map((post) => ({ params: { slug: post.id } }));
+  const posts: PostEntry[] = await getCollection("posts");
+  return posts.map((post: PostEntry) => ({ params: { slug: post.id } }));
 }
 
 const { slug } = Astro.params as { slug: string };
 
-const posts = await getCollection("posts");
-const match = posts.find((post) => post.id === slug);
+const posts: PostEntry[] = await getCollection("posts");
+const match = posts.find((post: PostEntry) => post.id === slug);
 
 if (!match) {
   throw new Error(`Post not found: ${slug}`);
@@ -37,14 +39,16 @@ const coverImage = Object.entries(coverImages).find(([path]) => {
 
 <Layout title={data.title ?? slug}>
   <article class="post-page surface-card">
-    {coverImage && (
-      <Image
-        class="post-cover"
-        src={coverImage}
-        alt={data.coverAlt ?? data.title ?? slug}
-        loading="lazy"
-      />
-    )}
+    {
+      coverImage && (
+        <Image
+          class="post-cover"
+          src={coverImage}
+          alt={data.coverAlt ?? data.title ?? slug}
+          loading="lazy"
+        />
+      )
+    }
     <header>
       <p class="post-eyebrow">Post</p>
       <h1 class="post-title">{data.title ?? slug}</h1>

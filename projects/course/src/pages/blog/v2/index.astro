@@ -1,8 +1,10 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
-const posts = await getCollection("posts");
+type PostEntry = CollectionEntry<"posts">;
+
+const posts: PostEntry[] = await getCollection("posts");
 ---
 
 <Layout title="Blog">
@@ -23,7 +25,7 @@ const posts = await getCollection("posts");
             Nenhum post encontrado em <code>src/content/post</code>.
           </div>
         ) : (
-          posts.map((post) => (
+          posts.map((post: PostEntry) => (
             <article class="blog-index__card surface-card">
               <p class="blog-index__label">Post</p>
               <h2>{post.data.title}</h2>
