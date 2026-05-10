@@ -1,0 +1,103 @@
+---
+interface TodoItem {
+  title: string;
+  completed: boolean;
+}
+
+interface Props {
+  todos: TodoItem[];
+  heading?: string;
+}
+
+const { todos, heading = "Lista de Todos" } = Astro.props;
+---
+
+<section class="todo-list" aria-labelledby="todo-list-title">
+  <div class="todo-list__header">
+    <p class="todo-list__eyebrow">Todos</p>
+    <h2 id="todo-list-title" class="todo-list__title">{heading}</h2>
+  </div>
+
+  <ul class="todo-list__items" role="list">
+    {
+      todos.map((todo) => (
+        <li class:list={["todo-item", { "todo-item--done": todo.completed }]}>
+          <div class="todo-item__meta">
+            <strong class="todo-item__title">{todo.title}</strong>
+            <span class="todo-item__status">
+              {todo.completed ? "Concluído" : "Pendente"}
+            </span>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style lang="scss">
+  .todo-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .todo-list__header {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .todo-list__eyebrow {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .todo-list__title {
+    color: var(--text);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.1;
+  }
+
+  .todo-list__items {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .todo-item {
+    list-style: none;
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    background: rgba(25, 22, 18, 0.42);
+    border: 1px solid rgba(253, 230, 138, 0.08);
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .todo-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(251, 146, 60, 0.18);
+    background: rgba(25, 22, 18, 0.55);
+  }
+
+  .todo-item__meta {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .todo-item__title {
+    color: var(--text);
+    font-size: 0.98rem;
+    line-height: 1.4;
+  }
+
+  .todo-item__status {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .todo-item--done .todo-item__status {
+    color: var(--cream);
+  }
+</style>

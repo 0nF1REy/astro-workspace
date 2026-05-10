@@ -1,0 +1,219 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Link from "../components/Link.astro";
+import Button from "../components/Button.astro";
+import Heading from "../components/Heading.astro";
+import Author from "../components/Author.astro";
+import CardComponent from "../components/Card.astro";
+import PricingCard from "../components/PricingCard.astro";
+import CounterComponent from "../components/Counter";
+import Blockquote from "../components/Blockquote.astro";
+import TodoList from "../components/TodoList.astro";
+import { Content as PromoBanner } from "../components/promoBanner.md";
+
+import cards from "../data/data.json";
+import pricings from "../data/pricing.json";
+---
+
+<Layout title="Components">
+  <main class="components-page">
+    <div class="components-page__hero surface-card">
+      <p class="components-page__eyebrow">Component library</p>
+      <h1 class="title-gradient">Components</h1>
+      <p class="components-page__lead">
+        Uma página única com a vitrine de todos os componentes do projeto para
+        comparar estrutura, estilo e comportamento lado a lado.
+      </p>
+    </div>
+
+    <div class="components-page__sections">
+      <section class="components-page__section surface-card" id="link">
+        <p class="components-page__label">Link</p>
+        <Heading tagName="h2" size="h4">Navegação e chamadas</Heading>
+        <div class="components-page__stack">
+          <Link href="/">Voltar para home</Link>
+          <Link href="/blog">Abrir blog</Link>
+        </div>
+      </section>
+
+      <section class="components-page__section surface-card" id="button">
+        <p class="components-page__label">Button</p>
+        <Heading tagName="h2" size="h4">Ação principal</Heading>
+        <div class="components-page__stack">
+          <Button>Botão padrão</Button>
+          <Button isBordered>Botão contornado</Button>
+        </div>
+      </section>
+
+      <section class="components-page__section surface-card" id="heading">
+        <p class="components-page__label">Heading</p>
+        <Heading tagName="h2" size="h4">Escala tipográfica</Heading>
+        <div class="components-page__headings">
+          <Heading tagName="h1" size="h1">Heading h1</Heading>
+          <Heading tagName="h2" size="h2">Heading h2</Heading>
+          <Heading tagName="h3" size="h3">Heading h3</Heading>
+          <Heading tagName="h4" size="h4">Heading h4</Heading>
+          <Heading tagName="h5" size="h5">Heading h5</Heading>
+          <Heading tagName="h6" size="h6">Heading h6</Heading>
+        </div>
+      </section>
+
+      <section class="components-page__section surface-card" id="author">
+        <p class="components-page__label">Author</p>
+        <Heading tagName="h2" size="h4">Assinatura editorial</Heading>
+        <Author
+          name="Carrie Brewer"
+          avatar="assets/images/card/carrie-brewer.jpg"
+          time="Há 2 horas"
+        />
+      </section>
+
+      <section class="components-page__section surface-card" id="card">
+        <p class="components-page__label">Card</p>
+        <Heading tagName="h2" size="h4">Cards de conteúdo</Heading>
+        <div class="components-page__cards-grid">
+          {cards.map((card) => <CardComponent data={card} />)}
+        </div>
+      </section>
+
+      <section class="components-page__section surface-card" id="pricing">
+        <p class="components-page__label">PricingCard</p>
+        <Heading tagName="h2" size="h4">Planos de preço</Heading>
+        <div class="components-page__pricing-grid">
+          {pricings.map((plan) => <PricingCard cardData={plan} />)}
+        </div>
+      </section>
+
+      <section class="components-page__section surface-card" id="counter">
+        <p class="components-page__label">Counter</p>
+        <Heading tagName="h2" size="h4">Interatividade React</Heading>
+        <CounterComponent client:load />
+      </section>
+
+      <section class="components-page__section surface-card" id="todos">
+        <p class="components-page__label">TodoList</p>
+        <Heading tagName="h2" size="h4">Lista de tarefas</Heading>
+        <TodoList
+          heading="Primeiros 5 itens"
+          todos={[
+            { title: "Leitura do material do curso", completed: true },
+            { title: "Criar o layout base", completed: true },
+            { title: "Estilizar os componentes", completed: true },
+            { title: "Montar a página de exemplos", completed: false },
+            { title: "Adicionar vitrine dos cards", completed: false },
+          ]}
+        />
+      </section>
+
+      <section class="components-page__section surface-card" id="blockquote">
+        <p class="components-page__label">Blockquote</p>
+        <Heading tagName="h2" size="h4">Chamada de citação</Heading>
+        <Blockquote>Componentes pequenos deixam o projeto mais fácil de manter.</Blockquote>
+      </section>
+
+      <section class="components-page__section surface-card" id="promo-banner">
+        <p class="components-page__label">Promo banner</p>
+        <Heading tagName="h2" size="h4">Conteúdo MDX</Heading>
+        <PromoBanner />
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style lang="scss">
+  .components-page {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .components-page__hero {
+    display: grid;
+    gap: 0.9rem;
+    padding: 2rem;
+  }
+
+  .components-page__eyebrow,
+  .components-page__label {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .components-page__lead {
+    max-width: 65ch;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  .components-page__sections {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .components-page__section {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .components-page__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .components-page__headings {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .components-page__section :global(a) {
+    color: var(--cream);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .components-page__section :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  .components-page__section :global(.btn) {
+    width: fit-content;
+  }
+
+  .components-page__section :global(.author) {
+    margin-top: 0;
+  }
+
+  .components-page__section :global(.pricing-card) {
+    width: 100%;
+  }
+
+  .components-page__section :global(.card) {
+    width: 100%;
+  }
+
+  .components-page__cards-grid,
+  .components-page__pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .components-page__section :global(.blockquote),
+  .components-page__section :global(blockquote) {
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .components-page__hero,
+    .components-page__section {
+      padding: 1.25rem;
+    }
+  }
+</style>

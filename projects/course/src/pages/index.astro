@@ -4,39 +4,14 @@ import Link from "../components/Link.astro";
 
 const routes = [
   {
-    title: "Sobre",
-    href: "about",
-    description: "Contexto do projeto, objetivo e estrutura geral.",
+    title: "Components",
+    href: "components",
+    description: "Vitrine única com todos os componentes do projeto.",
   },
   {
-    title: "Tarefas",
-    href: "todos",
-    description: "Lista prática para testar fluxo, estados e interações.",
-  },
-  {
-    title: "Cards",
-    href: "card",
-    description: "Grid de cards com composição visual e autoria.",
-  },
-  {
-    title: "Button",
-    href: "button",
-    description: "Botão estilizado com variações e foco visual.",
-  },
-  {
-    title: "Heading",
-    href: "heading",
-    description: "Demonstração da escala tipográfica do projeto.",
-  },
-  {
-    title: "Counter",
-    href: "counter",
-    description: "Exemplo React para interações com estado e clique.",
-  },
-  {
-    title: "Preços",
-    href: "pricing",
-    description: "Planos e preços com features lista e badge de popular.",
+    title: "Blog",
+    href: "blog",
+    description: "Posts do curso com conteúdo em Markdown e MDX.",
   },
 ];
 ---
@@ -44,13 +19,70 @@ const routes = [
 <Layout title="Home">
   <section class="home-page">
     <div class="home-page__hero surface-card">
-      <p class="home-page__eyebrow">Astro course workspace</p>
-      <h1 class="title-gradient">Um hub para explorar o curso</h1>
+      <p class="home-page__eyebrow">Course</p>
+      <h1 class="title-gradient">Fique a vontade para explorar</h1>
       <p class="home-page__lead">
         Use esta página como ponto de partida para navegar entre os exemplos do
         projeto e testar cada componente em contexto.
       </p>
     </div>
+
+    <section class="home-page__about surface-card">
+      <p class="home-page__eyebrow">About</p>
+      <h2>Sobre</h2>
+      <p>
+        Este projeto foi pensado como uma sequência de exemplos práticos para
+        aprender Astro com páginas pequenas, componentes reutilizáveis e um
+        sistema visual consistente.
+      </p>
+      <div class="home-page__about-grid">
+        <article class="home-page__about-panel surface-card">
+          <h3>O que você encontra aqui</h3>
+          <p>
+            Uma estrutura simples, mas organizada, que separa layout, páginas,
+            componentes e estilos globais sem exagerar na complexidade.
+          </p>
+          <p>
+            A ideia é mostrar como evoluir uma interface de forma incremental,
+            mantendo consistência visual e sem depender de um framework de UI
+            externo.
+          </p>
+        </article>
+
+        <article class="home-page__about-panel home-page__about-panel--accent surface-card">
+          <p class="home-page__about-kicker">Pilares</p>
+          <ul class="home-page__about-list">
+            <li>Componentes pequenos e reutilizáveis</li>
+            <li>Estilo global coerente com tokens de cor</li>
+            <li>Layout limpo, responsivo e fácil de manter</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="home-page__stats">
+        <article class="home-page__stat surface-card">
+          <p class="home-page__stat-value">01</p>
+          <p class="home-page__stat-label">Layout centralizado</p>
+        </article>
+
+        <article class="home-page__stat surface-card">
+          <p class="home-page__stat-value">02</p>
+          <p class="home-page__stat-label">Componentes isolados</p>
+        </article>
+
+        <article class="home-page__stat surface-card">
+          <p class="home-page__stat-value">03</p>
+          <p class="home-page__stat-label">Tema visual consistente</p>
+        </article>
+      </div>
+
+      <div class="home-page__about-footer surface-card">
+        <p>
+          O objetivo é manter o projeto didático, mas com aparência de produto
+          de verdade.
+        </p>
+      </div>
+    </section>
 
     <div class="home-page__grid">
       {
@@ -68,13 +100,12 @@ const routes = [
 
     <div class="home-page__footer surface-card">
       <p>
-        Comece por <Link class="home-page__inline-link" href="todos"
-          >Tarefas</Link
-        >, veja <Link class="home-page__inline-link" href="card">Cards</Link> e compare
-        a base visual em <Link class="home-page__inline-link" href="heading"
-          >Heading</Link
-        >. Teste também o <Link class="home-page__inline-link" href="counter"
-          >Counter</Link
+        Explore os componentes principais pela vitrine em <Link
+          class="home-page__inline-link"
+          href="components"
+          >Components</Link
+        > ou acompanhe os posts em <Link class="home-page__inline-link" href="blog"
+          >Blog</Link
         >.
       </p>
     </div>
@@ -93,6 +124,12 @@ const routes = [
     padding: 2rem;
   }
 
+  .home-page__about {
+    display: grid;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
   .home-page__eyebrow {
     color: var(--muted);
     font-size: 0.82rem;
@@ -107,7 +144,12 @@ const routes = [
   }
 
   .home-page h2 {
-    font-size: clamp(1.35rem, 2.8vw, 1.9rem);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.05;
+  }
+
+  .home-page h3 {
+    font-size: clamp(1.2rem, 2.8vw, 1.6rem);
     line-height: 1.1;
   }
 
@@ -125,10 +167,66 @@ const routes = [
     gap: 1rem;
   }
 
+  .home-page__about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .home-page__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
   .home-page__panel {
     display: grid;
     gap: 0.75rem;
     padding: 1.5rem;
+  }
+
+  .home-page__about-panel {
+    display: grid;
+    gap: 0.85rem;
+    padding: 1.5rem;
+  }
+
+  .home-page__about-panel--accent {
+    background: linear-gradient(
+      180deg,
+      rgba(51, 43, 38, 0.96),
+      rgba(20, 17, 14, 0.92)
+    );
+  }
+
+  .home-page__about-list {
+    display: grid;
+    gap: 0.8rem;
+    padding-left: 1.2rem;
+    color: var(--text);
+  }
+
+  .home-page__stat {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1.4rem;
+  }
+
+  .home-page__stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--cream);
+    line-height: 1;
+  }
+
+  .home-page__stat-label {
+    color: var(--muted);
+    font-size: 0.94rem;
+  }
+
+  .home-page__about-footer {
+    padding: 1.6rem;
+    text-align: center;
   }
 
   :global(a.home-page__panel-link),
@@ -152,12 +250,21 @@ const routes = [
     .home-page__grid {
       grid-template-columns: 1fr;
     }
+
+    .home-page__about-grid,
+    .home-page__stats {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 640px) {
     .home-page__hero,
     .home-page__panel,
-    .home-page__footer {
+    .home-page__footer,
+    .home-page__about,
+    .home-page__about-panel,
+    .home-page__about-footer,
+    .home-page__stat {
       padding: 1.25rem;
     }
   }
