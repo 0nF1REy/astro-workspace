@@ -3,6 +3,8 @@ title: Postagem 2
 tags: ["Produto", "Tutorial"]
 pubDate: 2025-02-04
 isDraft: false
+canonicalURL: https://mysite.com/sample/post-2
+author: "2"
 cover: /assets/images/post/post-2.jpg
 coverAlt: "Laptop à noite"
 ---

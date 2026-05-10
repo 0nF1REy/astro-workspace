@@ -1,5 +1,5 @@
 import { file, glob } from "astro/loaders";
-import { defineCollection } from "astro:content";
+import { defineCollection, reference } from "astro:content";
 import { z } from "astro/zod";
 import { parse as parseToml } from "toml";
 import { parse as parseCsv } from "csv-parse/sync";
@@ -14,10 +14,24 @@ export const collections = {
         id: todo.id.toString(),
       }));
     },
+    schema: z.object({
+      title: z.string(),
+      completed: z.boolean(),
+    }),
   }),
   posts: defineCollection({
     loader: glob({
-      pattern: "src/data/posts/**/*.{md,mdx}",
+      pattern: "src/content/post/*.{md,mdx}",
+    }),
+    schema: z.object({
+      title: z.string().max(32),
+      tags: z.array(z.string()),
+      pubDate: z.coerce.date(),
+      isDraft: z.boolean(),
+      canonicalURL: z.string().url(),
+      cover: z.string(),
+      coverAlt: z.string(),
+      author: reference("team"),
     }),
   }),
   team: defineCollection({
@@ -29,6 +43,7 @@ export const collections = {
       role: z.string(),
       email: z.string().email(),
       avatar: z.string().url(),
+      todos: z.array(reference("todos")),
       department: z.enum([
         "Engenharia",
         "Desenvolvimento de Software",
