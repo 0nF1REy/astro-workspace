@@ -1,6 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import type { PokemonRes } from "@types/PokeType";
+import type { PokemonRes } from "../../types/PokeType";
 
 const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100");
 const data: PokemonRes = await res.json();
