@@ -27,7 +27,7 @@ export default defineConfig({
   redirects: {
     "/inicio": { destination: "/", status: 301 },
     "/componentes": { destination: "/components", status: 301 },
-    "/postagens": { destination: "/blogs", status: 301 },
+    "/postagens": { destination: "/blog", status: 301 },
     "/manutencao": { destination: "/status", status: 302 },
   },
 
