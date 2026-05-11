@@ -4,7 +4,13 @@ import { getCollection, type CollectionEntry } from "astro:content";
 
 type PostEntry = CollectionEntry<"posts">;
 
-const posts: PostEntry[] = await getCollection("posts");
+const pageSize = 10;
+const posts: PostEntry[] = (await getCollection("posts"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, pageSize);
+
+const totalPosts = (await getCollection("posts")).length;
+const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
 ---
 
 <Layout title="Blog">
@@ -37,6 +43,24 @@ const posts: PostEntry[] = await getCollection("posts");
         )
       }
     </div>
+
+    <nav class="blog-index__pagination" aria-label="Paginação do blog">
+      <span class="blog-index__page-info">Página 1 de {totalPages}</span>
+      <div class="blog-index__pagination-links">
+        <span class="blog-index__pagination-link blog-index__pagination-link--disabled">
+          Anterior
+        </span>
+        {totalPages > 1 ? (
+          <a class="blog-index__pagination-link" href="/blog/v2/page/2">
+            Próxima
+          </a>
+        ) : (
+          <span class="blog-index__pagination-link blog-index__pagination-link--disabled">
+            Próxima
+          </span>
+        )}
+      </div>
+    </nav>
   </section>
 </Layout>
 
@@ -73,6 +97,53 @@ const posts: PostEntry[] = await getCollection("posts");
     gap: 1rem;
   }
 
+  .blog-index__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0 0;
+  }
+
+  .blog-index__page-info {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .blog-index__pagination-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .blog-index__pagination-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+    padding: 0.8rem 1rem;
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--cream);
+    text-decoration: none;
+    font-weight: 700;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .blog-index__pagination-link:hover {
+    color: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  .blog-index__pagination-link--disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
   .blog-index__card {
     display: grid;
     gap: 0.85rem;
@@ -104,6 +175,19 @@ const posts: PostEntry[] = await getCollection("posts");
     .blog-index__hero,
     .blog-index__card {
       padding: 1.25rem;
+    }
+
+    .blog-index__pagination {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .blog-index__pagination-links {
+      justify-content: space-between;
+    }
+
+    .blog-index__pagination-link {
+      width: 100%;
     }
   }
 </style>

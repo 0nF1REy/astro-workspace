@@ -29,7 +29,7 @@ export const collections = {
     }),
     schema: ({ image }) =>
       z.object({
-        title: z.string().max(32),
+        title: z.string().max(64),
         tags: z.array(z.string()),
         pubDate: z.coerce.date(),
         isDraft: z.boolean(),

@@ -1,0 +1,228 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+type PostEntry = CollectionEntry<"posts">;
+
+export async function getStaticPaths() {
+  const pageSize = 10;
+  const posts: PostEntry[] = (await getCollection("posts")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  const totalPages = Math.max(1, Math.ceil(posts.length / pageSize));
+
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => {
+    const page = index + 2;
+    return {
+      params: { page: String(page) },
+      props: {
+        page,
+        totalPages,
+        posts: posts.slice((page - 1) * pageSize, page * pageSize),
+      },
+    };
+  });
+}
+
+const { page, totalPages, posts } = Astro.props as {
+  page: number;
+  totalPages: number;
+  posts: PostEntry[];
+};
+---
+
+<Layout title={`Blog - Página ${page}`}>
+  <section class="blog-index">
+    <div class="blog-index__hero surface-card">
+      <p class="blog-index__eyebrow">Post</p>
+      <h1 class="title-gradient">Post Page</h1>
+      <p class="blog-index__lead">
+        Lista paginada de posts. Cada página mostra até 10 itens.
+      </p>
+    </div>
+
+    <div class="blog-index__grid">
+      {
+        posts.length === 0 ? (
+          <div class="surface-card" style="padding:1rem">
+            Nenhum post encontrado nesta página.
+          </div>
+        ) : (
+          posts.map((post: PostEntry) => (
+            <article class="blog-index__card surface-card">
+              <p class="blog-index__label">Post</p>
+              <h2>{post.data.title}</h2>
+              <a class="blog-index__link" href={`/blog/v2/${post.id}`}>
+                Abrir post
+              </a>
+            </article>
+          ))
+        )
+      }
+    </div>
+
+    <nav class="blog-index__pagination" aria-label="Paginação do blog">
+      <span class="blog-index__page-info">Página {page} de {totalPages}</span>
+      <div class="blog-index__pagination-links">
+        {
+          page > 1 ? (
+            <a
+              class="blog-index__pagination-link"
+              href={page === 2 ? "/blog/v2" : `/blog/v2/page/${page - 1}`}
+            >
+              Anterior
+            </a>
+          ) : (
+            <span class="blog-index__pagination-link blog-index__pagination-link--disabled">
+              Anterior
+            </span>
+          )
+        }
+
+        {
+          page < totalPages ? (
+            <a
+              class="blog-index__pagination-link"
+              href={`/blog/v2/page/${page + 1}`}
+            >
+              Próxima
+            </a>
+          ) : (
+            <span class="blog-index__pagination-link blog-index__pagination-link--disabled">
+              Próxima
+            </span>
+          )
+        }
+      </div>
+    </nav>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .blog-index {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .blog-index__hero {
+    display: grid;
+    gap: 0.85rem;
+    padding: 2rem;
+  }
+
+  .blog-index__eyebrow,
+  .blog-index__label {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .blog-index__lead {
+    max-width: 60ch;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  .blog-index__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .blog-index__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0 0;
+  }
+
+  .blog-index__page-info {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .blog-index__pagination-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .blog-index__pagination-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+    padding: 0.8rem 1rem;
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--cream);
+    text-decoration: none;
+    font-weight: 700;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .blog-index__pagination-link:hover {
+    color: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  .blog-index__pagination-link--disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .blog-index__card {
+    display: grid;
+    gap: 0.85rem;
+    padding: 1.5rem;
+    align-content: start;
+  }
+
+  .blog-index__card h2 {
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    line-height: 1.1;
+  }
+
+  .blog-index__link {
+    width: fit-content;
+    color: var(--cream);
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .blog-index__link:hover {
+    color: var(--orange);
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 640px) {
+    .blog-index__hero,
+    .blog-index__card {
+      padding: 1.25rem;
+    }
+
+    .blog-index__pagination {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .blog-index__pagination-links {
+      justify-content: space-between;
+    }
+
+    .blog-index__pagination-link {
+      width: 100%;
+    }
+  }
+</style>

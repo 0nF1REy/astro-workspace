@@ -12,12 +12,21 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params as { slug: string };
 
-const posts: PostEntry[] = await getCollection("posts");
+const posts: PostEntry[] = (await getCollection("posts")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 const match = posts.find((post: PostEntry) => post.id === slug);
 
 if (!match) {
   throw new Error(`Post not found: ${slug}`);
 }
+
+const currentIndex = posts.findIndex((post: PostEntry) => post.id === slug);
+const previousPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+const nextPost =
+  currentIndex >= 0 && currentIndex < posts.length - 1
+    ? posts[currentIndex + 1]
+    : null;
 
 const data = match.data;
 const { Content } = await render(match);
@@ -56,6 +65,39 @@ const coverImage = Object.entries(coverImages).find(([path]) => {
     <section class="post-content">
       <Content />
     </section>
+
+    <nav class="post-navigation" aria-label="Navegação entre posts">
+      {
+        previousPost ? (
+          <a class="post-navigation__link" href={`/blog/v2/${previousPost.id}`}>
+            <span class="post-navigation__eyebrow">Anterior</span>
+            <strong>{previousPost.data.title}</strong>
+          </a>
+        ) : (
+          <span class="post-navigation__link post-navigation__link--disabled">
+            <span class="post-navigation__eyebrow">Anterior</span>
+            <strong>Sem post anterior</strong>
+          </span>
+        )
+      }
+
+      {
+        nextPost ? (
+          <a
+            class="post-navigation__link post-navigation__link--next"
+            href={`/blog/v2/${nextPost.id}`}
+          >
+            <span class="post-navigation__eyebrow">Próximo</span>
+            <strong>{nextPost.data.title}</strong>
+          </a>
+        ) : (
+          <span class="post-navigation__link post-navigation__link--disabled post-navigation__link--next">
+            <span class="post-navigation__eyebrow">Próximo</span>
+            <strong>Sem próximo post</strong>
+          </span>
+        )
+      }
+    </nav>
   </article>
 </Layout>
 
@@ -77,5 +119,48 @@ const coverImage = Object.entries(coverImages).find(([path]) => {
   }
   .post-content {
     margin-top: 1rem;
+  }
+
+  .post-navigation {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .post-navigation__link {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    background: var(--surface);
+    color: inherit;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .post-navigation__link:hover {
+    transform: translateY(-2px);
+    background: var(--surface-light);
+    color: var(--orange);
+  }
+
+  .post-navigation__link--next {
+    text-align: right;
+  }
+
+  .post-navigation__link--disabled {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .post-navigation__eyebrow {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
   }
 </style>
