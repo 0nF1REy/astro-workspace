@@ -25,9 +25,10 @@ export default defineConfig({
 
   // Redirecionamentos
   redirects: {
-    "/inicio": "/",
-    "/componentes": "/components",
-    "/postagens": "/blogs",
+    "/inicio": { destination: "/", status: 301 },
+    "/componentes": { destination: "/components", status: 301 },
+    "/postagens": { destination: "/blogs", status: 301 },
+    "/manutencao": { destination: "/status", status: 302 },
   },
 
   // Imagens remotas
