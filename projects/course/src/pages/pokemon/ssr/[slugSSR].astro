@@ -1,37 +1,31 @@
 ---
-import type { GetStaticPaths } from "astro";
+export const prerender = false;
 import Layout from "@layouts/Layout.astro";
-import type { PokemonRes } from "./PokeType";
 
-export const getStaticPaths = (async () => {
-  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100");
-  const data: PokemonRes = await res.json();
+const { slugSSR } = Astro.params;
 
-  return data.results.map((p) => ({
-    params: { slugSSG: p.name },
-    props: { ...p },
-  }));
-}) satisfies GetStaticPaths;
+if (!slugSSR) {
+  return Astro.redirect("404");
+}
 
-const { name, url } = Astro.props;
+const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${slugSSR}`);
+const data = await res.json();
 ---
 
-<Layout title={name}>
+<Layout title={data.name}>
   <section class="pokemon-detail">
     <div class="pokemon-detail__hero surface-card">
-      <p class="pokemon-detail__eyebrow">Pokémon</p>
-      <h1 class="title-gradient pokemon-detail__title">{name}</h1>
+      <p class="pokemon-detail__eyebrow">Pokémon / SSR</p>
+      <h1 class="title-gradient pokemon-detail__title">{data.name}</h1>
       <p class="pokemon-detail__lead">
-        Detalhes gerados via SSG com getStaticPaths.
+        Detalhes carregados em SSR para consulta dinâmica.
       </p>
     </div>
 
     <article class="pokemon-detail__card surface-card">
-      <p class="pokemon-detail__label">Link oficial</p>
-      <a class="pokemon-detail__link" href={url} target="_blank" rel="noreferrer">
-        Saber mais
-      </a>
-      <a class="pokemon-detail__back" href="/pokemon">Voltar para a lista</a>
+      <p class="pokemon-detail__label">Modo</p>
+      <p>SSR com <code>prerender = false</code>.</p>
+      <a class="pokemon-detail__back" href="/pokemon/ssr">Voltar para a lista SSR</a>
     </article>
   </section>
 </Layout>
@@ -68,13 +62,13 @@ const { name, url } = Astro.props;
     text-transform: capitalize;
   }
 
-  .pokemon-detail__lead {
+  .pokemon-detail__lead,
+  .pokemon-detail__card p {
     color: var(--muted);
     line-height: 1.7;
     font-size: 1.02rem;
   }
 
-  .pokemon-detail__link,
   .pokemon-detail__back {
     width: fit-content;
     color: var(--cream);
@@ -85,14 +79,9 @@ const { name, url } = Astro.props;
       color 0.2s ease;
   }
 
-  .pokemon-detail__link:hover,
   .pokemon-detail__back:hover {
     color: var(--orange);
     transform: translateX(3px);
-  }
-
-  .pokemon-detail__back {
-    color: var(--muted);
   }
 
   @media (max-width: 640px) {

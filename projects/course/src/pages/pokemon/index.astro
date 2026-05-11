@@ -1,88 +1,95 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import type { PokemonRes } from "./PokeType";
-
-const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100");
-const data: PokemonRes = await res.json();
 ---
 
 <Layout title="Pokémon">
-  <section class="pokemon-page">
-    <div class="pokemon-page__hero surface-card">
-      <p class="pokemon-page__eyebrow">Pokémon</p>
-      <h1 class="title-gradient">Lista da Pokédex</h1>
-      <p class="pokemon-page__lead">
-        Navegue pelos primeiros 100 Pokémon da API e abra a página de cada um
-        para ver os detalhes.
+  <section class="pokemon-hub">
+    <div class="pokemon-hub__hero surface-card">
+      <p class="pokemon-hub__eyebrow">Pokémon</p>
+      <h1 class="title-gradient">Escolha a versão</h1>
+      <p class="pokemon-hub__lead">
+        Abaixo estão as duas abordagens do exemplo: uma com SSG e outra com SSR.
+        Selecione a que você quer explorar.
       </p>
     </div>
 
-    <ul class="pokemon-page__grid" role="list">
-      {
-        data.results.map((p) => (
-          <li class="pokemon-page__card surface-card">
-            <p class="pokemon-page__label">Pokémon</p>
-            <h2>{p.name}</h2>
-            <a class="pokemon-page__link" href={`/pokemon/${p.name}`}>
-              Abrir detalhe
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <div class="pokemon-hub__grid">
+      <a class="pokemon-hub__card surface-card" href="/pokemon/ssg">
+        <p class="pokemon-hub__label">SSG</p>
+        <h2>Static Site Generation</h2>
+        <p>
+          A página é gerada no build com `getStaticPaths()` e publicada como HTML
+          estático.
+        </p>
+        <span class="pokemon-hub__link">Abrir versão SSG</span>
+      </a>
+
+      <a class="pokemon-hub__card surface-card" href="/pokemon/ssr">
+        <p class="pokemon-hub__label">SSR</p>
+        <h2>Server-Side Rendering</h2>
+        <p>
+          A página é renderizada na requisição e funciona com `prerender = false`
+          no modo híbrido.
+        </p>
+        <span class="pokemon-hub__link">Abrir versão SSR</span>
+      </a>
+    </div>
   </section>
 </Layout>
 
 <style lang="scss">
-  .pokemon-page {
+  .pokemon-hub {
     display: grid;
     gap: 1.5rem;
   }
 
-  .pokemon-page__hero {
+  .pokemon-hub__hero {
     display: grid;
     gap: 0.85rem;
     padding: 2rem;
   }
 
-  .pokemon-page__eyebrow,
-  .pokemon-page__label {
+  .pokemon-hub__eyebrow,
+  .pokemon-hub__label {
     color: var(--muted);
     font-size: 0.82rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
-  .pokemon-page__lead {
+  .pokemon-hub__lead {
     max-width: 60ch;
     color: var(--muted);
     line-height: 1.7;
     font-size: 1.02rem;
   }
 
-  .pokemon-page__grid {
+  .pokemon-hub__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
-    padding: 0;
-    margin: 0;
   }
 
-  .pokemon-page__card {
+  .pokemon-hub__card {
     display: grid;
     gap: 0.85rem;
     padding: 1.5rem;
     align-content: start;
-    list-style: none;
+    text-decoration: none;
+    color: inherit;
   }
 
-  .pokemon-page__card h2 {
+  .pokemon-hub__card h2 {
     font-size: clamp(1.25rem, 3vw, 1.7rem);
     line-height: 1.1;
-    text-transform: capitalize;
   }
 
-  .pokemon-page__link {
+  .pokemon-hub__card p {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .pokemon-hub__link {
     width: fit-content;
     color: var(--cream);
     font-weight: 700;
@@ -92,14 +99,14 @@ const data: PokemonRes = await res.json();
       color 0.2s ease;
   }
 
-  .pokemon-page__link:hover {
+  .pokemon-hub__card:hover .pokemon-hub__link {
     color: var(--orange);
     transform: translateX(3px);
   }
 
   @media (max-width: 640px) {
-    .pokemon-page__hero,
-    .pokemon-page__card {
+    .pokemon-hub__hero,
+    .pokemon-hub__card {
       padding: 1.25rem;
     }
   }

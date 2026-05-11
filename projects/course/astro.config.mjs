@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import node from "@astrojs/node";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 
@@ -8,6 +9,9 @@ export default defineConfig({
   // Site e roteamento
   site: "https://meu-projeto-astro.com",
   output: "static",
+  adapter: node({
+    mode: "standalone",
+  }),
   trailingSlash: "never",
 
   // Integrações
