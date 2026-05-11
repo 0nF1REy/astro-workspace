@@ -1,31 +1,42 @@
 ---
-export const prerender = false;
+import type { GetStaticPaths } from "astro";
 import Layout from "@layouts/Layout.astro";
+import type { PokemonRes } from "../../types/PokeType";
 
-const { slugSSR } = Astro.params;
+export const getStaticPaths = (async () => {
+  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100");
+  const data: PokemonRes = await res.json();
 
-if (!slugSSR) {
-  return Astro.redirect("404");
-}
+  return data.results.map((p) => ({
+    params: { slugSSG: p.name },
+    props: { ...p },
+  }));
+}) satisfies GetStaticPaths;
 
-const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${slugSSR}`);
-const data = await res.json();
+const { name, url } = Astro.props;
 ---
 
-<Layout title={data.name}>
+<Layout title={name}>
   <section class="pokemon-detail">
     <div class="pokemon-detail__hero surface-card">
-      <p class="pokemon-detail__eyebrow">Pokémon / Teste / SSR</p>
-      <h1 class="title-gradient pokemon-detail__title">{data.name}</h1>
+      <p class="pokemon-detail__eyebrow">Pokémon / Teste / SSG</p>
+      <h1 class="title-gradient pokemon-detail__title">{name}</h1>
       <p class="pokemon-detail__lead">
-        Detalhes carregados em SSR para consulta dinâmica.
+        Detalhes gerados no build com `getStaticPaths()`.
       </p>
     </div>
 
     <article class="pokemon-detail__card surface-card">
-      <p class="pokemon-detail__label">Modo</p>
-      <p>SSR com <code>prerender = false</code>.</p>
-      <a class="pokemon-detail__back" href="/pokemon-02">Voltar para lista</a>
+      <p class="pokemon-detail__label">Link oficial</p>
+      <a
+        class="pokemon-detail__link"
+        href={url}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Saber mais
+      </a>
+      <a class="pokemon-detail__back" href="/pokemon-test">Voltar para lista</a>
     </article>
   </section>
 </Layout>
@@ -62,13 +73,13 @@ const data = await res.json();
     text-transform: capitalize;
   }
 
-  .pokemon-detail__lead,
-  .pokemon-detail__card p {
+  .pokemon-detail__lead {
     color: var(--muted);
     line-height: 1.7;
     font-size: 1.02rem;
   }
 
+  .pokemon-detail__link,
   .pokemon-detail__back {
     width: fit-content;
     color: var(--cream);
@@ -79,9 +90,14 @@ const data = await res.json();
       color 0.2s ease;
   }
 
+  .pokemon-detail__link:hover,
   .pokemon-detail__back:hover {
     color: var(--orange);
     transform: translateX(3px);
+  }
+
+  .pokemon-detail__back {
+    color: var(--muted);
   }
 
   @media (max-width: 640px) {
