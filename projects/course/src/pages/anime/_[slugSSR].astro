@@ -1,0 +1,28 @@
+---
+export const prerender = false;
+import Layout from "@layouts/Layout.astro";
+
+const { slugSSR } = Astro.params;
+
+const res = await fetch(`https://api.jikan.moe/v4/anime/${slugSSR}`);
+if (res.status === 404) return Astro.redirect("/404");
+
+const { data } = await res.json();
+---
+
+<Layout title={data.title}>
+  <section class="anime-detail">
+    <div class="anime-detail__hero surface-card">
+      <p class="anime-detail__eyebrow">Anime Detail</p>
+      <h1 class="title-gradient anime-detail__title">{data.title}</h1>
+      <p class="anime-detail__lead">Carregado em tempo real via SSR.</p>
+    </div>
+
+    <article class="anime-detail__card surface-card">
+      <p class="anime-detail__label">Modo</p>
+      <p>SSR habilitado para este ID específico: <code>{slugSSR}</code>.</p>
+      <p class="anime-desc">{data.synopsis}</p>
+      <a class="anime-detail__back" href="/anime">Voltar para a lista</a>
+    </article>
+  </section>
+</Layout>

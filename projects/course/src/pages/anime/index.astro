@@ -1,0 +1,33 @@
+---
+import Layout from "@layouts/Layout.astro";
+import type { AnimeRes } from "../../types/AnimeType";
+
+const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=25");
+const { data }: AnimeRes = await res.json();
+---
+
+<Layout title="Animes">
+  <section class="anime-page">
+    <div class="anime-page__hero surface-card">
+      <p class="anime-page__eyebrow">MyAnimeList</p>
+      <h1 class="title-gradient">Top Animes</h1>
+      <p class="anime-page__lead">
+        Explore os animes mais populares da atualidade consumindo a API Jikan.
+      </p>
+    </div>
+
+    <ul class="anime-page__grid" role="list">
+      {
+        data.map((anime) => (
+          <li class="anime-page__card surface-card">
+            <p class="anime-page__label">Anime ID: {anime.mal_id}</p>
+            <h2>{anime.title}</h2>
+            <a class="anime-page__link" href={`/anime/${anime.mal_id}`}>
+              Ver detalhes
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>

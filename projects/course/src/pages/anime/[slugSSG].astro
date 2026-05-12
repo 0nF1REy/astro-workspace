@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "@layouts/Layout.astro";
+import type { AnimeRes } from "../../types/AnimeType";
+
+export const getStaticPaths = (async () => {
+  const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=25");
+  const { data }: AnimeRes = await res.json();
+
+  return data.map((anime) => ({
+    params: { slugSSG: anime.mal_id.toString() },
+    props: { anime },
+  }));
+}) satisfies GetStaticPaths;
+
+const { anime } = Astro.props;
+---
+
+<Layout title={anime.title}>
+  <section class="anime-detail">
+    <div class="anime-detail__hero surface-card">
+      <p class="anime-detail__eyebrow">Anime Detail</p>
+      <h1 class="title-gradient anime-detail__title">{anime.title}</h1>
+      <p class="anime-detail__lead">Gerado via SSG (Static Site Generation).</p>
+    </div>
+
+    <article class="anime-detail__card surface-card">
+      <img
+        src={anime.images.webp.large_image_url}
+        alt={anime.title}
+        class="anime-img"
+      />
+      <div class="anime-info">
+        <p class="anime-detail__label">Sinopse</p>
+        <p class="anime-desc">{anime.synopsis}</p>
+        <div class="stats">
+          <span>⭐ {anime.score}</span>
+          <span>📺 {anime.episodes} episódios</span>
+        </div>
+        <a class="anime-detail__back" href="/anime">Voltar para a lista</a>
+      </div>
+    </article>
+  </section>
+</Layout>
