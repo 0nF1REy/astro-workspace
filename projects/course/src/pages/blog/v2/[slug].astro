@@ -30,31 +30,17 @@ const nextPost =
 
 const data = match.data;
 const { Content } = await render(match);
-
-const coverImages = import.meta.glob(
-  "/src/content/post/images/*.{jpg,jpeg,png,webp,avif,gif}",
-  {
-    eager: true,
-    import: "default",
-  },
-) as Record<string, any>;
-
-const coverImage = Object.entries(coverImages).find(([path]) => {
-  const fileName = path.split("/").pop() || path;
-  const fileSlug = fileName.replace(/\.[^.]+$/, "");
-  return fileSlug === slug;
-})?.[1];
 ---
 
 <Layout title={data.title ?? slug}>
   <article class="post-page surface-card">
     {
-      coverImage && (
+      data.cover && (
         <Image
           class="post-cover"
-          src={coverImage}
+          src={data.cover}
           alt={data.coverAlt ?? data.title ?? slug}
-          loading="lazy"
+          loading="eager"
         />
       )
     }
