@@ -42,3 +42,95 @@ const { anime } = Astro.props;
     </article>
   </section>
 </Layout>
+
+<style lang="scss">
+  .anime-detail {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .anime-detail__hero {
+    display: grid;
+    gap: 0.85rem;
+    padding: 2rem;
+  }
+
+  .anime-detail__eyebrow,
+  .anime-detail__label {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .anime-detail__title {
+    line-height: 1.1;
+  }
+
+  .anime-detail__lead {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .anime-detail__card {
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    align-items: start;
+  }
+
+  .anime-img {
+    width: 100%;
+    border-radius: 14px;
+    display: block;
+    object-fit: cover;
+    max-height: 460px;
+  }
+
+  .anime-info {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .anime-desc {
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .anime-detail__back {
+    width: fit-content;
+    color: var(--cream);
+    text-decoration: none;
+    font-weight: 700;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .anime-detail__back:hover {
+    color: var(--orange);
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 860px) {
+    .anime-detail__card {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .anime-detail__hero,
+    .anime-detail__card {
+      padding: 1.25rem;
+    }
+  }
+</style>
