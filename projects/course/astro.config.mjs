@@ -33,7 +33,11 @@ export default defineConfig({
 
   // Imagens remotas
   image: {
-    remotePatterns: [{ protocol: "https", hostname: "i.pravatar.cc" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "i.pravatar.cc" },
+      { protocol: "https", hostname: "cdn.myanimelist.net" },
+      { protocol: "https", hostname: "images.myanimelist.net" },
+    ],
   },
 
   // Markdown e syntax highlight
