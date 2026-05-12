@@ -5,7 +5,7 @@ pubDate: 2024-07-20
 isDraft: false
 canonicalURL: https://meusite.com/regra-dos-tercos-fotografia/
 author: "1"
-cover: ./images/azores-mountain-landscape.jpg
+cover: ./azores-mountain-landscape.jpg
 coverAlt: "Uma paisagem de montanha dividida por linhas imaginárias"
 ---
 

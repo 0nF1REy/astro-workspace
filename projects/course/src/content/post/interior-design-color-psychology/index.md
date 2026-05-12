@@ -5,7 +5,7 @@ pubDate: 2024-07-10
 isDraft: false
 canonicalURL: https://meusite.com/psicologia-das-cores-interiores/
 author: "1"
-cover: ./images/zen-interior.jpg
+cover: ./zen-interior.jpg
 coverAlt: "Uma sala bem decorada com tons de azul e madeira"
 ---
 

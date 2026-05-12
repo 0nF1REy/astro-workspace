@@ -5,7 +5,7 @@ pubDate: 2024-07-15
 isDraft: false
 canonicalURL: https://meusite.com/jazz-influencia-hip-hop/
 author: "1"
-cover: ./images/jazz-albums-feature.jpg
+cover: ./jazz-albums-feature.jpg
 coverAlt: "Um disco de vinil girando em um toca-discos"
 ---
 

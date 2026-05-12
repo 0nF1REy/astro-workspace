@@ -5,7 +5,7 @@ pubDate: 2024-06-25
 isDraft: false
 canonicalURL: https://meusite.com/treino-forca-corredores/
 author: "1"
-cover: ./images/running-night.jpeg
+cover: ./running-night.jpeg
 coverAlt: "Pessoa levantando pesos em uma academia"
 ---
 

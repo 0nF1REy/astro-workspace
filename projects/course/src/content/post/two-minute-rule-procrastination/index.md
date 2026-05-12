@@ -5,7 +5,7 @@ pubDate: 2024-06-15
 isDraft: false
 canonicalURL: https://meusite.com/regra-dois-minutos-habitos/
 author: "1"
-cover: ./images/productivity-clock.jpg
+cover: ./productivity-clock.jpg
 coverAlt: "Um cronômetro em uma mesa de trabalho"
 ---
 

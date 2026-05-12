@@ -5,7 +5,7 @@ pubDate: 2024-06-10
 isDraft: false
 canonicalURL: https://meusite.com/reserva-de-emergencia-guia/
 author: "1"
-cover: ./images/finance-save.jpg
+cover: ./finance-save.jpg
 coverAlt: "Um cofrinho de porco ao lado de moedas"
 ---
 

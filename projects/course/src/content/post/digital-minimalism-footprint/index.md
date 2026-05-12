@@ -5,7 +5,7 @@ pubDate: 2024-07-01
 isDraft: false
 canonicalURL: https://meusite.com/minimalismo-digital-sustentavel/
 author: "1"
-cover: ./images/digital-minimalism.jpg
+cover: ./digital-minimalism.jpg
 coverAlt: "Um smartphone desligado sobre uma mesa de madeira"
 ---
 

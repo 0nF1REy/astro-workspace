@@ -25,7 +25,8 @@ export const collections = {
       generateId: ({ entry }) =>
         entry
           .replace(/^\/?src\/content\/post\//, "")
-          .replace(/\.(md|mdx)$/, ""),
+          .replace(/\.(md|mdx)$/, "")
+          .replace(/\/index$/, ""),
     }),
     schema: ({ image }) =>
       z.object({

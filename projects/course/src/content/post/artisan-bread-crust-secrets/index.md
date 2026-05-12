@@ -5,7 +5,7 @@ pubDate: 2024-06-05
 isDraft: false
 canonicalURL: https://meusite.com/pao-artesanal-crosta/
 author: "1"
-cover: ./images/sourdough-bread.jpg
+cover: ./sourdough-bread.jpg
 coverAlt: "Um pão rústico saindo do forno"
 ---
 

@@ -5,7 +5,7 @@ pubDate: 2024-07-05
 isDraft: false
 canonicalURL: https://meusite.com/realismo-magico-gabriel-garcia/
 author: "1"
-cover: ./images/old-books.jpg
+cover: ./old-books.jpg
 coverAlt: "Livros antigos empilhados em uma biblioteca"
 ---
 

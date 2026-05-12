@@ -5,7 +5,7 @@ pubDate: 2024-06-20
 isDraft: false
 canonicalURL: https://meusite.com/historia-rota-da-seda/
 author: "1"
-cover: ./images/desert-traveller.jpg
+cover: ./desert-traveller.jpg
 coverAlt: "Uma caravana de camelos no deserto ao pôr do sol"
 ---
 
