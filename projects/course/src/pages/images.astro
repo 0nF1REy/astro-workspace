@@ -431,6 +431,18 @@ const optimizedAvif = await getImage({
     gap: 1rem;
   }
 
+  .image-panel__content img.media-frame,
+  .image-panel__content picture,
+  .image-panel__content :global(img) {
+    justify-self: center;
+  }
+
+  .image-panel__content > .media-frame:only-child,
+  .image-panel__content > img:only-child,
+  .image-panel__content > picture:only-child {
+    justify-self: center;
+  }
+
   .media-frame {
     width: 100%;
     max-width: 640px;
