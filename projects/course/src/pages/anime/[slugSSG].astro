@@ -17,31 +17,37 @@ const { anime } = Astro.props;
 
 <Layout title={anime.title}>
   <section class="anime-detail">
-    <div class="anime-detail__hero surface-card">
-      <p class="anime-detail__eyebrow">Anime Detail</p>
-      <h1 class="title-gradient anime-detail__title">{anime.title}</h1>
-      <p class="anime-detail__lead">Gerado via SSG (Static Site Generation).</p>
-    </div>
-
     <article class="anime-detail__card surface-card">
-      <img
-        src={anime.images.webp.large_image_url}
-        alt={anime.title}
-        class="anime-img"
-      />
-      <div class="anime-info">
-        <p class="anime-detail__label">Sinopse</p>
-        <p class="anime-desc">{anime.synopsis}</p>
-        <div class="stats">
-          <span
-            ><i class="fas fa-star" aria-hidden="true"></i> {anime.score}</span
-          >
-          <span
-            ><i class="fas fa-tv" aria-hidden="true"></i>
-            {anime.episodes} episódios</span
-          >
+      <div class="anime-detail__hero">
+        <p class="anime-detail__eyebrow">Anime Detail</p>
+        <h1 class="title-gradient anime-detail__title">{anime.title}</h1>
+        <p class="anime-detail__lead">
+          Gerado via SSG (Static Site Generation).
+        </p>
+      </div>
+
+      <div class="anime-detail__body">
+        <img
+          src={anime.images.webp.large_image_url}
+          alt={anime.title}
+          class="anime-img"
+        />
+
+        <div class="anime-info">
+          <p class="anime-detail__label">Sinopse</p>
+          <p class="anime-desc">{anime.synopsis}</p>
+          <div class="stats">
+            <span
+              ><i class="fas fa-star" aria-hidden="true"></i>
+              {anime.score}</span
+            >
+            <span
+              ><i class="fas fa-tv" aria-hidden="true"></i>
+              {anime.episodes} episódios</span
+            >
+          </div>
+          <a class="anime-detail__back" href="/anime">Voltar para a lista</a>
         </div>
-        <a class="anime-detail__back" href="/anime">Voltar para a lista</a>
       </div>
     </article>
   </section>
@@ -56,7 +62,13 @@ const { anime } = Astro.props;
   .anime-detail__hero {
     display: grid;
     gap: 0.85rem;
-    padding: 2rem;
+  }
+
+  .anime-detail__body {
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    gap: 1.25rem;
+    align-items: start;
   }
 
   .anime-detail__eyebrow,
@@ -72,16 +84,20 @@ const { anime } = Astro.props;
   }
 
   .anime-detail__lead {
-    color: var(--muted);
+    color: var(--cream);
     line-height: 1.7;
+    font-weight: 700;
+    background: rgba(251, 146, 60, 0.08);
+    padding: 0.45rem 0.65rem;
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 1.02rem;
   }
 
   .anime-detail__card {
     display: grid;
-    grid-template-columns: minmax(220px, 320px) 1fr;
     gap: 1.25rem;
     padding: 1.5rem;
-    align-items: start;
   }
 
   .anime-img {
@@ -131,13 +147,12 @@ const { anime } = Astro.props;
   }
 
   @media (max-width: 860px) {
-    .anime-detail__card {
+    .anime-detail__body {
       grid-template-columns: 1fr;
     }
   }
 
   @media (max-width: 640px) {
-    .anime-detail__hero,
     .anime-detail__card {
       padding: 1.25rem;
     }

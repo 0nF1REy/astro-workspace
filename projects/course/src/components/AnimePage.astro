@@ -27,7 +27,6 @@ const getPageHref = (page: number) =>
     {
       data.map((anime) => (
         <li class="anime-page__card surface-card">
-          <p class="anime-page__label">Anime ID: {anime.mal_id}</p>
           <h2>{anime.title}</h2>
           <a class="anime-page__link" href={`/anime/${anime.mal_id}`}>
             Ver detalhes
