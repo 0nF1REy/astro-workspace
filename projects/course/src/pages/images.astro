@@ -39,7 +39,8 @@ const optimizedAvif = await getImage({
         <div>
           <h2>Imagem pública</h2>
           <p class="image-panel__description">
-            Carregada diretamente da pasta pública sem processamento.
+            Servida diretamente da pasta <code>public</code> sem processamento — ideal
+            para arquivos estáticos e recursos que não precisam de otimização em build.
           </p>
         </div>
       </div>
@@ -63,7 +64,8 @@ const optimizedAvif = await getImage({
         <div>
           <h2>Imagem local</h2>
           <p class="image-panel__description">
-            Importada do diretório de assets e otimizada pelo Astro.
+            Importada dos assets do projeto e automaticamente otimizada pelo
+            Astro durante o build para melhor performance.
           </p>
         </div>
       </div>
@@ -74,7 +76,7 @@ const optimizedAvif = await getImage({
           class="media-frame"
         />
         <p class="image-panel__code">
-          <code>import localImage from "../../assets/images/kagura.png"</code>
+          <code>import localImage from "@assets/images/kagura.png"</code>
           <br />
           <code>&lt;Image src={"{localImage}"} alt="..." /&gt;</code>
         </p>
@@ -87,7 +89,8 @@ const optimizedAvif = await getImage({
         <div>
           <h2>Imagem remota</h2>
           <p class="image-panel__description">
-            Serve um arquivo externo com host autorizado na configuração.
+            Carregada de um host externo (CDN ou serviço de imagens). Use quando
+            as imagens estiverem hospedadas fora do projeto.
           </p>
         </div>
       </div>
@@ -116,7 +119,8 @@ const optimizedAvif = await getImage({
         <div>
           <h2>Dimensões controladas</h2>
           <p class="image-panel__description">
-            Mesma imagem em tamanhos diferentes para demonstrar width e height.
+            A mesma imagem exibida em várias resoluções para comparar como o
+            ajuste de `width`/`height` afeta recorte e desempenho.
           </p>
         </div>
       </div>
@@ -129,7 +133,7 @@ const optimizedAvif = await getImage({
               width={200}
               height={200}
             />
-            <figcaption>200x200</figcaption>
+            <figcaption>200×200 — miniatura</figcaption>
           </figure>
           <figure class="image-tile">
             <Image
@@ -138,7 +142,7 @@ const optimizedAvif = await getImage({
               width={400}
               height={400}
             />
-            <figcaption>400x400</figcaption>
+            <figcaption>400×400 — média</figcaption>
           </figure>
           <figure class="image-tile">
             <Image
@@ -147,7 +151,7 @@ const optimizedAvif = await getImage({
               width={600}
               height={600}
             />
-            <figcaption>600x600</figcaption>
+            <figcaption>600×600 — grande</figcaption>
           </figure>
         </div>
       </div>
@@ -157,39 +161,10 @@ const optimizedAvif = await getImage({
       <div class="image-panel__header surface-card">
         <span class="image-panel__number">05</span>
         <div>
-          <h2>Validação de tamanho</h2>
-          <p class="image-panel__description">
-            A coleção de posts valida imagens com pelo menos 1000px em uma das
-            dimensões.
-          </p>
-        </div>
-      </div>
-      <div class="image-panel__content surface-card">
-        <div class="code-block">
-          <pre><code>
-{`cover: image().refine((img) => {
-  const minSize = 1000;
-  return Math.max(img.width, img.height) >= minSize;
-}, {
-  message: 'Image must be at least 1000px in width or height'
-})`}
-          </code></pre>
-        </div>
-        <p class="validation-note">
-          <i class="fas fa-circle-check" aria-hidden="true"></i>
-          <strong>Validação ativa:</strong> imagens de capa precisam atender ao tamanho
-          mínimo.
-        </p>
-      </div>
-    </section>
-
-    <section class="image-panel">
-      <div class="image-panel__header surface-card">
-        <span class="image-panel__number">06</span>
-        <div>
           <h2>Imagem em React</h2>
           <p class="image-panel__description">
-            O componente React recebe uma imagem otimizada e a renderiza no UI.
+            Exemplo de componente React que recebe uma imagem otimizada e a
+            renderiza dinamicamente no cliente.
           </p>
         </div>
       </div>
@@ -204,11 +179,12 @@ const optimizedAvif = await getImage({
 
     <section class="image-panel image-panel--links">
       <div class="image-panel__header surface-card">
-        <span class="image-panel__number">07</span>
+        <span class="image-panel__number">06</span>
         <div>
           <h2>Markdown</h2>
           <p class="image-panel__description">
-            Um post real mostra imagens pública, local e remota em markdown.
+            Demonstra como imagens públicas, locais e remotas são referenciadas
+            e renderizadas dentro de conteúdo Markdown/MDX.
           </p>
         </div>
       </div>
@@ -222,15 +198,15 @@ const optimizedAvif = await getImage({
       </div>
     </section>
 
-    <!-- Exercise 1-6: Practice Image Exercises -->
     <section class="image-panel">
       <div class="image-panel__header surface-card">
-        <span class="image-panel__number">08</span>
+        <span class="image-panel__number">07</span>
         <div>
-          <h2>Image com diferentes pixel densities</h2>
+          <h2>Imagens para diferentes densidades de pixel</h2>
           <p class="image-panel__description">
-            Adapte a imagem para diferentes densidades de pixel: 1x, 2x
-            (Retina), 3x.
+            Entrega versões otimizadas para telas de densidade padrão e alta
+            (por exemplo, Retina), garantindo nitidez sem transferir arquivos
+            maiores do que o necessário.
           </p>
         </div>
       </div>
@@ -239,32 +215,32 @@ const optimizedAvif = await getImage({
           <figure class="image-tile">
             <Image
               src={localImageExample}
-              alt="1x"
+              alt="Densidade 1x"
               width={180}
               height={180}
               densities={[1]}
             />
-            <figcaption>1x</figcaption>
+            <figcaption>1x — densidade padrão</figcaption>
           </figure>
           <figure class="image-tile">
             <Image
               src={localImageExample}
-              alt="2x"
+              alt="Densidade 2x"
               width={180}
               height={180}
               densities={[2]}
             />
-            <figcaption>2x (Retina)</figcaption>
+            <figcaption>2x — Retina (alta densidade)</figcaption>
           </figure>
           <figure class="image-tile">
             <Image
               src={localImageExample}
-              alt="3x"
+              alt="Densidade 3x"
               width={180}
               height={180}
               densities={[3]}
             />
-            <figcaption>3x</figcaption>
+            <figcaption>3x — muito alta densidade</figcaption>
           </figure>
         </div>
       </div>
@@ -272,12 +248,12 @@ const optimizedAvif = await getImage({
 
     <section class="image-panel">
       <div class="image-panel__header surface-card">
-        <span class="image-panel__number">09</span>
+        <span class="image-panel__number">08</span>
         <div>
-          <h2>Image responsiva (sizes)</h2>
+          <h2>Imagens responsivas (sizes)</h2>
           <p class="image-panel__description">
-            Use `sizes` para controlar qual resolução é baixada conforme o
-            viewport.
+            Use a propriedade <code>sizes</code> para indicar ao navegador qual largura
+            de recurso é adequada para cada largura de viewport.
           </p>
         </div>
       </div>
@@ -294,12 +270,12 @@ const optimizedAvif = await getImage({
 
     <section class="image-panel">
       <div class="image-panel__header surface-card">
-        <span class="image-panel__number">10</span>
+        <span class="image-panel__number">09</span>
         <div>
           <h2>Picture com múltiplos formatos</h2>
           <p class="image-panel__description">
-            Navegadores modernos usam AVIF/WebP, fallback para PNG/JPG em
-            browsers antigos.
+            Sirva AVIF/WebP quando disponíveis e forneça PNG/JPG como fallback
+            para máxima compatibilidade e melhor performance.
           </p>
         </div>
       </div>
@@ -315,27 +291,28 @@ const optimizedAvif = await getImage({
 
     <section class="image-panel">
       <div class="image-panel__header surface-card">
-        <span class="image-panel__number">11</span>
+        <span class="image-panel__number">10</span>
         <div>
-          <h2>getImage para gerar alternativas</h2>
+          <h2>Gerar formatos com `getImage`</h2>
           <p class="image-panel__description">
-            Gere formatos otimizados programaticamente e acesse seus metadados.
+            Gera versões otimizadas (ex.: WebP/AVIF) programaticamente e retorna
+            metadados úteis para uso em templates e CSS.
           </p>
         </div>
       </div>
       <div class="image-panel__content surface-card">
         <div class="formats-grid">
           <div class="format-tile">
-            <img src={optimizedImage.src} alt="Original" />
-            <figcaption>PNG</figcaption>
+            <img src={optimizedImage.src} alt="PNG (original)" />
+            <figcaption>PNG — original</figcaption>
           </div>
           <div class="format-tile">
-            <img src={optimizedWebp.src} alt="WebP" />
-            <figcaption>WebP</figcaption>
+            <img src={optimizedWebp.src} alt="WebP (otimizado)" />
+            <figcaption>WebP — otimizado</figcaption>
           </div>
           <div class="format-tile">
-            <img src={optimizedAvif.src} alt="AVIF" />
-            <figcaption>AVIF</figcaption>
+            <img src={optimizedAvif.src} alt="AVIF (otimizado)" />
+            <figcaption>AVIF — otimizado</figcaption>
           </div>
         </div>
       </div>
@@ -343,11 +320,12 @@ const optimizedAvif = await getImage({
 
     <section class="image-panel">
       <div class="image-panel__header surface-card">
-        <span class="image-panel__number">12</span>
+        <span class="image-panel__number">11</span>
         <div>
           <h2>Imagem como background</h2>
           <p class="image-panel__description">
-            A imagem otimizada é aplicada como CSS background.
+            Mostra como aplicar uma imagem otimizada como `background-image` em
+            blocos, preservando performance e qualidade visual.
           </p>
         </div>
       </div>
