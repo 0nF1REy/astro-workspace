@@ -1,0 +1,223 @@
+---
+import type { Anime } from "../types/AnimeType";
+
+interface Props {
+  data: Anime[];
+  currentPage: number;
+  lastPage: number;
+}
+
+const { data, currentPage, lastPage } = Astro.props as Props;
+
+const getPageHref = (page: number) =>
+  page <= 1 ? "/anime" : `/anime/page/${page}`;
+---
+
+<section class="anime-page">
+  <div class="anime-page__hero surface-card">
+    <p class="anime-page__eyebrow">MyAnimeList</p>
+    <h1 class="title-gradient">Top Animes</h1>
+    <p class="anime-page__lead">
+      Explore os animes mais populares da atualidade consumindo a API Jikan.
+    </p>
+    <p class="anime-page__meta">Página {currentPage} de {lastPage}</p>
+  </div>
+
+  <ul class="anime-page__grid" role="list">
+    {
+      data.map((anime) => (
+        <li class="anime-page__card surface-card">
+          <p class="anime-page__label">Anime ID: {anime.mal_id}</p>
+          <h2>{anime.title}</h2>
+          <a class="anime-page__link" href={`/anime/${anime.mal_id}`}>
+            Ver detalhes
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <nav
+    class="anime-page__pagination surface-card"
+    aria-label="Paginação dos animes"
+  >
+    <div class="anime-page__pagination-summary">
+      <p class="anime-page__pagination-label">Navegação</p>
+      <p class="anime-page__pagination-meta">
+        Página {currentPage} de {lastPage}
+      </p>
+    </div>
+
+    <div class="anime-page__pagination-links" aria-label="Páginas">
+      {
+        Array.from({ length: lastPage }, (_, index) => index + 1).map(
+          (page) => (
+            <a
+              class:list={[
+                "anime-page__page-link",
+                { "anime-page__page-link--active": page === currentPage },
+              ]}
+              href={getPageHref(page)}
+              aria-current={page === currentPage ? "page" : undefined}
+            >
+              {page}
+            </a>
+          ),
+        )
+      }
+    </div>
+
+    <div class="anime-page__pagination-actions">
+      {
+        currentPage > 1 && (
+          <a class="anime-page__button" href={getPageHref(currentPage - 1)}>
+            Anterior
+          </a>
+        )
+      }
+      {
+        currentPage < lastPage && (
+          <a class="anime-page__button" href={getPageHref(currentPage + 1)}>
+            Próxima
+          </a>
+        )
+      }
+    </div>
+  </nav>
+</section>
+
+<style lang="scss">
+  .anime-page {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .anime-page__hero {
+    display: grid;
+    gap: 0.85rem;
+    padding: 2rem;
+  }
+
+  .anime-page__eyebrow,
+  .anime-page__label,
+  .anime-page__pagination-label {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .anime-page__lead,
+  .anime-page__pagination-meta {
+    max-width: 60ch;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  .anime-page__meta {
+    color: var(--cream);
+    font-weight: 700;
+  }
+
+  .anime-page__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .anime-page__card {
+    display: grid;
+    gap: 0.9rem;
+    padding: 1.5rem;
+    align-content: start;
+    list-style: none;
+  }
+
+  .anime-page__card h2 {
+    font-size: clamp(1.2rem, 3vw, 1.65rem);
+    line-height: 1.2;
+  }
+
+  .anime-page__link,
+  .anime-page__button,
+  .anime-page__page-link {
+    width: fit-content;
+    color: var(--cream);
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease,
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .anime-page__link:hover,
+  .anime-page__button:hover {
+    color: var(--orange);
+    transform: translateX(3px);
+  }
+
+  .anime-page__pagination {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .anime-page__pagination-summary {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .anime-page__pagination-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .anime-page__page-link {
+    min-width: 2.5rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(251, 146, 60, 0.18);
+    background: rgba(251, 146, 60, 0.06);
+    text-align: center;
+  }
+
+  .anime-page__page-link:hover {
+    color: var(--orange);
+    border-color: rgba(251, 146, 60, 0.34);
+    transform: translateY(-1px);
+  }
+
+  .anime-page__page-link--active {
+    background: var(--orange);
+    color: var(--bg);
+    border-color: var(--orange);
+    pointer-events: none;
+  }
+
+  .anime-page__pagination-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .anime-page__button {
+    padding: 0.7rem 1.1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(251, 146, 60, 0.18);
+    background: rgba(251, 146, 60, 0.08);
+  }
+
+  @media (max-width: 640px) {
+    .anime-page__hero,
+    .anime-page__card,
+    .anime-page__pagination {
+      padding: 1.25rem;
+    }
+  }
+</style>
