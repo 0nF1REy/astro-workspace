@@ -1,4 +1,5 @@
 import type { ImageMetadata } from "astro";
+import styles from "./ImageGalleryReact.module.scss";
 
 interface ImageGalleryReactProps {
   localImage: ImageMetadata;
@@ -10,21 +11,21 @@ const ImageGalleryReact: React.FC<ImageGalleryReactProps> = ({
   title = "Gallery",
 }) => {
   return (
-    <div className="image-gallery">
-      <h3 className="image-gallery__title">{title}</h3>
-      <p className="image-gallery__description">
+    <div className={styles.imageGallery}>
+      <h3 className={styles.imageGalleryTitle}>{title}</h3>
+      <p className={styles.imageGalleryDescription}>
         Um componente React renderizando uma imagem otimizada pelo Astro.
       </p>
 
-      <div className="image-gallery__container">
+      <div className={styles.imageGalleryContainer}>
         <img
           src={localImage.src}
           alt="Imagem local otimizada renderizada em componente React"
           width={400}
           height={400}
-          className="image-gallery__image"
+          className={styles.imageGalleryImage}
         />
-        <div className="image-gallery__info">
+        <div className={styles.imageGalleryInfo}>
           <p>
             <strong>Width:</strong> 400px
           </p>
@@ -34,7 +35,7 @@ const ImageGalleryReact: React.FC<ImageGalleryReactProps> = ({
           <p>
             <strong>Tipo:</strong> Imagem local otimizada pelo Astro
           </p>
-          <p className="image-gallery__note">
+          <p className={styles.imageGalleryNote}>
             <em>
               A imagem foi otimizada pelo Astro em tempo de build e agora é
               renderizada em um componente React.

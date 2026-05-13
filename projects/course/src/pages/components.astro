@@ -6,11 +6,11 @@ import Heading from "@components/Heading.astro";
 import Author from "@components/Author.astro";
 import CardComponent from "@components/Card.astro";
 import PricingCard from "@components/PricingCard.astro";
-import CounterComponent from "@components/Counter";
+import CounterComponent from "@components/Counter/Counter";
 import Blockquote from "@components/Blockquote.astro";
 import TodoList from "@components/TodoList.astro";
 import TeamGrid from "@components/TeamGrid.astro";
-import ImageGalleryReact from "@components/ImageGalleryReact";
+import ImageGalleryReact from "@components/ImageGalleryReact/ImageGalleryReact";
 import { Content as PromoBanner } from "@components/promoBanner.md";
 import { getCollection } from "astro:content";
 import localImageExample from "@assets/images/kagura.png";
@@ -203,109 +203,12 @@ const teamMembers = teamCollection.map((entry: TeamEntry) => ({
     gap: 0.6rem;
   }
 
-  .components-page__section :global(a) {
-    color: var(--cream);
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  .components-page__section :global(a:hover) {
-    text-decoration: underline;
-  }
-
-  .components-page__section :global(.btn) {
-    width: fit-content;
-  }
-
-  .components-page__section :global(.author) {
-    margin-top: 0;
-  }
-
-  .components-page__section :global(.pricing-card) {
-    width: 100%;
-  }
-
-  .components-page__section :global(.card) {
-    width: 100%;
-  }
-
   .components-page__cards-grid,
   .components-page__pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
     align-items: start;
-  }
-
-  .components-page__section :global(.blockquote),
-  .components-page__section :global(blockquote) {
-    margin: 0;
-  }
-
-  /* Counter Component Styles */
-  .components-page__section :global(.counter-shell) {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .components-page__section :global(.counter-shell__eyebrow) {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.82rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .components-page__section :global(.counter-shell__title) {
-    margin: 0;
-    color: var(--cream);
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .components-page__section :global(.counter-shell__description) {
-    margin: 0;
-    color: var(--muted);
-    line-height: 1.65;
-    font-size: 0.95rem;
-  }
-
-  .components-page__section :global(.counter-shell__actions) {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .components-page__section :global(.counter-shell__button) {
-    padding: 0.7rem 1.4rem;
-    border-radius: 8px;
-    border: 2px solid var(--orange);
-    background: var(--orange);
-    color: var(--bg);
-    font-weight: 700;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition:
-      background 0.2s ease,
-      color 0.2s ease,
-      border-color 0.2s ease;
-  }
-
-  .components-page__section :global(.counter-shell__button:hover) {
-    background: transparent;
-    color: var(--orange);
-  }
-
-  .components-page__section :global(.counter-shell__button--ghost) {
-    background: transparent;
-    color: var(--orange);
-    border-color: var(--orange);
-  }
-
-  .components-page__section :global(.counter-shell__button--ghost:hover) {
-    background: var(--orange);
-    color: var(--bg);
   }
 
   @media (max-width: 640px) {

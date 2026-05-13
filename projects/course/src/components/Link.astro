@@ -5,3 +5,16 @@ const { href, class: className, ...rest } = Astro.props;
 <a href={href} class={className} {...rest}>
   <slot />
 </a>
+
+<style lang="scss">
+  a {
+    color: var(--cream);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+</style>

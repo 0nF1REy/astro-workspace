@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./Counter.module.scss";
 
 const Counter = () => {
   const [count, setCount] = useState(0);
@@ -12,19 +13,19 @@ const Counter = () => {
   };
 
   return (
-    <div className="counter-shell">
-      <p className="counter-shell__eyebrow">React component</p>
-      <h2 className="counter-shell__title">Counter: {count}</h2>
-      <p className="counter-shell__description">
+    <div className={styles.counterShell}>
+      <p className={styles.eyebrow}>React component</p>
+      <h2 className={styles.title}>Counter: {count}</h2>
+      <p className={styles.description}>
         Um contador simples para testar React dentro do Astro.
       </p>
 
-      <div className="counter-shell__actions">
-        <button className="counter-shell__button" onClick={increment}>
+      <div className={styles.actions}>
+        <button className={styles.button} onClick={increment}>
           Incrementar
         </button>
         <button
-          className="counter-shell__button counter-shell__button--ghost"
+          className={`${styles.button} ${styles.buttonGhost}`}
           onClick={decrement}
         >
           Decrementar

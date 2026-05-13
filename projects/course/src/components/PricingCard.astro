@@ -33,7 +33,9 @@ const {
 } = cardData;
 ---
 
-<article class:list={["pricing-card", { "pricing-card--popular": most_popular }]}>
+<article
+  class:list={["pricing-card", { "pricing-card--popular": most_popular }]}
+>
   <div class="pricing-card__header">
     <div class="pricing-card__tier">{tier}</div>
     {most_popular && <div class="pricing-card__badge">Mais Popular</div>}
@@ -267,7 +269,9 @@ const {
     color: var(--orange);
   }
 
-  .pricing-card__feature:has(.pricing-card__feature-icon svg path[fill="currentColor"]:not([fill-rule])) {
+  .pricing-card__feature:has(
+    .pricing-card__feature-icon svg path[fill="currentColor"]:not([fill-rule])
+  ) {
     .pricing-card__feature-icon {
       color: var(--muted);
     }
