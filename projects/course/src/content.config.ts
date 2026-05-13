@@ -35,7 +35,19 @@ export const collections = {
         pubDate: z.coerce.date(),
         isDraft: z.boolean(),
         canonicalURL: z.url().optional(),
-        cover: image(),
+        cover: image().refine(
+          (img) => {
+            if (!img.width || !img.height) {
+              return true;
+            }
+            const minDimension = 1000;
+            return Math.max(img.width, img.height) >= minDimension;
+          },
+          {
+            message:
+              "Cover image must be at least 1000px in width or height (Exercise 5)",
+          }
+        ),
         coverAlt: z.string().optional(),
         author: reference("team").optional(),
       }),

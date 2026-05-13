@@ -1,0 +1,447 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+import ImageGalleryReact from "@components/ImageGalleryReact";
+import localImageExample from "../../assets/images/kagura.png";
+
+const remoteImageUrl =
+  "https://static.wikitide.net/saimoewiki/1/1b/Kagura_profile.png";
+
+const publicImagePath = "/assets/images/global/kagura.png";
+---
+
+<Layout title="Practice: Image Exercises">
+  <section class="practice-hero surface-card">
+    <h1 class="title-gradient">Image Exercises</h1>
+    <p class="practice-hero__lead">
+      Demonstração prática dos 6 exercícios de imagens no Astro
+    </p>
+  </section>
+
+  <article class="practice-content">
+    <section class="exercise">
+      <div class="exercise__header surface-card">
+        <span class="exercise__number">01</span>
+        <h2>Public Image in Astro Component</h2>
+        <p class="exercise__description">
+          Imagens públicas são servidas da pasta /public e referenciadas
+          diretamente. Não passam pelo processamento de otimização.
+        </p>
+      </div>
+      <div class="exercise__content surface-card">
+        <img
+          src={publicImagePath}
+          alt="Public image example (kagura.png)"
+          class="exercise__image"
+        />
+        <p class="exercise__code">
+          <code>&lt;img src="/assets/images/global/kagura.png" alt="..." /&gt;</code>
+        </p>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="exercise__header surface-card">
+        <span class="exercise__number">02</span>
+        <h2>Local Image with Image Component</h2>
+        <p class="exercise__description">
+          Imagens locais são importadas e processadas pelo Image component do
+          Astro para otimização automática. Suporta width e height.
+        </p>
+      </div>
+      <div class="exercise__content surface-card">
+        <Image
+          src={localImageExample}
+          alt="Local image example (SVG 1200x1200, imported)"
+          class="exercise__image"
+        />
+        <p class="exercise__code">
+          <code>import localImage from "@assets/exercise-local-image.svg"</code
+          ><br />
+          <code>&lt;Image src={"{localImage}"} alt="..." /&gt;</code>
+        </p>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="exercise__header surface-card">
+        <span class="exercise__number">03</span>
+        <h2>Remote Image in Astro Component</h2>
+        <p class="exercise__description">
+          Imagens remotas (HTTPS) podem ser renderizadas com Image component
+          quando o host está configurado em astro.config.mjs remotePatterns.
+        </p>
+      </div>
+      <div class="exercise__content surface-card">
+        <Image
+          src={remoteImageUrl}
+          alt="Remote anime cover image from MyAnimeList"
+          width={300}
+          height={400}
+          class="exercise__image exercise__image--remote"
+        />
+        <p class="exercise__code">
+          <code
+            >&lt;Image src="{"{remoteImageUrl}"}" width={"{300}"} height={
+              "{400}"
+            }
+            /&gt;</code
+          >
+        </p>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="exercise__header surface-card">
+        <span class="exercise__number">04</span>
+        <h2>Width and Height Attributes</h2>
+        <p class="exercise__description">
+          O Image component permite especificar width e height para controlar o
+          tamanho da imagem renderizada. Abaixo, a mesma imagem em diferentes
+          tamanhos.
+        </p>
+      </div>
+      <div class="exercise__content surface-card">
+        <div class="exercise__grid">
+          <div class="exercise__item">
+            <Image
+              src={localImageExample}
+              alt="200x200 version"
+              width={200}
+              height={200}
+            />
+            <p>200x200</p>
+          </div>
+          <div class="exercise__item">
+            <Image
+              src={localImageExample}
+              alt="400x400 version"
+              width={400}
+              height={400}
+            />
+            <p>400x400</p>
+          </div>
+          <div class="exercise__item">
+            <Image
+              src={localImageExample}
+              alt="600x600 version"
+              width={600}
+              height={600}
+            />
+            <p>600x600</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="exercise__header surface-card">
+        <span class="exercise__number">05</span>
+        <h2>Image Size Validation (>= 1000px)</h2>
+        <p class="exercise__description">
+          No content.config.ts, a content collection 'posts' usa
+          <code>image().refine()</code> para validar que imagens possuem no mínimo
+          1000px de dimensão.
+        </p>
+      </div>
+      <div class="exercise__content surface-card">
+        <div class="code-block">
+          <pre><code>
+{`schema: ({ image }) =>
+  z.object({
+    // ... other fields
+    cover: image().refine((img) => {
+      const minSize = 1000;
+      const actualSize = Math.max(img.width, img.height);
+      return actualSize >= minSize;
+    }, {
+      message: 'Image must be at least 1000px in width or height'
+    })
+  })`}
+          </code></pre>
+        </div>
+        <p class="validation-note">
+          <i class="fas fa-circle-check" aria-hidden="true"></i>
+          <strong>Validação Ativa:</strong> Todas as imagens cover nos posts são validadas
+          e devem ter no mínimo 1000px.
+        </p>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="exercise__header surface-card">
+        <span class="exercise__number">06</span>
+        <h2>Image Component in React</h2>
+        <p class="exercise__description">
+          Um componente React (ImageGalleryReact.tsx) recebe um componente Image
+          do Astro como prop e o renderiza. Demonstra interoperabilidade entre
+          Astro e React.
+        </p>
+      </div>
+      <div class="exercise__content surface-card">
+        <ImageGalleryReact
+          client:load
+          localImage={localImageExample}
+          title="React Gallery Component"
+        />
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="exercise__header surface-card">
+        <span class="plus">+</span>
+        <h2>Markdown Image Rendering</h2>
+        <p class="exercise__description">
+          Imagens em markdown são renderizadas automaticamente. Veja exemplos
+          nos posts do blog.
+        </p>
+      </div>
+      <div class="exercise__content surface-card">
+        <p>
+          Os posts utilizam Collections e podem renderizar imagens markdown
+          através do componente MDX. Use a sintaxe padrão:
+        </p>
+        <p class="exercise__code">
+          <code>![Alt text](./image.jpg)</code>
+        </p>
+      </div>
+    </section>
+  </article>
+</Layout>
+
+<style lang="scss">
+  .practice-hero {
+    display: grid;
+    gap: 0.85rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+
+    h1 {
+      line-height: 1.1;
+    }
+  }
+
+  .practice-hero__lead {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .practice-content {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .exercise {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .exercise__header {
+    display: grid;
+    gap: 0.85rem;
+    padding: 1.5rem;
+    position: relative;
+
+    h2 {
+      font-size: 1.4rem;
+      color: var(--cream);
+      margin: 0;
+    }
+  }
+
+  .exercise__number,
+  .plus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, var(--orange), var(--cream));
+    color: var(--bg);
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .plus {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.2rem;
+  }
+
+  .exercise__description {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+
+    code {
+      background: rgba(251, 146, 60, 0.1);
+      border: 1px solid rgba(251, 146, 60, 0.2);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: "Courier New", monospace;
+      color: var(--orange);
+    }
+  }
+
+  .exercise__content {
+    padding: 1.5rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .exercise__image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+  }
+
+  .exercise__image--remote {
+    max-width: 300px;
+  }
+
+  .exercise__code {
+    background: rgba(25, 22, 18, 0.8);
+    border: 1px solid rgba(251, 146, 60, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 0;
+
+    code {
+      font-family: "Courier New", monospace;
+      color: var(--cream);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+  }
+
+  .exercise__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .exercise__item {
+    text-align: center;
+
+    img,
+    :global(img) {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--muted);
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+
+  .code-block {
+    background: rgba(25, 22, 18, 0.8);
+    border: 1px solid rgba(251, 146, 60, 0.2);
+    border-radius: 8px;
+    overflow-x: auto;
+
+    pre {
+      margin: 0;
+      padding: 1rem;
+
+      code {
+        font-family: "Courier New", monospace;
+        color: var(--cream);
+        font-size: 0.85rem;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .validation-note {
+    background: rgba(123, 165, 96, 0.1);
+    border-left: 4px solid #7ba560;
+    padding: 1rem;
+    border-radius: 4px;
+    color: var(--text);
+    margin: 0;
+    font-size: 0.95rem;
+
+    i {
+      color: #7ba560;
+      margin-right: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    strong {
+      color: #7ba560;
+    }
+  }
+
+  .image-gallery {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .image-gallery__title {
+    font-size: 1.2rem;
+    color: var(--cream);
+    margin: 0;
+  }
+
+  .image-gallery__description {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .image-gallery__container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .image-gallery__image {
+    border-radius: 8px;
+    display: block;
+  }
+
+  .image-gallery__info {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .image-gallery__info p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  .image-gallery__note {
+    color: var(--muted) !important;
+    margin-top: 0.5rem !important;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(251, 146, 60, 0.2);
+  }
+
+  @media (max-width: 640px) {
+    .practice-hero,
+    .exercise__header,
+    .exercise__content {
+      padding: 1.25rem;
+    }
+
+    .exercise__header h2 {
+      font-size: 1.2rem;
+    }
+
+    .exercise__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
