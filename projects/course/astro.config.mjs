@@ -37,7 +37,7 @@ export default defineConfig({
       { protocol: "https", hostname: "i.pravatar.cc" },
       { protocol: "https", hostname: "cdn.myanimelist.net" },
       { protocol: "https", hostname: "images.myanimelist.net" },
-      { protocol: "https", hostname: "static.wikitide.net" },
+      { protocol: "https", hostname: "ik.imagekit.io" },
     ],
   },
 
