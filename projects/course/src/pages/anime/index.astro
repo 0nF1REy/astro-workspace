@@ -1,14 +1,12 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import AnimePage from "@components/AnimePage.astro";
-import type { AnimeRes } from "../../types/AnimeType";
+import { fetchTopAnime } from "../../lib/anime/fetchTopAnime.ts";
+import { ANIME_PAGE_SIZE } from "../../lib/anime/pagination.ts";
 
-const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=25");
-const { data }: AnimeRes = await res.json();
-
-const pageSize = 10;
-const lastPage = Math.max(1, Math.ceil(data.length / pageSize));
-const firstPage = data.slice(0, pageSize);
+const animeList = await fetchTopAnime();
+const lastPage = Math.max(1, Math.ceil(animeList.length / ANIME_PAGE_SIZE));
+const firstPage = animeList.slice(0, ANIME_PAGE_SIZE);
 ---
 
 <Layout title="Animes">

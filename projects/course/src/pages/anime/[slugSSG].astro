@@ -1,13 +1,12 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "@layouts/Layout.astro";
-import type { AnimeRes } from "../../types/AnimeType";
+import { fetchTopAnime } from "../../lib/anime/fetchTopAnime.ts";
 
 export const getStaticPaths = (async () => {
-  const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=25");
-  const { data }: AnimeRes = await res.json();
+  const animeList = await fetchTopAnime();
 
-  return data.map((anime) => ({
+  return animeList.map((anime) => ({
     params: { slugSSG: anime.mal_id.toString() },
     props: { anime },
   }));

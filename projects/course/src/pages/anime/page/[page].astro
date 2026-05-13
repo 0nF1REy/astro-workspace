@@ -2,23 +2,23 @@
 import type { GetStaticPaths } from "astro";
 import Layout from "@layouts/Layout.astro";
 import AnimePage from "@components/AnimePage.astro";
+import { fetchTopAnime } from "../../../lib/anime/fetchTopAnime.ts";
+import { ANIME_PAGE_SIZE } from "../../../lib/anime/pagination.ts";
 import type { AnimeRes } from "../../../types/AnimeType";
 
 export const getStaticPaths = (async () => {
-  const pageSize = 10;
-  const res = await fetch("https://api.jikan.moe/v4/top/anime?limit=25");
-  const { data }: AnimeRes = await res.json();
-  const lastPage = Math.max(1, Math.ceil(data.length / pageSize));
+  const animeList = await fetchTopAnime();
+  const lastPage = Math.max(1, Math.ceil(animeList.length / ANIME_PAGE_SIZE));
 
   return Array.from({ length: Math.max(0, lastPage - 1) }, (_, index) => {
     const currentPage = index + 2;
-    const start = (currentPage - 1) * pageSize;
-    const end = currentPage * pageSize;
+    const start = (currentPage - 1) * ANIME_PAGE_SIZE;
+    const end = currentPage * ANIME_PAGE_SIZE;
 
     return {
       params: { page: currentPage.toString() },
       props: {
-        data: data.slice(start, end),
+        data: animeList.slice(start, end),
         currentPage,
         lastPage,
       },
