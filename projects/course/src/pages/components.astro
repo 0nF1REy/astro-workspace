@@ -10,8 +10,10 @@ import CounterComponent from "@components/Counter";
 import Blockquote from "@components/Blockquote.astro";
 import TodoList from "@components/TodoList.astro";
 import TeamGrid from "@components/TeamGrid.astro";
+import ImageGalleryReact from "@components/ImageGalleryReact";
 import { Content as PromoBanner } from "@components/promoBanner.md";
 import { getCollection } from "astro:content";
+import localImageExample from "@assets/images/kagura.png";
 
 import cards from "@data/data.json";
 import pricings from "@data/pricing.json";
@@ -123,13 +125,28 @@ const teamMembers = teamCollection.map((entry: TeamEntry) => ({
       <section class="components-page__section surface-card" id="blockquote">
         <p class="components-page__label">Blockquote</p>
         <Heading tagName="h2" size="h4">Chamada de citação</Heading>
-        <Blockquote>Componentes pequenos deixam o projeto mais fácil de manter.</Blockquote>
+        <Blockquote
+          >Componentes pequenos deixam o projeto mais fácil de manter.</Blockquote
+        >
       </section>
 
       <section class="components-page__section surface-card" id="promo-banner">
         <p class="components-page__label">Promo banner</p>
         <Heading tagName="h2" size="h4">Conteúdo MDX</Heading>
         <PromoBanner />
+      </section>
+
+      <section
+        class="components-page__section surface-card"
+        id="image-gallery-react"
+      >
+        <p class="components-page__label">ImageGalleryReact</p>
+        <Heading tagName="h2" size="h4">Galeria de imagens React</Heading>
+        <ImageGalleryReact
+          client:load
+          localImage={localImageExample}
+          title="Galeria React"
+        />
       </section>
     </div>
   </main>
