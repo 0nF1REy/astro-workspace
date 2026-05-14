@@ -14,11 +14,26 @@ export const getStaticPaths = (async () => {
 
 const { anime } = Astro.props;
 
-const trailerEmbedUrl =
+const _rawTrailerEmbed =
   anime.trailer?.embed_url ??
   (anime.trailer?.youtube_id
     ? `https://www.youtube.com/embed/${anime.trailer.youtube_id}`
     : null);
+
+const trailerEmbedUrl = _rawTrailerEmbed
+  ? (() => {
+      try {
+        const u = new URL(_rawTrailerEmbed);
+        u.searchParams.delete("autoplay");
+        return u.toString();
+      } catch (e) {
+        return _rawTrailerEmbed.replace(
+          /([?&])autoplay=\d+(&|$)/,
+          (m, p1, p2) => (p2 ? p1 : ""),
+        );
+      }
+    })()
+  : null;
 ---
 
 <Layout title={anime.title}>
@@ -161,11 +176,6 @@ const trailerEmbedUrl =
               </div>
             )
           }
-
-          <a class="anime-detail__back" href="/anime">
-            <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            Voltar para a lista
-          </a>
         </div>
       </div>
 
@@ -190,7 +200,7 @@ const trailerEmbedUrl =
                   src={trailerEmbedUrl}
                   title={`Trailer de ${anime.title}`}
                   loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowfullscreen
                 />
               </div>
@@ -212,6 +222,11 @@ const trailerEmbedUrl =
               </a>
             )
           }
+
+          <a class="anime-detail__back" href="/anime">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            Voltar para a lista
+          </a>
         </aside>
       </div>
     </article>
@@ -338,7 +353,14 @@ const trailerEmbedUrl =
     font-weight: 600;
   }
 
-  /* Primary Stats Grid */
+  .trailer-section .anime-detail__back {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
   .primary-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
