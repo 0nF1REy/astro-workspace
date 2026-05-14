@@ -13,6 +13,12 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { anime } = Astro.props;
+
+const trailerEmbedUrl =
+  anime.trailer?.embed_url ??
+  (anime.trailer?.youtube_id
+    ? `https://www.youtube.com/embed/${anime.trailer.youtube_id}`
+    : null);
 ---
 
 <Layout title={anime.title}>
@@ -85,6 +91,30 @@ const { anime } = Astro.props;
               )
             }
             {
+              anime.source && (
+                <div class="meta-item">
+                  <span class="meta-label">Fonte</span>
+                  <span class="meta-value">{anime.source}</span>
+                </div>
+              )
+            }
+            {
+              anime.season && (
+                <div class="meta-item">
+                  <span class="meta-label">Temporada</span>
+                  <span class="meta-value">{anime.season}</span>
+                </div>
+              )
+            }
+            {
+              anime.duration && (
+                <div class="meta-item">
+                  <span class="meta-label">Duração</span>
+                  <span class="meta-value">{anime.duration}</span>
+                </div>
+              )
+            }
+            {
               anime.aired?.from && (
                 <div class="meta-item">
                   <span class="meta-label">Lançamento</span>
@@ -132,21 +162,57 @@ const { anime } = Astro.props;
             )
           }
 
-          {/* Sinopse */}
-          {
-            anime.synopsis && (
-              <div class="synopsis-section">
-                <p class="anime-detail__label">Sinopse</p>
-                <p class="anime-desc">{anime.synopsis}</p>
-              </div>
-            )
-          }
-
           <a class="anime-detail__back" href="/anime">
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
             Voltar para a lista
           </a>
         </div>
+      </div>
+
+      <div class="detail-footer">
+        {/* Sinopse */}
+        {
+          anime.synopsis && (
+            <div class="synopsis-section">
+              <p class="anime-detail__label">Sinopse</p>
+              <p class="anime-desc">{anime.synopsis}</p>
+            </div>
+          )
+        }
+
+        <aside class="trailer-section">
+          <p class="anime-detail__label">Trailer / Promo</p>
+
+          {
+            trailerEmbedUrl ? (
+              <div class="trailer-frame">
+                <iframe
+                  src={trailerEmbedUrl}
+                  title={`Trailer de ${anime.title}`}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                />
+              </div>
+            ) : (
+              <a
+                class="trailer-placeholder"
+                href={anime.trailer?.url ?? anime.images.webp.large_image_url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src={anime.images.webp.large_image_url}
+                  alt={anime.title}
+                  class="trailer-placeholder__image"
+                />
+                <span class="trailer-placeholder__text">
+                  Abrir material promocional externo
+                </span>
+              </a>
+            )
+          }
+        </aside>
       </div>
     </article>
   </section>
@@ -210,6 +276,66 @@ const { anime } = Astro.props;
   .anime-info {
     display: grid;
     gap: 1.25rem;
+  }
+
+  .detail-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.95fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .synopsis-section {
+    display: grid;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(251, 146, 60, 0.15);
+    max-width: 72ch;
+  }
+
+  .trailer-section {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 14px;
+    background: rgba(251, 146, 60, 0.05);
+    border: 1px solid rgba(251, 146, 60, 0.12);
+  }
+
+  .trailer-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .trailer-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .trailer-placeholder {
+    display: grid;
+    gap: 0.75rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .trailer-placeholder__image {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+  }
+
+  .trailer-placeholder__text {
+    color: var(--cream);
+    font-weight: 600;
   }
 
   /* Primary Stats Grid */
@@ -335,16 +461,11 @@ const { anime } = Astro.props;
     border-radius: 50%;
   }
 
-  /* Sinopse */
-  .synopsis-section {
-    display: grid;
-    gap: 0.5rem;
-  }
-
   .anime-desc {
     color: var(--cream);
     line-height: 1.75;
     font-weight: 400;
+    text-wrap: pretty;
   }
 
   /* Back Link */
@@ -385,6 +506,10 @@ const { anime } = Astro.props;
     .primary-stats {
       grid-template-columns: repeat(2, 1fr);
     }
+
+    .detail-footer {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 640px) {
@@ -398,6 +523,14 @@ const { anime } = Astro.props;
 
     .meta-row {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .synopsis-section {
+      max-width: none;
+    }
+
+    .trailer-section {
+      padding: 0.9rem;
     }
 
     .genre-tag {
