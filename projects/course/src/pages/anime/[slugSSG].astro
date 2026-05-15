@@ -27,9 +27,8 @@ const trailerEmbedUrl = _rawTrailerEmbed
         u.searchParams.delete("autoplay");
         return u.toString();
       } catch (e) {
-        return _rawTrailerEmbed.replace(
-          /([?&])autoplay=\d+(&|$)/,
-          (m, p1, p2) => (p2 ? p1 : ""),
+        return _rawTrailerEmbed.replace(/([?&])autoplay=\d+(&|$)/, (...a) =>
+          a[2] ? a[1] : "",
         );
       }
     })()
