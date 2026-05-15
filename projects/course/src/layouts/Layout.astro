@@ -26,7 +26,15 @@ const { title = "default" } = Astro.props;
                 }
                 href={item.href}
               >
-                {item.label}
+                <span
+                  class={`nav-link__icon ${
+                    item.href === "/"
+                      ? "nav-link__icon--home"
+                      : "nav-link__icon--default"
+                  } ${item.icon}`}
+                  aria-hidden="true"
+                />
+                <span class="nav-link__label">{item.label}</span>
               </Link>
             ))
           }
@@ -55,6 +63,10 @@ const { title = "default" } = Astro.props;
 <style lang="scss">
   .site-header {
     position: sticky;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
     top: 0;
     z-index: 100;
     width: 100%;
@@ -97,6 +109,34 @@ const { title = "default" } = Astro.props;
       color 0.2s ease,
       box-shadow 0.2s ease;
     box-shadow: 0 8px 20px var(--shadow);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .nav-link__label {
+    text-decoration: none;
+  }
+
+  .nav-link__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.15rem;
+    min-width: 1.15rem;
+    height: 1em;
+    font-size: 0.98rem;
+    line-height: 1;
+    color: currentColor;
+    flex-shrink: 0;
+  }
+
+  .nav-link__icon--default {
+    transform: translateY(0);
+  }
+
+  .nav-link__icon--home {
+    transform: translateY(-0.12em);
   }
 
   .nav-link:hover {
@@ -105,6 +145,19 @@ const { title = "default" } = Astro.props;
     border-color: rgba(251, 146, 60, 0.3);
     transform: translateY(-3px);
     box-shadow: 0 12px 24px rgba(251, 146, 60, 0.14);
+    text-decoration: none;
+  }
+
+  .nav-link:hover .nav-link__label,
+  .nav-link:focus-visible .nav-link__label {
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+  }
+
+  .nav-link:hover .nav-link__icon,
+  .nav-link:focus-visible .nav-link__icon {
+    text-decoration: none;
   }
 
   .nav-link-home {
@@ -227,6 +280,12 @@ const { title = "default" } = Astro.props;
     .nav-link {
       width: 100%;
       text-align: center;
+      justify-content: flex-start;
+    }
+
+    .nav-link__icon {
+      width: 1rem;
+      min-width: 1rem;
     }
 
     .site-main {
