@@ -1,4 +1,5 @@
-product_id: 2
+id: gaming-keyboard
+product_id: 8
 product_name: "Teclado Gamer"
 price: 89.9
 in_stock: true

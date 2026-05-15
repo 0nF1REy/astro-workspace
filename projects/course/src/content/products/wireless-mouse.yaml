@@ -1,4 +1,5 @@
-product_id: 7
+id: wireless-mouse
+product_id: 2
 product_name: "Mouse Sem Fio"
 price: 39.99
 in_stock: false

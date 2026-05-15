@@ -1,4 +1,5 @@
-product_id: 10
+id: action-camera
+product_id: 1
 product_name: "Câmera de Ação"
 price: 279.9
 in_stock: true

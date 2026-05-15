@@ -1,4 +1,5 @@
-product_id: 5
+id: laptop-backpack
+product_id: 7
 product_name: "Mochila para Notebook"
 price: 74.9
 in_stock: true

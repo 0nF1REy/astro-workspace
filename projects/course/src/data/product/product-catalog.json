@@ -1,5 +1,6 @@
 [
   {
+    "id": "wireless-headphones",
     "product_id": 1,
     "product_name": "Fone de Ouvido Sem Fio",
     "price": 149.99,
@@ -16,6 +17,7 @@
     }
   },
   {
+    "id": "gaming-keyboard",
     "product_id": 2,
     "product_name": "Teclado Gamer",
     "price": 89.9,
@@ -28,6 +30,7 @@
     }
   },
   {
+    "id": "smart-watch",
     "product_id": 3,
     "product_name": "Relógio Inteligente",
     "price": 199.5,
@@ -40,6 +43,7 @@
     }
   },
   {
+    "id": "portable-speaker",
     "product_id": 4,
     "product_name": "Caixa de Som Portátil",
     "price": 59.99,
@@ -52,6 +56,7 @@
     }
   },
   {
+    "id": "laptop-backpack",
     "product_id": 5,
     "product_name": "Mochila para Notebook",
     "price": 74.9,
@@ -68,6 +73,7 @@
     }
   },
   {
+    "id": "4k-monitor",
     "product_id": 6,
     "product_name": "Monitor 4K",
     "price": 329.99,
@@ -84,6 +90,7 @@
     }
   },
   {
+    "id": "wireless-mouse",
     "product_id": 7,
     "product_name": "Mouse Sem Fio",
     "price": 39.99,
@@ -100,6 +107,7 @@
     }
   },
   {
+    "id": "external-ssd",
     "product_id": 8,
     "product_name": "SSD Externo",
     "price": 119.0,
@@ -116,6 +124,7 @@
     }
   },
   {
+    "id": "gaming-chair",
     "product_id": 9,
     "product_name": "Cadeira Gamer",
     "price": 259.99,
@@ -128,6 +137,7 @@
     }
   },
   {
+    "id": "action-camera",
     "product_id": 10,
     "product_name": "Câmera de Ação",
     "price": 279.9,

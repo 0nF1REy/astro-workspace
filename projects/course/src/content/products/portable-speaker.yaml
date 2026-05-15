@@ -1,4 +1,5 @@
-product_id: 4
+id: portable-speaker
+product_id: 5
 product_name: "Caixa de Som Portátil"
 price: 59.99
 in_stock: true

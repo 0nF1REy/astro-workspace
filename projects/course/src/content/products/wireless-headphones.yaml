@@ -1,4 +1,5 @@
-product_id: 1
+id: wireless-headphones
+product_id: 3
 product_name: "Fone de Ouvido Sem Fio"
 price: 149.99
 in_stock: true

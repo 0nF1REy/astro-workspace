@@ -1,4 +1,5 @@
-product_id: 3
+id: smart-watch
+product_id: 4
 product_name: "Relógio Inteligente"
 price: 199.5
 in_stock: false
