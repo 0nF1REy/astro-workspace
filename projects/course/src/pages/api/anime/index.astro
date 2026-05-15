@@ -17,10 +17,9 @@ const animes = await getCollection("animes", ({ data }) => data.is_finished);
 
     <ul class="anime-grid">
       {
-        animes.map(({ id, data }) => (
+        animes.map(({ data }) => (
           <li class="anime-card">
             <div class="anime-card__top">
-              <span class="anime-card__id">{id}</span>
               <span class="anime-card__status">Finalizado</span>
             </div>
 
@@ -144,16 +143,11 @@ const animes = await getCollection("animes", ({ data }) => data.is_finished);
     gap: 0.75rem;
   }
 
-  .anime-card__id,
   .anime-card__status,
   .anime-card__label {
     font-size: 0.74rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-  }
-
-  .anime-card__id {
-    color: var(--muted);
   }
 
   .anime-card__status {

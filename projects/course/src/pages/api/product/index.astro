@@ -17,10 +17,9 @@ const products = await getCollection("products", ({ data }) => data.in_stock);
 
     <ul class="product-grid">
       {
-        products.map(({ id, data }) => (
+        products.map(({ data }) => (
           <li class="product-card">
             <div class="product-card__top">
-              <span class="product-card__id">{id}</span>
               <span class="product-card__status">
                 {data.in_stock ? "Em estoque" : "Esgotado"}
               </span>
