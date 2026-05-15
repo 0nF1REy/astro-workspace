@@ -1,0 +1,152 @@
+[
+  {
+    "id": "little-witch-academia",
+    "anime_id": 1,
+    "title": "Little Witch Academia",
+    "episodes": 25,
+    "rating": 8.0,
+    "is_finished": true,
+    "genres": ["Comédia", "Fantasia", "Magia"],
+    "details": {
+      "studio": "Trigger",
+      "main_character": "Atsuko Kagari",
+      "release_year": 2017,
+      "popular_arcs": ["Cavaleiro Shiny Rod", "Grande Triskelion"]
+    }
+  },
+  {
+    "id": "kenpuu-denki-berserk",
+    "anime_id": 2,
+    "title": "Kenpuu Denki Berserk",
+    "episodes": 25,
+    "rating": 8.7,
+    "is_finished": true,
+    "genres": ["Ação", "Fantasia Sombria", "Drama"],
+    "details": {
+      "studio": "OLM",
+      "main_character": "Guts",
+      "release_year": 1997,
+      "popular_arcs": ["Era de Ouro", "Eclipse"]
+    }
+  },
+  {
+    "id": "fullmetal-alchemist",
+    "anime_id": 3,
+    "title": "Fullmetal Alchemist",
+    "episodes": 51,
+    "rating": 8.2,
+    "is_finished": true,
+    "genres": ["Ação", "Aventura", "Fantasia"],
+    "details": {
+      "studio": "Bones",
+      "main_character": "Edward Elric",
+      "release_year": 2003,
+      "popular_arcs": ["Laboratório 5", "Conspiração dos Homúnculos"]
+    }
+  },
+  {
+    "id": "barakamon",
+    "anime_id": 4,
+    "title": "Barakamon",
+    "episodes": 12,
+    "rating": 8.3,
+    "is_finished": true,
+    "genres": ["Slice of Life", "Comédia", "Drama"],
+    "details": {
+      "studio": "Kinema Citrus",
+      "main_character": "Seishuu Handa",
+      "release_year": 2014,
+      "popular_arcs": ["Vida na Ilha", "Evolução da Caligrafia"]
+    }
+  },
+  {
+    "id": "perfect-blue",
+    "anime_id": 5,
+    "title": "Perfect Blue",
+    "episodes": 1,
+    "rating": 8.5,
+    "is_finished": true,
+    "genres": ["Psicológico", "Suspense", "Drama"],
+    "details": {
+      "studio": "Madhouse",
+      "main_character": "Mima Kirigoe",
+      "release_year": 1998,
+      "popular_arcs": ["Identidade Fragmentada", "Reality vs Fantasy"]
+    }
+  },
+  {
+    "id": "cowboy-bebop",
+    "anime_id": 6,
+    "title": "Cowboy Bebop",
+    "episodes": 26,
+    "rating": 8.9,
+    "is_finished": true,
+    "genres": ["Ação", "Sci-Fi", "Space Western"],
+    "details": {
+      "studio": "Sunrise",
+      "main_character": "Spike Spiegel",
+      "release_year": 1998,
+      "popular_arcs": ["Ballad of Fallen Angels", "The Real Folk Blues"]
+    }
+  },
+  {
+    "id": "kill-la-kill",
+    "anime_id": 7,
+    "title": "Kill la Kill",
+    "episodes": 24,
+    "rating": 8.1,
+    "is_finished": true,
+    "genres": ["Ação", "Comédia", "Ecchi"],
+    "details": {
+      "studio": "Trigger",
+      "main_character": "Ryuko Matoi",
+      "release_year": 2013,
+      "popular_arcs": ["Academia Honnouji", "Fibra da Vida"]
+    }
+  },
+  {
+    "id": "gintama",
+    "anime_id": 8,
+    "title": "Gintama",
+    "episodes": 201,
+    "rating": 9.0,
+    "is_finished": true,
+    "genres": ["Comédia", "Ação", "Sci-Fi"],
+    "details": {
+      "studio": "Sunrise",
+      "main_character": "Gintoki Sakata",
+      "release_year": 2006,
+      "popular_arcs": ["Benizakura", "Shinsengumi Crisis"]
+    }
+  },
+  {
+    "id": "great-teacher-onizuka",
+    "anime_id": 9,
+    "title": "Great Teacher Onizuka",
+    "episodes": 43,
+    "rating": 8.6,
+    "is_finished": true,
+    "genres": ["Comédia", "Drama", "Escolar"],
+    "details": {
+      "studio": "Pierrot",
+      "main_character": "Eikichi Onizuka",
+      "release_year": 1999,
+      "popular_arcs": ["Classe Problemática", "Reforma Escolar"]
+    }
+  },
+  {
+    "id": "steins-gate",
+    "anime_id": 10,
+    "title": "Steins;Gate",
+    "episodes": 24,
+    "rating": 9.1,
+    "is_finished": true,
+    "genres": ["Sci-Fi", "Suspense", "Drama"],
+    "details": {
+      "studio": "White Fox",
+      "main_character": "Rintarou Okabe",
+      "release_year": 2011,
+      "popular_arcs": ["D-Mail", "Operação Skuld"]
+    }
+  }
+]

@@ -1,0 +1,25 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const anime = await getCollection("anime", ({ data }) => data.is_finished);
+---
+
+<Layout title="Anime Catalog">
+  <h1>Anime Catalog</h1>
+  {
+    anime.map(({ data }) => (
+      <ul>
+        <li>
+          <strong>{data.title}</strong>
+        </li>
+
+        <li>Episódios: {data.episodes}</li>
+
+        <li>Nota: {data.rating}</li>
+
+        <li>Finalizado: {data.is_finished ? "Sim" : "Não"}</li>
+      </ul>
+    ))
+  }
+</Layout>

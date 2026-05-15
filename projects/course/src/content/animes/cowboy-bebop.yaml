@@ -1,0 +1,20 @@
+id: cowboy-bebop
+anime_id: 6
+title: Cowboy Bebop
+episodes: 26
+rating: 8.9
+is_finished: true
+
+genres:
+  - Ação
+  - Sci-Fi
+  - Space Western
+
+details:
+  studio: Sunrise
+  main_character: Spike Spiegel
+  release_year: 1998
+
+  popular_arcs:
+    - Ballad of Fallen Angels
+    - The Real Folk Blues

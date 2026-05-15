@@ -1,0 +1,20 @@
+id: kenpuu-denki-berserk
+anime_id: 2
+title: Kenpuu Denki Berserk
+episodes: 25
+rating: 8.7
+is_finished: true
+
+genres:
+  - Ação
+  - Fantasia Sombria
+  - Drama
+
+details:
+  studio: OLM
+  main_character: Guts
+  release_year: 1997
+
+  popular_arcs:
+    - Era de Ouro
+    - Eclipse

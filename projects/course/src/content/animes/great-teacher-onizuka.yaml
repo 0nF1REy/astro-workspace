@@ -1,0 +1,20 @@
+id: great-teacher-onizuka
+anime_id: 9
+title: Great Teacher Onizuka
+episodes: 43
+rating: 8.6
+is_finished: true
+
+genres:
+  - Comédia
+  - Drama
+  - Escolar
+
+details:
+  studio: Pierrot
+  main_character: Eikichi Onizuka
+  release_year: 1999
+
+  popular_arcs:
+    - Classe Problemática
+    - Reforma Escolar

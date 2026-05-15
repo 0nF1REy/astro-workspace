@@ -1,0 +1,20 @@
+id: barakamon
+anime_id: 4
+title: Barakamon
+episodes: 12
+rating: 8.3
+is_finished: true
+
+genres:
+  - Slice of Life
+  - Comédia
+  - Drama
+
+details:
+  studio: Kinema Citrus
+  main_character: Seishuu Handa
+  release_year: 2014
+
+  popular_arcs:
+    - Vida na Ilha
+    - Evolução da Caligrafia

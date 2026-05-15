@@ -1,0 +1,20 @@
+id: gintama
+anime_id: 8
+title: Gintama
+episodes: 201
+rating: 9.0
+is_finished: true
+
+genres:
+  - Comédia
+  - Ação
+  - Sci-Fi
+
+details:
+  studio: Sunrise
+  main_character: Gintoki Sakata
+  release_year: 2006
+
+  popular_arcs:
+    - Benizakura
+    - Shinsengumi Crisis

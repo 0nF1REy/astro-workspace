@@ -1,0 +1,20 @@
+id: perfect-blue
+anime_id: 5
+title: Perfect Blue
+episodes: 1
+rating: 8.5
+is_finished: true
+
+genres:
+  - Psicológico
+  - Suspense
+  - Drama
+
+details:
+  studio: Madhouse
+  main_character: Mima Kirigoe
+  release_year: 1998
+
+  popular_arcs:
+    - Identidade Fragmentada
+    - Reality vs Fantasy

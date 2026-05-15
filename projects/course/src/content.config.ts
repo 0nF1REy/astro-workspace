@@ -57,6 +57,26 @@ export const collections = {
       ]),
     }),
   }),
+  anime: defineCollection({
+    loader: file("src/data/anime/anime-catalog.json", {
+      parser: (text) => JSON.parse(text),
+    }),
+    schema: z.object({
+      id: z.string(),
+      anime_id: z.number(),
+      title: z.string(),
+      episodes: z.number(),
+      rating: z.number(),
+      is_finished: z.boolean(),
+      genres: z.array(z.string()),
+      details: z.object({
+        studio: z.string(),
+        main_character: z.string(),
+        release_year: z.number(),
+        popular_arcs: z.array(z.string()),
+      }),
+    }),
+  }),
   cats: defineCollection({
     loader: file("src/data/cats.csv", {
       parser: (text) => parseCsv(text, { columns: true, skipEmptyLines: true }),

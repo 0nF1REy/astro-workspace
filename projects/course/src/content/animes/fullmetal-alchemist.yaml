@@ -1,0 +1,20 @@
+id: fullmetal-alchemist
+anime_id: 3
+title: Fullmetal Alchemist
+episodes: 51
+rating: 8.2
+is_finished: true
+
+genres:
+  - Ação
+  - Aventura
+  - Fantasia
+
+details:
+  studio: Bones
+  main_character: Edward Elric
+  release_year: 2003
+
+  popular_arcs:
+    - Laboratório 5
+    - Conspiração dos Homúnculos
