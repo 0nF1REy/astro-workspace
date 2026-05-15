@@ -1,6 +1,7 @@
 ---
 import "@styles/global.scss";
 import Link from "@components/Link.astro";
+import menu, { type MenuItem } from "@data/menu";
 
 const { title = "default" } = Astro.props;
 ---
@@ -17,13 +18,18 @@ const { title = "default" } = Astro.props;
     <header class="site-header">
       <div class="site-shell">
         <nav class="site-nav">
-          <Link class="nav-link nav-link-home" href="/">Inicio</Link>
-          <Link class="nav-link" href="/blog">Blogs</Link>
-          <Link class="nav-link" href="/pokemon">Pokémon</Link>
-          <Link class="nav-link" href="/anime">Animes</Link>
-          <Link class="nav-link" href="/api/anime">Collection</Link>
-          <Link class="nav-link" href="/components">Componentes</Link>
-          <Link class="nav-link" href="/images">Imagens</Link>
+          {
+            menu.map((item: MenuItem) => (
+              <Link
+                class={
+                  item.href === "/" ? "nav-link nav-link-home" : "nav-link"
+                }
+                href={item.href}
+              >
+                {item.label}
+              </Link>
+            ))
+          }
         </nav>
       </div>
     </header>
