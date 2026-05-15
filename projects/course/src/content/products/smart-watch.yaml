@@ -1,0 +1,14 @@
+product_id: 3
+product_name: "Relógio Inteligente"
+price: 199.5
+in_stock: false
+colors:
+  - "Prata"
+  - "Preto"
+details:
+  brand: "FitTime"
+  model: "Watch X"
+  features:
+    - "Monitor Cardíaco"
+    - "Resistente à Água"
+    - "Rastreamento GPS"

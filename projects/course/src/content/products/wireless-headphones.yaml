@@ -1,0 +1,14 @@
+product_id: 1
+product_name: "Fone de Ouvido Sem Fio"
+price: 149.99
+in_stock: true
+colors:
+  - "Preto"
+  - "Branco"
+details:
+  brand: "SoundTech"
+  model: "ST-500"
+  features:
+    - "Bluetooth 5.2"
+    - "Cancelamento de Ruído"
+    - "20 Horas de Bateria"

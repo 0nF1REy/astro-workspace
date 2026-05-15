@@ -1,0 +1,14 @@
+product_id: 4
+product_name: "Caixa de Som Portátil"
+price: 59.99
+in_stock: true
+colors:
+  - "Azul"
+  - "Preto"
+details:
+  brand: "BoomAudio"
+  model: "MiniBeat"
+  features:
+    - "Áudio Sem Fio"
+    - "Design Compacto"
+    - "10 Horas de Reprodução"

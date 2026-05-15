@@ -1,0 +1,13 @@
+product_id: 6
+product_name: "Monitor 4K"
+price: 329.99
+in_stock: true
+colors:
+  - "Preto"
+details:
+  brand: "ViewMax"
+  model: "UltraVision 27"
+  features:
+    - "Resolução 3840x2160"
+    - "Suporte HDR"
+    - "Taxa de Atualização 75Hz"

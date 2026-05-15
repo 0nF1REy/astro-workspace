@@ -1,0 +1,14 @@
+product_id: 2
+product_name: "Teclado Gamer"
+price: 89.9
+in_stock: true
+colors:
+  - "Preto"
+  - "RGB"
+details:
+  brand: "KeyMaster"
+  model: "GK-Pro"
+  features:
+    - "Switches Mecânicos"
+    - "Iluminação RGB"
+    - "Conexão USB-C"

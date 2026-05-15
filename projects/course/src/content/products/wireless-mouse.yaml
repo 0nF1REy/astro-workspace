@@ -1,0 +1,14 @@
+product_id: 7
+product_name: "Mouse Sem Fio"
+price: 39.99
+in_stock: false
+colors:
+  - "Branco"
+  - "Preto"
+details:
+  brand: "ClickPro"
+  model: "AirMouse M2"
+  features:
+    - "Design Ergonômico"
+    - "Bateria Recarregável"
+    - "Clique Silencioso"

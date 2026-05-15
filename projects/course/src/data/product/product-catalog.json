@@ -1,0 +1,142 @@
+[
+  {
+    "product_id": 1,
+    "product_name": "Fone de Ouvido Sem Fio",
+    "price": 149.99,
+    "in_stock": true,
+    "colors": ["Preto", "Branco"],
+    "details": {
+      "brand": "SoundTech",
+      "model": "ST-500",
+      "features": [
+        "Bluetooth 5.2",
+        "Cancelamento de Ruído",
+        "20 Horas de Bateria"
+      ]
+    }
+  },
+  {
+    "product_id": 2,
+    "product_name": "Teclado Gamer",
+    "price": 89.9,
+    "in_stock": true,
+    "colors": ["Preto", "RGB"],
+    "details": {
+      "brand": "KeyMaster",
+      "model": "GK-Pro",
+      "features": ["Switches Mecânicos", "Iluminação RGB", "Conexão USB-C"]
+    }
+  },
+  {
+    "product_id": 3,
+    "product_name": "Relógio Inteligente",
+    "price": 199.5,
+    "in_stock": false,
+    "colors": ["Prata", "Preto"],
+    "details": {
+      "brand": "FitTime",
+      "model": "Watch X",
+      "features": ["Monitor Cardíaco", "Resistente à Água", "Rastreamento GPS"]
+    }
+  },
+  {
+    "product_id": 4,
+    "product_name": "Caixa de Som Portátil",
+    "price": 59.99,
+    "in_stock": true,
+    "colors": ["Azul", "Preto"],
+    "details": {
+      "brand": "BoomAudio",
+      "model": "MiniBeat",
+      "features": ["Áudio Sem Fio", "Design Compacto", "10 Horas de Reprodução"]
+    }
+  },
+  {
+    "product_id": 5,
+    "product_name": "Mochila para Notebook",
+    "price": 74.9,
+    "in_stock": true,
+    "colors": ["Cinza", "Preto"],
+    "details": {
+      "brand": "UrbanBag",
+      "model": "Traveler 15",
+      "features": [
+        "Resistente à Água",
+        "Porta USB para Carregamento",
+        "Múltiplos Compartimentos"
+      ]
+    }
+  },
+  {
+    "product_id": 6,
+    "product_name": "Monitor 4K",
+    "price": 329.99,
+    "in_stock": true,
+    "colors": ["Preto"],
+    "details": {
+      "brand": "ViewMax",
+      "model": "UltraVision 27",
+      "features": [
+        "Resolução 3840x2160",
+        "Suporte HDR",
+        "Taxa de Atualização 75Hz"
+      ]
+    }
+  },
+  {
+    "product_id": 7,
+    "product_name": "Mouse Sem Fio",
+    "price": 39.99,
+    "in_stock": false,
+    "colors": ["Branco", "Preto"],
+    "details": {
+      "brand": "ClickPro",
+      "model": "AirMouse M2",
+      "features": [
+        "Design Ergonômico",
+        "Bateria Recarregável",
+        "Clique Silencioso"
+      ]
+    }
+  },
+  {
+    "product_id": 8,
+    "product_name": "SSD Externo",
+    "price": 119.0,
+    "in_stock": true,
+    "colors": ["Cinza"],
+    "details": {
+      "brand": "FastStorage",
+      "model": "XDrive 1TB",
+      "features": [
+        "USB 3.2",
+        "Transferência de Alta Velocidade",
+        "Tamanho Compacto"
+      ]
+    }
+  },
+  {
+    "product_id": 9,
+    "product_name": "Cadeira Gamer",
+    "price": 259.99,
+    "in_stock": true,
+    "colors": ["Vermelho", "Preto"],
+    "details": {
+      "brand": "GameSeat",
+      "model": "Comfort Pro",
+      "features": ["Altura Ajustável", "Suporte Lombar", "Encosto Reclinável"]
+    }
+  },
+  {
+    "product_id": 10,
+    "product_name": "Câmera de Ação",
+    "price": 279.9,
+    "in_stock": true,
+    "colors": ["Preto"],
+    "details": {
+      "brand": "AdventureCam",
+      "model": "AC-4K",
+      "features": ["Gravação em 4K", "À Prova d'Água", "Lente Grande Angular"]
+    }
+  }
+]

@@ -1,0 +1,14 @@
+product_id: 9
+product_name: "Cadeira Gamer"
+price: 259.99
+in_stock: true
+colors:
+  - "Vermelho"
+  - "Preto"
+details:
+  brand: "GameSeat"
+  model: "Comfort Pro"
+  features:
+    - "Altura Ajustável"
+    - "Suporte Lombar"
+    - "Encosto Reclinável"

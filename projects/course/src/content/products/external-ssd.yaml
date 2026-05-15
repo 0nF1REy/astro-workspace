@@ -1,0 +1,13 @@
+product_id: 8
+product_name: "SSD Externo"
+price: 119.0
+in_stock: true
+colors:
+  - "Cinza"
+details:
+  brand: "FastStorage"
+  model: "XDrive 1TB"
+  features:
+    - "USB 3.2"
+    - "Transferência de Alta Velocidade"
+    - "Tamanho Compacto"

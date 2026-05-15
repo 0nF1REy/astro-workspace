@@ -82,6 +82,30 @@ export const collections = {
       }),
     }),
   }),
+  products: defineCollection({
+    loader: file("src/data/product/product-catalog.json", {
+      parser: (text) => JSON.parse(text),
+    }),
+    // loader: glob({
+    //   pattern: "src/content/products/*.yaml",
+    //   generateId: ({ entry }) =>
+    //     entry
+    //       .replace(/^\/?src\/content\/products\//, "")
+    //       .replace(/\.ya?ml$/, ""),
+    // }),
+    schema: z.object({
+      product_id: z.number(),
+      product_name: z.string(),
+      price: z.number(),
+      in_stock: z.boolean(),
+      colors: z.array(z.string()),
+      details: z.object({
+        brand: z.string(),
+        model: z.string(),
+        features: z.array(z.string()),
+      }),
+    }),
+  }),
   cats: defineCollection({
     loader: file("src/data/cats.csv", {
       parser: (text) => parseCsv(text, { columns: true, skipEmptyLines: true }),

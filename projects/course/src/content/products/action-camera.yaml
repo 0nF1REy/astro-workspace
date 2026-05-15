@@ -1,0 +1,13 @@
+product_id: 10
+product_name: "Câmera de Ação"
+price: 279.9
+in_stock: true
+colors:
+  - "Preto"
+details:
+  brand: "AdventureCam"
+  model: "AC-4K"
+  features:
+    - "Gravação em 4K"
+    - "À Prova d'Água"
+    - "Lente Grande Angular"

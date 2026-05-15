@@ -1,0 +1,14 @@
+product_id: 5
+product_name: "Mochila para Notebook"
+price: 74.9
+in_stock: true
+colors:
+  - "Cinza"
+  - "Preto"
+details:
+  brand: "UrbanBag"
+  model: "Traveler 15"
+  features:
+    - "Resistente à Água"
+    - "Porta USB para Carregamento"
+    - "Múltiplos Compartimentos"
