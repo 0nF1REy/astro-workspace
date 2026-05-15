@@ -1,11 +1,8 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
-const anime = await getCollection(
-  "anime",
-  ({ data }: CollectionEntry<"anime">) => data.is_finished,
-);
+const animes = await getCollection("animes", ({ data }) => data.is_finished);
 ---
 
 <Layout title="Anime Catalog">
@@ -20,7 +17,7 @@ const anime = await getCollection(
 
     <ul class="anime-grid">
       {
-        anime.map(({ id, data }: CollectionEntry<"anime">) => (
+        animes.map(({ id, data }) => (
           <li class="anime-card">
             <div class="anime-card__top">
               <span class="anime-card__id">{id}</span>

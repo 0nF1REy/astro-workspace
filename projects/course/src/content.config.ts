@@ -57,7 +57,7 @@ export const collections = {
       ]),
     }),
   }),
-  anime: defineCollection({
+  animes: defineCollection({
     // loader: file("src/data/anime/anime-catalog.json", {
     //   parser: (text) => JSON.parse(text),
     // }),
