@@ -1,7 +1,6 @@
 ---
 import "@styles/global.scss";
-import Link from "@components/Link.astro";
-import menu, { type MenuItem } from "@data/menu";
+import Header from "@components/Header.astro";
 
 const { title = "default" } = Astro.props;
 ---
@@ -15,32 +14,7 @@ const { title = "default" } = Astro.props;
   </head>
 
   <body>
-    <header class="site-header">
-      <div class="site-shell">
-        <nav class="site-nav">
-          {
-            menu.map((item: MenuItem) => (
-              <Link
-                class={
-                  item.href === "/" ? "nav-link nav-link-home" : "nav-link"
-                }
-                href={item.href}
-              >
-                <span
-                  class={`nav-link__icon ${
-                    item.href === "/"
-                      ? "nav-link__icon--home"
-                      : "nav-link__icon--default"
-                  } ${item.icon}`}
-                  aria-hidden="true"
-                />
-                <span class="nav-link__label">{item.label}</span>
-              </Link>
-            ))
-          }
-        </nav>
-      </div>
-    </header>
+    <Header />
 
     <main class="site-main">
       <div class="site-shell">
@@ -61,153 +35,6 @@ const { title = "default" } = Astro.props;
 </html>
 
 <style lang="scss">
-  .site-header {
-    position: sticky;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.65rem;
-    top: 0;
-    z-index: 100;
-    width: 100%;
-    padding: 18px 24px;
-    backdrop-filter: blur(12px);
-    background: rgba(25, 22, 18, 0.82);
-    border-bottom: 1px solid rgba(253, 230, 138, 0.08);
-    transition:
-      background 0.3s ease,
-      border-color 0.3s ease,
-      backdrop-filter 0.3s ease;
-  }
-
-  .site-shell {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .site-nav {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .nav-link {
-    text-decoration: none;
-    color: var(--muted);
-    background: var(--surface);
-    border: 1px solid transparent;
-    padding: 12px 20px;
-    border-radius: 999px;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-    transition:
-      transform 0.2s ease,
-      background 0.2s ease,
-      border-color 0.2s ease,
-      color 0.2s ease,
-      box-shadow 0.2s ease;
-    box-shadow: 0 8px 20px var(--shadow);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-  }
-
-  .nav-link__label {
-    text-decoration: none;
-  }
-
-  .nav-link__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.15rem;
-    min-width: 1.15rem;
-    height: 1em;
-    font-size: 0.98rem;
-    line-height: 1;
-    color: currentColor;
-    flex-shrink: 0;
-  }
-
-  .nav-link__icon--default {
-    transform: translateY(0);
-  }
-
-  .nav-link__icon--home {
-    transform: translateY(-0.12em);
-  }
-
-  .nav-link:hover {
-    color: var(--text);
-    background: var(--surface-light);
-    border-color: rgba(251, 146, 60, 0.3);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(251, 146, 60, 0.14);
-    text-decoration: none;
-  }
-
-  .nav-link:hover .nav-link__label,
-  .nav-link:focus-visible .nav-link__label {
-    text-decoration-line: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.2em;
-  }
-
-  .nav-link:hover .nav-link__icon,
-  .nav-link:focus-visible .nav-link__icon {
-    text-decoration: none;
-  }
-
-  .nav-link-home {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.25rem;
-    border: 1px solid rgba(253, 230, 138, 0.16);
-    border-radius: 999px;
-    background: linear-gradient(
-      135deg,
-      var(--surface),
-      rgba(251, 146, 60, 0.22)
-    );
-    color: var(--text);
-    box-shadow:
-      0 10px 24px rgba(0, 0, 0, 0.22),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease,
-      border-color 0.2s ease,
-      filter 0.2s ease,
-      background 0.2s ease;
-  }
-
-  .nav-link-home:hover {
-    transform: translateY(-2px);
-    border-color: rgba(251, 146, 60, 0.34);
-    background: linear-gradient(
-      135deg,
-      var(--surface-light),
-      rgba(251, 146, 60, 0.28)
-    );
-    box-shadow:
-      0 14px 28px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(251, 146, 60, 0.08);
-  }
-
-  .nav-link-home:active {
-    transform: translateY(0);
-    filter: brightness(0.98);
-  }
-
-  .nav-link-home:focus-visible {
-    outline: 3px solid rgba(253, 230, 138, 0.65);
-    outline-offset: 3px;
-  }
-
   .site-main {
     flex: 1;
     width: 100%;
@@ -240,61 +67,9 @@ const { title = "default" } = Astro.props;
     transition: color 0.2s ease;
   }
 
-  .surface-card {
-    background: var(--surface);
-    border: 1px solid rgba(253, 230, 138, 0.06);
-    border-radius: 28px;
-    padding: 28px;
-    box-shadow: 0 20px 40px var(--shadow);
-    backdrop-filter: blur(10px);
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      border-color 0.25s ease,
-      background 0.25s ease;
-  }
-
-  .surface-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(251, 146, 60, 0.18);
-    box-shadow: 0 26px 50px rgba(0, 0, 0, 0.5);
-  }
-
-  .title-gradient {
-    background: linear-gradient(135deg, var(--orange), var(--cream));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: filter 0.2s ease;
-  }
-
-  .title-gradient:hover {
-    filter: brightness(1.08);
-  }
-
   @media (max-width: 640px) {
-    .site-nav {
-      flex-wrap: wrap;
-    }
-
-    .nav-link {
-      width: 100%;
-      text-align: center;
-      justify-content: flex-start;
-    }
-
-    .nav-link__icon {
-      width: 1rem;
-      min-width: 1rem;
-    }
-
     .site-main {
       padding: 38px 18px;
-    }
-
-    .surface-card {
-      padding: 22px;
-      border-radius: 22px;
     }
   }
 </style>

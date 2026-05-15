@@ -39,6 +39,12 @@ body {
   font-family: "Trebuchet MS", Arial, sans-serif;
 }
 
+.site-shell {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
 .surface-card {
   background: var(--surface);
   border: 1px solid rgba(253, 230, 138, 0.06);
