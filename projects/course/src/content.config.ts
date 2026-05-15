@@ -58,8 +58,13 @@ export const collections = {
     }),
   }),
   anime: defineCollection({
-    loader: file("src/data/anime/anime-catalog.json", {
-      parser: (text) => JSON.parse(text),
+    // loader: file("src/data/anime/anime-catalog.json", {
+    //   parser: (text) => JSON.parse(text),
+    // }),
+    loader: glob({
+      pattern: "src/content/animes/*.yaml",
+      generateId: ({ entry }) =>
+        entry.replace(/^\/?src\/content\/animes\//, "").replace(/\.ya?ml$/, ""),
     }),
     schema: z.object({
       id: z.string(),

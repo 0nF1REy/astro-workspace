@@ -1,25 +1,258 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
-const anime = await getCollection("anime", ({ data }) => data.is_finished);
+const anime = await getCollection(
+  "anime",
+  ({ data }: CollectionEntry<"anime">) => data.is_finished,
+);
 ---
 
 <Layout title="Anime Catalog">
-  <h1>Anime Catalog</h1>
-  {
-    anime.map(({ data }) => (
-      <ul>
-        <li>
-          <strong>{data.title}</strong>
-        </li>
+  <section class="anime-catalog">
+    <header class="anime-catalog__header">
+      <p class="anime-catalog__eyebrow">Collection</p>
+      <h1 class="anime-catalog__title">Anime Catalog</h1>
+      <p class="anime-catalog__subtitle">
+        Catálogo editorial com os animes finalizados da coleção do projeto.
+      </p>
+    </header>
 
-        <li>Episódios: {data.episodes}</li>
+    <ul class="anime-grid">
+      {
+        anime.map(({ id, data }: CollectionEntry<"anime">) => (
+          <li class="anime-card">
+            <div class="anime-card__top">
+              <span class="anime-card__id">{id}</span>
+              <span class="anime-card__status">Finalizado</span>
+            </div>
 
-        <li>Nota: {data.rating}</li>
+            <h2 class="anime-card__title">{data.title}</h2>
 
-        <li>Finalizado: {data.is_finished ? "Sim" : "Não"}</li>
-      </ul>
-    ))
-  }
+            <dl class="anime-card__stats">
+              <div>
+                <dt>Episódios</dt>
+                <dd>{data.episodes}</dd>
+              </div>
+              <div>
+                <dt>Nota</dt>
+                <dd>{data.rating}</dd>
+              </div>
+              <div>
+                <dt>Ano</dt>
+                <dd>{data.details.release_year}</dd>
+              </div>
+              <div>
+                <dt>Estúdio</dt>
+                <dd>{data.details.studio}</dd>
+              </div>
+            </dl>
+
+            <div class="anime-card__meta">
+              <p class="anime-card__label">Protagonista</p>
+              <p class="anime-card__value">{data.details.main_character}</p>
+            </div>
+
+            <div class="anime-card__genres">
+              {data.genres.map((genre: string) => (
+                <span class="anime-card__genre">{genre}</span>
+              ))}
+            </div>
+
+            <div class="anime-card__arcs">
+              <p class="anime-card__label">Arcos populares</p>
+              <ul>
+                {data.details.popular_arcs.map((arc: string) => (
+                  <li>{arc}</li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 </Layout>
+
+<style lang="scss">
+  .anime-catalog {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1rem 0 2rem;
+  }
+
+  .anime-catalog__header {
+    display: grid;
+    gap: 0.5rem;
+    max-width: 720px;
+  }
+
+  .anime-catalog__eyebrow {
+    color: var(--muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .anime-catalog__title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+  }
+
+  .anime-catalog__subtitle {
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+
+  .anime-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .anime-card {
+    display: grid;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-radius: 18px;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(251, 146, 60, 0.08),
+        rgba(255, 255, 255, 0.02)
+      ),
+      rgba(15, 15, 18, 0.9);
+    border: 1px solid rgba(251, 146, 60, 0.12);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .anime-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(251, 146, 60, 0.24);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+  }
+
+  .anime-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .anime-card__id,
+  .anime-card__status,
+  .anime-card__label {
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .anime-card__id {
+    color: var(--muted);
+  }
+
+  .anime-card__status {
+    color: var(--bg);
+    background: var(--orange);
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+
+  .anime-card__title {
+    font-size: 1.35rem;
+    line-height: 1.15;
+    color: var(--cream);
+  }
+
+  .anime-card__stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .anime-card__stats div {
+    padding: 0.75rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .anime-card__stats dt {
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
+  }
+
+  .anime-card__stats dd {
+    color: var(--cream);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .anime-card__meta {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .anime-card__value {
+    color: var(--cream);
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .anime-card__genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .anime-card__genre {
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(251, 146, 60, 0.12);
+    color: var(--cream);
+    border: 1px solid rgba(251, 146, 60, 0.18);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .anime-card__arcs {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .anime-card__arcs ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--muted);
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .anime-card__arcs li {
+    line-height: 1.5;
+  }
+
+  @media (max-width: 640px) {
+    .anime-card {
+      padding: 1rem;
+    }
+
+    .anime-card__stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
