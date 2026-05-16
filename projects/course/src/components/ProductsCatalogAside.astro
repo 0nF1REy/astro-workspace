@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  products: CollectionEntry<"products">[];
+}
+
+const { products } = Astro.props;
+---
+
+<aside class="products-catalog">
+  <header class="products-catalog__header">
+    <p class="products-catalog__eyebrow">Collection</p>
+    <h1 class="products-catalog__title">Catálogo de Produtos</h1>
+    <p class="products-catalog__subtitle">
+      Lista de produtos renderizados a partir da coleção `products`.
+    </p>
+  </header>
+
+  <ul class="products-grid">
+    {
+      products.map(({ data }) => (
+        <li class="product-card">
+          <div class="product-card__top">
+            <span class="product-card__status">
+              {data.in_stock ? "Em estoque" : "Esgotado"}
+            </span>
+          </div>
+
+          <h3 class="product-card__title">{data.product_name}</h3>
+
+          <div class="product-card__meta">
+            <div class="product-card__price">R$ {data.price}</div>
+            <div class="product-card__brand">
+              {data.details.brand} — {data.details.model}
+            </div>
+            <div class="product-card__colors">
+              Cores: {data.colors.join(", ")}
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</aside>

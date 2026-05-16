@@ -1,0 +1,13 @@
+---
+import { ListProducts } from "@components/ListProducts";
+---
+
+<aside class="products-dynamic">
+  <header class="products-dynamic__header">
+    <h2 class="products-catalog__title">Lista de Produtos (React)</h2>
+    <p class="products-catalog__subtitle">
+      Lista de produtos carregados dinamicamente via API `product.json`.
+    </p>
+  </header>
+  <ListProducts client:load />
+</aside>
