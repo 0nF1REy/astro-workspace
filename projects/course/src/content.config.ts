@@ -94,6 +94,7 @@ export const collections = {
     //       .replace(/\.ya?ml$/, ""),
     // }),
     schema: z.object({
+      id: z.string(),
       product_id: z.number(),
       product_name: z.string(),
       price: z.number(),
