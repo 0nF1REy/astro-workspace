@@ -5,13 +5,13 @@ import { getCollection } from "astro:content";
 const animes = await getCollection("animes", ({ data }) => data.is_finished);
 ---
 
-<Layout title="Anime Catalog">
+<Layout title="Catálogo de Animes">
   <section class="anime-catalog">
     <header class="anime-catalog__header">
       <p class="anime-catalog__eyebrow">Collection</p>
-      <h1 class="anime-catalog__title">Anime Catalog</h1>
+      <h1 class="anime-catalog__title">Catálogo de Animes</h1>
       <p class="anime-catalog__subtitle">
-        Catálogo editorial com os animes finalizados da coleção do projeto.
+        Lista de animes carregados a partir da coleção `animes`.
       </p>
     </header>
 
@@ -79,26 +79,31 @@ const animes = await getCollection("animes", ({ data }) => data.is_finished);
 
   .anime-catalog__header {
     display: grid;
-    gap: 0.5rem;
-    max-width: 720px;
+    gap: 0.75rem;
   }
 
   .anime-catalog__eyebrow {
     color: var(--muted);
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
   .anime-catalog__title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1;
+    font-size: clamp(2.3rem, 6vw, 4.3rem);
+    line-height: 0.96;
+    max-width: 12ch;
+    background: linear-gradient(135deg, var(--orange), var(--cream));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .anime-catalog__subtitle {
     color: var(--muted);
     line-height: 1.7;
-    max-width: 60ch;
+    font-size: 1.02rem;
+    max-width: 58ch;
   }
 
   .anime-grid {
@@ -238,12 +243,21 @@ const animes = await getCollection("animes", ({ data }) => data.is_finished);
   }
 
   @media (max-width: 640px) {
+    .anime-catalog__header {
+      padding: 1.35rem;
+      border-radius: 22px;
+    }
+
     .anime-card {
       padding: 1rem;
     }
 
     .anime-card__stats {
       grid-template-columns: 1fr;
+    }
+
+    .anime-catalog__title {
+      max-width: none;
     }
   }
 </style>
