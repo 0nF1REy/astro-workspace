@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Nexora
+title: Primeiros passos com Nexora
 description: Learn how to set up your first site with Nexora in under 5 minutes.
 author: Alex Johnson
 date: 2026-03-01T00:00:00Z
