@@ -1,0 +1,22 @@
+paths:
+  static: public
+  uploads: public/uploads
+timezone: America/Sao_Paulo
+markdown:
+  engine: commonmark
+  options:
+    gfm: true
+source: /projects/nexora/
+collections_config:
+  data:
+    path: data
+    icon: data_usage
+  pages_blog:
+    path: src/pages/blog
+    icon: call_log
+  posts:
+    path: src/content/posts
+    icon: event_available
+  src_content_pages:
+    path: src/content/pages
+    icon: contact_page
