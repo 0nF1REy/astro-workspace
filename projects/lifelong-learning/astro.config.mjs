@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,7 +16,7 @@ export default defineConfig({
   trailingSlash: "never",
 
   // Integrações
-  integrations: [react(), mdx()],
+  integrations: [react(), mdx(), sitemap()],
 
   // Servidor de desenvolvimento
   server: {
@@ -53,5 +54,15 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
     defaultStrategy: "hover",
+  },
+
+  // Dev Toolbar
+  devToolbar: {
+    enabled: false,
+  },
+
+  // Experimental (Rust compiler)
+  experimental: {
+    rustCompiler: true,
   },
 });

@@ -41,10 +41,12 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@astrojs/compiler-rs": "^0.2.0",
     "@astrojs/mdx": "^5.0.4",
     "@astrojs/node": "^10.1.0",
     "@astrojs/react": "^5.0.4",
     "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
     "@fortawesome/fontawesome-free": "^6.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

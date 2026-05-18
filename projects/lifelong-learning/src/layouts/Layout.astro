@@ -1,10 +1,17 @@
 ---
 import "@styles/global.scss";
+import { baseData } from "../data/siteData";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import MainShell from "@components/MainShell.astro";
 
-const { title = "default" } = Astro.props;
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const { title: pageTitle = "default", description = baseData.description } =
+  Astro.props;
 ---
 
 <!doctype html>
@@ -12,7 +19,16 @@ const { title = "default" } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} | Astro — Lifelong Learning</title>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={baseData.title}
+      href={`${Astro.site}rss.xml`}
+    />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{pageTitle} | {baseData.title}</title>
   </head>
 
   <body>
