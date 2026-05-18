@@ -11,7 +11,7 @@ const routes = [
     icon: "fa-solid fa-newspaper",
   },
   {
-    title: "Pokédex Lab",
+    title: "Pokédex Hub",
     href: "pokemon",
     description:
       "O coração técnico: comparação prática entre Static Site Generation (SSG) e Server-Side Rendering (SSR).",
@@ -42,7 +42,7 @@ const routes = [
     title: "Asset Intelligence",
     href: "images",
     description:
-      "Laboratório de otimização: densidade de pixels, formatos modernos (AVIF/WebP) e getImage().",
+      "Gestão de assets: densidade de pixels, formatos modernos (AVIF/WebP) e otimização programática.",
     icon: "fa-solid fa-image",
   },
 ];
@@ -52,7 +52,7 @@ const routes = [
   <section class="home-page">
     <div class="home-page__hero surface-card">
       <p class="home-page__eyebrow">Lifelong Learning</p>
-      <h1 class="title-gradient">Laboratório de Aprendizado Contínuo</h1>
+      <h1 class="title-gradient">Aprendizado Contínuo</h1>
       <p class="home-page__lead">
         Um ecossistema técnico projetado para explorar as capacidades do Astro
         6, documentando a evolução de padrões arquiteturais e boas práticas em
@@ -64,9 +64,10 @@ const routes = [
       <p class="home-page__eyebrow">A Proposta</p>
       <h2>Sobre o Projeto</h2>
       <p class="home-page__lead">
-        Este não é apenas um site, mas um <strong>repositório vivo</strong>.
-        Cada diretório representa um marco no domínio de ferramentas modernas de
-        desenvolvimento web, priorizando performance, experiência do
+        Este projeto documenta a evolução de <strong
+          >padrões arquiteturais</strong
+        >. Cada diretório representa um marco no domínio de ferramentas modernas
+        de desenvolvimento web, priorizando performance, experiência do
         desenvolvedor e design system resiliente.
       </p>
       <div class="home-page__about-grid">
@@ -132,7 +133,7 @@ const routes = [
 
     <div class="home-page__footer surface-card">
       <p>
-        Este laboratório é mantido como parte de um processo de estudo contínuo.
+        Este espaço é mantido como parte de um processo de estudo contínuo.
         Sinta-se à vontade para inspecionar o código e ver como os módulos se
         conectam.
       </p>
@@ -232,10 +233,12 @@ const routes = [
     display: grid;
     gap: 0.85rem;
     padding: 1.8rem;
+    background: rgba(25, 22, 18, 0.4);
   }
 
   .home-page__about-panel p {
     color: var(--muted);
+    line-height: 1.6;
   }
 
   .home-page__about-panel .home-page__about-kicker {
@@ -255,7 +258,7 @@ const routes = [
     color: var(--orange);
     font-weight: 800;
     text-transform: uppercase;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     letter-spacing: 0.1em;
   }
 
