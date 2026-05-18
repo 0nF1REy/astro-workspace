@@ -5,8 +5,8 @@ PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 
 .PHONY: help list open add status sync \
 	atarashii-gakko book-bites clerk-auth cloudinary-form-upload \
-	jashin-chan-dropkick lifelong-learning nexora p5js-workspace \
-	portfolio product-management profile scriptora
+	jashin-chan-dropkick lifelong-learning p5js-workspace portfolio\
+	product-management profile scriptora
 
 help: ## Mostra os comandos disponíveis
 	@echo "Comandos disponíveis:"
@@ -66,9 +66,6 @@ jashin-chan-dropkick:
 
 lifelong-learning:
 	@code "$(WORKSPACE_DIR)/lifelong-learning/lifelong-learning.code-workspace"
-
-nexora:
-	@code "$(WORKSPACE_DIR)/nexora/nexora.code-workspace"
 
 p5js-workspace:
 	@code "$(WORKSPACE_DIR)/p5js-workspace/p5js-workspace.code-workspace"
