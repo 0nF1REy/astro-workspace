@@ -1,11 +1,22 @@
 {
-  "name": "course",
+  "name": "lifelong-learning",
   "type": "module",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "packageManager": "npm@11.11.0",
   "engines": {
     "node": "24.x"
   },
+  "description": "A pedagogical laboratory for continuous learning with Astro, covering SSG, SSR, React integration, and advanced content management.",
+  "keywords": [
+    "astro",
+    "lifelong-learning",
+    "learning-path",
+    "ssg",
+    "ssr",
+    "react-in-astro",
+    "mdx",
+    "educational-project"
+  ],
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
