@@ -12,8 +12,8 @@ export const GET: APIRoute = async () => {
       return new Response(
         JSON.stringify(
           {
-            sucesso: false,
-            mensagem: "Variável API_KEY não configurada",
+            success: false,
+            message: "Variável API_KEY não configurada",
           },
           null,
           2,
@@ -44,10 +44,10 @@ export const GET: APIRoute = async () => {
     return new Response(
       JSON.stringify(
         {
-          sucesso: true,
-          mensagem: "Postagens carregadas com sucesso",
-          quantidade: posts.length,
-          dados: posts,
+          success: true,
+          message: "Postagens carregadas com sucesso",
+          count: posts.length,
+          data: posts,
         },
         null,
         2,
@@ -65,8 +65,8 @@ export const GET: APIRoute = async () => {
     return new Response(
       JSON.stringify(
         {
-          sucesso: false,
-          mensagem: e instanceof Error ? e.message : "Erro interno do servidor",
+          success: false,
+          message: e instanceof Error ? e.message : "Erro interno do servidor",
         },
         null,
         2,
