@@ -37,14 +37,14 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "astro": "^6.3.1"
+    "astro": "^6.3.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@astrojs/compiler-rs": "^0.2.0",
-    "@astrojs/mdx": "^5.0.4",
-    "@astrojs/node": "^10.1.0",
-    "@astrojs/react": "^5.0.4",
+    "@astrojs/mdx": "^5.0.6",
+    "@astrojs/node": "^10.1.1",
+    "@astrojs/react": "^5.0.5",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "@fortawesome/fontawesome-free": "^6.5.0",
