@@ -6,6 +6,29 @@ export const GET: APIRoute = async () => {
   try {
     const key = import.meta.env.API_KEY;
 
+    if (!key) {
+      console.error("[ERRO] API_KEY não foi configurada no arquivo .env");
+
+      return new Response(
+        JSON.stringify(
+          {
+            sucesso: false,
+            mensagem: "Variável API_KEY não configurada",
+          },
+          null,
+          2,
+        ),
+        {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        },
+      );
+    }
+
+    console.log("[OK] API_KEY carregada corretamente");
+
     const req = await fetch("https://jsonplaceholder.typicode.com/posts", {
       headers: {
         Authorization: `Bearer ${key}`,
@@ -37,7 +60,7 @@ export const GET: APIRoute = async () => {
       },
     );
   } catch (e) {
-    console.error(e);
+    console.error("[ERRO]", e);
 
     return new Response(
       JSON.stringify(
