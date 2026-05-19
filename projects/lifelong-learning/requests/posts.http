@@ -1,0 +1,14 @@
+### GET - Buscar posts
+GET http://localhost:4321/api/posts
+Content-Type: application/json
+
+
+### POST - Criar post
+POST http://localhost:4321/api/posts
+Content-Type: application/json
+
+{
+  "title": "Meu primeiro post",
+  "body": "Conteúdo do post",
+  "userId": 1
+}
