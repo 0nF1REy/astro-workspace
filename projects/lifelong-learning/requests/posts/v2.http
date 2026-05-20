@@ -1,10 +1,10 @@
 ### GET - Buscar posts
-GET http://localhost:4321/api/posts
+GET http://localhost:4321/api/posts/v2
 Content-Type: application/json
 
 
 ### POST - Criar post
-POST http://localhost:4321/api/posts
+POST http://localhost:4321/api/posts/v2
 Content-Type: application/json
 
 {
