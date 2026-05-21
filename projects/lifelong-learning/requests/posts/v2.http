@@ -3,6 +3,11 @@ GET http://localhost:4321/api/posts/v2
 Content-Type: application/json
 
 
+### GET BY ID - Buscar post por ID
+GET http://localhost:4321/api/posts/v2/1
+Content-Type: application/json
+
+
 ### POST - Criar post
 POST http://localhost:4321/api/posts/v2
 Content-Type: application/json
@@ -12,3 +17,28 @@ Content-Type: application/json
   "body": "Conteúdo do post",
   "userId": 1
 }
+
+
+### PUT - Atualizar post completo
+PUT http://localhost:4321/api/posts/v2/1
+Content-Type: application/json
+
+{
+  "title": "Post atualizado",
+  "body": "Conteúdo atualizado",
+  "userId": 1
+}
+
+
+### PATCH - Atualizar parcialmente
+PATCH http://localhost:4321/api/posts/v2/1
+Content-Type: application/json
+
+{
+  "title": "Título alterado"
+}
+
+
+### DELETE - Remover post
+DELETE http://localhost:4321/api/posts/v2/1
+Content-Type: application/json
