@@ -21,7 +21,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "server": "json-server mocks/db.json"
   },
   "author": {
     "name": "Alan Ryan da Silva Domingues",
@@ -51,6 +52,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "csv-parse": "^6.2.1",
+    "json-server": "^1.0.0-beta.15",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "sass-embedded": "^1.99.0",

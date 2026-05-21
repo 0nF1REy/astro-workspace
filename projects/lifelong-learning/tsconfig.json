@@ -9,7 +9,8 @@
       "@styles/*": ["./src/styles/*"],
       "@data/*": ["./src/data/*"],
       "@types/*": ["./src/types/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@features/*": ["./src/features/*"]
     }
   }
 }
