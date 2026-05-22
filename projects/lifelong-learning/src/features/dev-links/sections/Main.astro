@@ -1,8 +1,6 @@
 ---
 import { getImage } from "astro:assets";
-
 import dots from "@assets/images/dots.png";
-
 import LinkCard from "@components/LinkCard.astro";
 import Button from "@components/ui/Button.astro";
 import Dialog from "@components/ui/Dialog.astro";
@@ -21,13 +19,16 @@ const dotsImage = await getImage({
   </div>
 
   <div class="dev-links__wrapper">
-    <header class="dev-links__header">
-      <h1 class="dev-links__title">Dev Links</h1>
+    <header class="dev-links__header surface-card">
+      <div class="dev-links__hero-copy">
+        <p class="dev-links__eyebrow">Workspace</p>
+        <h1 class="dev-links__title title-gradient">Dev Links</h1>
+      </div>
 
       <Button intent="accent" id="open-dialog"> Adicionar Link </Button>
     </header>
 
-    <div class="dev-links__content">
+    <div class="dev-links__content surface-card">
       <div class="dev-links__grid">
         <!-- <LinkCard link={link} /> -->
       </div>
@@ -50,54 +51,72 @@ const dotsImage = await getImage({
     overflow-x: hidden;
 
     min-height: 100vh;
+    padding: clamp(1rem, 2.5vw, 2rem);
 
-    background: linear-gradient(to bottom, #000000, var(--theme-base));
+    background:
+      radial-gradient(circle at top, rgba(251, 146, 60, 0.16), transparent 26%),
+      radial-gradient(
+        circle at bottom right,
+        rgba(253, 230, 138, 0.08),
+        transparent 22%
+      ),
+      linear-gradient(to bottom, #191612, #120f0d);
 
-    color: var(--theme-text);
+    color: var(--text);
 
     &__wrapper {
       position: relative;
 
       display: grid;
-      grid-template-rows: auto 1fr;
+      gap: 1rem;
 
-      gap: 2.5rem;
-
-      min-height: 100vh;
+      width: min(100%, 1200px);
+      margin-inline: auto;
 
       overflow: hidden;
-
-      @media (min-width: 640px) {
-        gap: 4rem;
-      }
     }
 
     &__header {
-      display: grid;
-      place-items: center;
-
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 1rem;
 
-      padding: 2rem 1rem;
+      padding: 1.25rem 1.5rem;
+
+      @media (max-width: 640px) {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    &__hero-copy {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    &__eyebrow {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
     }
 
     &__title {
       margin: 0;
 
-      font-size: 2.25rem;
-      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 0.95;
+      font-weight: 800;
 
-      color: var(--theme-accent);
-
-      text-shadow: 0 10px 15px black;
+      text-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);
     }
 
     &__content {
       position: relative;
 
-      width: min(100% - 2rem, 1200px);
-
-      margin-inline: auto;
+      padding: 1.25rem;
 
       &::after {
         content: "";
@@ -112,15 +131,15 @@ const dotsImage = await getImage({
 
         border-radius: 9999px;
 
-        background-color: var(--theme-accent);
+        background-color: var(--orange);
 
-        opacity: 0.4;
+        opacity: 0.18;
 
         transform: translateX(-50%);
 
-        filter: blur(64px);
+        filter: blur(70px);
 
-        mix-blend-mode: difference;
+        mix-blend-mode: screen;
 
         z-index: -1;
       }
@@ -128,7 +147,7 @@ const dotsImage = await getImage({
 
     &__grid {
       display: grid;
-      gap: 1.5rem;
+      gap: 1rem;
 
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
@@ -145,14 +164,14 @@ const dotsImage = await getImage({
 
       background-repeat: repeat;
 
-      mix-blend-mode: difference;
+      mix-blend-mode: screen;
 
       z-index: -10;
 
       &--top {
         top: 0;
 
-        opacity: 0.4;
+        opacity: 0.2;
 
         -webkit-mask-image: linear-gradient(
           to bottom,
@@ -170,7 +189,7 @@ const dotsImage = await getImage({
       &--bottom {
         bottom: 0;
 
-        opacity: 0.3;
+        opacity: 0.18;
 
         -webkit-mask-image: linear-gradient(
           to top,

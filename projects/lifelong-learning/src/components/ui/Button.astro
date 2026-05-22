@@ -7,11 +7,23 @@ export interface Props extends HTMLAttributes<"button"> {
   classes?: string;
 }
 
-const { intent = "primary", size = "medium", classes, ...rest } = Astro.props;
+const {
+  intent = "primary",
+  size = "medium",
+  classes,
+  class: className,
+  ...rest
+} = Astro.props;
 ---
 
 <button
-  class:list={["button", `button--${intent}`, `button--${size}`, classes]}
+  class:list={[
+    "button",
+    `button--${intent}`,
+    `button--${size}`,
+    classes,
+    className,
+  ]}
   {...rest}
 >
   <slot />
@@ -19,61 +31,112 @@ const { intent = "primary", size = "medium", classes, ...rest } = Astro.props;
 
 <style lang="scss">
   .button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 
     max-width: fit-content;
+    min-height: 2.75rem;
+    padding: 0.85rem 1.2rem;
+    border: 1px solid rgba(253, 230, 138, 0.12);
+    border-radius: 999px;
 
-    border: transparent;
-    border-radius: 0.375rem;
+    background: linear-gradient(
+      135deg,
+      var(--surface),
+      rgba(251, 146, 60, 0.18)
+    );
+    color: var(--text);
+    box-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    cursor: pointer;
+    font: inherit;
+    text-decoration: none;
 
-    color: var(--theme-base);
-
-    transition: all 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease,
+      background 0.2s ease,
+      filter 0.2s ease;
 
     &:focus {
       outline: none;
     }
 
     &:focus-visible {
-      outline: 2px solid currentColor;
-      outline-offset: 4px;
+      outline: 3px solid rgba(253, 230, 138, 0.65);
+      outline-offset: 3px;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: rgba(251, 146, 60, 0.28);
+      box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(251, 146, 60, 0.08);
+    }
+
+    &:active {
+      transform: translateY(0);
+      filter: brightness(0.98);
     }
 
     &--primary {
-      background-color: var(--theme-text);
+      background: linear-gradient(
+        135deg,
+        var(--surface),
+        rgba(251, 146, 60, 0.18)
+      );
+      color: var(--text);
 
       &:hover {
-        opacity: 0.9;
+        background: linear-gradient(
+          135deg,
+          var(--surface-light),
+          rgba(251, 146, 60, 0.24)
+        );
       }
     }
 
     &--accent {
-      background-color: var(--theme-accent);
+      background: linear-gradient(
+        135deg,
+        var(--orange),
+        rgba(251, 146, 60, 0.82)
+      );
+      color: var(--bg);
 
       &:hover {
-        opacity: 0.9;
+        border-color: rgba(253, 230, 138, 0.24);
+        box-shadow:
+          0 16px 30px rgba(251, 146, 60, 0.22),
+          0 0 0 1px rgba(253, 230, 138, 0.08);
       }
     }
 
     &--small {
-      padding: 0.25rem 0.5rem;
+      min-height: 2.25rem;
+      padding: 0.5rem 0.85rem;
       font-size: 0.875rem;
     }
 
     &--medium {
-      padding: 0.5rem 1rem;
+      padding: 0.85rem 1.2rem;
       font-size: 1rem;
     }
 
     &--large {
-      padding: 0.75rem 1.25rem;
-      font-size: 1.125rem;
+      min-height: 3.25rem;
+      padding: 1rem 1.4rem;
+      font-size: 1.05rem;
     }
 
     &--square {
-      padding: 0.5rem;
+      width: 2.75rem;
+      padding: 0;
       aspect-ratio: 1 / 1;
     }
   }

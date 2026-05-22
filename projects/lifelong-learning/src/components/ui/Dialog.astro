@@ -37,47 +37,61 @@ import TextInput from "./TextInput.astro";
 <style lang="scss">
   .dialog {
     width: 100%;
-    max-width: 24rem;
+    max-width: 32rem;
 
-    border: none;
-    border-radius: 0.375rem;
+    border: 1px solid rgba(253, 230, 138, 0.1);
+    border-radius: 28px;
 
-    background-color: var(--theme-base);
-    color: var(--theme-text);
+    background: linear-gradient(180deg, var(--surface), rgba(20, 17, 14, 0.96));
+    color: var(--text);
 
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+    box-shadow:
+      0 24px 48px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
 
     &::backdrop {
-      background-color: rgba(0, 0, 0, 0.6);
+      background:
+        radial-gradient(circle at top, rgba(251, 146, 60, 0.2), transparent 35%),
+        rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
     }
 
     &__content {
-      padding: 1rem;
+      padding: 1.25rem;
 
       @media (min-width: 640px) {
-        padding: 2rem;
+        padding: 1.75rem;
       }
     }
 
     &__form {
       display: grid;
-      gap: 1rem;
+      gap: 1.1rem;
     }
 
     &__title {
       margin: 0;
 
-      font-size: 1.25rem;
-      font-weight: 700;
-      line-height: 1.25;
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.15;
 
-      color: var(--theme-accent);
+      color: var(--cream);
     }
 
     &__actions {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
+      justify-content: flex-end;
+
+      @media (max-width: 640px) {
+        justify-content: stretch;
+
+        > * {
+          flex: 1 1 100%;
+        }
+      }
     }
   }
 </style>
