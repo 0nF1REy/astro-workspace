@@ -39,6 +39,14 @@ import TextInput from "./TextInput.astro";
     width: 100%;
     max-width: 32rem;
 
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    max-height: 90vh;
+    overflow: auto;
+
     border: 1px solid rgba(253, 230, 138, 0.1);
     border-radius: 28px;
 
@@ -51,7 +59,11 @@ import TextInput from "./TextInput.astro";
 
     &::backdrop {
       background:
-        radial-gradient(circle at top, rgba(251, 146, 60, 0.2), transparent 35%),
+        radial-gradient(
+          circle at top,
+          rgba(251, 146, 60, 0.2),
+          transparent 35%
+        ),
         rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(6px);
     }

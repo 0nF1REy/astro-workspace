@@ -1,23 +1,10 @@
 ---
-import { getImage } from "astro:assets";
-import dots from "@assets/images/dots.png";
 import LinkCard from "@components/LinkCard.astro";
 import Button from "@components/ui/Button.astro";
 import Dialog from "@components/ui/Dialog.astro";
-
-const dotsImage = await getImage({
-  src: dots,
-  format: "avif",
-});
 ---
 
 <section class="dev-links">
-  <div
-    class="dev-links__dots dev-links__dots--top"
-    style={`background-image: url(${dotsImage.src});`}
-  >
-  </div>
-
   <div class="dev-links__wrapper">
     <header class="dev-links__header surface-card">
       <div class="dev-links__hero-copy">
@@ -36,12 +23,6 @@ const dotsImage = await getImage({
 
     <Dialog />
   </div>
-
-  <div
-    class="dev-links__dots dev-links__dots--bottom"
-    style={`background-image: url(${dotsImage.src});`}
-  >
-  </div>
 </section>
 
 <style lang="scss">
@@ -51,16 +32,6 @@ const dotsImage = await getImage({
     overflow-x: hidden;
 
     min-height: 100vh;
-    padding: clamp(1rem, 2.5vw, 2rem);
-
-    background:
-      radial-gradient(circle at top, rgba(251, 146, 60, 0.16), transparent 26%),
-      radial-gradient(
-        circle at bottom right,
-        rgba(253, 230, 138, 0.08),
-        transparent 22%
-      ),
-      linear-gradient(to bottom, #191612, #120f0d);
 
     color: var(--text);
 
@@ -152,53 +123,6 @@ const dotsImage = await getImage({
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
       align-items: start;
-    }
-
-    &__dots {
-      position: absolute;
-
-      left: 0;
-      right: 0;
-
-      height: 15rem;
-
-      background-repeat: repeat;
-
-      mix-blend-mode: screen;
-
-      z-index: -10;
-
-      &--top {
-        top: 0;
-
-        opacity: 0.2;
-
-        -webkit-mask-image: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 1),
-          rgba(0, 0, 0, 0)
-        );
-
-        mask-image: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 1),
-          rgba(0, 0, 0, 0)
-        );
-      }
-
-      &--bottom {
-        bottom: 0;
-
-        opacity: 0.18;
-
-        -webkit-mask-image: linear-gradient(
-          to top,
-          rgba(0, 0, 0, 1),
-          rgba(0, 0, 0, 0)
-        );
-
-        mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-      }
     }
   }
 </style>
