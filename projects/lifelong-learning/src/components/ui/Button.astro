@@ -1,0 +1,80 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"button"> {
+  intent?: "primary" | "accent";
+  size?: "small" | "medium" | "large" | "square";
+  classes?: string;
+}
+
+const { intent = "primary", size = "medium", classes, ...rest } = Astro.props;
+---
+
+<button
+  class:list={["button", `button--${intent}`, `button--${size}`, classes]}
+  {...rest}
+>
+  <slot />
+</button>
+
+<style lang="scss">
+  .button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    max-width: fit-content;
+
+    border: transparent;
+    border-radius: 0.375rem;
+
+    color: var(--theme-base);
+
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 4px;
+    }
+
+    &--primary {
+      background-color: var(--theme-text);
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    &--accent {
+      background-color: var(--theme-accent);
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    &--small {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    &--medium {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+
+    &--large {
+      padding: 0.75rem 1.25rem;
+      font-size: 1.125rem;
+    }
+
+    &--square {
+      padding: 0.5rem;
+      aspect-ratio: 1 / 1;
+    }
+  }
+</style>

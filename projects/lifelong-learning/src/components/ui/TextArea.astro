@@ -1,0 +1,53 @@
+---
+type Props = {
+  name: string;
+  id: number;
+};
+
+const { id, name } = Astro.props;
+---
+
+<div class="textarea-field">
+  <label for={`input-${id}`} class="textarea-field__label">
+    {name}
+  </label>
+
+  <textarea
+    required
+    id={`input-${id}`}
+    name={name.toLowerCase().replace(" ", "-")}
+    class="textarea-field__textarea"></textarea>
+</div>
+
+<style lang="scss">
+  .textarea-field {
+    display: grid;
+    gap: 0.25rem;
+
+    &__label {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+    }
+
+    &__textarea {
+      padding: 0.5rem;
+
+      border: none;
+      border-radius: 0.375rem;
+
+      background-color: var(--theme-text);
+      color: var(--theme-base);
+
+      resize: vertical;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--theme-accent);
+        outline-offset: 4px;
+      }
+    }
+  }
+</style>

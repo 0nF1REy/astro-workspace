@@ -1,0 +1,83 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"a"> {
+  href: string;
+  intent?: "primary" | "accent";
+  size?: "small" | "medium" | "large";
+}
+
+const { href, intent = "primary", size = "medium", ...rest } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={["link", `link--${intent}`, `link--${size}`]}
+  {...rest}
+>
+  <slot />
+</a>
+
+<style lang="scss">
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    max-width: fit-content;
+
+    border: transparent;
+    border-radius: 0.375rem;
+
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+
+    transition:
+      all 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 4px;
+    }
+
+    &--primary {
+      background-color: var(--theme-text);
+      color: var(--theme-base);
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    &--accent {
+      background-color: var(--theme-accent);
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    &--small {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    &--medium {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+
+    &--large {
+      padding: 0.75rem 1.25rem;
+      font-size: 1.125rem;
+    }
+  }
+</style>

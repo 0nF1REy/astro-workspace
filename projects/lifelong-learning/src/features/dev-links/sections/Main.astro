@@ -1,3 +1,185 @@
-<div>
-    Hello World!
-</div>
+---
+import { getImage } from "astro:assets";
+
+import dots from "@assets/images/dots.png";
+
+import LinkCard from "@components/LinkCard.astro";
+import Button from "@components/ui/Button.astro";
+import Dialog from "@components/ui/Dialog.astro";
+
+const dotsImage = await getImage({
+  src: dots,
+  format: "avif",
+});
+---
+
+<section class="dev-links">
+  <div
+    class="dev-links__dots dev-links__dots--top"
+    style={`background-image: url(${dotsImage.src});`}
+  >
+  </div>
+
+  <div class="dev-links__wrapper">
+    <header class="dev-links__header">
+      <h1 class="dev-links__title">Dev Links</h1>
+
+      <Button intent="accent" id="open-dialog"> Adicionar Link </Button>
+    </header>
+
+    <div class="dev-links__content">
+      <div class="dev-links__grid">
+        <!-- <LinkCard link={link} /> -->
+      </div>
+    </div>
+
+    <Dialog />
+  </div>
+
+  <div
+    class="dev-links__dots dev-links__dots--bottom"
+    style={`background-image: url(${dotsImage.src});`}
+  >
+  </div>
+</section>
+
+<style lang="scss">
+  .dev-links {
+    position: relative;
+
+    overflow-x: hidden;
+
+    min-height: 100vh;
+
+    background: linear-gradient(to bottom, #000000, var(--theme-base));
+
+    color: var(--theme-text);
+
+    &__wrapper {
+      position: relative;
+
+      display: grid;
+      grid-template-rows: auto 1fr;
+
+      gap: 2.5rem;
+
+      min-height: 100vh;
+
+      overflow: hidden;
+
+      @media (min-width: 640px) {
+        gap: 4rem;
+      }
+    }
+
+    &__header {
+      display: grid;
+      place-items: center;
+
+      gap: 1rem;
+
+      padding: 2rem 1rem;
+    }
+
+    &__title {
+      margin: 0;
+
+      font-size: 2.25rem;
+      font-weight: 700;
+
+      color: var(--theme-accent);
+
+      text-shadow: 0 10px 15px black;
+    }
+
+    &__content {
+      position: relative;
+
+      width: min(100% - 2rem, 1200px);
+
+      margin-inline: auto;
+
+      &::after {
+        content: "";
+
+        position: absolute;
+
+        left: 50%;
+        bottom: -25%;
+
+        width: 75%;
+        height: 24rem;
+
+        border-radius: 9999px;
+
+        background-color: var(--theme-accent);
+
+        opacity: 0.4;
+
+        transform: translateX(-50%);
+
+        filter: blur(64px);
+
+        mix-blend-mode: difference;
+
+        z-index: -1;
+      }
+    }
+
+    &__grid {
+      display: grid;
+      gap: 1.5rem;
+
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+      align-items: start;
+    }
+
+    &__dots {
+      position: absolute;
+
+      left: 0;
+      right: 0;
+
+      height: 15rem;
+
+      background-repeat: repeat;
+
+      mix-blend-mode: difference;
+
+      z-index: -10;
+
+      &--top {
+        top: 0;
+
+        opacity: 0.4;
+
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 1),
+          rgba(0, 0, 0, 0)
+        );
+
+        mask-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 1),
+          rgba(0, 0, 0, 0)
+        );
+      }
+
+      &--bottom {
+        bottom: 0;
+
+        opacity: 0.3;
+
+        -webkit-mask-image: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 1),
+          rgba(0, 0, 0, 0)
+        );
+
+        mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+      }
+    }
+  }
+</style>

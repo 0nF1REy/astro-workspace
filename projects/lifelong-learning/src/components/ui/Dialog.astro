@@ -1,0 +1,109 @@
+---
+import Button from "./Button.astro";
+import Checkbox from "./Checkbox.astro";
+import TextArea from "./TextArea.astro";
+import TextInput from "./TextInput.astro";
+---
+
+<dialog class="dialog">
+  <div class="dialog__content">
+    <form class="dialog__form" id="add-form">
+      <h2 class="dialog__title">Adicionar um Link</h2>
+
+      <TextInput name="Título do Link" inputId={Math.random()} />
+
+      <TextArea name="Descrição do Link" id={Math.random()} />
+
+      <TextInput
+        name="URL do Link"
+        inputId={Math.random()}
+        title="Deve começar com https://"
+        pattern="https?://.*"
+      />
+
+      <Checkbox checked={false} inputId={Math.random()} name="isRead" />
+
+      <div class="dialog__actions">
+        <Button intent="primary" id="close-dialog" type="button">
+          Fechar
+        </Button>
+
+        <Button intent="accent" type="submit"> Adicionar Link </Button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<style lang="scss">
+  .dialog {
+    width: 100%;
+    max-width: 24rem;
+
+    border: none;
+    border-radius: 0.375rem;
+
+    background-color: var(--theme-base);
+    color: var(--theme-text);
+
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    &__content {
+      padding: 1rem;
+
+      @media (min-width: 640px) {
+        padding: 2rem;
+      }
+    }
+
+    &__form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    &__title {
+      margin: 0;
+
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.25;
+
+      color: var(--theme-accent);
+    }
+
+    &__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const openDialogBtn = document.getElementById(
+    "open-dialog",
+  ) as HTMLButtonElement;
+
+  const closeDialogBtn = document.getElementById(
+    "close-dialog",
+  ) as HTMLButtonElement;
+
+  const dialog = document.querySelector("dialog") as HTMLDialogElement;
+
+  openDialogBtn.addEventListener("click", () => {
+    dialog.showModal();
+  });
+
+  closeDialogBtn.addEventListener("click", () => {
+    dialog.close();
+  });
+
+  dialog.addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) {
+      dialog.close();
+    }
+  });
+</script>
