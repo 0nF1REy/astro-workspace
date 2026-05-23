@@ -1,7 +1,7 @@
 {
   "name": "lifelong-learning",
   "type": "module",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "packageManager": "npm@11.11.0",
   "engines": {
     "node": "24.x"
