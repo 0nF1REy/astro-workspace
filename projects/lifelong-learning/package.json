@@ -6,27 +6,49 @@
   "engines": {
     "node": "24.x"
   },
-  "description": "An advanced technical ecosystem for mastering Astro 6, featuring hybrid rendering architecture, server-side API endpoints, and modular UI patterns with React integration.",
+  "description": "The Lifelong Learning ecosystem: an advanced technical workspace demonstrating Astro 6 with hybrid SSG/SSR rendering, server-side APIs, islands UI, React integration, MDX content collections, TypeScript support, and modular component patterns for continuous learning and examples.",
   "keywords": [
     "astro",
     "astro-6",
+    "astro-islands",
+    "islands-architecture",
     "hybrid-rendering",
     "ssg",
     "ssr",
+    "static-site",
+    "static-site-generator",
     "api-routes",
     "server-endpoints",
+    "serverless",
+    "edge",
     "content-collections",
-    "islands-architecture",
-    "react-integration",
     "mdx",
-    "web-performance"
+    "markdown",
+    "react",
+    "react-integration",
+    "typescript",
+    "components",
+    "design-system",
+    "starter",
+    "boilerplate",
+    "performance",
+    "seo",
+    "rss",
+    "sitemap",
+    "scss",
+    "web-performance",
+    "education",
+    "tutorial",
+    "example",
+    "accessibility"
   ],
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "server": "json-server mocks/db.json"
+    "server": "json-server mocks/db.json",
+    "upgrade": "npx @astrojs/upgrade"
   },
   "author": {
     "name": "Alan Ryan da Silva Domingues",
@@ -42,14 +64,14 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "astro": "^6.3.6",
+    "astro": "^6.3.7",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "sanitize-html": "^2.17.4"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "@astrojs/compiler-rs": "^0.2.0",
+    "@astrojs/compiler-rs": "^0.2.1",
     "@astrojs/mdx": "^5.0.6",
     "@astrojs/node": "^10.1.1",
     "@astrojs/react": "^5.0.5",
