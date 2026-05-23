@@ -202,4 +202,35 @@ const { link } = Astro.props;
       }
     });
   });
+
+  const readInputs = document.querySelectorAll(
+    "[data-isread]",
+  ) as NodeListOf<HTMLInputElement>;
+
+  readInputs.forEach((input) => {
+    input.addEventListener("change", async (e) => {
+      const el = e.currentTarget as HTMLInputElement;
+      const id = el.dataset.id;
+      const newValue = el.checked;
+
+      if (!id) return;
+
+      try {
+        const res = await fetch(`/api/links/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ isRead: newValue }),
+        });
+
+        if (!res.ok) {
+          throw new Error("Erro ao atualizar isRead");
+        }
+
+        window.dispatchEvent(new CustomEvent("dev-links:changed"));
+      } catch (err) {
+        console.error(err);
+        el.checked = !newValue;
+      }
+    });
+  });
 </script>

@@ -139,3 +139,43 @@ export const PUT: APIRoute = async ({ params, request }) => {
     );
   }
 };
+
+export const PATCH: APIRoute = async ({ params, request }) => {
+  try {
+    const id = params.id;
+
+    if (!id) {
+      throw new Error("ID não informado.");
+    }
+
+    const { isRead } = await request.json();
+
+    if (typeof isRead !== "boolean") {
+      throw new Error("Campo isRead inválido.");
+    }
+
+    const req = await fetch(`${API_URL}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ isRead }),
+    });
+
+    if (!req.ok) {
+      throw new Error("Erro ao atualizar isRead.");
+    }
+
+    return new Response(null, { status: 204 });
+  } catch (e) {
+    console.error(e);
+
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: e instanceof Error ? e.message : "Erro desconhecido.",
+      }),
+      { status: 500 },
+    );
+  }
+};
