@@ -6,16 +6,20 @@
   "engines": {
     "node": "24.x"
   },
-  "description": "A pedagogical laboratory for continuous learning with Astro, covering SSG, SSR, React integration, and advanced content management.",
+  "description": "An advanced technical ecosystem for mastering Astro 6, featuring hybrid rendering architecture, server-side API endpoints, and modular UI patterns with React integration.",
   "keywords": [
     "astro",
-    "lifelong-learning",
-    "learning-path",
+    "astro-6",
+    "hybrid-rendering",
     "ssg",
     "ssr",
-    "react-in-astro",
+    "api-routes",
+    "server-endpoints",
+    "content-collections",
+    "islands-architecture",
+    "react-integration",
     "mdx",
-    "educational-project"
+    "web-performance"
   ],
   "scripts": {
     "dev": "astro dev",
