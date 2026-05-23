@@ -4,19 +4,46 @@ import sanitize from "sanitize-html";
 export const prerender = false;
 
 export const GET: APIRoute = async () => {
-  return new Response(
-    JSON.stringify({
-      success: true,
-      message: "API funcionando",
-    }),
-    {
-      status: 200,
+  try {
+    const req = await fetch("http://localhost:3000/links");
 
-      headers: {
-        "Content-Type": "application/json",
+    if (!req.ok) {
+      throw new Error("Erro ao buscar links.");
+    }
+
+    const data = await req.json();
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        data,
+      }),
+      {
+        status: 200,
+
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    },
-  );
+    );
+  } catch (e) {
+    console.error(e);
+
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message:
+          e instanceof Error ? e.message : "Ocorreu um erro desconhecido.",
+      }),
+      {
+        status: 500,
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  }
 };
 
 export const POST: APIRoute = async ({ request }) => {
