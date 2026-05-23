@@ -12,8 +12,8 @@ const links = res.data ?? [];
 
 <section class="dev-links">
   <div class="dev-links__wrapper">
-    <header class="dev-links__header surface-card">
-      <div class="dev-links__hero-copy">
+    <header class="dev-links__header">
+      <div class="dev-links__hero-copy surface-card">
         <p class="dev-links__eyebrow">Workspace</p>
 
         <h1 class="dev-links__title title-gradient">Dev Links</h1>
@@ -29,13 +29,13 @@ const links = res.data ?? [];
       }
     </header>
 
-    <div class="dev-links__content surface-card">
+    <div class="dev-links__content">
       <div class="dev-links__grid">
         {
           links.length > 0 ? (
             links.map((link: LinkProps) => <LinkCard link={link} />)
           ) : (
-            <div class="dev-links__empty">
+            <div class="dev-links__empty surface-card">
               <div class="dev-links__empty-icon">
                 <i class="fa-solid fa-link" />
               </div>
@@ -64,12 +64,6 @@ const links = res.data ?? [];
 
 <style lang="scss">
   .dev-links {
-    position: relative;
-
-    overflow-x: hidden;
-
-    min-height: 100vh;
-
     color: var(--text);
 
     &__empty {
@@ -140,6 +134,9 @@ const links = res.data ?? [];
     &__hero-copy {
       display: grid;
       gap: 0.35rem;
+      flex: 1;
+      width: 100%;
+      min-width: 0;
     }
 
     &__eyebrow {
@@ -168,32 +165,6 @@ const links = res.data ?? [];
       position: relative;
 
       padding: 1.25rem;
-
-      &::after {
-        content: "";
-
-        position: absolute;
-
-        left: 50%;
-        bottom: -25%;
-
-        width: 75%;
-        height: 24rem;
-
-        border-radius: 9999px;
-
-        background-color: var(--orange);
-
-        opacity: 0.18;
-
-        transform: translateX(-50%);
-
-        filter: blur(70px);
-
-        mix-blend-mode: screen;
-
-        z-index: -1;
-      }
     }
 
     &__grid {
