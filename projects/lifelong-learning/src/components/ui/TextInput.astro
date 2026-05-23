@@ -3,7 +3,7 @@ import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"input"> {
   name: string;
-  inputId: number;
+  inputId: string;
 }
 
 const { inputId, name, ...rest } = Astro.props;
