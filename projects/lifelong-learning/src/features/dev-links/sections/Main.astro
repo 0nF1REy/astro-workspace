@@ -1,7 +1,13 @@
 ---
-import LinkCard from "@components/LinkCard.astro";
+import LinkCard, { type LinkProps } from "@components/LinkCard.astro";
 import Button from "@components/ui/Button.astro";
 import Dialog from "@components/ui/Dialog.astro";
+
+const req = await fetch(`${Astro.url.origin}/api/links`);
+
+const res = await req.json();
+
+const links = res.data ?? [];
 ---
 
 <section class="dev-links">
@@ -9,6 +15,7 @@ import Dialog from "@components/ui/Dialog.astro";
     <header class="dev-links__header surface-card">
       <div class="dev-links__hero-copy">
         <p class="dev-links__eyebrow">Workspace</p>
+
         <h1 class="dev-links__title title-gradient">Dev Links</h1>
       </div>
 
@@ -17,7 +24,7 @@ import Dialog from "@components/ui/Dialog.astro";
 
     <div class="dev-links__content surface-card">
       <div class="dev-links__grid">
-        <!-- <LinkCard link={link} /> -->
+       {links.map((l: LinkProps) => <LinkCard link={l} />)}
       </div>
     </div>
 
@@ -42,6 +49,7 @@ import Dialog from "@components/ui/Dialog.astro";
       gap: 1rem;
 
       width: min(100%, 1200px);
+
       margin-inline: auto;
 
       overflow: hidden;
@@ -51,6 +59,7 @@ import Dialog from "@components/ui/Dialog.astro";
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       gap: 1rem;
 
       padding: 1.25rem 1.5rem;
@@ -67,9 +76,13 @@ import Dialog from "@components/ui/Dialog.astro";
     }
 
     &__eyebrow {
+      margin: 0;
+
       color: var(--muted);
+
       font-size: 0.82rem;
       font-weight: 700;
+
       letter-spacing: 0.14em;
       text-transform: uppercase;
     }
@@ -118,6 +131,7 @@ import Dialog from "@components/ui/Dialog.astro";
 
     &__grid {
       display: grid;
+
       gap: 1rem;
 
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

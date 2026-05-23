@@ -10,18 +10,18 @@ import TextInput from "./TextInput.astro";
     <form class="dialog__form" id="add-form">
       <h2 class="dialog__title">Adicionar um Link</h2>
 
-      <TextInput name="Título do Link" inputId={Math.random()} />
+      <TextInput name="Título do Link" inputId={crypto.randomUUID()} />
 
-      <TextArea name="Descrição do Link" id={Math.random()} />
+      <TextArea name="Descrição do Link" id={crypto.randomUUID()} />
 
       <TextInput
         name="URL do Link"
-        inputId={Math.random()}
+        inputId={crypto.randomUUID()}
         title="Deve começar com https://"
         pattern="https?://.*"
       />
 
-      <Checkbox checked={false} inputId={Math.random()} name="isRead" />
+      <Checkbox checked={false} inputId={crypto.randomUUID()} name="isRead" />
 
       <div class="dialog__actions">
         <Button intent="primary" id="close-dialog" type="button">
