@@ -19,7 +19,11 @@ const { inputId, name, ...rest } = Astro.props;
     required
     id={`input-${inputId}`}
     {...rest}
-    name={name.toLowerCase().replace(" ", "-")}
+    name={name
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/\s+/g, "-")}
     class="input-field__input"
   />
 </div>

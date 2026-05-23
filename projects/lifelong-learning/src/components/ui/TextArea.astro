@@ -15,7 +15,11 @@ const { id, name } = Astro.props;
   <textarea
     required
     id={`input-${id}`}
-    name={name.toLowerCase().replace(" ", "-")}
+    name={name
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/\s+/g, "-")}
     class="textarea-field__textarea"></textarea>
 </div>
 
