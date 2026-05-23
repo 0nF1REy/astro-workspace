@@ -170,3 +170,35 @@ const { link } = Astro.props;
     }
   }
 </style>
+
+<script>
+  const deleteButtons = document.querySelectorAll(
+    "[data-delete]",
+  ) as NodeListOf<HTMLButtonElement>;
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const id = button.dataset.id;
+
+      try {
+        if (!id) {
+          throw new Error("ID não encontrado");
+        }
+
+        const response = await fetch(`/api/links/${id}`, {
+          method: "DELETE",
+        });
+
+        if (!response.ok) {
+          throw new Error("Erro ao excluir link");
+        }
+
+        console.log("Link removido");
+
+        button.closest("article")?.remove();
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  });
+</script>
