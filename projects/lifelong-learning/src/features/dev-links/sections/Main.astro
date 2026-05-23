@@ -19,12 +19,42 @@ const links = res.data ?? [];
         <h1 class="dev-links__title title-gradient">Dev Links</h1>
       </div>
 
-      <Button intent="accent" id="open-dialog"> Adicionar Link </Button>
+      {
+        links.length > 0 && (
+          <Button intent="accent" data-open-dialog>
+            <i class="fa-solid fa-plus" />
+            Adicionar Link
+          </Button>
+        )
+      }
     </header>
 
     <div class="dev-links__content surface-card">
       <div class="dev-links__grid">
-       {links.map((l: LinkProps) => <LinkCard link={l} />)}
+        {
+          links.length > 0 ? (
+            links.map((link: LinkProps) => <LinkCard link={link} />)
+          ) : (
+            <div class="dev-links__empty">
+              <div class="dev-links__empty-icon">
+                <i class="fa-solid fa-link" />
+              </div>
+              <h3 class="dev-links__empty-title">Nenhum link salvo ainda</h3>
+              <p class="dev-links__empty-text">
+                Comece adicionando seu primeiro link. Você pode salvar links
+                úteis e organizá-los para referência futura.
+              </p>
+              <Button
+                intent="accent"
+                data-open-dialog
+                class="dev-links__empty-cta"
+              >
+                <i class="fa-solid fa-plus" />
+                Adicionar Primeiro Link
+              </Button>
+            </div>
+          )
+        }
       </div>
     </div>
 
@@ -41,6 +71,43 @@ const links = res.data ?? [];
     min-height: 100vh;
 
     color: var(--text);
+
+    &__empty {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    &__empty-icon {
+      font-size: 3.5rem;
+      color: var(--orange);
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    &__empty-title {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--cream);
+    }
+
+    &__empty-text {
+      margin: 0 0 1.75rem 0;
+      color: var(--muted);
+      max-width: 35ch;
+      line-height: 1.6;
+    }
+
+    &__empty-cta {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
 
     &__wrapper {
       position: relative;

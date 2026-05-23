@@ -118,9 +118,7 @@ import TextInput from "./TextInput.astro";
 <script>
   const addForm = document.querySelector("#add-form") as HTMLFormElement;
 
-  const openDialogBtn = document.getElementById(
-    "open-dialog",
-  ) as HTMLButtonElement;
+  const openDialogButtons = document.querySelectorAll("[data-open-dialog]");
 
   const closeDialogBtn = document.getElementById(
     "close-dialog",
@@ -128,8 +126,10 @@ import TextInput from "./TextInput.astro";
 
   const dialog = document.querySelector("dialog") as HTMLDialogElement;
 
-  openDialogBtn.addEventListener("click", () => {
-    dialog.showModal();
+  openDialogButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      dialog.showModal();
+    });
   });
 
   closeDialogBtn.addEventListener("click", () => {
