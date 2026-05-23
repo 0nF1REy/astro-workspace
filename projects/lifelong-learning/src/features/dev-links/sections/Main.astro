@@ -22,9 +22,11 @@ const links = res.data ?? [];
       </div>
 
       <div class="dev-links__hero-actions">
-        <p class="dev-links__count">
-          <span>{links.length}</span>
-          {links.length === 1 ? "link salvo" : "links salvos"}
+        <p class="dev-links__count" aria-live="polite">
+          <span data-count-value>{links.length}</span>
+          <span data-count-label>
+            {links.length === 1 ? "link salvo" : "links salvos"}
+          </span>
         </p>
 
         {
@@ -40,30 +42,27 @@ const links = res.data ?? [];
 
     <div class="dev-links__board">
       <div class="dev-links__grid">
-        {
-          links.length > 0 ? (
-            links.map((link: LinkProps) => <LinkCard link={link} />)
-          ) : (
-            <div class="dev-links__empty surface-card">
-              <div class="dev-links__empty-icon">
-                <i class="fa-solid fa-link" />
-              </div>
-              <h3 class="dev-links__empty-title">Nenhum link salvo ainda</h3>
-              <p class="dev-links__empty-text">
-                Comece adicionando seu primeiro link. Você pode salvar links
-                úteis e organizá-los para referência futura.
-              </p>
-              <Button
-                intent="accent"
-                data-open-dialog
-                class="dev-links__empty-cta"
-              >
-                <i class="fa-solid fa-plus" />
-                Adicionar Primeiro Link
-              </Button>
-            </div>
-          )
-        }
+        {links.map((link: LinkProps) => <LinkCard link={link} />)}
+
+        <div
+          class={`dev-links__empty surface-card ${
+            links.length > 0 ? "dev-links__empty--hidden" : ""
+          }`}
+          data-empty-state
+        >
+          <div class="dev-links__empty-icon">
+            <i class="fa-solid fa-link"></i>
+          </div>
+          <h3 class="dev-links__empty-title">Nenhum link salvo ainda</h3>
+          <p class="dev-links__empty-text">
+            Comece adicionando seu primeiro link. Você pode salvar links úteis e
+            organizá-los para referência futura.
+          </p>
+          <Button intent="accent" data-open-dialog class="dev-links__empty-cta">
+            <i class="fa-solid fa-plus"></i>
+            Adicionar Primeiro Link
+          </Button>
+        </div>
       </div>
     </div>
 
@@ -228,6 +227,10 @@ const links = res.data ?? [];
       text-align: center;
     }
 
+    &__empty--hidden {
+      display: none;
+    }
+
     &__empty-icon {
       font-size: 3.3rem;
       color: var(--orange);
@@ -256,3 +259,33 @@ const links = res.data ?? [];
     }
   }
 </style>
+
+<script>
+  const root = document.querySelector(".dev-links");
+
+  if (root) {
+    const grid = root.querySelector(".dev-links__grid");
+    const emptyState = root.querySelector("[data-empty-state]");
+    const countValue = root.querySelector("[data-count-value]");
+    const countLabel = root.querySelector("[data-count-label]");
+
+    const syncUI = () => {
+      const count = grid?.querySelectorAll("[data-link-card]").length ?? 0;
+
+      if (countValue) {
+        countValue.textContent = String(count);
+      }
+
+      if (countLabel) {
+        countLabel.textContent = count === 1 ? "link salvo" : "links salvos";
+      }
+
+      if (emptyState) {
+        emptyState.classList.toggle("dev-links__empty--hidden", count > 0);
+      }
+    };
+
+    syncUI();
+    window.addEventListener("dev-links:changed", syncUI);
+  }
+</script>

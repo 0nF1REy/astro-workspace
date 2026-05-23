@@ -18,7 +18,7 @@ type Props = {
 const { link } = Astro.props;
 ---
 
-<article class="link-card surface-card">
+<article class="link-card surface-card" data-link-card>
   <div class="link-card__content">
     <Checkbox
       checked={link.isRead}
@@ -196,6 +196,7 @@ const { link } = Astro.props;
         console.log("Link removido");
 
         button.closest("article")?.remove();
+        window.dispatchEvent(new CustomEvent("dev-links:changed"));
       } catch (error) {
         console.error(error);
       }
