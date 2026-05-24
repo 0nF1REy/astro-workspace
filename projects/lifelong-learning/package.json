@@ -64,6 +64,7 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
+    "@astrojs/db": "^0.21.2",
     "astro": "^6.3.7",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",

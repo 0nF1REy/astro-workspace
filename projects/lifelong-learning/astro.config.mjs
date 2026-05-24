@@ -4,6 +4,7 @@ import node from "@astrojs/node";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import db from "@astrojs/db";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,7 +17,7 @@ export default defineConfig({
   trailingSlash: "never",
 
   // Integrações
-  integrations: [react(), mdx(), sitemap()],
+  integrations: [react(), mdx(), sitemap(), db()],
 
   // Servidor de desenvolvimento
   server: {
