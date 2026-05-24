@@ -47,6 +47,8 @@
     "dev:remote": "astro dev --remote",
     "build": "astro build",
     "build:remote": "astro build --remote",
+    "db:push": "astro db push --remote",
+    "db:seed": "astro db execute db/seed.ts --remote",
     "preview": "astro preview",
     "astro": "astro",
     "server": "json-server mocks/db.json",
