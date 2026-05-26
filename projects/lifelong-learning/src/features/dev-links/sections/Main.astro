@@ -3,7 +3,11 @@ import LinkCard, { type LinkProps } from "@components/LinkCard.astro";
 import Button from "@components/ui/Button.astro";
 import Dialog from "@components/ui/Dialog.astro";
 
-const req = await fetch(`${Astro.url.origin}/api/links`);
+const apiUrl = import.meta.env.DEV
+  ? `${Astro.url.origin}/api/links`
+  : new URL("/api/links", Astro.site);
+
+const req = await fetch(apiUrl);
 
 const res = await req.json();
 

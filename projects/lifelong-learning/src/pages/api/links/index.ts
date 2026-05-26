@@ -3,7 +3,52 @@ import sanitize from "sanitize-html";
 
 export const prerender = false;
 
+const devOnlyResponse = () =>
+  new Response(
+    JSON.stringify({
+      success: false,
+      message: "json-server disponível apenas em desenvolvimento.",
+    }),
+    {
+      status: 503,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+const serverUnavailableResponse = () =>
+  new Response(
+    JSON.stringify({
+      success: false,
+      message:
+        "json-server não está rodando. Execute npm run server em desenvolvimento.",
+    }),
+    {
+      status: 503,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+const isServerUnavailableError = (error: unknown) => {
+  if (!(error instanceof Error)) {
+    return false;
+  }
+
+  const cause = error.cause as { code?: string } | undefined;
+
+  return (
+    error.message.includes("fetch failed") || cause?.code === "ECONNREFUSED"
+  );
+};
+
 export const GET: APIRoute = async () => {
+  if (!import.meta.env.DEV) {
+    return devOnlyResponse();
+  }
+
   try {
     const req = await fetch("http://localhost:3000/links");
 
@@ -29,6 +74,10 @@ export const GET: APIRoute = async () => {
   } catch (e) {
     console.error(e);
 
+    if (isServerUnavailableError(e)) {
+      return serverUnavailableResponse();
+    }
+
     return new Response(
       JSON.stringify({
         success: false,
@@ -47,6 +96,10 @@ export const GET: APIRoute = async () => {
 };
 
 export const POST: APIRoute = async ({ request }) => {
+  if (!import.meta.env.DEV) {
+    return devOnlyResponse();
+  }
+
   const body = await request.json();
 
   try {
@@ -98,6 +151,10 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (e) {
     console.error(e);
+
+    if (isServerUnavailableError(e)) {
+      return serverUnavailableResponse();
+    }
 
     if (e instanceof Error) {
       return new Response(

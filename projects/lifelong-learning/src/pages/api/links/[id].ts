@@ -3,6 +3,47 @@ import sanitize from "sanitize-html";
 
 export const prerender = false;
 
+const devOnlyResponse = () =>
+  new Response(
+    JSON.stringify({
+      success: false,
+      message: "json-server disponível apenas em desenvolvimento.",
+    }),
+    {
+      status: 503,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+const serverUnavailableResponse = () =>
+  new Response(
+    JSON.stringify({
+      success: false,
+      message:
+        "json-server não está rodando. Execute npm run server em desenvolvimento.",
+    }),
+    {
+      status: 503,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+const isServerUnavailableError = (error: unknown) => {
+  if (!(error instanceof Error)) {
+    return false;
+  }
+
+  const cause = error.cause as { code?: string } | undefined;
+
+  return (
+    error.message.includes("fetch failed") || cause?.code === "ECONNREFUSED"
+  );
+};
+
 const API_URL = "http://localhost:3000/links";
 
 const jsonResponse = (data: unknown, status = 200) => {
@@ -16,6 +57,10 @@ const jsonResponse = (data: unknown, status = 200) => {
 };
 
 export const GET: APIRoute = async ({ params }) => {
+  if (!import.meta.env.DEV) {
+    return devOnlyResponse();
+  }
+
   try {
     const id = params.id;
 
@@ -38,6 +83,10 @@ export const GET: APIRoute = async ({ params }) => {
   } catch (e) {
     console.error(e);
 
+    if (isServerUnavailableError(e)) {
+      return serverUnavailableResponse();
+    }
+
     return jsonResponse(
       {
         success: false,
@@ -49,6 +98,10 @@ export const GET: APIRoute = async ({ params }) => {
 };
 
 export const DELETE: APIRoute = async ({ params }) => {
+  if (!import.meta.env.DEV) {
+    return devOnlyResponse();
+  }
+
   try {
     const id = params.id;
 
@@ -70,6 +123,10 @@ export const DELETE: APIRoute = async ({ params }) => {
   } catch (e) {
     console.error(e);
 
+    if (isServerUnavailableError(e)) {
+      return serverUnavailableResponse();
+    }
+
     return jsonResponse(
       {
         success: false,
@@ -81,6 +138,10 @@ export const DELETE: APIRoute = async ({ params }) => {
 };
 
 export const PUT: APIRoute = async ({ params, request }) => {
+  if (!import.meta.env.DEV) {
+    return devOnlyResponse();
+  }
+
   try {
     const id = params.id;
 
@@ -130,6 +191,10 @@ export const PUT: APIRoute = async ({ params, request }) => {
   } catch (e) {
     console.error(e);
 
+    if (isServerUnavailableError(e)) {
+      return serverUnavailableResponse();
+    }
+
     return jsonResponse(
       {
         success: false,
@@ -141,6 +206,10 @@ export const PUT: APIRoute = async ({ params, request }) => {
 };
 
 export const PATCH: APIRoute = async ({ params, request }) => {
+  if (!import.meta.env.DEV) {
+    return devOnlyResponse();
+  }
+
   try {
     const id = params.id;
 
@@ -169,6 +238,10 @@ export const PATCH: APIRoute = async ({ params, request }) => {
     return new Response(null, { status: 204 });
   } catch (e) {
     console.error(e);
+
+    if (isServerUnavailableError(e)) {
+      return serverUnavailableResponse();
+    }
 
     return new Response(
       JSON.stringify({
