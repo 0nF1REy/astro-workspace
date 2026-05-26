@@ -10,7 +10,7 @@ import db from "@astrojs/db";
 // https://astro.build/config
 export default defineConfig({
   // Site e roteamento
-  site: "https://meu-projeto-astro.com",
+  site: "https://my-lifelong-learning.vercel.app",
   output: "static",
   trailingSlash: "never",
   adapter: vercel(),
