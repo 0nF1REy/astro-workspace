@@ -7,11 +7,29 @@ const apiUrl = import.meta.env.DEV
   ? `${Astro.url.origin}/api/links`
   : new URL("/api/links", Astro.site);
 
-const req = await fetch(apiUrl);
+let links: LinkProps[] = [];
 
-const res = await req.json();
+try {
+  const req = await fetch(apiUrl);
 
-const links = res.data ?? [];
+  if (!req.ok) {
+    throw new Error(`Erro HTTP: ${req.status}`);
+  }
+
+  const contentType = req.headers.get("content-type");
+
+  if (!contentType?.includes("application/json")) {
+    const text = await req.text();
+
+    throw new Error(`Resposta inválida da API: ${text.slice(0, 120)}`);
+  }
+
+  const res = await req.json();
+
+  links = res.data ?? [];
+} catch (e) {
+  console.error(e);
+}
 ---
 
 <section class="dev-links">
