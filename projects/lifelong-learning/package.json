@@ -52,6 +52,7 @@
     "upgrade": "npx @astrojs/upgrade",
     "db:push": "astro db push --remote",
     "db:seed": "astro db execute db/seed.ts --remote",
+    "sync": "astro sync",
     "server": "json-server mock/db.json",
     "astro": "astro"
   },

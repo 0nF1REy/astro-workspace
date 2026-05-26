@@ -1,60 +1,15 @@
 import type { APIRoute } from "astro";
 import sanitize from "sanitize-html";
+import {
+  devOnlyResponse,
+  serverUnavailableResponse,
+  isServerUnavailableError,
+  jsonResponse,
+} from "@lib/api/dev-server";
 
 export const prerender = false;
 
-const devOnlyResponse = () =>
-  new Response(
-    JSON.stringify({
-      success: false,
-      message: "json-server disponível apenas em desenvolvimento.",
-    }),
-    {
-      status: 503,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  );
-
-const serverUnavailableResponse = () =>
-  new Response(
-    JSON.stringify({
-      success: false,
-      message:
-        "json-server não está rodando. Execute npm run server em desenvolvimento.",
-    }),
-    {
-      status: 503,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  );
-
-const isServerUnavailableError = (error: unknown) => {
-  if (!(error instanceof Error)) {
-    return false;
-  }
-
-  const cause = error.cause as { code?: string } | undefined;
-
-  return (
-    error.message.includes("fetch failed") || cause?.code === "ECONNREFUSED"
-  );
-};
-
 const API_URL = "http://localhost:3000/links";
-
-const jsonResponse = (data: unknown, status = 200) => {
-  return new Response(JSON.stringify(data), {
-    status,
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
 
 export const GET: APIRoute = async ({ params }) => {
   if (!import.meta.env.DEV) {
