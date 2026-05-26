@@ -3,32 +3,22 @@ import LinkCard, { type LinkProps } from "@components/LinkCard.astro";
 import Button from "@components/ui/Button.astro";
 import Dialog from "@components/ui/Dialog.astro";
 
-const apiUrl = import.meta.env.DEV
-  ? `${Astro.url.origin}/api/links`
-  : new URL("/api/links", Astro.site);
-
 let links: LinkProps[] = [];
 
-try {
-  const req = await fetch(apiUrl);
+if (import.meta.env.DEV) {
+  try {
+    const req = await fetch(`${Astro.url.origin}/api/links`);
 
-  if (!req.ok) {
-    throw new Error(`Erro HTTP: ${req.status}`);
+    if (!req.ok) {
+      throw new Error(`Erro HTTP: ${req.status}`);
+    }
+
+    const res = await req.json();
+
+    links = res.data ?? [];
+  } catch (e) {
+    console.error(e);
   }
-
-  const contentType = req.headers.get("content-type");
-
-  if (!contentType?.includes("application/json")) {
-    const text = await req.text();
-
-    throw new Error(`Resposta inválida da API: ${text.slice(0, 120)}`);
-  }
-
-  const res = await req.json();
-
-  links = res.data ?? [];
-} catch (e) {
-  console.error(e);
 }
 ---
 
