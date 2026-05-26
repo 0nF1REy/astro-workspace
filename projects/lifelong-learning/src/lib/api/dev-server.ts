@@ -67,3 +67,8 @@ export const jsonResponse = (data: unknown, status = 200): Response => {
     },
   });
 };
+
+/**
+ * Base URL para dev-server mock API
+ */
+export const API_URL = "http://localhost:3000/links";

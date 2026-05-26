@@ -5,6 +5,7 @@ import {
   serverUnavailableResponse,
   isServerUnavailableError,
   jsonResponse,
+  API_URL,
 } from "@lib/api/dev-server";
 
 export const prerender = false;
@@ -15,7 +16,7 @@ export const GET: APIRoute = async () => {
   }
 
   try {
-    const req = await fetch("http://localhost:3000/links");
+    const req = await fetch(API_URL);
 
     if (!req.ok) {
       throw new Error("Erro ao buscar links.");
@@ -79,7 +80,7 @@ export const POST: APIRoute = async ({ request }) => {
       throw new Error("Por favor, forneça todos os campos obrigatórios.");
     }
 
-    const req = await fetch("http://localhost:3000/links", {
+    const req = await fetch(API_URL, {
       method: "POST",
 
       headers: {

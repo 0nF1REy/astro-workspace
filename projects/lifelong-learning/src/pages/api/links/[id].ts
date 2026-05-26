@@ -5,11 +5,10 @@ import {
   serverUnavailableResponse,
   isServerUnavailableError,
   jsonResponse,
+  API_URL,
 } from "@lib/api/dev-server";
 
 export const prerender = false;
-
-const API_URL = "http://localhost:3000/links";
 
 export const GET: APIRoute = async ({ params }) => {
   if (!import.meta.env.DEV) {
