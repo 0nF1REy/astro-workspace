@@ -1,6 +1,7 @@
 /**
- * Utilitários de API apenas para desenvolvimento (dev-server e mock API)
- * Centraliza helpers de resposta reutilizáveis e detecção de erros entre as rotas da API
+ * Utilitários de suporte para rotas de API
+ * Centraliza helpers de resposta JSON, tratamento de erros e integração com mock server
+ * Usado para padronizar respostas entre endpoints de API
  */
 
 /**
