@@ -3,7 +3,7 @@
 WORKSPACE_DIR := projects
 PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 
-.PHONY: help list open add status sync \
+.PHONY: help list open add status sync install-all build-all prepare-all \
 	atarashii-gakko book-bites clerk-auth cloudinary-form-upload \
 	jashin-chan-dropkick lifelong-learning p5js-workspace portfolio\
 	product-management profile scriptora
@@ -48,6 +48,29 @@ sync: ## Sincroniza o repositório
 	@echo ""
 	@echo "Status atual do repositório:"
 	@git status
+
+install-all: ## Instala dependências em todos os projetos
+	@echo "Instalando dependências em todos os projetos..."
+	@for project in $(PROJECTS); do \
+		if [ -f "$(WORKSPACE_DIR)/$$project/package.json" ]; then \
+			echo "$$project"; \
+			cd "$(WORKSPACE_DIR)/$$project" && npm install; \
+		fi \
+	done
+	@echo "Instalação concluída"
+
+build-all: ## Executa build em todos os projetos
+	@echo "Build em todos os projetos..."
+	@for project in $(PROJECTS); do \
+		if [ -f "$(WORKSPACE_DIR)/$$project/package.json" ]; then \
+			echo "$$project"; \
+			cd "$(WORKSPACE_DIR)/$$project" && npm run build; \
+		fi \
+	done
+	@echo "Build concluído"
+
+prepare-all: install-all build-all ## Prepara todos os projetos
+	@echo "Todos os projetos preparados!"
 
 atarashii-gakko:
 	@code "$(WORKSPACE_DIR)/atarashii-gakko/atarashii-gakko.code-workspace"
