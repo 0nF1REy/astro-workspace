@@ -46,14 +46,15 @@
     "dev": "astro dev",
     "dev:remote": "astro dev --remote",
     "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
-    "build": "astro build --remote",
+    "build": "npm run clean && astro build --remote",
     "preview": "astro preview",
+    "clean": "rimraf dist",
     "check": "astro check",
-    "upgrade": "npx @astrojs/upgrade",
+    "sync": "astro sync",
     "db:push": "astro db push --remote",
     "db:seed": "astro db execute db/seed.ts --remote",
-    "sync": "astro sync",
     "server": "json-server mock/db.json",
+    "upgrade": "npx @astrojs/upgrade",
     "astro": "astro"
   },
   "author": {
@@ -91,6 +92,7 @@
     "concurrently": "^9.2.1",
     "csv-parse": "^6.2.1",
     "json-server": "^1.0.0-beta.15",
+    "rimraf": "^6.1.3",
     "sass-embedded": "^1.99.0",
     "toml": "^4.1.1",
     "typescript": "^6.0.3"
