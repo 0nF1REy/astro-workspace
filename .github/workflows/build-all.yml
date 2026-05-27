@@ -7,9 +7,47 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  build:
+  discover:
     runs-on: ubuntu-latest
+    outputs:
+      projects: ${{ steps.set.outputs.projects }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Discover projects
+        id: set
+        run: |
+          projects=$(python - <<'PY'
+          import os, json
+          root='projects'
+          projs=[]
+          if os.path.isdir(root):
+            for name in sorted(os.listdir(root)):
+              path=os.path.join(root,name)
+              if os.path.isdir(path) and os.path.exists(os.path.join(path,'package.json')):
+                projs.append(name)
+          print(json.dumps(projs))
+          PY
+          )
+          echo "projects=$projects" >> $GITHUB_OUTPUT
+
+  build:
+    needs: discover
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      matrix:
+        project: ${{ fromJson(needs.discover.outputs.projects) }}
+    concurrency:
+      group: ${{ github.workflow }}-${{ matrix.project }}-${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - name: Checkout Code
@@ -20,5 +58,63 @@ jobs:
         with:
           node-version: 24
 
-      - name: Full pipeline
-        run: make prepare-all
+      - name: Cache node_modules for project
+        uses: actions/cache@v5
+        with:
+          path: projects/${{ matrix.project }}/node_modules
+          key: ${{ runner.os }}-node-modules-${{ matrix.project }}-${{ hashFiles(format('projects/{0}/package-lock.json', matrix.project)) }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-${{ matrix.project }}-
+
+      - name: Install dependencies (project)
+        run: |
+          cd projects/${{ matrix.project }}
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - name: Build project
+        run: |
+          cd projects/${{ matrix.project }}
+          npm run build
+
+  lint-test:
+    needs: discover
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        project: ${{ fromJson(needs.discover.outputs.projects) }}
+    concurrency:
+      group: ${{ github.workflow }}-lint-${{ matrix.project }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Cache node_modules for lint/test
+        uses: actions/cache@v5
+        with:
+          path: projects/${{ matrix.project }}/node_modules
+          key: ${{ runner.os }}-node-modules-${{ matrix.project }}-${{ hashFiles(format('projects/{0}/package-lock.json', matrix.project)) }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-${{ matrix.project }}-
+
+      - name: Install dependencies (project)
+        run: |
+          cd projects/${{ matrix.project }}
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - name: Run lint (if present)
+        run: |
+          cd projects/${{ matrix.project }}
+          npm run lint --if-present
+
+      - name: Run tests (if present)
+        run: |
+          cd projects/${{ matrix.project }}
+          npm run test --if-present
