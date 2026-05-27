@@ -1,0 +1,61 @@
+Scripts disponíveis:
+
+========================= Desenvolvimento =========================
+
+npm run dev
+→ Inicia o servidor de desenvolvimento do Astro.
+
+npm run dev:remote
+→ Inicia o Astro utilizando banco remoto (Turso/libSQL).
+
+npm run dev:full
+→ Inicia Astro + json-server simultaneamente.
+
+============================== Build ==============================
+
+npm run build
+→ Limpa a pasta dist e gera a build de produção.
+
+npm run preview
+→ Visualiza localmente a build de produção.
+
+npm run clean
+→ Remove a pasta dist utilizando rimraf.
+
+=========================== Astro Utils ===========================
+
+npm run check
+→ Executa verificações e diagnósticos do Astro.
+
+npm run sync
+→ Sincroniza tipos gerados pelo Astro e integrações.
+
+npm run info
+→ Exibe informações do ambiente Astro/Vite/Node.
+
+npm run upgrade
+→ Executa atualização guiada do Astro.
+
+npm run astro
+→ Executa comandos diretos da CLI do Astro.
+
+============================= Astro DB ============================
+
+npm run db:push
+→ Envia o schema do Astro DB para o banco remoto.
+
+npm run db:seed
+→ Executa seed no banco remoto utilizando db/seed.ts.
+
+============================= Mock API ============================
+
+npm run server
+→ Inicia o json-server usando mock/db.json.
+
+=========================== Documentação ==========================
+
+npm run help
+→ Exibe esta lista de scripts.
+
+npm run list
+→ Lista scripts disponíveis no package.json.

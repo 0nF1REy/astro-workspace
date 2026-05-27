@@ -51,11 +51,14 @@
     "clean": "rimraf dist",
     "check": "astro check",
     "sync": "astro sync",
+    "info": "astro info",
+    "upgrade": "npx @astrojs/upgrade",
+    "astro": "astro",
     "db:push": "astro db push --remote",
     "db:seed": "astro db execute db/seed.ts --remote",
     "server": "json-server mock/db.json",
-    "upgrade": "npx @astrojs/upgrade",
-    "astro": "astro"
+    "help": "cat docs/help.txt",
+    "list": "npm run"
   },
   "author": {
     "name": "Alan Ryan da Silva Domingues",
