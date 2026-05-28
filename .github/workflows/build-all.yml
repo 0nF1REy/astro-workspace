@@ -38,11 +38,12 @@ jobs:
           )
           echo "projects=$projects" >> $GITHUB_OUTPUT
 
-  build:
+  verify:
     needs: discover
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:
+      fail-fast: false
       matrix:
         project: ${{ fromJson(needs.discover.outputs.projects) }}
     concurrency:
@@ -58,7 +59,7 @@ jobs:
         with:
           node-version: 24
 
-      - name: Cache node_modules for project
+      - name: Cache node_modules
         uses: actions/cache@v5
         with:
           path: projects/${{ matrix.project }}/node_modules
@@ -66,45 +67,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-modules-${{ matrix.project }}-
 
-      - name: Install dependencies (project)
-        run: |
-          cd projects/${{ matrix.project }}
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
-
-      - name: Build project
-        run: |
-          cd projects/${{ matrix.project }}
-          npm run build
-
-  lint-test:
-    needs: discover
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    strategy:
-      matrix:
-        project: ${{ fromJson(needs.discover.outputs.projects) }}
-    concurrency:
-      group: ${{ github.workflow }}-lint-${{ matrix.project }}-${{ github.ref }}
-      cancel-in-progress: true
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v6
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Cache node_modules for lint/test
-        uses: actions/cache@v5
-        with:
-          path: projects/${{ matrix.project }}/node_modules
-          key: ${{ runner.os }}-node-modules-${{ matrix.project }}-${{ hashFiles(format('projects/{0}/package-lock.json', matrix.project)) }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-${{ matrix.project }}-
-
-      - name: Install dependencies (project)
+      - name: Install dependencies
         run: |
           cd projects/${{ matrix.project }}
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
@@ -118,3 +81,8 @@ jobs:
         run: |
           cd projects/${{ matrix.project }}
           npm run test --if-present
+
+      - name: Build project
+        run: |
+          cd projects/${{ matrix.project }}
+          npm run build
