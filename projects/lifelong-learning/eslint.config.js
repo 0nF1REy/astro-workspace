@@ -5,7 +5,13 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["dist/**", ".astro/**", ".vercel/**", "node_modules/**"],
+    ignores: [
+      "dist/**",
+      ".astro/**",
+      ".vercel/**",
+      "node_modules/**",
+      "coverage/**",
+    ],
   },
 
   js.configs.recommended,
@@ -15,13 +21,18 @@ export default [
   ...astro.configs.recommended,
 
   {
-    files: ["**/*.{js,mjs,cjs,ts,astro}"],
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx,astro}"],
 
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.node,
       },
+    },
+
+    rules: {
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unused-vars": "warn",
     },
   },
 ];
