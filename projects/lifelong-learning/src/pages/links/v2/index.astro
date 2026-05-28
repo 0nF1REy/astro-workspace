@@ -1,10 +1,10 @@
 ---
 export const prerender = false;
 
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import DbLinksPage from "@features/links/v2-db";
 ---
 
-<Layout title="DB LINKS">
+<BaseLayout title="DB LINKS">
   <DbLinksPage />
-</Layout>
+</BaseLayout>

@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from "astro";
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { fetchTopAnime } from "../../lib/anime/fetchTopAnime.ts";
 
 export const getStaticPaths = (async () => {
@@ -35,7 +35,7 @@ const trailerEmbedUrl = _rawTrailerEmbed
   : null;
 ---
 
-<Layout title={anime.title}>
+<BaseLayout title={anime.title}>
   <section class="anime-detail">
     <article class="anime-detail__card surface-card">
       <div class="anime-detail__hero">
@@ -230,7 +230,7 @@ const trailerEmbedUrl = _rawTrailerEmbed
       </div>
     </article>
   </section>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .anime-detail {

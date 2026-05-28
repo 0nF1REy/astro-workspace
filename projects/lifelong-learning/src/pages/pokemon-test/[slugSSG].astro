@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from "astro";
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import type { PokemonRes } from "../../types/PokeType";
 
 export const getStaticPaths = (async () => {
@@ -16,7 +16,7 @@ export const getStaticPaths = (async () => {
 const { name, url } = Astro.props;
 ---
 
-<Layout title={name}>
+<BaseLayout title={name}>
   <section class="pokemon-detail">
     <div class="pokemon-detail__hero surface-card">
       <p class="pokemon-detail__eyebrow">Pokémon / Teste / SSG</p>
@@ -39,7 +39,7 @@ const { name, url } = Astro.props;
       <a class="pokemon-detail__back" href="/pokemon-test">Voltar para lista</a>
     </article>
   </section>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .pokemon-detail {

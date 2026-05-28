@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image, Picture, getImage } from "astro:assets";
 import ImageGalleryReact from "@components/ImageGalleryReact/ImageGalleryReact";
 import localImageExample from "@assets/images/kagura.png";
@@ -20,7 +20,7 @@ const optimizedAvif = await getImage({
 });
 ---
 
-<Layout title="Imagens">
+<BaseLayout title="Imagens">
   <section class="practice-hero surface-card">
     <div class="practice-hero__copy">
       <p class="practice-hero__eyebrow">Imagens</p>
@@ -343,7 +343,7 @@ const optimizedAvif = await getImage({
       </div>
     </section>
   </article>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .practice-hero {

@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 
 type Frontmatter = {
   title: string;
@@ -15,7 +15,7 @@ const posts = Object.values(
 ) as PostEntry[];
 ---
 
-<Layout title="Blog">
+<BaseLayout title="Blog">
   <section class="blog-index">
     <div class="blog-index__hero surface-card">
       <p class="blog-index__eyebrow">Blog</p>
@@ -40,7 +40,7 @@ const posts = Object.values(
       }
     </div>
   </section>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .blog-index {

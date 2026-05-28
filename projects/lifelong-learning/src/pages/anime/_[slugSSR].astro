@@ -1,6 +1,6 @@
 ---
 export const prerender = false;
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 
 const { slugSSR } = Astro.params;
 
@@ -10,7 +10,7 @@ if (res.status === 404) return Astro.redirect("/404");
 const { data } = await res.json();
 ---
 
-<Layout title={data.title}>
+<BaseLayout title={data.title}>
   <section class="anime-detail">
     <article class="anime-detail__card surface-card">
       <img
@@ -33,7 +33,7 @@ const { data } = await res.json();
       </div>
     </article>
   </section>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .anime-detail {

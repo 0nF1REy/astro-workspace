@@ -1,12 +1,12 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import type { PokemonRes } from "../../../types/PokeType";
 
 const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100");
 const data: PokemonRes = await res.json();
 ---
 
-<Layout title="Pokémon SSG">
+<BaseLayout title="Pokémon SSG">
   <section class="pokemon-page">
     <div class="pokemon-page__hero surface-card">
       <p class="pokemon-page__eyebrow">Pokémon / SSG</p>
@@ -30,7 +30,7 @@ const data: PokemonRes = await res.json();
       }
     </ul>
   </section>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .pokemon-page {

@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 type PostEntry = CollectionEntry<"posts">;
@@ -13,7 +13,7 @@ const totalPosts = (await getCollection("posts")).length;
 const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
 ---
 
-<Layout title="Blog">
+<BaseLayout title="Blog">
   <section class="blog-index">
     <div class="blog-index__hero surface-card">
       <p class="blog-index__eyebrow">Post</p>
@@ -62,7 +62,7 @@ const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
       </div>
     </nav>
   </section>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .blog-index {

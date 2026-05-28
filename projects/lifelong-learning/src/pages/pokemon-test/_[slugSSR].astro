@@ -1,6 +1,6 @@
 ---
 export const prerender = false;
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 
 const { slugSSR } = Astro.params;
 
@@ -12,7 +12,7 @@ const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${slugSSR}`);
 const data = await res.json();
 ---
 
-<Layout title={data.name}>
+<BaseLayout title={data.name}>
   <section class="pokemon-detail">
     <div class="pokemon-detail__hero surface-card">
       <p class="pokemon-detail__eyebrow">Pokémon / Teste / SSR</p>
@@ -28,7 +28,7 @@ const data = await res.json();
       <a class="pokemon-detail__back" href="/pokemon-test">Voltar para lista</a>
     </article>
   </section>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .pokemon-detail {

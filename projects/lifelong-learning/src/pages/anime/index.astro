@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import AnimePage from "@components/AnimePage.astro";
 import { fetchTopAnime } from "../../lib/anime/fetchTopAnime.ts";
 import { ANIME_PAGE_SIZE } from "../../lib/anime/pagination.ts";
@@ -9,6 +9,6 @@ const lastPage = Math.max(1, Math.ceil(animeList.length / ANIME_PAGE_SIZE));
 const firstPage = animeList.slice(0, ANIME_PAGE_SIZE);
 ---
 
-<Layout title="Animes">
+<BaseLayout title="Animes">
   <AnimePage data={firstPage} currentPage={1} lastPage={lastPage} />
-</Layout>
+</BaseLayout>

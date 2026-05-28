@@ -1,11 +1,11 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const animes = await getCollection("animes", ({ data }) => data.is_finished);
 ---
 
-<Layout title="Catálogo de Animes">
+<BaseLayout title="Catálogo de Animes">
   <section class="anime-catalog">
     <header class="anime-catalog__header">
       <p class="anime-catalog__eyebrow">Collection</p>
@@ -68,7 +68,7 @@ const animes = await getCollection("animes", ({ data }) => data.is_finished);
       }
     </ul>
   </section>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .anime-catalog {

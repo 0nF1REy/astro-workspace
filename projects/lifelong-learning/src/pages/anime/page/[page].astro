@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from "astro";
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import AnimePage from "@components/AnimePage.astro";
 import { fetchTopAnime } from "../../../lib/anime/fetchTopAnime.ts";
 import { ANIME_PAGE_SIZE } from "../../../lib/anime/pagination.ts";
@@ -33,6 +33,6 @@ const { data, currentPage, lastPage } = Astro.props as {
 };
 ---
 
-<Layout title="Animes">
+<BaseLayout title="Animes">
   <AnimePage data={data} currentPage={currentPage} lastPage={lastPage} />
-</Layout>
+</BaseLayout>

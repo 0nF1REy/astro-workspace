@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import Link from "@components/Link.astro";
 
 const routes = [
@@ -48,7 +48,7 @@ const routes = [
 ];
 ---
 
-<Layout title="Home">
+<BaseLayout title="Home">
   <section class="home-page">
     <div class="home-page__hero surface-card">
       <p class="home-page__eyebrow">Lifelong Learning</p>
@@ -139,7 +139,7 @@ const routes = [
       </p>
     </div>
   </section>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .home-page {

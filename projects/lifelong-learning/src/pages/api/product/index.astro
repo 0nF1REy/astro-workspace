@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import ProductsCatalogAside from "@components/ProductsCatalogAside.astro";
 import ProductsDynamicAside from "@components/ProductsDynamicAside.astro";
@@ -7,12 +7,12 @@ import ProductsDynamicAside from "@components/ProductsDynamicAside.astro";
 const products = await getCollection("products", ({ data }) => data.in_stock);
 ---
 
-<Layout title="Catálogo de Produtos">
+<BaseLayout title="Catálogo de Produtos">
   <section class="products-container">
     <ProductsCatalogAside products={products} />
     <ProductsDynamicAside />
   </section>
-</Layout>
+</BaseLayout>
 
 <style is:global lang="scss">
   .products-container {

@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 type PostEntry = CollectionEntry<"posts">;
@@ -32,7 +32,7 @@ const { page, totalPages, posts } = Astro.props as {
 };
 ---
 
-<Layout title={`Blog - Página ${page}`}>
+<BaseLayout title={`Blog - Página ${page}`}>
   <section class="blog-index">
     <div class="blog-index__hero surface-card">
       <p class="blog-index__eyebrow">Post</p>
@@ -97,7 +97,7 @@ const { page, totalPages, posts } = Astro.props as {
       </div>
     </nav>
   </section>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .blog-index {

@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 
@@ -32,7 +32,7 @@ const data = match.data;
 const { Content } = await render(match);
 ---
 
-<Layout title={data.title ?? slug}>
+<BaseLayout title={data.title ?? slug}>
   <article class="post-page surface-card">
     {
       data.cover && (
@@ -85,7 +85,7 @@ const { Content } = await render(match);
       }
     </nav>
   </article>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .post-page {

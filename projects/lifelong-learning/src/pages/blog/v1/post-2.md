@@ -16,10 +16,10 @@ Provavelmente não tem muito estilo, mas o Markdown suporta:
 
 ```astro
 ---
-import Layout from "@layouts/Layout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
-<Layout title="Início">
+<BaseLayout title="Início">
   <h1>Página Inicial</h1>
-</Layout>
+</BaseLayout>
 ```
