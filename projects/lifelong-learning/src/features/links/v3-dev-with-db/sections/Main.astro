@@ -1,0 +1,303 @@
+---
+import LinkCard, { type LinkProps } from "@components/LinkCard.astro";
+import Button from "@components/ui/Button.astro";
+import Dialog from "@components/ui/Dialog.astro";
+
+let links: LinkProps[] = [];
+
+if (import.meta.env.DEV) {
+  try {
+    const req = await fetch(`${Astro.url.origin}/api/links`);
+
+    if (!req.ok) {
+      throw new Error(`Erro HTTP: ${req.status}`);
+    }
+
+    const res = await req.json();
+
+    links = res.data ?? [];
+  } catch (e) {
+    console.error(e);
+  }
+}
+---
+
+<section class="dev-links">
+  <div class="dev-links__wrapper">
+    <header class="dev-links__hero surface-card">
+      <div class="dev-links__hero-main">
+        <p class="dev-links__eyebrow">Workspace</p>
+        <h1 class="dev-links__title title-gradient">Dev Links</h1>
+        <p class="dev-links__subtitle">
+          Salve, organize e revisite seus links importantes em um painel unico.
+        </p>
+      </div>
+
+      <div class="dev-links__hero-actions">
+        <p class="dev-links__count" aria-live="polite">
+          <span data-count-value>{links.length}</span>
+          <span data-count-label>
+            {links.length === 1 ? "link salvo" : "links salvos"}
+          </span>
+        </p>
+
+        {
+          links.length > 0 && (
+            <Button intent="accent" data-open-dialog>
+              <i class="fa-solid fa-plus" />
+              Adicionar Link
+            </Button>
+          )
+        }
+      </div>
+    </header>
+
+    <div class="dev-links__board">
+      <div class="dev-links__grid">
+        {links.map((link: LinkProps) => <LinkCard link={link} />)}
+
+        <div
+          class={`dev-links__empty surface-card ${
+            links.length > 0 ? "dev-links__empty--hidden" : ""
+          }`}
+          data-empty-state
+        >
+          <div class="dev-links__empty-icon">
+            <i class="fa-solid fa-link"></i>
+          </div>
+          <h3 class="dev-links__empty-title">Nenhum link salvo ainda</h3>
+          <p class="dev-links__empty-text">
+            Comece adicionando seu primeiro link. Você pode salvar links úteis e
+            organizá-los para referência futura.
+          </p>
+          <Button intent="accent" data-open-dialog class="dev-links__empty-cta">
+            <i class="fa-solid fa-plus"></i>
+            Adicionar Primeiro Link
+          </Button>
+        </div>
+      </div>
+    </div>
+
+    <Dialog />
+  </div>
+</section>
+
+<style lang="scss">
+  .dev-links {
+    position: relative;
+    color: var(--text);
+
+    &__wrapper {
+      position: relative;
+
+      display: grid;
+      gap: 1.15rem;
+
+      width: min(100%, 1200px);
+
+      margin-inline: auto;
+    }
+
+    &__hero {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      gap: 1.25rem;
+
+      overflow: hidden;
+
+      @media (max-width: 860px) {
+        align-items: stretch;
+      }
+
+      @media (max-width: 640px) {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    &__hero-main {
+      display: grid;
+      gap: 0.5rem;
+
+      flex: 1;
+
+      min-width: 0;
+    }
+
+    &__hero-actions {
+      display: grid;
+      gap: 0.8rem;
+      justify-items: end;
+
+      @media (max-width: 860px) {
+        justify-items: start;
+      }
+
+      @media (max-width: 640px) {
+        width: 100%;
+
+        :global(button) {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    }
+
+    &__count {
+      margin: 0;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+
+      padding: 0.45rem 0.7rem;
+
+      border: 1px solid rgba(253, 230, 138, 0.12);
+      border-radius: 9999px;
+
+      color: var(--muted);
+      background: rgba(20, 17, 14, 0.55);
+
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+
+      span {
+        color: var(--cream);
+        font-size: 0.95rem;
+      }
+    }
+
+    &__eyebrow {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 0.82rem;
+      font-weight: 700;
+
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    &__title {
+      margin: 0;
+
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 0.98;
+      font-weight: 800;
+
+      text-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);
+    }
+
+    &__subtitle {
+      margin: 0;
+      max-width: 56ch;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    &__board {
+      position: relative;
+
+      padding: 0.35rem;
+
+      border: 1px solid rgba(253, 230, 138, 0.09);
+      border-radius: 30px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(251, 146, 60, 0.04),
+          rgba(251, 146, 60, 0.01)
+        ),
+        rgba(13, 11, 9, 0.28);
+    }
+
+    &__grid {
+      display: grid;
+
+      gap: 1rem;
+
+      padding: 0.9rem;
+
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+
+      align-items: start;
+    }
+
+    &__empty {
+      grid-column: 1 / -1;
+
+      display: grid;
+      justify-items: center;
+      gap: 0.35rem;
+
+      text-align: center;
+    }
+
+    &__empty--hidden {
+      display: none;
+    }
+
+    &__empty-icon {
+      font-size: 3.3rem;
+      color: var(--orange);
+      margin-bottom: 0.35rem;
+      opacity: 0.82;
+    }
+
+    &__empty-title {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--cream);
+    }
+
+    &__empty-text {
+      margin: 0 0 1.35rem 0;
+      color: var(--muted);
+      max-width: 36ch;
+      line-height: 1.65;
+    }
+
+    &__empty-cta {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector(".dev-links");
+
+  if (root) {
+    const grid = root.querySelector(".dev-links__grid");
+    const emptyState = root.querySelector("[data-empty-state]");
+    const countValue = root.querySelector("[data-count-value]");
+    const countLabel = root.querySelector("[data-count-label]");
+
+    const syncUI = () => {
+      const count = grid?.querySelectorAll("[data-link-card]").length ?? 0;
+
+      if (countValue) {
+        countValue.textContent = String(count);
+      }
+
+      if (countLabel) {
+        countLabel.textContent = count === 1 ? "link salvo" : "links salvos";
+      }
+
+      if (emptyState) {
+        emptyState.classList.toggle("dev-links__empty--hidden", count > 0);
+      }
+    };
+
+    syncUI();
+    window.addEventListener("dev-links:changed", syncUI);
+  }
+</script>
