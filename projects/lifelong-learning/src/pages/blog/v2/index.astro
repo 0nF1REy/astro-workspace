@@ -47,18 +47,22 @@ const totalPages = Math.max(1, Math.ceil(totalPosts / pageSize));
     <nav class="blog-index__pagination" aria-label="Paginação do blog">
       <span class="blog-index__page-info">Página 1 de {totalPages}</span>
       <div class="blog-index__pagination-links">
-        <span class="blog-index__pagination-link blog-index__pagination-link--disabled">
+        <span
+          class="blog-index__pagination-link blog-index__pagination-link--disabled"
+        >
           Anterior
         </span>
-        {totalPages > 1 ? (
-          <a class="blog-index__pagination-link" href="/blog/v2/page/2">
-            Próxima
-          </a>
-        ) : (
-          <span class="blog-index__pagination-link blog-index__pagination-link--disabled">
-            Próxima
-          </span>
-        )}
+        {
+          totalPages > 1 ? (
+            <a class="blog-index__pagination-link" href="/blog/v2/page/2">
+              Próxima
+            </a>
+          ) : (
+            <span class="blog-index__pagination-link blog-index__pagination-link--disabled">
+              Próxima
+            </span>
+          )
+        }
       </div>
     </nav>
   </section>

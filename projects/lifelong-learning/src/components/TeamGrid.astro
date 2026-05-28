@@ -12,25 +12,27 @@ const { members } = Astro.props as { members: TeamMember[] };
 ---
 
 <div class="team-grid">
-  {members.map((member) => (
-    <article class="team-card">
-      <img
-        class="team-card__avatar"
-        src={member.avatar ?? "https://i.pravatar.cc/300?u=default"}
-        alt={member.name}
-        loading="lazy"
-        decoding="async"
-      />
-      <div class="team-card__info">
-        <p class="team-card__department">{member.department}</p>
-        <h3 class="team-card__name">{member.name}</h3>
-        <p class="team-card__role">{member.role}</p>
-        <a class="team-card__email" href={`mailto:${member.email}`}>
-          {member.email}
-        </a>
-      </div>
-    </article>
-  ))}
+  {
+    members.map((member) => (
+      <article class="team-card">
+        <img
+          class="team-card__avatar"
+          src={member.avatar ?? "https://i.pravatar.cc/300?u=default"}
+          alt={member.name}
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="team-card__info">
+          <p class="team-card__department">{member.department}</p>
+          <h3 class="team-card__name">{member.name}</h3>
+          <p class="team-card__role">{member.role}</p>
+          <a class="team-card__email" href={`mailto:${member.email}`}>
+            {member.email}
+          </a>
+        </div>
+      </article>
+    ))
+  }
 </div>
 
 <style lang="scss">
@@ -48,7 +50,11 @@ const { members } = Astro.props as { members: TeamMember[] };
     padding: 1rem;
     border-radius: 20px;
     border: 1px solid rgba(253, 230, 138, 0.08);
-    background: linear-gradient(180deg, rgba(38, 33, 29, 0.92), rgba(20, 17, 14, 0.92));
+    background: linear-gradient(
+      180deg,
+      rgba(38, 33, 29, 0.92),
+      rgba(20, 17, 14, 0.92)
+    );
     height: 100%;
   }
 

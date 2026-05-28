@@ -3,22 +3,18 @@ title: Olá, Mundo
 layout: "@layouts/BlogLayout.astro"
 ---
 
-import Link from "@components/Link.astro"
-import Blockquote from "@components/Blockquote.astro"
-import Button from "@components/Button.astro"
+import Link from "@components/Link.astro";
+import Blockquote from "@components/Blockquote.astro";
+import Button from "@components/Button.astro";
 
 export const customProp = "olá";
-export const components = { blockquote: Blockquote }
+export const components = { blockquote: Blockquote };
 
 > citações são incríveis
 
-<Link href="/blog">
-VOLTAAAAAAAAAAR
-</Link>
+<Link href="/blog">VOLTAAAAAAAAAAR</Link>
 
-<Button>
-Um Botão
-</Button>
+<Button>Um Botão</Button>
 
 # Olá!
 
@@ -41,3 +37,4 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 <BaseLayout title="Início">
   <h1>Página Inicial</h1>
 </BaseLayout>
+```
