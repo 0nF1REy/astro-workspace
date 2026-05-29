@@ -1,11 +1,11 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-// import node from "@astrojs/node";
 import vercel from "@astrojs/vercel";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import db from "@astrojs/db";
+import { satteri } from "@astrojs/markdown-satteri";
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,10 +13,10 @@ export default defineConfig({
   site: "https://my-lifelong-learning.vercel.app",
   output: "static",
   trailingSlash: "never",
-  adapter: vercel(),
-  // adapter: node({
-  //   mode: "standalone",
-  // }),
+
+  adapter: vercel({
+    skewProtection: true,
+  }),
 
   // Integrações
   integrations: [react(), mdx(), sitemap(), db()],
@@ -47,6 +47,11 @@ export default defineConfig({
 
   // Markdown e syntax highlight
   markdown: {
+    processor: satteri({
+      features: {
+        directive: true,
+      },
+    }),
     shikiConfig: {
       theme: "dracula",
       wrap: true,
