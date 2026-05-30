@@ -15,10 +15,10 @@ export const GET: APIRoute = async ({ params }) => {
       throw new Error("Link não encontrado.");
     }
 
-    return new Response(
-      JSON.stringify({ success: true, data: link[0] }),
-      { status: 200, headers: { "Content-Type": "application/json" } },
-    );
+    return new Response(JSON.stringify({ success: true, data: link[0] }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (e) {
     console.error(e);
     return new Response(

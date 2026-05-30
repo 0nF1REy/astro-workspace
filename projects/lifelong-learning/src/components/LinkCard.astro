@@ -45,8 +45,7 @@ const { link } = Astro.props as Props;
       >
         <i
           class={`fa-solid ${link.isRead ? "fa-check" : "fa-square"}`}
-          aria-hidden="true"
-        ></i>
+          aria-hidden="true"></i>
       </Button>
 
       <Button
@@ -203,8 +202,12 @@ const { link } = Astro.props as Props;
 </style>
 
 <script>
-  const deleteButtons = document.querySelectorAll("[data-delete]") as NodeListOf<HTMLButtonElement>;
-  const toggleButtons = document.querySelectorAll("[data-toggle-read]") as NodeListOf<HTMLButtonElement>;
+  const deleteButtons = document.querySelectorAll(
+    "[data-delete]",
+  ) as NodeListOf<HTMLButtonElement>;
+  const toggleButtons = document.querySelectorAll(
+    "[data-toggle-read]",
+  ) as NodeListOf<HTMLButtonElement>;
 
   const notifyLinksChanged = () => {
     window.dispatchEvent(new Event("dev-links:changed"));
@@ -251,18 +254,25 @@ const { link } = Astro.props as Props;
             if (!badge) {
               const statusWrapper = card.querySelector(".link-card__status");
               if (statusWrapper) {
-                statusWrapper.innerHTML = '<span class="link-card__badge">Lido</span>';
+                statusWrapper.innerHTML =
+                  '<span class="link-card__badge">Lido</span>';
               }
             }
 
-            btn.setAttribute("aria-label", `Marcar como não lido: ${card.querySelector(".link-card__title")?.textContent ?? "link"}`);
+            btn.setAttribute(
+              "aria-label",
+              `Marcar como não lido: ${card.querySelector(".link-card__title")?.textContent ?? "link"}`,
+            );
             btn.classList.remove("link-card__icon-button--unread");
             btn.classList.add("link-card__icon-button--read");
             icon?.classList.remove("fa-square");
             icon?.classList.add("fa-check");
           } else {
             badge?.remove();
-            btn.setAttribute("aria-label", `Marcar como lido: ${card.querySelector(".link-card__title")?.textContent ?? "link"}`);
+            btn.setAttribute(
+              "aria-label",
+              `Marcar como lido: ${card.querySelector(".link-card__title")?.textContent ?? "link"}`,
+            );
             btn.classList.remove("link-card__icon-button--read");
             btn.classList.add("link-card__icon-button--unread");
             icon?.classList.remove("fa-check");
