@@ -5,30 +5,31 @@ import TextArea from "./TextArea.astro";
 import TextInput from "./TextInput.astro";
 ---
 
-<dialog class="dialog">
+<dialog class="dialog" aria-labelledby="dialog-title">
   <div class="dialog__content">
     <form class="dialog__form" id="add-form">
-      <h2 class="dialog__title">Adicionar um Link</h2>
+      <h2 class="dialog__title" id="dialog-title">
+        Adicionar Novo Link
+      </h2>
 
-      <TextInput name="Título do Link" inputId={crypto.randomUUID()} />
-
-      <TextArea name="Descrição do Link" id={crypto.randomUUID()} />
-
+      <TextInput name="Título do Link" inputId={Math.random()} />
+      <TextArea name="Descrição do Link" id={Math.random()} />
       <TextInput
         name="URL do Link"
-        inputId={crypto.randomUUID()}
+        inputId={Math.random()}
         title="Deve começar com https://"
         pattern="https?://.*"
       />
-
-      <Checkbox checked={false} inputId={crypto.randomUUID()} name="isRead" />
+      <Checkbox checked={false} inputId={Math.random()} name="isRead" />
 
       <div class="dialog__actions">
-        <Button intent="primary" id="close-dialog" type="button">
-          Fechar
+        <Button intent="secondary" id="close-dialog" type="button">
+          Cancelar
         </Button>
-
-        <Button intent="accent" type="submit"> Adicionar Link </Button>
+        <Button intent="primary" type="submit">
+          <i class="fa-solid fa-plus"></i>
+          Adicionar Link
+        </Button>
       </div>
     </form>
   </div>
@@ -36,258 +37,133 @@ import TextInput from "./TextInput.astro";
 
 <style lang="scss">
   .dialog {
-    width: 100%;
-    max-width: 32rem;
-
-    position: fixed;
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    z-index: 10000;
-
+    width: min(100%, 32rem);
+    max-width: 90vw;
     max-height: 90vh;
-    overflow: auto;
-
-    border: 1px solid rgba(253, 230, 138, 0.1);
-    border-radius: 28px;
-
-    background: linear-gradient(180deg, var(--surface), rgba(20, 17, 14, 0.96));
-
+    padding: 0;
     color: var(--text);
-
-    box-shadow:
-      0 24px 48px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
 
     &::backdrop {
-      background:
-        radial-gradient(
-          circle at top,
-          rgba(251, 146, 60, 0.2),
-          transparent 35%
-        ),
-        rgba(0, 0, 0, 0.7);
-
-      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
     }
 
-    &__content {
-      padding: 1.25rem;
-
-      @media (min-width: 640px) {
-        padding: 1.75rem;
-      }
+    &[open] {
+      animation: slideIn 0.3s ease;
     }
+  }
 
-    &__form {
-      display: grid;
-      gap: 1.1rem;
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.95);
     }
-
-    &__title {
-      margin: 0;
-
-      font-size: 1.35rem;
-      font-weight: 800;
-      line-height: 1.15;
-
-      color: var(--cream);
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
+  }
 
-    &__actions {
-      display: flex;
-      flex-wrap: wrap;
+  .dialog__content {
+    width: 100%;
+    padding: 2rem;
+    overflow-y: auto;
+  }
 
-      gap: 1rem;
+  .dialog__form {
+    display: grid;
+    gap: 1.25rem;
+  }
 
-      justify-content: flex-end;
+  .dialog__title {
+    margin: 0;
+    color: var(--cream);
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
 
-      @media (max-width: 640px) {
-        justify-content: stretch;
+  .dialog__actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
 
-        > * {
-          flex: 1 1 100%;
-        }
-      }
+    :global(button) {
+      flex: 1;
     }
   }
 </style>
 
 <script>
-  const addForm = document.querySelector("#add-form") as HTMLFormElement;
+  import sanitize from "sanitize-html";
 
-  const openDialogButtons = document.querySelectorAll("[data-open-dialog]");
+  const addForm = document.querySelector("#add-form");
+  const openDialogBtns = document.querySelectorAll("[data-open-dialog]");
+  const closeDialogBtn = document.getElementById("close-dialog");
+  const dialog = document.querySelector("dialog");
 
-  const closeDialogBtn = document.getElementById(
-    "close-dialog",
-  ) as HTMLButtonElement;
-
-  const dialog = document.querySelector("dialog") as HTMLDialogElement;
-
-  openDialogButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      dialog.showModal();
+  openDialogBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      dialog?.showModal();
     });
   });
 
-  closeDialogBtn.addEventListener("click", () => {
-    dialog.close();
+  closeDialogBtn?.addEventListener("click", () => {
+    dialog?.close();
   });
 
-  dialog.addEventListener("click", (e) => {
+  dialog?.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) {
       dialog.close();
     }
   });
 
-  addForm.addEventListener("submit", async (e) => {
+  dialog?.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      dialog.close();
+    }
+  });
+
+  addForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     try {
-      const formData = new FormData(addForm);
+      const formData = new FormData(addForm as HTMLFormElement);
+      const title = sanitize(formData.get("título-do-link") as string);
+      const description = sanitize(formData.get("descrição-do-link") as string);
+      const url = sanitize(formData.get("url-do-link") as string);
+      const isRead = formData.get("isread") === "on";
 
-      const title = formData.get("titulo-do-link");
-
-      const description = formData.get("descricao-do-link");
-
-      const url = formData.get("url-do-link");
-
-      const isRead = formData.get("isRead") === "on";
+      if (!title || !description || !url) {
+        throw new Error("Por favor, preencha todos os campos");
+      }
 
       const req = await fetch("/api/links", {
         method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          title,
-          description,
-          url,
-          isRead,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, description, url, isRead }),
       });
 
+      if (!req.ok) throw new Error("Falha ao adicionar link");
+
       const res = await req.json();
+      if (!res.success) throw new Error(res.message);
 
-      if (!req.ok || !res.success) {
-        throw new Error(res.message || "Erro ao adicionar link.");
-      }
-
-      addForm.reset();
-
-      dialog.close();
-
+      (addForm as HTMLFormElement).reset();
+      (dialog as HTMLDialogElement).close();
       location.reload();
     } catch (e) {
+      if (e instanceof Error) alert(e.message);
       console.error(e);
-
-      if (e instanceof Error) {
-        alert(e.message);
-      }
-    }
-  });
-</script>
-
-<style lang="scss">
-  .dialog {
-    width: 100%;
-    max-width: 32rem;
-
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10000;
-    max-height: 90vh;
-    overflow: auto;
-
-    border: 1px solid rgba(253, 230, 138, 0.1);
-    border-radius: 28px;
-
-    background: linear-gradient(180deg, var(--surface), rgba(20, 17, 14, 0.96));
-    color: var(--text);
-
-    box-shadow:
-      0 24px 48px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
-
-    &::backdrop {
-      background:
-        radial-gradient(
-          circle at top,
-          rgba(251, 146, 60, 0.2),
-          transparent 35%
-        ),
-        rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(6px);
-    }
-
-    &__content {
-      padding: 1.25rem;
-
-      @media (min-width: 640px) {
-        padding: 1.75rem;
-      }
-    }
-
-    &__form {
-      display: grid;
-      gap: 1.1rem;
-    }
-
-    &__title {
-      margin: 0;
-
-      font-size: 1.35rem;
-      font-weight: 800;
-      line-height: 1.15;
-
-      color: var(--cream);
-    }
-
-    &__actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: flex-end;
-
-      @media (max-width: 640px) {
-        justify-content: stretch;
-
-        > * {
-          flex: 1 1 100%;
-        }
-      }
-    }
-  }
-</style>
-
-<script>
-  const openDialogBtn = document.getElementById(
-    "open-dialog",
-  ) as HTMLButtonElement;
-
-  const closeDialogBtn = document.getElementById(
-    "close-dialog",
-  ) as HTMLButtonElement;
-
-  const dialog = document.querySelector("dialog") as HTMLDialogElement;
-
-  openDialogBtn.addEventListener("click", () => {
-    dialog.showModal();
-  });
-
-  closeDialogBtn.addEventListener("click", () => {
-    dialog.close();
-  });
-
-  dialog.addEventListener("click", (e) => {
-    if (e.target === e.currentTarget) {
-      dialog.close();
     }
   });
 </script>

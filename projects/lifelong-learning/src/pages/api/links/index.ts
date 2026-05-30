@@ -1,74 +1,41 @@
 import type { APIRoute } from "astro";
 import sanitize from "sanitize-html";
-import {
-  devOnlyResponse,
-  serverUnavailableResponse,
-  isServerUnavailableError,
-  jsonResponse,
-  API_URL,
-} from "@lib/api/dev-server";
+import { db, Links } from "astro:db";
 
 export const prerender = false;
 
 export const GET: APIRoute = async () => {
-  if (!import.meta.env.DEV) {
-    return devOnlyResponse();
-  }
-
   try {
-    const req = await fetch(API_URL);
-
-    if (!req.ok) {
-      throw new Error("Erro ao buscar links.");
-    }
-
-    const data = await req.json();
+    const links = await db.select().from(Links);
 
     return new Response(
       JSON.stringify({
         success: true,
-        data,
+        data: links,
       }),
       {
         status: 200,
-
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       },
     );
   } catch (e) {
     console.error(e);
-
-    if (isServerUnavailableError(e)) {
-      return serverUnavailableResponse();
-    }
-
     return new Response(
       JSON.stringify({
         success: false,
-        message:
-          e instanceof Error ? e.message : "Ocorreu um erro desconhecido.",
+        message: e instanceof Error ? e.message : "Erro ao buscar links.",
       }),
       {
         status: 500,
-
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       },
     );
   }
 };
 
 export const POST: APIRoute = async ({ request }) => {
-  if (!import.meta.env.DEV) {
-    return devOnlyResponse();
-  }
-
-  const body = await request.json();
-
   try {
+    const body = await request.json();
     const { title, description, url, isRead } = body;
 
     if (
@@ -80,64 +47,35 @@ export const POST: APIRoute = async ({ request }) => {
       throw new Error("Por favor, forneça todos os campos obrigatórios.");
     }
 
-    const req = await fetch(API_URL, {
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        title: sanitize(title),
-        description: sanitize(description),
-        url: sanitize(url),
-        isRead,
-      }),
+    const result = await db.insert(Links).values({
+      title: sanitize(title),
+      description: sanitize(description),
+      url: sanitize(url),
+      isRead,
     });
-
-    if (!req.ok) {
-      throw new Error("Ocorreu um problema com a requisição ao servidor.");
-    }
-
-    const data = await req.json();
 
     return new Response(
       JSON.stringify({
-        message: "Link adicionado com sucesso.",
         success: true,
-        data,
+        message: "Link adicionado com sucesso.",
+        data: result,
       }),
       {
         status: 201,
-
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       },
     );
   } catch (e) {
     console.error(e);
-
-    if (isServerUnavailableError(e)) {
-      return serverUnavailableResponse();
-    }
-
-    if (e instanceof Error) {
-      return jsonResponse(
-        {
-          message: e.message,
-          success: false,
-        },
-        400,
-      );
-    }
-
-    return jsonResponse(
-      {
-        message: "Ocorreu um erro desconhecido.",
+    return new Response(
+      JSON.stringify({
         success: false,
+        message: e instanceof Error ? e.message : "Erro ao adicionar link.",
+      }),
+      {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
       },
-      500,
     );
   }
 };

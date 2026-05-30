@@ -1,31 +1,17 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
+type Intent = "primary" | "secondary" | "accent";
+
 export interface Props extends HTMLAttributes<"button"> {
-  intent?: "primary" | "accent";
-  size?: "small" | "medium" | "large" | "square";
+  intent?: Intent;
   classes?: string;
 }
 
-const {
-  intent = "primary",
-  size = "medium",
-  classes,
-  class: className,
-  ...rest
-} = Astro.props;
+const { intent = "primary", classes = "", ...rest } = Astro.props;
 ---
 
-<button
-  class:list={[
-    "button",
-    `button--${intent}`,
-    `button--${size}`,
-    classes,
-    className,
-  ]}
-  {...rest}
->
+<button class={`button button--${intent} ${classes}`.trim()} {...rest}>
   <slot />
 </button>
 
@@ -35,109 +21,63 @@ const {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-
-    max-width: fit-content;
-    min-height: 2.75rem;
-    padding: 0.85rem 1.2rem;
-    border: 1px solid rgba(253, 230, 138, 0.12);
-    border-radius: 999px;
-
-    background: linear-gradient(
-      135deg,
-      var(--surface),
-      rgba(251, 146, 60, 0.18)
-    );
-    color: var(--text);
-    box-shadow:
-      0 10px 24px rgba(0, 0, 0, 0.22),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    padding: 0.75rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
     cursor: pointer;
-    font: inherit;
-    text-decoration: none;
-
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease,
-      border-color 0.2s ease,
-      background 0.2s ease,
-      filter 0.2s ease;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
 
     &:focus {
       outline: none;
     }
 
     &:focus-visible {
-      outline: 3px solid rgba(253, 230, 138, 0.65);
-      outline-offset: 3px;
-    }
-
-    &:hover {
-      transform: translateY(-2px);
-      border-color: rgba(251, 146, 60, 0.28);
-      box-shadow:
-        0 14px 28px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(251, 146, 60, 0.08);
-    }
-
-    &:active {
-      transform: translateY(0);
-      filter: brightness(0.98);
+      outline: 2px solid var(--orange);
+      outline-offset: 2px;
     }
 
     &--primary {
-      background: linear-gradient(
-        135deg,
-        var(--surface),
-        rgba(251, 146, 60, 0.18)
-      );
-      color: var(--text);
+      background: linear-gradient(135deg, var(--orange), #ea580c);
+      color: #fff;
+      border-color: transparent;
 
       &:hover {
-        background: linear-gradient(
-          135deg,
-          var(--surface-light),
-          rgba(251, 146, 60, 0.24)
-        );
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(251, 146, 60, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    &--secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+
+      &:hover {
+        background: var(--surface);
+        border-color: var(--orange);
+      }
+
+      &:active {
+        background: var(--brown);
       }
     }
 
     &--accent {
-      background: linear-gradient(
-        135deg,
-        var(--orange),
-        rgba(251, 146, 60, 0.82)
-      );
-      color: var(--bg);
+      background: transparent;
+      color: var(--orange);
+      border-color: var(--orange);
 
       &:hover {
-        border-color: rgba(253, 230, 138, 0.24);
-        box-shadow:
-          0 16px 30px rgba(251, 146, 60, 0.22),
-          0 0 0 1px rgba(253, 230, 138, 0.08);
+        background: rgba(251, 146, 60, 0.1);
+        border-color: #fb923c;
       }
-    }
-
-    &--small {
-      min-height: 2.25rem;
-      padding: 0.5rem 0.85rem;
-      font-size: 0.875rem;
-    }
-
-    &--medium {
-      padding: 0.85rem 1.2rem;
-      font-size: 1rem;
-    }
-
-    &--large {
-      min-height: 3.25rem;
-      padding: 1rem 1.4rem;
-      font-size: 1.05rem;
-    }
-
-    &--square {
-      width: 2.75rem;
-      padding: 0;
-      aspect-ratio: 1 / 1;
     }
   }
 </style>

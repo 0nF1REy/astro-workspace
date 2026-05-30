@@ -1,110 +1,85 @@
 import type { APIRoute } from "astro";
 import sanitize from "sanitize-html";
-import {
-  devOnlyResponse,
-  serverUnavailableResponse,
-  isServerUnavailableError,
-  jsonResponse,
-  API_URL,
-} from "@lib/api/dev-server";
+import { db, Links, eq } from "astro:db";
 
 export const prerender = false;
 
 export const GET: APIRoute = async ({ params }) => {
-  if (!import.meta.env.DEV) {
-    return devOnlyResponse();
-  }
-
   try {
-    const id = params.id;
+    const id = params.id ? parseInt(params.id) : null;
+    if (!id) throw new Error("ID não informado.");
 
-    if (!id) {
-      throw new Error("ID não informado.");
-    }
+    const link = await db.select().from(Links).where(eq(Links.id, id));
 
-    const req = await fetch(`${API_URL}/${id}`);
-
-    if (!req.ok) {
+    if (link.length === 0) {
       throw new Error("Link não encontrado.");
     }
 
-    const data = await req.json();
-
-    return jsonResponse({
-      success: true,
-      data,
-    });
+    return new Response(
+      JSON.stringify({ success: true, data: link[0] }),
+      { status: 200, headers: { "Content-Type": "application/json" } },
+    );
   } catch (e) {
     console.error(e);
-
-    if (isServerUnavailableError(e)) {
-      return serverUnavailableResponse();
-    }
-
-    return jsonResponse(
-      {
+    return new Response(
+      JSON.stringify({
         success: false,
         message: e instanceof Error ? e.message : "Erro desconhecido.",
-      },
-      404,
+      }),
+      { status: 404, headers: { "Content-Type": "application/json" } },
     );
   }
 };
 
 export const DELETE: APIRoute = async ({ params }) => {
-  if (!import.meta.env.DEV) {
-    return devOnlyResponse();
-  }
-
   try {
-    const id = params.id;
+    const id = params.id ? parseInt(params.id) : null;
+    if (!id) throw new Error("ID não informado.");
 
-    if (!id) {
-      throw new Error("ID não informado.");
-    }
+    await db.delete(Links).where(eq(Links.id, id));
 
-    const req = await fetch(`${API_URL}/${id}`, {
-      method: "DELETE",
-    });
-
-    if (!req.ok) {
-      throw new Error("Erro ao remover link.");
-    }
-
-    return new Response(null, {
-      status: 204,
-    });
+    return new Response(null, { status: 204 });
   } catch (e) {
     console.error(e);
-
-    if (isServerUnavailableError(e)) {
-      return serverUnavailableResponse();
-    }
-
-    return jsonResponse(
-      {
+    return new Response(
+      JSON.stringify({
         success: false,
-        message: e instanceof Error ? e.message : "Erro desconhecido.",
-      },
-      500,
+        message: e instanceof Error ? e.message : "Erro ao remover link.",
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } },
+    );
+  }
+};
+
+export const PATCH: APIRoute = async ({ params, request }) => {
+  try {
+    const id = params.id ? parseInt(params.id) : null;
+    if (!id) throw new Error("ID não informado.");
+
+    const { isRead } = await request.json();
+    if (typeof isRead !== "boolean") throw new Error("Campo isRead inválido.");
+
+    await db.update(Links).set({ isRead }).where(eq(Links.id, id));
+
+    return new Response(null, { status: 204 });
+  } catch (e) {
+    console.error(e);
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: e instanceof Error ? e.message : "Erro ao atualizar link.",
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } },
     );
   }
 };
 
 export const PUT: APIRoute = async ({ params, request }) => {
-  if (!import.meta.env.DEV) {
-    return devOnlyResponse();
-  }
-
   try {
-    const id = params.id;
-
-    if (!id) {
-      throw new Error("ID não informado.");
-    }
+    const id = params.id ? parseInt(params.id) : null;
+    if (!id) throw new Error("ID não informado.");
 
     const body = await request.json();
-
     const { title, description, url, isRead } = body;
 
     if (
@@ -116,93 +91,34 @@ export const PUT: APIRoute = async ({ params, request }) => {
       throw new Error("Campos inválidos.");
     }
 
-    const req = await fetch(`${API_URL}/${id}`, {
-      method: "PUT",
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
+    await db
+      .update(Links)
+      .set({
         title: sanitize(title),
         description: sanitize(description),
         url: sanitize(url),
         isRead,
-      }),
-    });
+      })
+      .where(eq(Links.id, id));
 
-    if (!req.ok) {
-      throw new Error("Erro ao atualizar link.");
-    }
-
-    const data = await req.json();
-
-    return jsonResponse({
-      success: true,
-      message: "Link atualizado com sucesso.",
-      data,
-    });
-  } catch (e) {
-    console.error(e);
-
-    if (isServerUnavailableError(e)) {
-      return serverUnavailableResponse();
-    }
-
-    return jsonResponse(
-      {
-        success: false,
-        message: e instanceof Error ? e.message : "Erro desconhecido.",
-      },
-      500,
-    );
-  }
-};
-
-export const PATCH: APIRoute = async ({ params, request }) => {
-  if (!import.meta.env.DEV) {
-    return devOnlyResponse();
-  }
-
-  try {
-    const id = params.id;
-
-    if (!id) {
-      throw new Error("ID não informado.");
-    }
-
-    const { isRead } = await request.json();
-
-    if (typeof isRead !== "boolean") {
-      throw new Error("Campo isRead inválido.");
-    }
-
-    const req = await fetch(`${API_URL}/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ isRead }),
-    });
-
-    if (!req.ok) {
-      throw new Error("Erro ao atualizar isRead.");
-    }
-
-    return new Response(null, { status: 204 });
-  } catch (e) {
-    console.error(e);
-
-    if (isServerUnavailableError(e)) {
-      return serverUnavailableResponse();
-    }
+    const updated = await db.select().from(Links).where(eq(Links.id, id));
 
     return new Response(
       JSON.stringify({
-        success: false,
-        message: e instanceof Error ? e.message : "Erro desconhecido.",
+        success: true,
+        message: "Link atualizado com sucesso.",
+        data: updated[0],
       }),
-      { status: 500 },
+      { status: 200, headers: { "Content-Type": "application/json" } },
+    );
+  } catch (e) {
+    console.error(e);
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: e instanceof Error ? e.message : "Erro ao atualizar link.",
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } },
     );
   }
 };

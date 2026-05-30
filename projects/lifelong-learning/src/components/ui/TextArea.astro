@@ -1,73 +1,64 @@
 ---
 type Props = {
-  id: string;
   name: string;
+  id: number;
 };
 
 const { id, name } = Astro.props;
+const inputName = name.toLowerCase().replaceAll(" ", "-");
 ---
 
 <div class="textarea-field">
-  <label for={`input-${id}`} class="textarea-field__label">
+  <label class="textarea-field__label" for={`input-${id}`}>
     {name}
   </label>
-
   <textarea
     required
     id={`input-${id}`}
-    name={name
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .replace(/\s+/g, "-")}
-    class="textarea-field__textarea"></textarea>
+    name={inputName}
+    class="textarea-field__input"
+  ></textarea>
 </div>
 
 <style lang="scss">
   .textarea-field {
     display: grid;
-    gap: 0.45rem;
+    gap: 0.5rem;
+  }
 
-    &__label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+  .textarea-field__label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .textarea-field__input {
+    min-height: 100px;
+    padding: 0.85rem 1rem;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.2s ease;
+
+    &::placeholder {
       color: var(--muted);
     }
 
-    &__textarea {
-      min-height: 7rem;
-      padding: 0.9rem 1rem;
+    &:hover {
+      border-color: var(--orange);
+    }
 
-      border: 1px solid rgba(253, 230, 138, 0.12);
-      border-radius: 18px;
-
-      background: rgba(25, 22, 18, 0.72);
-      color: var(--text);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-      resize: vertical;
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-
-      &::placeholder {
-        color: var(--muted);
-      }
-
-      &:hover {
-        border-color: rgba(251, 146, 60, 0.22);
-      }
-
-      &:focus {
-        outline: none;
-      }
-
-      &:focus-visible {
-        border-color: rgba(251, 146, 60, 0.45);
-        box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.14);
-      }
+    &:focus {
+      outline: none;
+      border-color: var(--orange);
+      background: rgba(251, 146, 60, 0.05);
+      box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.1);
     }
   }
 </style>
