@@ -139,7 +139,7 @@ import TextInput from "./TextInput.astro";
       const title = sanitize(formData.get("título-do-link") as string);
       const description = sanitize(formData.get("descrição-do-link") as string);
       const url = sanitize(formData.get("url-do-link") as string);
-      const isRead = formData.get("isread") === "on";
+      const isRead = formData.get("isRead") === "on";
 
       if (!title || !description || !url) {
         throw new Error("Por favor, preencha todos os campos");
