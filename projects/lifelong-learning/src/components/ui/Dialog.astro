@@ -7,26 +7,27 @@ import TextInput from "./TextInput.astro";
 
 <dialog class="dialog" aria-labelledby="dialog-title">
   <div class="dialog__content">
-    <form class="dialog__form" id="add-form">
+    <form class="dialog__form" id="link-form">
+      <input type="hidden" name="link-id" id="link-id" />
       <h2 class="dialog__title" id="dialog-title">Adicionar Novo Link</h2>
 
-      <TextInput name="Título do Link" inputId={Math.random()} />
-      <TextArea name="Descrição do Link" id={Math.random()} />
+      <TextInput name="Título do Link" inputId={1} />
+      <TextArea name="Descrição do Link" id={2} />
       <TextInput
         name="URL do Link"
-        inputId={Math.random()}
+        inputId={3}
         title="Deve começar com https://"
         pattern="https?://.*"
       />
-      <Checkbox checked={false} inputId={Math.random()} name="isRead" />
+      <Checkbox checked={false} inputId={4} name="isRead" />
 
       <div class="dialog__actions">
         <Button intent="secondary" id="close-dialog" type="button">
           Cancelar
         </Button>
-        <Button intent="primary" type="submit">
+        <Button intent="primary" type="submit" id="submit-btn">
           <i class="fa-solid fa-plus"></i>
-          Adicionar Link
+          <span>Adicionar Link</span>
         </Button>
       </div>
     </form>
@@ -104,38 +105,75 @@ import TextInput from "./TextInput.astro";
 <script>
   import sanitize from "sanitize-html";
 
-  const addForm = document.querySelector("#add-form");
+  const dialog = document.querySelector("dialog") as HTMLDialogElement;
+  const linkForm = document.getElementById("link-form") as HTMLFormElement;
+  const idInput = document.getElementById("link-id") as HTMLInputElement;
+  const dialogTitle = document.getElementById("dialog-title");
+  const submitBtnText = document.querySelector("#submit-btn span");
+  const submitBtnIcon = document.querySelector("#submit-btn i");
+
   const openDialogBtns = document.querySelectorAll("[data-open-dialog]");
   const closeDialogBtn = document.getElementById("close-dialog");
-  const dialog = document.querySelector("dialog");
+
+  const titleField = linkForm.querySelector(
+    '[name="título-do-link"]',
+  ) as HTMLInputElement;
+  const descField = linkForm.querySelector(
+    '[name="descrição-do-link"]',
+  ) as HTMLTextAreaElement;
+  const urlField = linkForm.querySelector(
+    '[name="url-do-link"]',
+  ) as HTMLInputElement;
+  const isReadField = linkForm.querySelector(
+    '[name="isRead"]',
+  ) as HTMLInputElement;
 
   openDialogBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
+      linkForm.reset();
+      idInput.value = "";
+      if (dialogTitle) dialogTitle.textContent = "Adicionar Novo Link";
+      if (submitBtnText) submitBtnText.textContent = "Adicionar Link";
+      submitBtnIcon?.classList.replace("fa-save", "fa-plus");
       dialog?.showModal();
     });
   });
 
-  closeDialogBtn?.addEventListener("click", () => {
-    dialog?.close();
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const editBtn = target.closest("[data-edit]") as HTMLButtonElement;
+
+    if (editBtn) {
+      const { id, title, description, url, isRead } = editBtn.dataset;
+
+      idInput.value = id || "";
+      titleField.value = title || "";
+      descField.value = description || "";
+      urlField.value = url || "";
+      isReadField.checked = isRead === "true";
+
+      if (dialogTitle) dialogTitle.textContent = "Editar Link";
+      if (submitBtnText) submitBtnText.textContent = "Salvar Alterações";
+      submitBtnIcon?.classList.replace("fa-plus", "fa-save");
+
+      dialog?.showModal();
+    }
   });
+
+  closeDialogBtn?.addEventListener("click", () => dialog?.close());
 
   dialog?.addEventListener("click", (e) => {
-    if (e.target === e.currentTarget) {
-      dialog.close();
-    }
+    if (e.target === e.currentTarget) dialog.close();
   });
 
-  dialog?.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      dialog.close();
-    }
-  });
-
-  addForm?.addEventListener("submit", async (e) => {
+  linkForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     try {
-      const formData = new FormData(addForm as HTMLFormElement);
+      const id = idInput.value;
+      const isEdit = id !== "";
+
+      const formData = new FormData(linkForm);
       const title = sanitize(formData.get("título-do-link") as string);
       const description = sanitize(formData.get("descrição-do-link") as string);
       const url = sanitize(formData.get("url-do-link") as string);
@@ -145,19 +183,19 @@ import TextInput from "./TextInput.astro";
         throw new Error("Por favor, preencha todos os campos");
       }
 
-      const req = await fetch("/api/links", {
-        method: "POST",
+      const apiUrl = isEdit ? `/api/links/${id}` : "/api/links";
+      const method = isEdit ? "PUT" : "POST";
+
+      const req = await fetch(apiUrl, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description, url, isRead }),
       });
 
-      if (!req.ok) throw new Error("Falha ao adicionar link");
+      if (!req.ok) throw new Error("Falha ao salvar link");
 
-      const res = await req.json();
-      if (!res.success) throw new Error(res.message);
-
-      (addForm as HTMLFormElement).reset();
-      (dialog as HTMLDialogElement).close();
+      linkForm.reset();
+      dialog.close();
       location.reload();
     } catch (e) {
       if (e instanceof Error) alert(e.message);

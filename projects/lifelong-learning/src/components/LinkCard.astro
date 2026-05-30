@@ -36,6 +36,20 @@ const { link } = Astro.props as Props;
     <div class="link-card__actions">
       <Button
         intent="secondary"
+        classes="link-card__icon-button link-card__icon-button--edit"
+        data-edit
+        data-id={link.id}
+        data-title={link.title}
+        data-description={link.description}
+        data-url={link.url}
+        data-is-read={String(link.isRead)}
+        aria-label={`Editar link: ${link.title}`}
+      >
+        <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+      </Button>
+
+      <Button
+        intent="secondary"
         classes={`link-card__icon-button link-card__icon-button--${
           link.isRead ? "read" : "unread"
         }`}
@@ -161,6 +175,18 @@ const { link } = Astro.props as Props;
     &:hover {
       transform: translateY(-1px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+    }
+  }
+
+  .link-card__icon-button--edit {
+    color: #93c5fd;
+    border-color: rgba(59, 130, 246, 0.35);
+    background: rgba(30, 58, 138, 0.2);
+
+    &:hover {
+      color: #bfdbfe;
+      border-color: rgba(59, 130, 246, 0.55);
+      background: rgba(30, 64, 175, 0.3);
     }
   }
 
