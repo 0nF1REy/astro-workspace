@@ -2,24 +2,9 @@
 import LinkCard, { type LinkProps } from "@components/LinkCard.astro";
 import Button from "@components/ui/Button.astro";
 import Dialog from "@components/ui/Dialog.astro";
+import { db, Links } from "astro:db";
 
-let links: LinkProps[] = [];
-
-if (import.meta.env.DEV) {
-  try {
-    const req = await fetch(`${Astro.url.origin}/api/links`);
-
-    if (!req.ok) {
-      throw new Error(`Erro HTTP: ${req.status}`);
-    }
-
-    const res = await req.json();
-
-    links = res.data ?? [];
-  } catch (e) {
-    console.error(e);
-  }
-}
+const links = (await db.select().from(Links)) as LinkProps[];
 ---
 
 <section class="dev-links">
