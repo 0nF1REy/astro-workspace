@@ -19,7 +19,12 @@ import TextInput from "./TextInput.astro";
         title="Deve começar com https://"
         pattern="https?://.*"
       />
-      <Checkbox checked={false} inputId={4} name="isRead" />
+      <Checkbox
+        checked={false}
+        inputId={4}
+        name="isRead"
+        label="Marcar como lido"
+      />
 
       <div class="dialog__actions">
         <Button intent="secondary" id="close-dialog" type="button">

@@ -4,9 +4,10 @@ import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"input"> {
   checked: boolean;
   inputId: number;
+  label: string;
 }
 
-const { inputId, checked, ...rest } = Astro.props;
+const { inputId, checked, label = "Selecionar", ...rest } = Astro.props;
 ---
 
 <div class="checkbox">
@@ -21,7 +22,7 @@ const { inputId, checked, ...rest } = Astro.props;
     <i class="fa-solid fa-check"></i>
   </div>
   <label class="checkbox__label" for={`check-${inputId}`}>
-    Marcar como lido
+    {label}
   </label>
 </div>
 
