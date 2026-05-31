@@ -72,4 +72,6 @@ export const jsonResponse = (data: unknown, status = 200): Response => {
 /**
  * Base URL para dev-server mock API
  */
-export const API_URL = "http://localhost:3000/links";
+export const MOCK_API_BASE = "http://localhost:3000";
+export const getResourceUrl = (resource: string) =>
+  `${MOCK_API_BASE}/${resource}`;

@@ -1,3 +1,108 @@
 {
-  "links": []
+  "activities": [
+    {
+      "id": "1",
+      "type": "Corrida",
+      "distance": "5.2",
+      "duration": "25:30",
+      "isCompleted": true,
+      "notes": "Treino leve matinal no parque."
+    },
+    {
+      "id": "2",
+      "type": "Musculação",
+      "distance": "0",
+      "duration": "45:00",
+      "isCompleted": false,
+      "notes": "Foco em pernas (agachamento e afundo)."
+    },
+    {
+      "id": "3",
+      "type": "Ciclismo",
+      "distance": "18.7",
+      "duration": "52:10",
+      "isCompleted": true,
+      "notes": "Percurso urbano com algumas subidas."
+    },
+    {
+      "id": "4",
+      "type": "Caminhada",
+      "distance": "3.4",
+      "duration": "38:20",
+      "isCompleted": true,
+      "notes": "Caminhada após o almoço."
+    },
+    {
+      "id": "5",
+      "type": "Natação",
+      "distance": "1.2",
+      "duration": "35:00",
+      "isCompleted": true,
+      "notes": "Treino de resistência."
+    },
+    {
+      "id": "6",
+      "type": "Yoga",
+      "distance": "0",
+      "duration": "40:00",
+      "isCompleted": true,
+      "notes": "Sessão focada em alongamento."
+    },
+    {
+      "id": "7",
+      "type": "Pilates",
+      "distance": "0",
+      "duration": "50:00",
+      "isCompleted": true,
+      "notes": "Exercícios para fortalecimento do core."
+    },
+    {
+      "id": "8",
+      "type": "Remo",
+      "distance": "4.8",
+      "duration": "32:15",
+      "isCompleted": true,
+      "notes": "Treino em máquina de remo."
+    },
+    {
+      "id": "9",
+      "type": "Escalada",
+      "distance": "0",
+      "duration": "01:10:00",
+      "isCompleted": false,
+      "notes": "Sessão em parede indoor."
+    },
+    {
+      "id": "10",
+      "type": "Patinação",
+      "distance": "9.5",
+      "duration": "47:20",
+      "isCompleted": true,
+      "notes": "Patinação recreativa no parque."
+    },
+    {
+      "id": "11",
+      "type": "Dança",
+      "distance": "0",
+      "duration": "55:00",
+      "isCompleted": true,
+      "notes": "Aula de dança contemporânea."
+    },
+    {
+      "id": "12",
+      "type": "Boxe",
+      "distance": "0",
+      "duration": "42:30",
+      "isCompleted": true,
+      "notes": "Treino técnico e condicionamento."
+    },
+    {
+      "id": "13",
+      "type": "Trilha",
+      "distance": "8.3",
+      "duration": "02:05:00",
+      "isCompleted": false,
+      "notes": "Trilha em terreno montanhoso."
+    }
+  ]
 }
