@@ -1,8 +1,11 @@
 import { defineMiddleware } from "astro:middleware";
 
-export const onRequest = defineMiddleware(async () => {
-  console.log("Middleware ativo.");
-  return new Response(
-    JSON.stringify({ success: true, message: "Middleware ativo." }),
-  );
+export const onRequest = defineMiddleware(async (context, next) => {
+  console.log("Antes da página");
+
+  const response = await next();
+
+  console.log("Depois da página");
+
+  return response;
 });
