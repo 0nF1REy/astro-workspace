@@ -87,8 +87,3 @@ db-push: ## Envia schema do Astro DB
 
 db-seed: ## Executa seed no banco remoto
 	@npm run db:seed
-
-# ========================= Mock API =========================
-
-server: ## Inicia o json-server
-	@npm run server

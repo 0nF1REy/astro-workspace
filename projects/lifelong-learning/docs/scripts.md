@@ -30,23 +30,6 @@ npm run dev:remote
 
 ---
 
-## dev:full
-
-Executa o Astro e o json-server simultaneamente.
-
-```bash
-npm run dev:full
-```
-
-Inicia:
-
-- servidor de desenvolvimento do Astro
-- mock API com json-server
-
-Útil para rotas de desenvolvimento que dependem de APIs REST mockadas.
-
----
-
 # 🏗️ Build & Preview
 
 ## build
@@ -162,26 +145,6 @@ npm run db:seed
 ```
 
 Utilizado para popular o banco com dados iniciais/mockados.
-
----
-
-# 🎭 Mock API
-
-## server
-
-Inicia a instância local do json-server.
-
-```bash
-npm run server
-```
-
-Utiliza:
-
-```txt
-mock/db.json
-```
-
-Disponível apenas para fluxos de desenvolvimento.
 
 ---
 

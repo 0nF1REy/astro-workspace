@@ -45,7 +45,6 @@
   "scripts": {
     "dev": "astro dev",
     "dev:remote": "astro dev --remote",
-    "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
     "build": "npm run clean && astro build --remote",
     "preview": "astro preview",
     "clean": "rimraf dist",
@@ -56,7 +55,6 @@
     "astro": "astro",
     "db:push": "astro db push --remote",
     "db:seed": "astro db execute db/seed.ts --remote",
-    "server": "json-server mock/db.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
@@ -102,7 +100,6 @@
     "csv-parse": "^6.2.1",
     "eslint": "^10.4.0",
     "eslint-plugin-astro": "^1.7.0",
-    "json-server": "^1.0.0-beta.15",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "rimraf": "^6.1.3",

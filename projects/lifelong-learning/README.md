@@ -39,7 +39,6 @@ O projeto mistura:
 - SSR
 - APIs REST
 - Astro DB
-- mock APIs
 - estudos de organização modular com `src/features`
 
 com foco educacional e experimental.

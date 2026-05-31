@@ -47,11 +47,6 @@ npm run db:push
 npm run db:seed
 → Executa seed no banco remoto utilizando db/seed.ts.
 
-============================= Mock API ============================
-
-npm run server
-→ Inicia o json-server usando mock/db.json.
-
 =========================== Documentação ==========================
 
 npm run help
