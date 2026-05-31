@@ -1,11 +1,15 @@
 import { defineMiddleware } from "astro:middleware";
 
-export const onRequest = defineMiddleware(async (context, next) => {
-  console.log("Antes da página");
+export const onRequest = defineMiddleware(async ({ url }, next) => {
+  const redirects = ["/"];
+
+  if (redirects.includes(url.pathname)) {
+    return Response.redirect(new URL("/redirected", url), 302);
+  }
 
   const response = await next();
 
-  console.log("Depois da página");
+  response.headers.set("X-Credits", "Crafted with Astro by Alan Ryan");
 
   return response;
 });
