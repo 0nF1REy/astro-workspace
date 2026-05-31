@@ -15,7 +15,7 @@ export const PATCH: APIRoute = async ({ params, request }) => {
 
   try {
     const { id } = params;
-    const idAsNumber = Number(id); 
+    const idAsNumber = Number(id);
 
     const body = await request.json();
 

@@ -4,7 +4,6 @@ import ActivityForm from "../components/ActivityForm.astro";
 import ActivityCard from "../components/ActivityCard.astro";
 import type { ActivityProps } from "../components/ActivityCard.astro";
 import Button from "@ui/Button.astro";
-import Link from "@ui/Link.astro";
 
 const req = await fetch(`${Astro.url.origin}/api/activities`);
 const res = await req.json();
@@ -19,7 +18,6 @@ const activities = (res.data ?? []) as ActivityProps[];
       <p>Gerencie sua rotina de exercícios.</p>
     </div>
     <div class="actions">
-      <Link href="/">Voltar</Link>
       <Button id="open-training" intent="accent">Registrar Treino</Button>
     </div>
   </header>
