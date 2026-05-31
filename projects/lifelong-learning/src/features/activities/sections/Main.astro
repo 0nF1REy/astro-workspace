@@ -1,3 +1,19 @@
-<div>
-  <h1>Hello World!</h1>
-</div>
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Dialog from "@ui/Dialog.astro";
+import ActivityForm from "@features/activities/components/ActivityForm.astro";
+import Button from "@ui/Button.astro";
+---
+
+<BaseLayout title="Meus Treinos">
+  <Button id="open-training" intent="accent">Registrar Treino</Button>
+  <Dialog id="dialog-treino" title="Novo Treino">
+    <ActivityForm />
+  </Dialog>
+</BaseLayout>
+
+<script>
+  document.getElementById("open-training")?.addEventListener("click", () => {
+    (document.getElementById("dialog-treino") as HTMLDialogElement).showModal();
+  });
+</script>

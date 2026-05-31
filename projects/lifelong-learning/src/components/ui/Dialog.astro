@@ -1,55 +1,27 @@
 ---
-import Button from "./Button.astro";
-import Checkbox from "./Checkbox.astro";
-import TextArea from "./TextArea.astro";
-import TextInput from "./TextInput.astro";
+interface Props {
+  id: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
 ---
 
-<dialog class="dialog" aria-labelledby="dialog-title">
-  <div class="dialog__content">
-    <form class="dialog__form" id="link-form">
-      <input type="hidden" name="link-id" id="link-id" />
-      <h2 class="dialog__title" id="dialog-title">Adicionar Novo Link</h2>
-
-      <TextInput name="Título do Link" inputId={1} />
-      <TextArea name="Descrição do Link" id={2} />
-      <TextInput
-        name="URL do Link"
-        inputId={3}
-        title="Deve começar com https://"
-        pattern="https?://.*"
-      />
-      <Checkbox
-        checked={false}
-        inputId={4}
-        name="isRead"
-        label="Marcar como lido"
-      />
-
-      <div class="dialog__actions">
-        <Button intent="secondary" id="close-dialog" type="button">
-          Cancelar
-        </Button>
-        <Button intent="primary" type="submit" id="submit-btn">
-          <i class="fa-solid fa-plus"></i>
-          <span>Adicionar Link</span>
-        </Button>
-      </div>
-    </form>
+<dialog class="ui-dialog" id={id} aria-labelledby={`${id}-title`}>
+  <div class="ui-dialog__content">
+    <h2 class="ui-dialog__title" id={`${id}-title`}>{title}</h2>
+    <slot />
   </div>
 </dialog>
 
 <style lang="scss">
-  .dialog {
+  .ui-dialog {
     width: min(100%, 32rem);
     max-width: 90vw;
-    max-height: 90vh;
-    padding: 0;
-    color: var(--text);
     background: var(--surface-light);
     border: 1px solid var(--border);
     border-radius: 12px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    padding: 0;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -60,151 +32,23 @@ import TextInput from "./TextInput.astro";
       background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(4px);
     }
-
-    &[open] {
-      animation: slideIn 0.3s ease;
-    }
   }
 
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
-
-  .dialog__content {
-    width: 100%;
+  .ui-dialog__content {
     padding: 2rem;
-    overflow-y: auto;
   }
 
-  .dialog__form {
-    display: grid;
-    gap: 1.25rem;
-  }
-
-  .dialog__title {
-    margin: 0;
+  .ui-dialog__title {
+    margin-bottom: 1.5rem;
     color: var(--cream);
     font-size: 1.5rem;
     font-weight: 800;
-    line-height: 1.2;
-  }
-
-  .dialog__actions {
-    display: flex;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-
-    :global(button) {
-      flex: 1;
-    }
   }
 </style>
 
-<script>
-  import sanitize from "sanitize-html";
-
-  const dialog = document.querySelector("dialog") as HTMLDialogElement;
-  const linkForm = document.getElementById("link-form") as HTMLFormElement;
-  const idInput = document.getElementById("link-id") as HTMLInputElement;
-  const dialogTitle = document.getElementById("dialog-title");
-  const submitBtnText = document.querySelector("#submit-btn span");
-  const submitBtnIcon = document.querySelector("#submit-btn i");
-
-  const openDialogBtns = document.querySelectorAll("[data-open-dialog]");
-  const closeDialogBtn = document.getElementById("close-dialog");
-
-  const titleField = linkForm.querySelector(
-    '[name="título-do-link"]',
-  ) as HTMLInputElement;
-  const descField = linkForm.querySelector(
-    '[name="descrição-do-link"]',
-  ) as HTMLTextAreaElement;
-  const urlField = linkForm.querySelector(
-    '[name="url-do-link"]',
-  ) as HTMLInputElement;
-  const isReadField = linkForm.querySelector(
-    '[name="isRead"]',
-  ) as HTMLInputElement;
-
-  openDialogBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      linkForm.reset();
-      idInput.value = "";
-      if (dialogTitle) dialogTitle.textContent = "Adicionar Novo Link";
-      if (submitBtnText) submitBtnText.textContent = "Adicionar Link";
-      submitBtnIcon?.classList.replace("fa-save", "fa-plus");
-      dialog?.showModal();
-    });
-  });
-
-  document.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
-    const editBtn = target.closest("[data-edit]") as HTMLButtonElement;
-
-    if (editBtn) {
-      const { id, title, description, url, isRead } = editBtn.dataset;
-
-      idInput.value = id || "";
-      titleField.value = title || "";
-      descField.value = description || "";
-      urlField.value = url || "";
-      isReadField.checked = isRead === "true";
-
-      if (dialogTitle) dialogTitle.textContent = "Editar Link";
-      if (submitBtnText) submitBtnText.textContent = "Salvar Alterações";
-      submitBtnIcon?.classList.replace("fa-plus", "fa-save");
-
-      dialog?.showModal();
-    }
-  });
-
-  closeDialogBtn?.addEventListener("click", () => dialog?.close());
-
+<script define:vars={{ id }} is:inline>
+  const dialog = document.getElementById(id);
   dialog?.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) dialog.close();
-  });
-
-  linkForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    try {
-      const id = idInput.value;
-      const isEdit = id !== "";
-
-      const formData = new FormData(linkForm);
-      const title = sanitize(formData.get("título-do-link") as string);
-      const description = sanitize(formData.get("descrição-do-link") as string);
-      const url = sanitize(formData.get("url-do-link") as string);
-      const isRead = formData.get("isRead") === "on";
-
-      if (!title || !description || !url) {
-        throw new Error("Por favor, preencha todos os campos");
-      }
-
-      const apiUrl = isEdit ? `/api/links/${id}` : "/api/links";
-      const method = isEdit ? "PUT" : "POST";
-
-      const req = await fetch(apiUrl, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, description, url, isRead }),
-      });
-
-      if (!req.ok) throw new Error("Falha ao salvar link");
-
-      linkForm.reset();
-      dialog.close();
-      location.reload();
-    } catch (e) {
-      if (e instanceof Error) alert(e.message);
-      console.error(e);
-    }
   });
 </script>
