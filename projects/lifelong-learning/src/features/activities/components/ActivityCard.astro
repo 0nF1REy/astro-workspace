@@ -1,6 +1,7 @@
 ---
 import Checkbox from "@ui/Checkbox.astro";
 import Button from "@ui/Button.astro";
+import { getActivityIcon } from "../lib/getActivityIcon";
 
 export type ActivityProps = {
   id: number;
@@ -17,10 +18,7 @@ type Props = {
 
 const { activity } = Astro.props;
 
-const isStrength =
-  activity.type.toLowerCase().includes("musculação") ||
-  activity.type.toLowerCase().includes("força");
-const iconClass = isStrength ? "fa-dumbbell" : "fa-person-running";
+const iconClass = getActivityIcon(activity.type);
 ---
 
 <article class="activity-card surface-card" data-activity-card>
