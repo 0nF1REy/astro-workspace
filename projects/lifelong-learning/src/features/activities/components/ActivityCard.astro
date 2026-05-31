@@ -1,10 +1,9 @@
-<!-- ---
-import Link from "./ui/Link.astro";
-import Checkbox from "./ui/Checkbox.astro";
-import Button from "./ui/Button.astro";
+---
+import Checkbox from "@ui/Checkbox.astro";
+import Button from "@ui/Button.astro";
 
 export type ActivityProps = {
-  id: string;
+  id: number;
   type: string;
   distance: string;
   duration: string;
@@ -47,6 +46,7 @@ const iconClass = isStrength ? "fa-dumbbell" : "fa-person-running";
       <Checkbox
         checked={activity.isCompleted}
         inputId={activity.id}
+        label="Concluído"
         data-id={activity.id}
         data-iscompleted
       />
@@ -212,4 +212,4 @@ const iconClass = isStrength ? "fa-dumbbell" : "fa-person-running";
       }
     });
   });
-</script> -->
+</script>

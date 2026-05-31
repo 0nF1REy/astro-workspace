@@ -15,9 +15,11 @@ export const PATCH: APIRoute = async ({ params, request }) => {
 
   try {
     const { id } = params;
+    const idAsNumber = Number(id); 
+
     const body = await request.json();
 
-    const req = await fetch(`${RESOURCE_URL}/${id}`, {
+    const req = await fetch(`${RESOURCE_URL}/${idAsNumber}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),

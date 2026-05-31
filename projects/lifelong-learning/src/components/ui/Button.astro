@@ -2,16 +2,26 @@
 import type { HTMLAttributes } from "astro/types";
 
 type Intent = "primary" | "secondary" | "accent";
+type Size = "small" | "medium" | "large" | "square";
 
 export interface Props extends HTMLAttributes<"button"> {
   intent?: Intent;
+  size?: Size;
   classes?: string;
 }
 
-const { intent = "primary", classes = "", ...rest } = Astro.props;
+const {
+  intent = "primary",
+  size = "medium",
+  classes = "",
+  ...rest
+} = Astro.props;
 ---
 
-<button class={`button button--${intent} ${classes}`.trim()} {...rest}>
+<button
+  class:list={["button", `button--${intent}`, `button--${size}`, classes]}
+  {...rest}
+>
   <slot />
 </button>
 
@@ -21,12 +31,10 @@ const { intent = "primary", classes = "", ...rest } = Astro.props;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
     border: 1px solid transparent;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 1rem;
     transition: all 0.2s ease;
     white-space: nowrap;
 
@@ -37,6 +45,27 @@ const { intent = "primary", classes = "", ...rest } = Astro.props;
     &:focus-visible {
       outline: 2px solid var(--orange);
       outline-offset: 2px;
+    }
+
+    &--small {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.875rem;
+    }
+
+    &--medium {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+
+    &--large {
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+    }
+
+    &--square {
+      padding: 0.75rem;
+      aspect-ratio: 1 / 1;
+      border-radius: 10px;
     }
 
     &--primary {

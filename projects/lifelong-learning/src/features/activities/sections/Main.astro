@@ -1,19 +1,66 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
 import Dialog from "@ui/Dialog.astro";
-import ActivityForm from "@features/activities/components/ActivityForm.astro";
+import ActivityForm from "../components/ActivityForm.astro";
+import ActivityCard from "../components/ActivityCard.astro";
+import type { ActivityProps } from "../components/ActivityCard.astro";
 import Button from "@ui/Button.astro";
+import Link from "@ui/Link.astro";
+
+const req = await fetch(`${Astro.url.origin}/api/activities`);
+const res = await req.json();
+
+const activities = (res.data ?? []) as ActivityProps[];
 ---
 
-<BaseLayout title="Meus Treinos">
-  <Button id="open-training" intent="accent">Registrar Treino</Button>
+<section class="activities-feature">
+  <header class="activities-header surface-card">
+    <div>
+      <h1 class="title-gradient">Meus Treinos</h1>
+      <p>Gerencie sua rotina de exercícios.</p>
+    </div>
+    <div class="actions">
+      <Link href="/">Voltar</Link>
+      <Button id="open-training" intent="accent">Registrar Treino</Button>
+    </div>
+  </header>
+
+  <div class="activities-grid">
+    {activities.map((act) => <ActivityCard activity={act} />)}
+  </div>
+
   <Dialog id="dialog-treino" title="Novo Treino">
     <ActivityForm />
   </Dialog>
-</BaseLayout>
+</section>
+
+<style lang="scss">
+  .activities-feature {
+    display: grid;
+    gap: 2rem;
+  }
+  .activities-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+  }
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+</style>
 
 <script>
   document.getElementById("open-training")?.addEventListener("click", () => {
-    (document.getElementById("dialog-treino") as HTMLDialogElement).showModal();
+    const dialog = document.getElementById(
+      "dialog-treino",
+    ) as HTMLDialogElement;
+    dialog?.showModal();
   });
 </script>

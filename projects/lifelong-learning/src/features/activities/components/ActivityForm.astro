@@ -57,7 +57,7 @@ import TextInput from "@ui/TextInput.astro";
       distance: sanitize(formData.get("distancia") as string),
       duration: sanitize(formData.get("duracao") as string),
       notes: sanitize(formData.get("notas") as string),
-      isCompleted: formData.get("iscompleted") === "on",
+      isCompleted: formData.get("isCompleted") === "on",
     };
 
     try {
