@@ -7,9 +7,26 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   context.locals.name = developerName;
 
-  console.log("[Middleware] Dados adicionados à requisição:", context.locals);
+  context.locals.userMessage = () => {
+    const pathname = url.pathname;
 
-  const redirects = ["/"];
+    const authStatus = false;
+
+    if (pathname === "/" && !authStatus) {
+      return "Você precisa estar conectado.";
+    }
+
+    if (pathname !== "/") {
+      return "Freedom!";
+    }
+
+    return "";
+  };
+
+  console.log("[Middleware] Dados adicionados à requisição:", context.locals);
+  console.log("[Middleware] Mensagem:", context.locals.userMessage());
+
+  const redirects = ["/test"];
 
   if (redirects.includes(url.pathname)) {
     return Response.redirect(new URL("/redirected", url), 302);
