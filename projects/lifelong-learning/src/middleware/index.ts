@@ -3,7 +3,9 @@ import { defineMiddleware } from "astro:middleware";
 export const onRequest = defineMiddleware(async (context, next) => {
   const { url } = context;
 
-  context.locals.name = "John Wick";
+  const developerName = "Alan Ryan da Silva Domingues";
+
+  context.locals.name = developerName;
 
   console.log("[Middleware] Dados adicionados à requisição:", context.locals);
 
@@ -15,7 +17,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   const response = await next();
 
-  response.headers.set("X-Credits", "Crafted with Astro by Alan Ryan");
+  response.headers.set("X-Credits", `Crafted with Astro by ${developerName}`);
 
   return response;
 });
