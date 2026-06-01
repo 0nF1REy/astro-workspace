@@ -1,0 +1,8 @@
+---
+console.log("[Page] Dados recebidos do middleware:", Astro.locals);
+
+const { name } = Astro.locals;
+---
+
+<h1>Middleware Page</h1>
+<p>Hi, {name}</p>
