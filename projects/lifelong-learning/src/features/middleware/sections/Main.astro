@@ -1,37 +1,332 @@
 ---
-import { db, Logs } from "astro:db";
+import { db, Logs, desc } from "astro:db";
 
 console.log("[Page] Dados recebidos do middleware:", Astro.locals);
 console.log("[Page] Mensagem:", Astro.locals.userMessage());
 
+const logs = await db.select().from(Logs).orderBy(desc(Logs.date_accessed));
+
 const name = Astro.locals.name;
 const userMessage = Astro.locals.userMessage();
-
-const logs = await db.select().from(Logs);
 ---
 
-<h1>Middleware Page</h1>
+<section class="middleware-demo">
+  <div class="middleware-demo__hero surface-card">
+    <p class="middleware-demo__eyebrow">Astro Middleware</p>
+    <h1 class="title-gradient">Interceptor de Requisições</h1>
+    <p class="middleware-demo__lead">
+      Esta página demonstra o poder do <code>src/middleware/index.ts</code>. Os
+      dados abaixo são injetados via <code>Astro.locals</code> e o conteúdo sensível
+      é mascarado em tempo de execução.
+    </p>
+  </div>
 
-<p>Hi, {name}.</p>
-<p>{userMessage}</p>
+  <div class="middleware-demo__grid">
+    <!-- Card de Locals -->
+    <article class="middleware-demo__card surface-card">
+      <div class="middleware-demo__card-header">
+        <i class="fa-solid fa-user-shield"></i>
+        <h2>Dados do Contexto</h2>
+      </div>
+      <div class="middleware-demo__locals">
+        <div class="local-item">
+          <span>Desenvolvedor:</span>
+          <strong>{name}</strong>
+        </div>
+        <div class="local-item">
+          <span>Status de Acesso:</span>
+          <p class="status-badge">{userMessage}</p>
+        </div>
+      </div>
+    </article>
 
-<p>PRIVATE INFO</p>
-<p>CPF: 123.456.789-00</p>
+    <!-- Card de Redação/Segurança -->
+    <article class="middleware-demo__card surface-card">
+      <div class="middleware-demo__card-header">
+        <i class="fa-solid fa-eye-slash"></i>
+        <h2>Segurança (HTML Redaction)</h2>
+      </div>
+      <div class="middleware-demo__security">
+        <p>
+          O middleware está configurado para interceptar o HTML final e
+          substituir strings sensíveis:
+        </p>
 
-<h2>Logs registrados</h2>
+        <div class="security-example">
+          <div class="redacted-box">PRIVATE INFO</div>
+        </div>
 
-{
-  logs.map((log) => (
-    <ul>
-      <li>
-        <strong>URL:</strong> {log.url}
-      </li>
-      <li>
-        <strong>Status:</strong> {log.status}
-      </li>
-      <li>
-        <strong>Data:</strong> {log.date_accessed.toLocaleDateString()}
-      </li>
-    </ul>
-  ))
-}
+        <div class="security-example">
+          <div class="redacted-box">123.456.789-00</div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Seção de Logs do Astro DB -->
+  <section class="middleware-logs surface-card">
+    <div class="middleware-demo__card-header">
+      <i class="fa-solid fa-database"></i>
+      <h2>Logs de Erros (Astro DB)</h2>
+    </div>
+    <p class="logs-description">
+      Sempre que uma rota retorna status diferente de 200, o middleware registra
+      no banco:
+    </p>
+
+    <div class="logs-table-wrapper">
+      <table class="logs-table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>URL</th>
+            <th>Data de Acesso</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            logs.length > 0 ? (
+              logs.map((log) => (
+                <tr>
+                  <td>
+                    <span
+                      class={`status-tag status-${log.status >= 400 ? "error" : "warn"}`}
+                    >
+                      {log.status}
+                    </span>
+                  </td>
+                  <td class="url-cell">{log.url}</td>
+                  <td>{new Date(log.date_accessed).toLocaleString("pt-BR")}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colspan="3" class="empty-logs">
+                  Nenhum log de erro registrado ainda.
+                </td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+<style lang="scss">
+  .middleware-demo {
+    display: grid;
+    gap: 1.5rem;
+
+    &__hero {
+      display: grid;
+      gap: 0.85rem;
+      padding: 2.5rem;
+    }
+
+    &__eyebrow {
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    &__lead {
+      max-width: 65ch;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.05rem;
+
+      code {
+        background: rgba(251, 146, 60, 0.15);
+        color: var(--orange);
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    &__card {
+      display: grid;
+      gap: 1.5rem;
+      padding: 2rem;
+      align-content: start;
+    }
+
+    &__card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--orange);
+
+      i {
+        font-size: 1.5rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+        color: var(--cream);
+        margin: 0;
+      }
+    }
+
+    &__locals {
+      display: grid;
+      gap: 1.25rem;
+
+      .local-item {
+        display: grid;
+        gap: 0.35rem;
+
+        span {
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          color: var(--muted);
+          letter-spacing: 0.05em;
+        }
+
+        strong {
+          font-size: 1.2rem;
+          color: var(--text);
+        }
+
+        .status-badge {
+          background: var(--brown);
+          border: 1px solid var(--border);
+          padding: 0.75rem;
+          border-radius: 12px;
+          color: var(--orange);
+          font-weight: 700;
+          margin: 0;
+        }
+      }
+    }
+
+    &__security {
+      display: grid;
+      gap: 1rem;
+      color: var(--muted);
+
+      .security-example {
+        display: grid;
+        justify-items: center;
+        gap: 0.5rem;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 1rem;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+
+        label {
+          font-size: 0.7rem;
+          text-transform: uppercase;
+        }
+
+        code {
+          color: var(--muted);
+          opacity: 0.6;
+        }
+        i {
+          color: var(--orange);
+          font-size: 0.8rem;
+        }
+
+        .redacted-box {
+          background: var(--orange);
+          color: var(--bg);
+          padding: 0.2rem 0.8rem;
+          border-radius: 4px;
+          font-weight: 800;
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+
+  .middleware-logs {
+    padding: 2rem;
+    display: grid;
+    gap: 1rem;
+
+    .logs-description {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+  }
+
+  .logs-table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+
+    th,
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: rgba(251, 146, 60, 0.05);
+      color: var(--cream);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    .url-cell {
+      font-family: monospace;
+      color: var(--muted);
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .status-tag {
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.8rem;
+
+      &.status-error {
+        background: #ef4444;
+        color: white;
+      }
+      &.status-warn {
+        background: var(--orange);
+        color: var(--bg);
+      }
+    }
+
+    .empty-logs {
+      text-align: center;
+      color: var(--muted);
+      padding: 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .middleware-demo__hero {
+      padding: 1.5rem;
+    }
+    .middleware-demo__card {
+      padding: 1.25rem;
+    }
+    .middleware-logs {
+      padding: 1.25rem;
+    }
+  }
+</style>
