@@ -42,8 +42,14 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // Lê o HTML gerado pela página
   const html = await response.text();
 
-  // Remove ou substitui informações sensíveis
-  const redactedHtml = html.replaceAll("PRIVATE INFO", "REDACTED");
+  let redactedHtml = html;
+
+  // Substituição de conteúdo no HTML gerado
+  redactedHtml = redactedHtml.replaceAll("PRIVATE INFO", "REDACTED");
+
+  if (url.pathname === "/middleware") {
+    redactedHtml = redactedHtml.replaceAll("123.456.789-00", "***.***.***-**");
+  }
 
   // Cria uma nova resposta baseada no HTML modificado
   const newResponse = new Response(redactedHtml, {
