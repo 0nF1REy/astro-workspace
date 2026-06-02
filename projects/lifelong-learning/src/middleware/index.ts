@@ -2,23 +2,6 @@ import { defineMiddleware } from "astro:middleware";
 import { db, Logs } from "astro:db";
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  const response = await next();
-  if (response.status !== 200) {
-    console.log(
-      "[Middleware] Resposta com status diferente de 200. Registrando ocorrência.",
-    );
-    await db.insert(Logs).values({
-      url: context.url.toString(),
-      date_accessed: new Date(),
-    });
-  }
-  return next();
-});
-
-/*
-import { defineMiddleware } from "astro:middleware";
-
-export const onRequest = defineMiddleware(async (context, next) => {
   const { url } = context;
 
   // Informações da aplicação
@@ -44,7 +27,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // Logs de desenvolvimento
   console.log("[Middleware] Dados adicionados à requisição:", context.locals);
-
   console.log("[Middleware] Mensagem:", context.locals.userMessage());
 
   // Redirecionamentos
@@ -57,6 +39,18 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // Continua o fluxo da requisição
   const response = await next();
 
+  // Registro de erros
+  if (response.status !== 200) {
+    console.log(
+      `[Middleware] Status ${response.status}. Registrando ocorrência.`,
+    );
+
+    await db.insert(Logs).values({
+      url: url.toString(),
+      date_accessed: new Date(),
+    });
+  }
+
   // Lê o HTML gerado pela página
   const html = await response.text();
 
@@ -65,6 +59,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // Substituição de conteúdo no HTML gerado
   redactedHtml = redactedHtml.replaceAll("PRIVATE INFO", "REDACTED");
 
+  // Exemplo específico para a rota /middleware
   if (url.pathname === "/middleware") {
     redactedHtml = redactedHtml.replaceAll("123.456.789-00", "***.***.***-**");
   }
@@ -84,4 +79,3 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   return newResponse;
 });
-*/
