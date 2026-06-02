@@ -5,21 +5,33 @@ console.log("[Page] Dados recebidos do middleware:", Astro.locals);
 console.log("[Page] Mensagem:", Astro.locals.userMessage());
 
 const name = Astro.locals.name;
-const userMessage = Astro.locals.userMessage;
+const userMessage = Astro.locals.userMessage();
 
 const logs = await db.select().from(Logs);
 ---
 
 <h1>Middleware Page</h1>
+
 <p>Hi, {name}.</p>
 <p>{userMessage}</p>
+
 <p>PRIVATE INFO</p>
 <p>CPF: 123.456.789-00</p>
+
+<h2>Logs registrados</h2>
+
 {
-  logs.map((l) => (
+  logs.map((log) => (
     <ul>
-      <li>URL: {l.url}</li>
-      <li>DATE: {l.date_accessed.toLocaleDateString()}</li>
+      <li>
+        <strong>URL:</strong> {log.url}
+      </li>
+      <li>
+        <strong>Status:</strong> {log.status}
+      </li>
+      <li>
+        <strong>Data:</strong> {log.date_accessed.toLocaleDateString()}
+      </li>
     </ul>
   ))
 }

@@ -14,6 +14,7 @@ const Logs = defineTable({
   columns: {
     id: column.number({ primaryKey: true }),
     url: column.text(),
+    status: column.number(),
     date_accessed: column.date(),
   },
 });
