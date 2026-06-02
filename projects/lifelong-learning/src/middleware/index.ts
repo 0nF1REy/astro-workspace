@@ -14,15 +14,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const pathname = url.pathname;
     const authStatus = false;
 
-    if (pathname === "/" && !authStatus) {
+    const protectedRoutes = ["/middleware", "/admin"];
+
+    if (protectedRoutes.includes(pathname) && !authStatus) {
       return "Você precisa estar conectado.";
     }
 
-    if (pathname !== "/") {
-      return "Freedom!";
-    }
-
-    return "";
+    return "Freedom!";
   };
 
   // Logs de desenvolvimento
