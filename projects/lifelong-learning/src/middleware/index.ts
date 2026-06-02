@@ -1,9 +1,16 @@
 import { defineMiddleware } from "astro:middleware";
+import { db, Logs } from "astro:db";
 
-export const onRequest = defineMiddleware(async (_, next) => {
+export const onRequest = defineMiddleware(async (context, next) => {
   const response = await next();
   if (response.status !== 200) {
-    console.log("Logging error");
+    console.log(
+      "[Middleware] Resposta com status diferente de 200. Registrando ocorrência.",
+    );
+    await db.insert(Logs).values({
+      url: context.url.toString(),
+      date_accessed: new Date(),
+    });
   }
   return next();
 });

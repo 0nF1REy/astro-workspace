@@ -1,13 +1,24 @@
 ---
-console.log("[Page] Dados recebidos do middleware:", Astro.locals);
-console.log("[Page] Mensagem:", Astro.locals.userMessage());
+import { db, Logs } from "astro:db";
 
-const name = Astro.locals.name;
-const userMessage = Astro.locals.userMessage;
+// console.log("[Page] Dados recebidos do middleware:", Astro.locals);
+// console.log("[Page] Mensagem:", Astro.locals.userMessage());
+
+// const name = Astro.locals.name;
+// const userMessage = Astro.locals.userMessage;
+const logs = await db.select().from(Logs);
 ---
 
 <h1>Middleware Page</h1>
-<p>Hi, {name}.</p>
-<p>{userMessage}</p>
+<!-- <p>Hi, {name}.</p>
+<p>{userMessage}</p> -->
 <p>PRIVATE INFO</p>
 <p>CPF: 123.456.789-00</p>
+{
+  logs.map((l) => (
+    <ul>
+      <li>URL: {l.url}</li>
+      <li>DATE: {l.date_accessed.toLocaleDateString()}</li>
+    </ul>
+  ))
+}
