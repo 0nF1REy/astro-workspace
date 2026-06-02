@@ -1,5 +1,14 @@
 import { defineMiddleware } from "astro:middleware";
 
+export const onRequest = defineMiddleware(async (_, next) => {
+  const request = await next();
+  console.log("~ onRequest ~ request: ", request);
+  return next();
+});
+
+/*
+import { defineMiddleware } from "astro:middleware";
+
 export const onRequest = defineMiddleware(async (context, next) => {
   const { url } = context;
 
@@ -66,3 +75,4 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   return newResponse;
 });
+*/
