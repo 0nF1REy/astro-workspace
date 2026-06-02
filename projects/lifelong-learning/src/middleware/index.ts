@@ -1,8 +1,10 @@
 import { defineMiddleware } from "astro:middleware";
 
 export const onRequest = defineMiddleware(async (_, next) => {
-  const request = await next();
-  console.log("~ onRequest ~ request: ", request);
+  const response = await next();
+  if (response.status !== 200) {
+    console.log("Logging error");
+  }
   return next();
 });
 
