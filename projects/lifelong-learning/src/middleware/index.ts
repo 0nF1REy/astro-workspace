@@ -37,8 +37,19 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // Continua o fluxo da requisição
   const response = await next();
 
-  // Registro de erros
-  if (response.status !== 200) {
+  // Filtro de ruído
+  const isNoise =
+    url.pathname.startsWith("/_astro") ||
+    url.pathname.startsWith("/favicon") ||
+    url.pathname.startsWith("/@") ||
+    url.pathname.includes("404");
+
+  // Detecta respostas não-HTML (assets estáticos como JS, CSS, imagens)
+  const isAsset =
+    response.headers.get("content-type")?.includes("text/html") === false;
+
+  // Registro de erros reais
+  if (!isNoise && !isAsset && response.status !== 200) {
     console.log(
       `[Middleware] Status ${response.status}. Registrando ocorrência.`,
     );
