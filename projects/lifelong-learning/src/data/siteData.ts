@@ -1,5 +1,5 @@
 export const baseData = {
-  title: "Learn",
+  title: "Lifelong Learning",
   description:
-    "Projeto didático para aprender Astro com páginas pequenas, componentes reutilizáveis e um sistema visual consistente.",
+    "Estudo prático e avançado de Astro: renderização híbrida (SSG/SSR), Content Collections, Middlewares e gestão de dados com Astro DB em um projeto escalável.",
 };
