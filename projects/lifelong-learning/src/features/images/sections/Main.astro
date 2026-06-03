@@ -1,0 +1,678 @@
+---
+import { Image, Picture, getImage } from "astro:assets";
+import ImageGalleryReact from "@components/ImageGalleryReact/ImageGalleryReact";
+import localImageExample from "@assets/images/kagura.png";
+
+const remoteImageUrl =
+  "https://ik.imagekit.io/0nF1REy/projects/learn/global/kagura.png";
+
+const publicImagePath = "/assets/images/global/kagura.png";
+
+const optimizedImage = await getImage({ src: localImageExample });
+
+const optimizedWebp = await getImage({
+  src: localImageExample,
+  format: "webp",
+});
+
+const optimizedAvif = await getImage({
+  src: localImageExample,
+  format: "avif",
+});
+---
+
+<section class="practice-hero surface-card">
+  <div class="practice-hero__copy">
+    <p class="practice-hero__eyebrow">Imagens</p>
+    <h1 class="title-gradient">Imagens no Astro</h1>
+    <p class="practice-hero__lead">
+      Demonstração prática de imagens públicas, locais, remotas e renderizadas
+      por componentes.
+    </p>
+  </div>
+</section>
+
+<article class="practice-content">
+  <section class="image-panel">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">01</span>
+      <div>
+        <h2>Imagem pública</h2>
+        <p class="image-panel__description">
+          Servida diretamente da pasta <code>public</code> sem processamento — ideal
+          para arquivos estáticos e recursos que não precisam de otimização em build.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <img
+        src={publicImagePath}
+        alt="Imagem pública de Kagura"
+        class="media-frame media-frame--public"
+      />
+      <p class="image-panel__code">
+        <code
+          >&lt;img src="/assets/images/global/kagura.png" alt="..." /&gt;</code
+        >
+      </p>
+    </div>
+  </section>
+
+  <section class="image-panel">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">02</span>
+      <div>
+        <h2>Imagem local</h2>
+        <p class="image-panel__description">
+          Importada dos assets do projeto e automaticamente otimizada pelo Astro
+          durante o build para melhor performance.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <Image
+        src={localImageExample}
+        alt="Imagem local de Kagura"
+        class="media-frame"
+      />
+      <p class="image-panel__code">
+        <code>import localImage from "@assets/images/kagura.png"</code>
+        <br />
+        <code>&lt;Image src={"{localImage}"} alt="..." /&gt;</code>
+      </p>
+    </div>
+  </section>
+
+  <section class="image-panel">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">03</span>
+      <div>
+        <h2>Imagem remota</h2>
+        <p class="image-panel__description">
+          Carregada de um host externo (CDN ou serviço de imagens). Use quando
+          as imagens estiverem hospedadas fora do projeto.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <Image
+        src={remoteImageUrl}
+        alt="Imagem remota de Kagura"
+        width={300}
+        height={400}
+        class="media-frame media-frame--remote"
+      />
+      <p class="image-panel__code">
+        <code>
+          &lt;Image src="{"{remoteImageUrl}"}" width={"{300}"} height={"{400}"}
+          /&gt;
+        </code>
+      </p>
+    </div>
+  </section>
+
+  <section class="image-panel">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">04</span>
+      <div>
+        <h2>Dimensões controladas</h2>
+        <p class="image-panel__description">
+          A mesma imagem exibida em várias resoluções para comparar como o
+          ajuste de `width`/`height` afeta recorte e desempenho.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <div class="image-grid">
+        <figure class="image-tile">
+          <Image
+            src={localImageExample}
+            alt="Versão 200 por 200"
+            width={200}
+            height={200}
+          />
+          <figcaption>200×200 — miniatura</figcaption>
+        </figure>
+        <figure class="image-tile">
+          <Image
+            src={localImageExample}
+            alt="Versão 400 por 400"
+            width={400}
+            height={400}
+          />
+          <figcaption>400×400 — média</figcaption>
+        </figure>
+        <figure class="image-tile">
+          <Image
+            src={localImageExample}
+            alt="Versão 600 por 600"
+            width={600}
+            height={600}
+          />
+          <figcaption>600×600 — grande</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="image-panel">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">05</span>
+      <div>
+        <h2>Imagem em React</h2>
+        <p class="image-panel__description">
+          Exemplo de componente React que recebe uma imagem otimizada e a
+          renderiza dinamicamente no cliente.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <ImageGalleryReact
+        client:load
+        localImage={localImageExample}
+        title="Galeria React"
+      />
+    </div>
+  </section>
+
+  <section class="image-panel image-panel--links">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">06</span>
+      <div>
+        <h2>Markdown</h2>
+        <p class="image-panel__description">
+          Demonstra como imagens públicas, locais e remotas são referenciadas e
+          renderizadas dentro de conteúdo Markdown/MDX.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <p class="image-panel__text">
+        Acesse o post abaixo para ver a renderização no conteúdo.
+      </p>
+      <a class="image-link" href="/blog/v2/artisan-bread-crust-secrets">
+        Abrir exemplo de markdown
+      </a>
+    </div>
+  </section>
+
+  <section class="image-panel">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">07</span>
+      <div>
+        <h2>Imagens para diferentes densidades de pixel</h2>
+        <p class="image-panel__description">
+          Entrega versões otimizadas para telas de densidade padrão e alta (por
+          exemplo, Retina), garantindo nitidez sem transferir arquivos maiores
+          do que o necessário.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <div class="image-grid">
+        <figure class="image-tile">
+          <Image
+            src={localImageExample}
+            alt="Densidade 1x"
+            width={180}
+            height={180}
+            densities={[1]}
+          />
+          <figcaption>1x — densidade padrão</figcaption>
+        </figure>
+        <figure class="image-tile">
+          <Image
+            src={localImageExample}
+            alt="Densidade 2x"
+            width={180}
+            height={180}
+            densities={[2]}
+          />
+          <figcaption>2x — Retina (alta densidade)</figcaption>
+        </figure>
+        <figure class="image-tile">
+          <Image
+            src={localImageExample}
+            alt="Densidade 3x"
+            width={180}
+            height={180}
+            densities={[3]}
+          />
+          <figcaption>3x — muito alta densidade</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="image-panel">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">08</span>
+      <div>
+        <h2>Imagens responsivas (sizes)</h2>
+        <p class="image-panel__description">
+          Use a propriedade <code>sizes</code> para indicar ao navegador qual largura
+          de recurso é adequada para cada largura de viewport.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <Image
+        src={localImageExample}
+        alt="Responsive"
+        width={960}
+        height={640}
+        sizes="(max-width: 480px) 100vw, (max-width: 768px) 80vw, 60vw"
+      />
+    </div>
+  </section>
+
+  <section class="image-panel">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">09</span>
+      <div>
+        <h2>Picture com múltiplos formatos</h2>
+        <p class="image-panel__description">
+          Sirva AVIF/WebP quando disponíveis e forneça PNG/JPG como fallback
+          para máxima compatibilidade e melhor performance.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <Picture
+        src={localImageExample}
+        alt="Picture"
+        formats={["avif", "webp", "png"]}
+        sizes="(max-width: 720px) 100vw, 50vw"
+      />
+    </div>
+  </section>
+
+  <section class="image-panel">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">10</span>
+      <div>
+        <h2>Gerar formatos com `getImage`</h2>
+        <p class="image-panel__description">
+          Gera versões otimizadas (ex.: WebP/AVIF) programaticamente e retorna
+          metadados úteis para uso em templates e CSS.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <div class="formats-grid">
+        <div class="format-tile">
+          <img src={optimizedImage.src} alt="PNG (original)" />
+          <figcaption>PNG — original</figcaption>
+        </div>
+        <div class="format-tile">
+          <img src={optimizedWebp.src} alt="WebP (otimizado)" />
+          <figcaption>WebP — otimizado</figcaption>
+        </div>
+        <div class="format-tile">
+          <img src={optimizedAvif.src} alt="AVIF (otimizado)" />
+          <figcaption>AVIF — otimizado</figcaption>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="image-panel">
+    <div class="image-panel__header surface-card">
+      <span class="image-panel__number">11</span>
+      <div>
+        <h2>Imagem como background</h2>
+        <p class="image-panel__description">
+          Mostra como aplicar uma imagem otimizada como `background-image` em
+          blocos, preservando performance e qualidade visual.
+        </p>
+      </div>
+    </div>
+    <div class="image-panel__content surface-card">
+      <div
+        class="background-example"
+        style={`background-image: url('${optimizedAvif.src}');`}
+        role="img"
+        aria-label="Background"
+      >
+        <div class="background-overlay">
+          <h4>Background via getImage()</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>
+
+<style lang="scss">
+  .practice-hero {
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    background:
+      radial-gradient(
+        circle at top right,
+        rgba(251, 146, 60, 0.14),
+        transparent 34%
+      ),
+      linear-gradient(180deg, rgba(38, 33, 29, 0.94), rgba(38, 33, 29, 0.82));
+  }
+
+  .practice-hero__copy {
+    display: grid;
+    gap: 0.85rem;
+    max-width: 68ch;
+  }
+
+  .practice-hero__eyebrow {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+  }
+
+  .practice-hero__lead {
+    color: var(--muted);
+    line-height: 1.75;
+    font-size: 1rem;
+  }
+
+  .practice-content {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .image-panel {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .image-panel__header,
+  .image-panel__content {
+    padding: 1.5rem;
+  }
+
+  .image-panel__header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .image-panel__number {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--orange), var(--cream));
+    color: var(--bg);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    box-shadow: 0 10px 24px rgba(251, 146, 60, 0.18);
+  }
+
+  .image-panel__header h2 {
+    margin: 0;
+    color: var(--cream);
+    line-height: 1.2;
+    font-size: 1.15rem;
+  }
+
+  .image-panel__description {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .image-panel__content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .image-panel__content img.media-frame,
+  .image-panel__content picture,
+  .image-panel__content :global(img) {
+    justify-self: center;
+  }
+
+  .image-panel__content > .media-frame:only-child,
+  .image-panel__content > img:only-child,
+  .image-panel__content > picture:only-child {
+    justify-self: center;
+  }
+
+  .media-frame {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    display: block;
+    border-radius: 18px;
+    object-fit: cover;
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.24);
+  }
+
+  .media-frame--public {
+    max-width: 520px;
+  }
+
+  .media-frame--remote {
+    max-width: 320px;
+  }
+
+  .image-panel__code,
+  .code-block {
+    margin: 0;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    background: rgba(25, 22, 18, 0.78);
+    border: 1px solid rgba(251, 146, 60, 0.16);
+    overflow-x: auto;
+  }
+
+  .image-panel__code code,
+  .code-block code {
+    font-family: "Courier New", monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--cream);
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .image-tile {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: center;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .image-tile img,
+  .image-tile :global(img) {
+    width: 100%;
+    border-radius: 14px;
+    display: block;
+  }
+
+  .image-tile figcaption {
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .validation-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    color: var(--text);
+    background: rgba(123, 165, 96, 0.1);
+    border: 1px solid rgba(123, 165, 96, 0.22);
+  }
+
+  .validation-note i {
+    color: #7ba560;
+    margin-top: 0.12rem;
+  }
+
+  .image-panel__text {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .image-link {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--cream);
+    text-decoration: none;
+    font-weight: 800;
+    transition:
+      transform 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .image-link::after {
+    content: "→";
+    color: var(--orange);
+  }
+
+  .image-link:hover {
+    color: var(--orange);
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 720px) {
+    .practice-hero,
+    .image-panel__header,
+    .image-panel__content {
+      padding: 1.25rem;
+    }
+
+    .image-panel__header {
+      grid-template-columns: 1fr;
+    }
+
+    .image-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Styles for Practice Image Exercises */
+  .exercise-block {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(251, 146, 60, 0.12);
+  }
+
+  .exercise-block:last-child {
+    border-bottom: none;
+  }
+
+  .exercise-block h3 {
+    margin: 0;
+    color: var(--cream);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .exercise-description {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .code-label {
+    margin: 0.75rem 0 0.5rem 0;
+    color: var(--cream);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .formats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .format-tile {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: rgba(25, 22, 18, 0.5);
+    border: 1px solid rgba(251, 146, 60, 0.16);
+    text-align: center;
+  }
+
+  .format-tile img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .format-tile figcaption {
+    color: var(--cream);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .format-code {
+    margin: 0;
+    padding: 0.5rem;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--orange);
+    font-family: "Courier New", monospace;
+    font-size: 0.75rem;
+    word-break: break-all;
+  }
+
+  .background-example {
+    width: 100%;
+    height: 280px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+    margin: 1rem 0;
+  }
+
+  .background-overlay {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.2)
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .background-overlay h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+  }
+
+  .background-overlay p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+</style>
