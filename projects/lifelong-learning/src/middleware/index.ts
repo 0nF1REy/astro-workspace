@@ -28,7 +28,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const response = await next();
 
   // Delegação de Observabilidade (Logger Service)
-  LoggerService.processRequestEvent({
+  await LoggerService.processRequestEvent({
     url: url,
     status: response.status,
     contentType: response.headers.get("content-type"),

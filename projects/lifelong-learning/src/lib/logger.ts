@@ -26,7 +26,7 @@ export class LoggerService {
     const shouldLog = !isNoise && !isAsset && status !== 200;
 
     if (shouldLog) {
-      insertLog({
+      await insertLog({
         url: url.toString(),
         status: status,
         date_accessed: new Date(),
