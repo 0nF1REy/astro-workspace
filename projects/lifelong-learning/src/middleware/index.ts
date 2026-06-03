@@ -1,91 +1,70 @@
 import { defineMiddleware } from "astro:middleware";
-import { db, Logs } from "astro:db";
+import { LoggerService } from "@lib/logger";
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  const { url } = context;
+  const { url, locals } = context;
 
-  // Informações da aplicação
+  // Configurações de Contexto (Locals)
   const developerName = "Alan Ryan da Silva Domingues";
+  locals.name = developerName;
 
-  // Dados compartilhados com as páginas Astro
-  context.locals.name = developerName;
-
-  context.locals.userMessage = () => {
-    const pathname = url.pathname;
+  locals.userMessage = () => {
+    const protectedRoutes = ["/middleware", "/admin"];
     const authStatus = false;
 
-    const protectedRoutes = ["/middleware", "/admin"];
-
-    if (protectedRoutes.includes(pathname) && !authStatus) {
+    if (protectedRoutes.includes(url.pathname) && !authStatus) {
       return "Você precisa estar conectado.";
     }
-
     return "Freedom!";
   };
 
-  // Logs de desenvolvimento
-  console.log("[Middleware] Dados adicionados à requisição:", context.locals);
-  console.log("[Middleware] Mensagem:", context.locals.userMessage());
-
-  // Redirecionamentos
+  // Lógica de Redirecionamento
   const redirects = ["/test"];
-
   if (redirects.includes(url.pathname)) {
     return Response.redirect(new URL("/redirected", url), 302);
   }
 
-  // Continua o fluxo da requisição
+  // Execução da Rota (Geração da Resposta)
   const response = await next();
 
-  // Filtro de ruído
-  const isNoise =
-    url.pathname.startsWith("/_astro") ||
-    url.pathname.startsWith("/favicon") ||
-    url.pathname.startsWith("/@") ||
-    url.pathname.includes("404");
-
-  // Detecta respostas não-HTML (assets estáticos como JS, CSS, imagens)
-  const isAsset =
-    response.headers.get("content-type")?.includes("text/html") === false;
-
-  // Registro de erros reais
-  if (!isNoise && !isAsset && response.status !== 200) {
-    console.log(
-      `[Middleware] Status ${response.status}. Registrando ocorrência.`,
-    );
-
-    await db.insert(Logs).values({
-      url: url.toString(),
-      status: response.status,
-      date_accessed: new Date(),
-    });
-  }
-
-  // Lê o HTML gerado pela página
-  const html = await response.text();
-
-  let redactedHtml = html;
-
-  // Substituição de conteúdo no HTML gerado
-  redactedHtml = redactedHtml.replaceAll("PRIVATE INFO", "REDACTED");
-
-  // Exemplo específico para a rota /middleware
-  if (url.pathname === "/middleware") {
-    redactedHtml = redactedHtml.replaceAll("123.456.789-00", "***.***.***-**");
-  }
-
-  // Cria uma nova resposta baseada no HTML modificado
-  const newResponse = new Response(redactedHtml, {
+  // Delegação de Observabilidade (Logger Service)
+  LoggerService.processRequestEvent({
+    url: url,
     status: response.status,
-    statusText: response.statusText,
-    headers: response.headers,
+    contentType: response.headers.get("content-type"),
   });
 
-  // Header personalizado
-  newResponse.headers.set(
-    "X-Credits",
-    `Crafted with Astro by ${developerName}`,
-  );
+  // Manipulação de Resposta e Segurança
+  const contentType = response.headers.get("content-type") || "";
+  const isHtml = contentType.includes("text/html");
 
-  return newResponse;
+  // Só tentamos ler o corpo da resposta se for HTML (evita corromper imagens/assets)
+  if (isHtml) {
+    let html = await response.text();
+
+    // Aplica as regras de redação de conteúdo sensível
+    html = html.replaceAll("PRIVATE INFO", "REDACTED");
+
+    if (url.pathname === "/middleware") {
+      html = html.replaceAll("123.456.789-00", "***.***.***-**");
+    }
+
+    // Cria a nova resposta com o HTML modificado
+    const newResponse = new Response(html, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    });
+
+    // Injeção de Headers customizados
+    newResponse.headers.set(
+      "X-Credits",
+      `Crafted with Astro by ${developerName}`,
+    );
+
+    return newResponse;
+  }
+
+  // Para assets (JS, CSS, Imagens), retorna a resposta original sem processamento de texto
+  return response;
 });

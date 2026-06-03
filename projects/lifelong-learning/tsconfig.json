@@ -12,7 +12,8 @@
       "@types/*": ["./src/types/*"],
       "@assets/*": ["./src/assets/*"],
       "@features/*": ["./src/features/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@lib/*": ["./src/lib/*"],
+      "@db/*": ["./db/*"]
     }
   }
 }
