@@ -37,10 +37,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // Continua o fluxo da requisição
   const response = await next();
 
-  console.log(
-    `[Middleware] ${response.status} | ${url.pathname} | ${new Date().toLocaleTimeString()}`,
-  );
-
   // Registro de erros
   if (response.status !== 200) {
     console.log(
