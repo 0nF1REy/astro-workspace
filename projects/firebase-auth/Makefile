@@ -1,0 +1,56 @@
+MAKEFLAGS += --no-print-directory
+
+.DEFAULT_GOAL := help
+
+.PHONY: help contexto send add status sync \
+	dev build preview astro \
+	
+# ========================= Help =========================
+
+help: ## Mostra os comandos disponíveis
+	@echo "Comandos disponíveis:"
+	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
+	awk 'BEGIN {FS = ":.*?## "}; {printf "  %-10s %s\n", $$1, $$2}'
+
+# ========================= Contexto =========================
+
+contexto: ## Gera o arquivo contexto.txt com repomix
+	@echo "Limpando arquivo antigo..."
+	@rm -f contexto.txt
+	@echo "Gerando novo contexto..."
+	@npx --yes repomix --output contexto.txt
+	@echo "Pronto!"
+
+send: contexto ## Copia o contexto para o clipboard
+	@echo "Copiando para o clipboard..."
+	@cat contexto.txt | xclip -selection clipboard
+	@echo "Copiado! Agora é só colar."
+
+# ========================= Git =========================
+
+add: ## Adiciona todas as mudanças do repositório ao stage (via raiz)
+	@echo "Indo para a raiz e executando git add..."
+	@cd ../../ && $(MAKE) add
+
+status: ## Mostra o status atual do repositório (via raiz)
+	@echo "Indo para a raiz e verificando o status..."
+	@cd ../../ && $(MAKE) status
+
+sync: ## Sincroniza o repositório (via raiz)
+	@echo "Indo para a raiz do repositorio..."
+	@cd ../../ && $(MAKE) sync
+	@echo "Sincronizacao concluida!"
+
+# ========================= Astro =========================
+
+dev: ## Inicia o servidor de desenvolvimento do Astro
+	@npm run dev
+
+build: ## Gera a build de produção
+	@npm run build
+
+preview: ## Visualiza a build de produção
+	@npm run preview
+
+astro: ## Executa comandos da CLI do Astro
+	@npm run astro
