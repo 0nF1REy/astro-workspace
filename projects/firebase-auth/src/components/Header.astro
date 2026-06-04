@@ -1,0 +1,81 @@
+<header class="site-header">
+  <div class="site-shell">
+    <div class="site-header__inner">
+      <a href="/" class="site-header__title">Firebase Auth</a>
+      <nav class="site-header__nav">
+        {Astro.locals.user ? (
+          <>
+            <a href="/dashboard" class="site-header__nav-link">Dashboard</a>
+            <a href="/api/signout" class="site-header__nav-link">Sair</a>
+          </>
+        ) : (
+          <>
+            <a href="/signin" class="site-header__nav-link">Login</a>
+            <a href="/register" class="site-header__nav-link">Cadastro</a>
+          </>
+        )}
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style lang="scss">
+.site-header {
+  background: var(--mantle);
+  border-bottom: 1px solid var(--surface-2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 4rem;
+    gap: 1rem;
+  }
+
+  &__title {
+    color: var(--text);
+    font-size: 1.125rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.025em;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--mauve);
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__nav-link {
+    color: var(--subtext-0);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.625rem 1rem;
+    border-radius: 0.75rem;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      background: var(--surface-0);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+</style>

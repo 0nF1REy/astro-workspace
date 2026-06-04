@@ -6,7 +6,12 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "paths": {
-      "@lib/*": ["./src/lib/*"]
+      "@layouts/*": ["./src/layouts/*"],
+      "@components/*": ["./src/components/*"],
+      "@features/*": ["./src/features/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@data/*": ["./src/data/*"],
+      "@styles/*": ["./src/styles/*"]
     }
   }
 }

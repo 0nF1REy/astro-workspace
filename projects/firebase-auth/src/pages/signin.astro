@@ -1,0 +1,25 @@
+---
+export const prerender = false;
+
+import BaseLayout from "@layouts/BaseLayout.astro";
+import LoginForm from "@features/auth/components/LoginForm";
+
+if (Astro.locals.user) {
+  return Astro.redirect("/dashboard");
+}
+---
+
+<BaseLayout title="Login">
+  <section class="auth-page">
+    <LoginForm client:load />
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .auth-page {
+    display: grid;
+    place-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-shell">
+    <div class="site-footer-inner">
+      <p class="site-footer-text">
+        &#169; <time datetime={`${currentYear}-01-01`}>{currentYear}</time> Firebase Auth
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style lang="scss">
+    .site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--surface-2);
+  background: linear-gradient(
+    to bottom,
+    var(--mantle),
+    var(--crust)
+  );
+
+  &-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.5rem;
+  }
+
+  &-text {
+    color: var(--subtext-0);
+    font-size: 0.875rem;
+    letter-spacing: 0.025em;
+
+    time {
+      color: var(--mauve);
+      font-weight: 600;
+    }
+  }
+}
+</style>
