@@ -2,69 +2,97 @@ import { defineMiddleware } from "astro:middleware";
 import { LoggerService } from "@lib/logger";
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  const { url, locals } = context;
+  const { url, locals, request } = context;
 
   // Configurações de Contexto (Locals)
   const developerName = "Alan Ryan da Silva Domingues";
+
   locals.name = developerName;
 
-  locals.userMessage = () => {
-    const protectedRoutes = ["/middleware", "/admin"];
-    const authStatus = false;
+  const protectedRoutes = ["/middleware", "/admin"];
 
-    if (protectedRoutes.includes(url.pathname) && !authStatus) {
+  locals.userMessage = () => {
+    if (protectedRoutes.includes(url.pathname)) {
       return "Você precisa estar conectado.";
     }
+
     return "Freedom!";
   };
 
-  // Lógica de Redirecionamento
-  const redirects = ["/test"];
-  if (redirects.includes(url.pathname)) {
-    return Response.redirect(new URL("/redirected", url), 302);
-  }
+  // Autenticação HTTP Basic (apenas para rotas protegidas)
+  if (protectedRoutes.includes(url.pathname)) {
+    const authHeader = request.headers.get("authorization");
 
-  // Execução da Rota (Geração da Resposta)
-  const response = await next();
+    if (authHeader) {
+      const authValue = authHeader.split(" ")[1] ?? "";
 
-  // Delegação de Observabilidade (Logger Service)
-  await LoggerService.processRequestEvent({
-    url: url,
-    status: response.status,
-    contentType: response.headers.get("content-type"),
-  });
+      const [username, password] = atob(authValue).split(":");
 
-  // Manipulação de Resposta e Segurança
-  const contentType = response.headers.get("content-type") || "";
-  const isHtml = contentType.includes("text/html");
+      console.log({
+        username,
+        password,
+      });
 
-  // Só tentamos ler o corpo da resposta se for HTML (evita corromper imagens/assets)
-  if (isHtml) {
-    let html = await response.text();
-
-    // Aplica as regras de redação de conteúdo sensível
-    html = html.replaceAll("PRIVATE INFO", "REDACTED");
-
-    if (url.pathname === "/middleware") {
-      html = html.replaceAll("123.456.789-00", "***.***.***-**");
+      if (username === "Alan" && password === "13062004") {
+        return await continueRequest();
+      }
     }
 
-    // Cria a nova resposta com o HTML modificado
-    const newResponse = new Response(html, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: response.headers,
+    return new Response("Auth required", {
+      status: 401,
+      headers: {
+        "WWW-Authenticate": 'Basic realm="Secure Area"',
+      },
     });
-
-    // Injeção de Headers customizados
-    newResponse.headers.set(
-      "X-Credits",
-      `Crafted with Astro by ${developerName}`,
-    );
-
-    return newResponse;
   }
 
-  // Para assets (JS, CSS, Imagens), retorna a resposta original sem processamento de texto
-  return response;
+  return await continueRequest();
+
+  async function continueRequest() {
+    // Lógica de Redirecionamento
+    const redirects = ["/test"];
+
+    if (redirects.includes(url.pathname)) {
+      return Response.redirect(new URL("/redirected", url), 302);
+    }
+
+    // Execução da Rota
+    const response = await next();
+
+    // Delegação de Observabilidade
+    await LoggerService.processRequestEvent({
+      url,
+      status: response.status,
+      contentType: response.headers.get("content-type"),
+    });
+
+    // Manipulação da Resposta
+    const contentType = response.headers.get("content-type") || "";
+    const isHtml = contentType.includes("text/html");
+
+    if (isHtml) {
+      let html = await response.text();
+
+      html = html.replaceAll("PRIVATE INFO", "REDACTED");
+
+      if (url.pathname === "/middleware") {
+        html = html.replaceAll("123.456.789-00", "***.***.***-**");
+      }
+
+      const newResponse = new Response(html, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers,
+      });
+
+      newResponse.headers.set(
+        "X-Credits",
+        `Crafted with Astro by ${developerName}`,
+      );
+
+      return newResponse;
+    }
+
+    return response;
+  }
 });
