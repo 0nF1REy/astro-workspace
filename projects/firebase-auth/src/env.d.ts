@@ -18,3 +18,12 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+declare namespace App {
+  interface Locals {
+    user: {
+      uid: string;
+      email: string;
+    } | null;
+  }
+}
