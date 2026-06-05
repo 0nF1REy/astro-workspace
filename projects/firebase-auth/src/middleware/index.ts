@@ -30,6 +30,5 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return redirect("/signin");
   }
 
-  // 7. Segue o fluxo normal da requisição
   return next();
 });

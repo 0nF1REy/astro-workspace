@@ -2,13 +2,13 @@
 export const prerender = false;
 
 import BaseLayout from "@layouts/BaseLayout.astro";
-import LoginForm from "@features/auth/components/LoginForm";
+import RegisterForm from "@features/auth/components/RegisterForm";
 
 if (Astro.locals.user) {
   return Astro.redirect("/dashboard");
 }
 ---
 
-<BaseLayout title="Login">
-  <LoginForm client:load />
+<BaseLayout title="Registro">
+  <RegisterForm client:load />
 </BaseLayout>
