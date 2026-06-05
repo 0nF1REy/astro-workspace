@@ -1,0 +1,50 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const { user } = Astro.locals;
+---
+
+<BaseLayout title="Dashboard">
+  <section class="dashboard">
+    <header class="dashboard__header">
+      <h1 class="title-gradient">Painel de Controle</h1>
+      <p class="dashboard__welcome">
+        Bem-vindo de volta, <span class="user-email">{user?.email}</span>
+      </p>
+    </header>
+
+    <div class="dashboard__content surface-card">
+      <div class="status-box">
+        <i class="fa-solid fa-shield-check"></i>
+        <p>Sua sessão está ativa e protegida via Session Cookies.</p>
+      </div>
+
+      <div class="user-info">
+        <h3>Dados da Conta</h3>
+        <p><strong>UID:</strong> <code>{user?.uid}</code></p>
+        <p><strong>Provedor:</strong> Firebase Authentication</p>
+      </div>
+
+      <button id="logout-btn" class="btn-logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Sair do Sistema
+      </button>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { actions } from "astro:actions";
+
+  const logoutBtn = document.getElementById("logout-btn");
+
+  logoutBtn?.addEventListener("click", async () => {
+    const { error } = await actions.signOut();
+
+    if (!error) {
+      window.location.href = "/signin";
+    } else {
+      alert("Erro ao sair do sistema.");
+    }
+  });
+</script>

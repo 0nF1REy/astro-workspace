@@ -4,8 +4,13 @@ import { auth } from "@lib/firebase/server";
 export const onRequest = defineMiddleware(async (context, next) => {
   const { url, cookies, redirect, locals } = context;
 
-  const protectedRoutes = ["/dashboard"];
-  const authRoutes = ["/signin", "/register"];
+  const isAuthRoute =
+    url.pathname.startsWith("/signin") || url.pathname.startsWith("/register");
+  const isProtectedRoute = url.pathname.startsWith("/dashboard");
+
+  if (!isAuthRoute && !isProtectedRoute) {
+    return next();
+  }
 
   const sessionCookie = cookies.get("__session")?.value;
 
@@ -18,7 +23,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         email: decodedClaims.email || "",
       };
 
-      if (authRoutes.includes(url.pathname)) {
+      if (isAuthRoute) {
         return redirect("/dashboard");
       }
     } catch (error) {
@@ -26,7 +31,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     }
   }
 
-  if (!locals.user && protectedRoutes.includes(url.pathname)) {
+  if (!locals.user && isProtectedRoute) {
     return redirect("/signin");
   }
 
