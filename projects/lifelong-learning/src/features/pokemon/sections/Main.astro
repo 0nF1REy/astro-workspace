@@ -1,0 +1,255 @@
+---
+import { fetchPokemon } from "@lib/pokemon/fetchPokemon";
+
+const pokemonList = await fetchPokemon();
+
+const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
+---
+
+<section class="pokemon-explorer">
+  <div class="pokemon-explorer__hero surface-card">
+    <p class="pokemon-explorer__eyebrow">Pokédex Hub</p>
+    <h1 class="title-gradient">Pokémon</h1>
+    <p class="pokemon-explorer__lead">
+      Exploração técnica da PokeAPI utilizando <strong>Snapshot Fallback</strong
+      > e
+      <strong>Resilient Fetching</strong>. Dados capturados e processados no
+      servidor para máxima performance.
+    </p>
+    <div class="pokemon-explorer__stats">
+      <span class="stat-tag">
+        <i class="fa-solid fa-microchip"></i>
+        {pokemonList.length} capturados
+      </span>
+    </div>
+  </div>
+
+  <div class="pokemon-grid">
+    {
+      pokemonList.map((pokemon) => (
+        <article class="pokemon-card surface-card">
+          <header class="pokemon-card__header">
+            <span class="pokemon-card__id">{formatId(pokemon.id)}</span>
+            <div class="pokemon-card__types">
+              {pokemon.types.map((type) => (
+                <span class:list={["type-badge", `type-badge--${type}`]}>
+                  {type}
+                </span>
+              ))}
+            </div>
+          </header>
+
+          <div class="pokemon-card__image-container">
+            <img
+              src={pokemon.image}
+              alt={pokemon.name}
+              class="pokemon-card__img"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <footer class="pokemon-card__info">
+            <h2 class="pokemon-card__name">{pokemon.name}</h2>
+            <div class="pokemon-card__metrics">
+              <div class="metric">
+                <span>Altura</span>
+                <strong>{pokemon.height / 10}m</strong>
+              </div>
+              <div class="metric">
+                <span>Peso</span>
+                <strong>{pokemon.weight / 10}kg</strong>
+              </div>
+            </div>
+          </footer>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style lang="scss">
+  .pokemon-explorer {
+    display: grid;
+    gap: 2rem;
+
+    &__hero {
+      display: grid;
+      gap: 0.85rem;
+      padding: 2.5rem;
+    }
+
+    &__eyebrow {
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    &__lead {
+      max-width: 65ch;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.05rem;
+
+      strong {
+        color: var(--cream);
+      }
+    }
+
+    &__stats {
+      margin-top: 0.5rem;
+      .stat-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.8rem;
+        background: rgba(251, 146, 60, 0.1);
+        border: 1px solid rgba(251, 146, 60, 0.2);
+        border-radius: 8px;
+        color: var(--orange);
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .pokemon-card {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__id {
+      font-family: monospace;
+      font-weight: 800;
+      color: var(--muted);
+      opacity: 0.5;
+    }
+
+    &__types {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    &__image-container {
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      background: radial-gradient(
+        circle,
+        rgba(251, 146, 60, 0.08) 0%,
+        transparent 70%
+      );
+      border-radius: 20px;
+    }
+
+    &__img {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+      transition: transform 0.3s ease;
+    }
+
+    &:hover &__img {
+      transform: scale(1.1) translateY(-5px);
+    }
+
+    &__name {
+      margin: 0.5rem 0;
+      font-size: 1.6rem;
+      color: var(--cream);
+      text-transform: capitalize;
+      text-align: center;
+    }
+
+    &__metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(253, 230, 138, 0.08);
+
+      .metric {
+        display: grid;
+        text-align: center;
+        span {
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          color: var(--muted);
+          letter-spacing: 0.05em;
+        }
+        strong {
+          color: var(--text);
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  .type-badge {
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: var(--brown);
+    color: var(--text);
+    border: 1px solid var(--border);
+
+    &--fire {
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+    &--water {
+      border-color: #3b82f6;
+      color: #93c5fd;
+    }
+    &--grass {
+      border-color: #22c55e;
+      color: #86efac;
+    }
+    &--electric {
+      border-color: #eab308;
+      color: #fde047;
+    }
+    &--psychic {
+      border-color: #ec4899;
+      color: #f9a8d4;
+    }
+    &--ice {
+      border-color: #06b6d4;
+      color: #67e8f9;
+    }
+    &--dragon {
+      border-color: #8b5cf6;
+      color: #c4b5fd;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pokemon-explorer__hero {
+      padding: 1.5rem;
+    }
+    .pokemon-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
