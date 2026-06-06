@@ -84,7 +84,7 @@ const initialCount = Math.min(POKEMON_PAGE_SIZE, pokemonList.length);
   }
 </section>
 
-<script define:vars={{ POKEMON_PAGE_SIZE }}>
+<script is:inline define:vars={{ POKEMON_PAGE_SIZE }}>
   const explorer = document.querySelector("[data-pokemon-explorer]");
   const grid = explorer?.querySelector("[data-grid]");
   const loadMoreBtn = explorer?.querySelector("[data-load-more]");
