@@ -1,28 +1,35 @@
 <header class="site-header">
   <div class="site-shell">
     <div class="site-header__inner">
-      <a href="/" class="site-header__title">Firebase Auth</a>
+      <a href="/" class="site-header__title">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Firebase Auth</span>
+      </a>
       <nav class="site-header__nav">
         {
           Astro.locals.user ? (
             <>
               <a href="/dashboard" class="site-header__nav-link">
-                Dashboard
+                <i class="fa-solid fa-gauge-high" />
+                <span>Dashboard</span>
               </a>
               <button
                 id="logout-trigger"
                 class="site-header__nav-link site-header__logout-btn"
               >
-                Sair
+                <i class="fa-solid fa-right-from-bracket" />
+                <span>Sair</span>
               </button>
             </>
           ) : (
             <>
               <a href="/signin" class="site-header__nav-link">
-                Login
+                <i class="fa-solid fa-right-to-bracket" />
+                <span>Login</span>
               </a>
               <a href="/register" class="site-header__nav-link">
-                Cadastro
+                <i class="fa-solid fa-user-plus" />
+                <span>Cadastro</span>
               </a>
             </>
           )
@@ -60,17 +67,27 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      min-height: 4rem;
+      min-height: 4.5rem;
       gap: 1rem;
     }
 
     &__title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
       color: var(--text);
       font-size: 1.125rem;
       font-weight: 700;
       text-decoration: none;
       letter-spacing: -0.025em;
       transition: color 0.2s ease;
+
+      i {
+        color: var(--mauve);
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+      }
 
       &:hover {
         color: var(--mauve);
@@ -84,6 +101,10 @@
     }
 
     &__nav-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
       color: var(--subtext-0);
       text-decoration: none;
       font-size: 0.95rem;
@@ -94,15 +115,28 @@
       background: transparent;
       cursor: pointer;
       font-family: inherit;
-      transition:
-        background-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+      transition: all 0.2s ease;
+
+      i {
+        font-size: 0.95rem;
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+        line-height: 1;
+      }
+
+      span {
+        line-height: 1;
+      }
 
       &:hover {
         background: var(--surface-0);
         color: var(--text);
         transform: translateY(-1px);
+
+        i {
+          opacity: 1;
+        }
       }
 
       &:active {
@@ -114,6 +148,18 @@
       &:hover {
         color: var(--red);
         background: rgba(243, 139, 168, 0.1);
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    .site-header__nav-link span {
+      display: none;
+    }
+    .site-header__nav-link {
+      padding: 0.75rem;
+      i {
+        font-size: 1.1rem;
       }
     }
   }
