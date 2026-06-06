@@ -7,3 +7,4 @@ dist
 contexto.txt
 *.log
 *-cache.json
+.env
