@@ -6,3 +6,4 @@ dist
 *.webp
 contexto.txt
 *.log
+*-cache.json
