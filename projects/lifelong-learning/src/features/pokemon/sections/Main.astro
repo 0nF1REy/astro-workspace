@@ -1,12 +1,13 @@
 ---
 import { fetchPokemon } from "@lib/pokemon/fetchPokemon";
+import { POKEMON_PAGE_SIZE } from "@lib/pokemon/pagination";
 
 const pokemonList = await fetchPokemon();
-
 const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
+const initialCount = Math.min(POKEMON_PAGE_SIZE, pokemonList.length);
 ---
 
-<section class="pokemon-explorer">
+<section class="pokemon-explorer" data-pokemon-explorer>
   <div class="pokemon-explorer__hero surface-card">
     <p class="pokemon-explorer__eyebrow">Pokédex Hub</p>
     <h1 class="title-gradient">Pokémon</h1>
@@ -19,19 +20,23 @@ const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
     <div class="pokemon-explorer__stats">
       <span class="stat-tag">
         <i class="fa-solid fa-microchip"></i>
-        {pokemonList.length} capturados
+        <span data-count>{initialCount}</span> de {pokemonList.length} exibidos
       </span>
     </div>
   </div>
 
-  <div class="pokemon-grid">
+  <div class="pokemon-grid" data-grid>
     {
-      pokemonList.map((pokemon) => (
-        <article class="pokemon-card surface-card">
+      pokemonList.map((pokemon, index) => (
+        <article
+          class="pokemon-card surface-card"
+          data-index={index}
+          style={index >= POKEMON_PAGE_SIZE ? "display: none;" : ""}
+        >
           <header class="pokemon-card__header">
             <span class="pokemon-card__id">{formatId(pokemon.id)}</span>
             <div class="pokemon-card__types">
-              {pokemon.types.map((type) => (
+              {pokemon.types.map((type: string) => (
                 <span class:list={["type-badge", `type-badge--${type}`]}>
                   {type}
                 </span>
@@ -44,7 +49,7 @@ const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
               src={pokemon.image}
               alt={pokemon.name}
               class="pokemon-card__img"
-              loading="lazy"
+              loading={index < POKEMON_PAGE_SIZE ? "eager" : "lazy"}
               decoding="async"
             />
           </div>
@@ -66,7 +71,45 @@ const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
       ))
     }
   </div>
+
+  {
+    pokemonList.length > POKEMON_PAGE_SIZE && (
+      <div class="pokemon-explorer__actions">
+        <button class="load-more-btn" data-load-more>
+          <i class="fa-solid fa-plus" />
+          Carregar Mais
+        </button>
+      </div>
+    )
+  }
 </section>
+
+<script define:vars={{ POKEMON_PAGE_SIZE }}>
+  const explorer = document.querySelector("[data-pokemon-explorer]");
+  const grid = explorer?.querySelector("[data-grid]");
+  const loadMoreBtn = explorer?.querySelector("[data-load-more]");
+  const countDisplay = explorer?.querySelector("[data-count]");
+
+  let currentVisible = POKEMON_PAGE_SIZE;
+
+  loadMoreBtn?.addEventListener("click", () => {
+    const cards = grid.querySelectorAll(".pokemon-card");
+    const nextLimit = currentVisible + POKEMON_PAGE_SIZE;
+
+    cards.forEach((card, index) => {
+      if (index >= currentVisible && index < nextLimit) {
+        card.style.display = "grid";
+        card.classList.add("fade-in");
+      }
+    });
+
+    currentVisible = nextLimit;
+
+    if (countDisplay)
+      countDisplay.textContent = Math.min(currentVisible, cards.length);
+    if (currentVisible >= cards.length) loadMoreBtn.style.display = "none";
+  });
+</script>
 
 <style lang="scss">
   .pokemon-explorer {
@@ -92,7 +135,6 @@ const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
       color: var(--muted);
       line-height: 1.7;
       font-size: 1.05rem;
-
       strong {
         color: var(--cream);
       }
@@ -111,8 +153,13 @@ const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
         color: var(--orange);
         font-size: 0.85rem;
         font-weight: 700;
-        text-transform: uppercase;
       }
+    }
+
+    &__actions {
+      display: flex;
+      justify-content: center;
+      padding: 2rem 0;
     }
   }
 
@@ -127,12 +174,9 @@ const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
     gap: 1rem;
     padding: 1.5rem;
     position: relative;
-    overflow: hidden;
 
-    &__header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    &.fade-in {
+      animation: fadeIn 0.5s ease forwards;
     }
 
     &__id {
@@ -164,11 +208,6 @@ const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
       height: 160px;
       object-fit: contain;
       filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-      transition: transform 0.3s ease;
-    }
-
-    &:hover &__img {
-      transform: scale(1.1) translateY(-5px);
     }
 
     &__name {
@@ -194,13 +233,34 @@ const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
           font-size: 0.7rem;
           text-transform: uppercase;
           color: var(--muted);
-          letter-spacing: 0.05em;
         }
         strong {
           color: var(--text);
           font-size: 1rem;
         }
       }
+    }
+  }
+
+  .load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: var(--orange);
+    color: var(--bg);
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 10px 20px rgba(251, 146, 60, 0.2);
+
+    &:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.1);
+      box-shadow: 0 15px 25px rgba(251, 146, 60, 0.3);
     }
   }
 
@@ -211,7 +271,6 @@ const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
     font-weight: 800;
     text-transform: uppercase;
     background: var(--brown);
-    color: var(--text);
     border: 1px solid var(--border);
 
     &--fire {
@@ -230,26 +289,32 @@ const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
       border-color: #eab308;
       color: #fde047;
     }
-    &--psychic {
-      border-color: #ec4899;
-      color: #f9a8d4;
+    &--poison {
+      border-color: #a855f7;
+      color: #d8b4fe;
     }
-    &--ice {
-      border-color: #06b6d4;
-      color: #67e8f9;
+    &--bug {
+      border-color: #84cc16;
+      color: #bef264;
     }
-    &--dragon {
-      border-color: #8b5cf6;
-      color: #c4b5fd;
+    &--normal {
+      border-color: #94a3b8;
+      color: #cbd5e1;
+    }
+    &--flying {
+      border-color: #60a5fa;
+      color: #bae6fd;
     }
   }
 
-  @media (max-width: 640px) {
-    .pokemon-explorer__hero {
-      padding: 1.5rem;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
     }
-    .pokemon-grid {
-      grid-template-columns: 1fr;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 </style>
