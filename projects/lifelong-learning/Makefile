@@ -2,6 +2,8 @@ MAKEFLAGS += --no-print-directory
 
 .DEFAULT_GOAL := help
 
+ROOT_DIR := ../../
+
 .PHONY: help contexto send git-context add status sync \
 	dev dev-remote dev-full \
 	build preview clean \
@@ -30,36 +32,23 @@ send: contexto ## Copia o contexto para o clipboard
 	@cat contexto.txt | xclip -selection clipboard
 	@echo "Copiado! Agora é só colar."
 
-git-context: ## Gera o contexto do Git + Instruções para o chat e copia para o clipboard
-	@echo "### AI INSTRUCTIONS ###" > context.tmp
-	@cat docs/commit-prompt.txt >> context.tmp
-	@echo "\n### GIT STATUS ###" >> context.tmp
-	@git status --porcelain=1 -b >> context.tmp
-	@echo "\n### GIT NAME-STATUS ###" >> context.tmp
-	@git diff --cached --name-status >> context.tmp
-	@echo "\n### GIT STAT ###" >> context.tmp
-	@git diff --cached --stat >> context.tmp
-	@echo "\n### GIT DIFF ###" >> context.tmp
-	@git diff --cached >> context.tmp
-	@echo "\n### GIT LOG ###" >> context.tmp
-	@git log --oneline -n 20 >> context.tmp
-	@cat context.tmp | xclip -selection clipboard
-	@rm context.tmp
-	@echo "Contexto e Instruções copiados! É só colar no chat."
+git-context: ## Gera contexto Git + Prompt AI para o clipboard (via raiz)
+	@echo "▐▓▒░ Delegando '$@' para a raiz do repositorio..."
+	@cd $(ROOT_DIR) && $(MAKE) git-context
 
 # ========================= Git =========================
 
 add: ## Adiciona todas as mudanças do repositório ao stage (via raiz)
-	@echo "Indo para a raiz e executando git add..."
-	@cd ../../ && $(MAKE) add
+	@echo "▐▓▒░ Delegando '$@' para a raiz do repositorio..."
+	@cd $(ROOT_DIR) && $(MAKE) add
 
 status: ## Mostra o status atual do repositório (via raiz)
-	@echo "Indo para a raiz e verificando o status..."
-	@cd ../../ && $(MAKE) status
+	@echo "▐▓▒░ Delegando '$@' para a raiz do repositorio..."
+	@cd $(ROOT_DIR) && $(MAKE) status
 
 sync: ## Sincroniza o repositório (via raiz)
-	@echo "Indo para a raiz do repositorio..."
-	@cd ../../ && $(MAKE) sync
+	@echo "▐▓▒░ Delegando '$@' para a raiz do repositorio..."
+	@cd $(ROOT_DIR) && $(MAKE) sync
 	@echo "Sincronizacao concluida!"
 
 # ========================= Astro =========================

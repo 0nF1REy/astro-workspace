@@ -3,7 +3,7 @@
 WORKSPACE_DIR := projects
 PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 
-.PHONY: help list open add status sync install-all build-all prepare-all \
+.PHONY: help list open add status sync git-context \
 	atarashii-gakko book-bites clerk-auth cloudinary-form-upload \
 	firebase-auth jashin-chan-dropkick lifelong-learning p5js-workspace \
 	portfolio product-management profile scriptora
@@ -33,10 +33,10 @@ open: ## Abre o workspace de um projeto (use p=<nome-do-projeto>)
 
 add: ## Adiciona todas as mudanças ao stage
 	@git add .
-	@echo "Todas as mudanças do repositório foram adicionadas ao stage."
+	@echo "▐▓▒░ Todas as mudanças do repositório foram adicionadas ao stage."
 
 status: ## Mostra o status atual do repositório
-	@echo "Status atual do repositório:"
+	@echo "▐▓▒░ Status atual do repositório:"
 	@git status
 
 sync: ## Sincroniza o repositório
@@ -46,31 +46,25 @@ sync: ## Sincroniza o repositório
 	@git push origin main
 	@echo "Sincronização completa!"
 	@echo ""
-	@echo "Status atual do repositório:"
+	@echo "▐▓▒░ Status atual do repositório:"
 	@git status
 
-install-all: ## Instala dependências em todos os projetos
-	@echo "Instalando dependências em todos os projetos..."
-	@for project in $(PROJECTS); do \
-		if [ -f "$(WORKSPACE_DIR)/$$project/package.json" ]; then \
-			echo "$$project"; \
-			cd "$(WORKSPACE_DIR)/$$project" && npm install; \
-		fi \
-	done
-	@echo "Instalação concluída"
-
-build-all: ## Executa build em todos os projetos
-	@echo "Build em todos os projetos..."
-	@for project in $(PROJECTS); do \
-		if [ -f "$(WORKSPACE_DIR)/$$project/package.json" ]; then \
-			echo "$$project"; \
-			cd "$(WORKSPACE_DIR)/$$project" && npm run build; \
-		fi \
-	done
-	@echo "Build concluído"
-
-prepare-all: install-all build-all ## Prepara todos os projetos
-	@echo "Todos os projetos preparados!"
+git-context: ## Gera contexto Git + Prompt AI para o clipboard
+	@echo "### AI INSTRUCTIONS ###" > context.tmp
+	@cat docs/ai/commit-prompt.txt >> context.tmp
+	@echo "\n### GIT STATUS ###" >> context.tmp
+	@git status --porcelain=1 -b >> context.tmp
+	@echo "\n### GIT NAME-STATUS ###" >> context.tmp
+	@git diff --cached --name-status >> context.tmp
+	@echo "\n### GIT STAT ###" >> context.tmp
+	@git diff --cached --stat >> context.tmp
+	@echo "\n### GIT DIFF ###" >> context.tmp
+	@git diff --cached >> context.tmp
+	@echo "\n### GIT LOG ###" >> context.tmp
+	@git log --oneline -n 20 >> context.tmp
+	@cat context.tmp | xclip -selection clipboard
+	@rm context.tmp
+	@echo "▐▓▒░ Contexto e Instruções copiados com sucesso!"
 
 atarashii-gakko:
 	@code "$(WORKSPACE_DIR)/atarashii-gakko/atarashii-gakko.code-workspace"
