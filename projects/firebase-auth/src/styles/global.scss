@@ -1,7 +1,7 @@
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 
 :root {
-  /* Base */
+  /* Catppuccin Mocha Palette */
   --rosewater: #f5e0dc;
   --flamingo: #f2cdcd;
   --pink: #f5c2e7;
@@ -17,29 +17,27 @@
   --blue: #89b4fa;
   --lavender: #b4befe;
 
-  /* Texto */
   --text: #cdd6f4;
   --subtext-1: #bac2de;
   --subtext-0: #a6adc8;
 
-  /* Camadas */
   --overlay-2: #9399b2;
   --overlay-1: #7f849c;
   --overlay-0: #6c7086;
 
-  /* Superfícies */
   --surface-2: #585b70;
   --surface-1: #45475a;
   --surface-0: #313244;
 
-  /* Fundo */
   --base: #1e1e2e;
   --mantle: #181825;
   --crust: #11111b;
 
-  /* Extras úteis */
-  --border: var(--surface-2);
-  --shadow: rgb(17 17 27 / 35%);
+  /* Atalhos Semânticos Universais */
+  --primary: var(--mauve);
+  --accent: var(--peach);
+  --border: var(--surface-0);
+  --shadow: rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -56,12 +54,34 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--base);
   color: var(--text);
-  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 .site-shell {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
+  width: min(100% - 2rem, 1100px);
+  margin-inline: auto;
+}
+
+.title-gradient {
+  background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+.surface-card {
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 30px -10px var(--shadow);
 }
