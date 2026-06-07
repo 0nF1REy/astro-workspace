@@ -33,7 +33,7 @@ export default function LoginForm() {
       if (data?.success) window.location.href = "/dashboard";
     } catch (err: any) {
       console.error(err);
-      setError("Email ou senha inválidos.");
+      setError("Credenciais inválidas. Por favor, tente novamente.");
     } finally {
       setIsLoading(false);
     }
@@ -42,18 +42,18 @@ export default function LoginForm() {
   return (
     <div className={styles.authCard}>
       <header>
-        <h2>Login</h2>
-        <p>Acesse a área restrita do sistema</p>
+        <h2>Entrar</h2>
+        <p>Acesse sua conta para gerenciar seus recursos</p>
       </header>
 
       <form className={styles.authForm} onSubmit={handleLogin}>
         <div className={styles.group}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">E-mail corporativo</label>
           <div className={styles.inputWrapper}>
             <input
               type="email"
               id="email"
-              placeholder="exemplo@shinsengumi.com"
+              placeholder="exemplo@empresa.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -68,7 +68,7 @@ export default function LoginForm() {
             <input
               type="password"
               id="password"
-              placeholder="••••••••"
+              placeholder="Sua senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -87,13 +87,13 @@ export default function LoginForm() {
                 : "fa-solid fa-right-to-bracket"
             }
           ></i>
-          <span>{isLoading ? "Validando..." : "Entrar no Sistema"}</span>
+          <span>{isLoading ? "Autenticando..." : "Entrar no Sistema"}</span>
         </button>
       </form>
 
       <footer className={styles.footer}>
         <p>
-          Ainda não tem acesso? <a href="/register">Solicitar registro</a>
+          Ainda não possui uma conta? <a href="/register">Cadastre-se aqui</a>
         </p>
       </footer>
     </div>

@@ -4,14 +4,14 @@ const { user } = Astro.locals;
 
 <section class="hero">
   <div class="hero__content">
-    <p class="hero__eyebrow">Astro 6 + Firebase</p>
-    <h1 class="hero__title title-gradient">Firebase Authentication</h1>
+    <p class="hero__eyebrow">Enterprise Identity & Access Management</p>
+    <h1 class="hero__title title-gradient">
+      Autenticação de Segurança Avançada
+    </h1>
     <p class="hero__lead">
-      Exemplo prático de autenticação moderna utilizando
-      <strong>Firebase Authentication</strong>,
-      <strong>Session Cookies</strong>,
-      <strong>Middleware</strong> e
-      <strong>Firebase Admin SDK</strong>.
+      Infraestrutura robusta de gerenciamento de usuários implementada com
+      <strong>Astro 6</strong>, <strong>Firebase Admin</strong> e proteção baseada
+      em <strong>HttpOnly Session Cookies</strong>.
     </p>
 
     <div class="hero__actions">
@@ -24,11 +24,11 @@ const { user } = Astro.locals;
         ) : (
           <>
             <a href="/signin" class="btn-primary">
-              <i class="fa-solid fa-right-to-bracket" />
+              <i class="fa-solid fa-shield-halved" />
               <span>Entrar no Sistema</span>
             </a>
             <a href="/register" class="btn-secondary">
-              <span>Criar Conta</span>
+              <span>Registrar Novo Acesso</span>
             </a>
           </>
         )
@@ -38,19 +38,28 @@ const { user } = Astro.locals;
 
   <div class="hero__features">
     <div class="feature-card surface-card">
-      <i class="fa-solid fa-cookie-bite"></i>
-      <h3>SSR Auth</h3>
-      <p>Validação de identidade no servidor via HttpOnly Cookies.</p>
+      <i class="fa-solid fa-server"></i>
+      <h3>SSR Validation</h3>
+      <p>
+        Verificação de sessão executada inteiramente no lado do servidor para
+        máxima segurança.
+      </p>
     </div>
     <div class="feature-card surface-card">
-      <i class="fa-solid fa-shield-halved"></i>
-      <h3>Middleware</h3>
-      <p>Proteção de rotas resiliente que barra acessos antes do render.</p>
+      <i class="fa-solid fa-lock"></i>
+      <h3>HttpOnly Cookies</h3>
+      <p>
+        Tokens protegidos contra ataques de Cross-Site Scripting (XSS) via
+        persistência em cookies.
+      </p>
     </div>
     <div class="feature-card surface-card">
-      <i class="fa-solid fa-bolt"></i>
+      <i class="fa-solid fa-code"></i>
       <h3>Astro Actions</h3>
-      <p>Comunicação tipada e segura entre o formulário e o servidor.</p>
+      <p>
+        Endpoints tipados e seguros que garantem a integridade dos dados
+        trafegados.
+      </p>
     </div>
   </div>
 </section>
@@ -121,7 +130,6 @@ const { user } = Astro.locals;
       span {
         line-height: 1;
       }
-
       i {
         font-size: 1rem;
       }
@@ -167,13 +175,11 @@ const { user } = Astro.locals;
         font-size: 1.75rem;
         color: var(--accent);
       }
-
       h3 {
         color: var(--text);
         font-size: 1.25rem;
         margin: 0;
       }
-
       p {
         color: var(--subtext-0);
         font-size: 0.95rem;
@@ -190,12 +196,10 @@ const { user } = Astro.locals;
       max-width: 300px;
       margin-inline: auto;
     }
-
     .btn-primary,
     .btn-secondary {
       width: 100%;
     }
-
     .hero {
       padding: 3rem 0;
       gap: 3rem;

@@ -23,31 +23,20 @@ export default function RegisterForm() {
 
     try {
       await setPersistence(auth, inMemoryPersistence);
-
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password,
       );
-
-      await updateProfile(userCredential.user, {
-        displayName: name,
-      });
-
+      await updateProfile(userCredential.user, { displayName: name });
       const idToken = await userCredential.user.getIdToken();
-
       const { data, error: actionError } = await actions.signIn({ idToken });
 
-      if (actionError) {
-        throw new Error(actionError.message);
-      }
-
-      if (data?.success) {
-        window.location.href = "/dashboard";
-      }
+      if (actionError) throw new Error(actionError.message);
+      if (data?.success) window.location.href = "/dashboard";
     } catch (err: any) {
       console.error(err);
-      setError("Erro ao criar conta. Verifique os dados e tente novamente.");
+      setError("Erro ao processar o cadastro. Verifique os dados inseridos.");
     } finally {
       setIsLoading(false);
     }
@@ -57,56 +46,72 @@ export default function RegisterForm() {
     <div className={styles.authCard}>
       <header>
         <h2>Criar Conta</h2>
-        <p>Preencha seus dados para começar.</p>
+        <p>Preencha os campos abaixo para registrar seu acesso</p>
       </header>
 
       <form className={styles.authForm} onSubmit={handleRegister}>
         <div className={styles.group}>
-          <label htmlFor="name">Nome Completo</label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Sakata Gintoki"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+          <label htmlFor="name">Nome completo</label>
+          <div className={styles.inputWrapper}>
+            <input
+              type="text"
+              id="name"
+              placeholder="Ex: João Silva"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <i className="fa-solid fa-user"></i>
+          </div>
         </div>
 
         <div className={styles.group}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="gin@yorozuya.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <label htmlFor="email">E-mail</label>
+          <div className={styles.inputWrapper}>
+            <input
+              type="email"
+              id="email"
+              placeholder="exemplo@dominio.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <i className="fa-solid fa-envelope"></i>
+          </div>
         </div>
 
         <div className={styles.group}>
-          <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <label htmlFor="password">Crie uma senha</label>
+          <div className={styles.inputWrapper}>
+            <input
+              type="password"
+              id="password"
+              placeholder="Mínimo 6 caracteres"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <i className="fa-solid fa-lock"></i>
+          </div>
         </div>
 
         {error && <div className={styles.error}>{error}</div>}
 
         <button type="submit" className={styles.submit} disabled={isLoading}>
-          {isLoading ? "Criando conta..." : "Registrar"}
+          <i
+            className={
+              isLoading
+                ? "fa-solid fa-circle-notch fa-spin"
+                : "fa-solid fa-user-plus"
+            }
+          ></i>
+          <span>{isLoading ? "Processando..." : "Finalizar Cadastro"}</span>
         </button>
       </form>
 
       <footer className={styles.footer}>
         <p>
-          Já tem uma conta? <a href="/signin">Fazer login</a>
+          Já possui cadastro? <a href="/signin">Fazer login</a>
         </p>
       </footer>
     </div>
