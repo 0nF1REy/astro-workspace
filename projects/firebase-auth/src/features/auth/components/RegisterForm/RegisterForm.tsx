@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "@lib/firebase/client";
 import { actions } from "astro:actions";
+import styles from "./RegisterForm.module.scss";
 
 export default function RegisterForm() {
   const [name, setName] = useState("");
@@ -53,14 +54,14 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="auth-card">
-      <header className="auth-card__header">
-        <h2 className="auth-card__title">Criar Conta</h2>
-        <p className="auth-card__subtitle">Junte-se à Shinsengumi</p>
+    <div className={styles.authCard}>
+      <header>
+        <h2>Criar Conta</h2>
+        <p>Preencha seus dados para começar.</p>
       </header>
 
-      <form className="auth-form" onSubmit={handleRegister}>
-        <div className="auth-form__group">
+      <form className={styles.authForm} onSubmit={handleRegister}>
+        <div className={styles.group}>
           <label htmlFor="name">Nome Completo</label>
           <input
             type="text"
@@ -72,7 +73,7 @@ export default function RegisterForm() {
           />
         </div>
 
-        <div className="auth-form__group">
+        <div className={styles.group}>
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -84,7 +85,7 @@ export default function RegisterForm() {
           />
         </div>
 
-        <div className="auth-form__group">
+        <div className={styles.group}>
           <label htmlFor="password">Senha</label>
           <input
             type="password"
@@ -96,18 +97,14 @@ export default function RegisterForm() {
           />
         </div>
 
-        {error && <div className="auth-form__error">{error}</div>}
+        {error && <div className={styles.error}>{error}</div>}
 
-        <button
-          type="submit"
-          className="auth-form__submit"
-          disabled={isLoading}
-        >
+        <button type="submit" className={styles.submit} disabled={isLoading}>
           {isLoading ? "Criando conta..." : "Registrar"}
         </button>
       </form>
 
-      <footer className="auth-card__footer">
+      <footer className={styles.footer}>
         <p>
           Já tem uma conta? <a href="/signin">Fazer login</a>
         </p>
