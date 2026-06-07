@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import { auth } from "@lib/firebase/client";
 import { actions } from "astro:actions";
+import styles from "./LoginForm.module.scss";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -39,7 +40,7 @@ export default function LoginForm() {
         window.location.href = "/dashboard";
       }
     } catch (err: any) {
-      console.error("Erro ao logar:", err);
+      console.error(err);
       setError("Email ou senha inválidos. Tente novamente.");
     } finally {
       setIsLoading(false);
@@ -47,14 +48,14 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="auth-card">
-      <header className="auth-card__header">
-        <h2 className="auth-card__title">Login</h2>
-        <p className="auth-card__subtitle">Acesse a área restrita do sistema</p>
+    <div className={styles.authCard}>
+      <header>
+        <h2>Login</h2>
+        <p>Acesse a área restrita do sistema</p>
       </header>
 
-      <form className="auth-form" onSubmit={handleLogin}>
-        <div className="auth-form__group">
+      <form className={styles.authForm} onSubmit={handleLogin}>
+        <div className={styles.group}>
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -66,7 +67,7 @@ export default function LoginForm() {
           />
         </div>
 
-        <div className="auth-form__group">
+        <div className={styles.group}>
           <label htmlFor="password">Senha</label>
           <input
             type="password"
@@ -78,18 +79,14 @@ export default function LoginForm() {
           />
         </div>
 
-        {error && <div className="auth-form__error">{error}</div>}
+        {error && <div className={styles.error}>{error}</div>}
 
-        <button
-          type="submit"
-          className="auth-form__submit"
-          disabled={isLoading}
-        >
-          {isLoading ? "Validando credenciais..." : "Entrar no Sistema"}
+        <button type="submit" className={styles.submit} disabled={isLoading}>
+          {isLoading ? "Validando..." : "Entrar no Sistema"}
         </button>
       </form>
 
-      <footer className="auth-card__footer">
+      <footer className={styles.footer}>
         <p>
           Ainda não tem acesso? <a href="/register">Solicitar registro</a>
         </p>
