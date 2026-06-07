@@ -5,11 +5,13 @@ const { user } = Astro.locals;
 <section class="hero">
   <div class="hero__content">
     <p class="hero__eyebrow">Astro 6 + Firebase</p>
-    <h1 class="hero__title title-gradient">Shinsengumi Identity</h1>
+    <h1 class="hero__title title-gradient">Firebase Authentication</h1>
     <p class="hero__lead">
-      Um laboratório de autenticação avançada focado em segurança de servidor,
-      utilizando <strong>Session Cookies</strong>, <strong>Middleware</strong> e a
-      robustez do <strong>Firebase Admin SDK</strong>.
+      Exemplo prático de autenticação moderna utilizando
+      <strong>Firebase Authentication</strong>,
+      <strong>Session Cookies</strong>,
+      <strong>Middleware</strong> e
+      <strong>Firebase Admin SDK</strong>.
     </p>
 
     <div class="hero__actions">
@@ -17,16 +19,16 @@ const { user } = Astro.locals;
         user ? (
           <a href="/dashboard" class="btn-primary">
             <i class="fa-solid fa-gauge-high" />
-            Acessar Dashboard
+            <span>Acessar Dashboard</span>
           </a>
         ) : (
           <>
             <a href="/signin" class="btn-primary">
               <i class="fa-solid fa-right-to-bracket" />
-              Entrar no Sistema
+              <span>Entrar no Sistema</span>
             </a>
             <a href="/register" class="btn-secondary">
-              Criar Conta
+              <span>Criar Conta</span>
             </a>
           </>
         )
@@ -34,7 +36,7 @@ const { user } = Astro.locals;
     </div>
   </div>
 
-  <div class="hero__features grid">
+  <div class="hero__features">
     <div class="feature-card surface-card">
       <i class="fa-solid fa-cookie-bite"></i>
       <h3>SSR Auth</h3>
@@ -56,7 +58,7 @@ const { user } = Astro.locals;
 <style lang="scss">
   .hero {
     display: grid;
-    gap: 4rem;
+    gap: 5rem;
     padding: 4rem 0;
     text-align: center;
 
@@ -71,24 +73,27 @@ const { user } = Astro.locals;
       color: var(--primary);
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 0.875rem;
+      letter-spacing: 0.25em;
+      font-size: 0.75rem;
     }
 
     &__title {
       font-size: clamp(2.5rem, 8vw, 4.5rem);
       line-height: 1.1;
       margin: 0;
+      letter-spacing: -0.02em;
     }
 
     &__lead {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: var(--subtext-1);
-      max-width: 60ch;
+      max-width: 55ch;
       margin-inline: auto;
+      line-height: 1.6;
 
       strong {
         color: var(--text);
+        font-weight: 600;
       }
     }
 
@@ -96,41 +101,59 @@ const { user } = Astro.locals;
       display: flex;
       gap: 1rem;
       justify-content: center;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
 
     .btn-primary,
     .btn-secondary {
-      padding: 0.875rem 2rem;
+      text-decoration: none;
+      padding: 0.85rem 2rem;
       border-radius: 0.75rem;
       font-weight: 700;
-      display: flex;
+      font-size: 0.95rem;
+      display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      transition: all 0.2s;
+      justify-content: center;
+      gap: 0.65rem;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid transparent;
+
+      span {
+        line-height: 1;
+      }
+
+      i {
+        font-size: 1rem;
+      }
     }
 
     .btn-primary {
       background-color: var(--primary);
       color: var(--crust);
+      box-shadow: 0 1px 6px rgba(203, 166, 247, 0.08);
+
       &:hover {
         filter: brightness(1.1);
         transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(203, 166, 247, 0.12);
       }
     }
 
     .btn-secondary {
       background-color: var(--surface-0);
       color: var(--text);
-      border: 1px solid var(--border);
+      border-color: var(--border);
+
       &:hover {
         background-color: var(--surface-1);
+        border-color: var(--primary);
+        transform: translateY(-2px);
       }
     }
 
     .hero__features {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       text-align: left;
     }
@@ -138,18 +161,24 @@ const { user } = Astro.locals;
     .feature-card {
       display: grid;
       gap: 1rem;
+      padding: 2rem;
+
       i {
-        font-size: 2rem;
+        font-size: 1.75rem;
         color: var(--accent);
       }
+
       h3 {
         color: var(--text);
+        font-size: 1.25rem;
         margin: 0;
       }
+
       p {
         color: var(--subtext-0);
         font-size: 0.95rem;
         margin: 0;
+        line-height: 1.5;
       }
     }
   }
@@ -157,10 +186,19 @@ const { user } = Astro.locals;
   @media (max-width: 640px) {
     .hero__actions {
       flex-direction: column;
+      width: 100%;
+      max-width: 300px;
+      margin-inline: auto;
     }
+
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+    }
+
     .hero {
-      padding: 2rem 0;
-      gap: 2rem;
+      padding: 3rem 0;
+      gap: 3rem;
     }
   }
 </style>
