@@ -1,0 +1,166 @@
+---
+const { user } = Astro.locals;
+---
+
+<section class="hero">
+  <div class="hero__content">
+    <p class="hero__eyebrow">Astro 6 + Firebase</p>
+    <h1 class="hero__title title-gradient">Shinsengumi Identity</h1>
+    <p class="hero__lead">
+      Um laboratório de autenticação avançada focado em segurança de servidor,
+      utilizando <strong>Session Cookies</strong>, <strong>Middleware</strong> e a
+      robustez do <strong>Firebase Admin SDK</strong>.
+    </p>
+
+    <div class="hero__actions">
+      {
+        user ? (
+          <a href="/dashboard" class="btn-primary">
+            <i class="fa-solid fa-gauge-high" />
+            Acessar Dashboard
+          </a>
+        ) : (
+          <>
+            <a href="/signin" class="btn-primary">
+              <i class="fa-solid fa-right-to-bracket" />
+              Entrar no Sistema
+            </a>
+            <a href="/register" class="btn-secondary">
+              Criar Conta
+            </a>
+          </>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="hero__features grid">
+    <div class="feature-card surface-card">
+      <i class="fa-solid fa-cookie-bite"></i>
+      <h3>SSR Auth</h3>
+      <p>Validação de identidade no servidor via HttpOnly Cookies.</p>
+    </div>
+    <div class="feature-card surface-card">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h3>Middleware</h3>
+      <p>Proteção de rotas resiliente que barra acessos antes do render.</p>
+    </div>
+    <div class="feature-card surface-card">
+      <i class="fa-solid fa-bolt"></i>
+      <h3>Astro Actions</h3>
+      <p>Comunicação tipada e segura entre o formulário e o servidor.</p>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .hero {
+    display: grid;
+    gap: 4rem;
+    padding: 4rem 0;
+    text-align: center;
+
+    &__content {
+      max-width: 800px;
+      margin-inline: auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    &__eyebrow {
+      color: var(--primary);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.875rem;
+    }
+
+    &__title {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    &__lead {
+      font-size: 1.25rem;
+      color: var(--subtext-1);
+      max-width: 60ch;
+      margin-inline: auto;
+
+      strong {
+        color: var(--text);
+      }
+    }
+
+    &__actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 0.875rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--crust);
+      &:hover {
+        filter: brightness(1.1);
+        transform: translateY(-2px);
+      }
+    }
+
+    .btn-secondary {
+      background-color: var(--surface-0);
+      color: var(--text);
+      border: 1px solid var(--border);
+      &:hover {
+        background-color: var(--surface-1);
+      }
+    }
+
+    .hero__features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      text-align: left;
+    }
+
+    .feature-card {
+      display: grid;
+      gap: 1rem;
+      i {
+        font-size: 2rem;
+        color: var(--accent);
+      }
+      h3 {
+        color: var(--text);
+        margin: 0;
+      }
+      p {
+        color: var(--subtext-0);
+        font-size: 0.95rem;
+        margin: 0;
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero__actions {
+      flex-direction: column;
+    }
+    .hero {
+      padding: 2rem 0;
+      gap: 2rem;
+    }
+  }
+</style>
