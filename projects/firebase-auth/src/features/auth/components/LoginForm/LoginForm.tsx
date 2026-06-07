@@ -21,27 +21,19 @@ export default function LoginForm() {
 
     try {
       await setPersistence(auth, inMemoryPersistence);
-
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password,
       );
-
       const idToken = await userCredential.user.getIdToken();
-
       const { data, error: actionError } = await actions.signIn({ idToken });
 
-      if (actionError) {
-        throw new Error(actionError.message);
-      }
-
-      if (data?.success) {
-        window.location.href = "/dashboard";
-      }
+      if (actionError) throw new Error(actionError.message);
+      if (data?.success) window.location.href = "/dashboard";
     } catch (err: any) {
       console.error(err);
-      setError("Email ou senha inválidos. Tente novamente.");
+      setError("Email ou senha inválidos.");
     } finally {
       setIsLoading(false);
     }
@@ -57,32 +49,45 @@ export default function LoginForm() {
       <form className={styles.authForm} onSubmit={handleLogin}>
         <div className={styles.group}>
           <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="hijikata@shinsengumi.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <div className={styles.inputWrapper}>
+            <input
+              type="email"
+              id="email"
+              placeholder="exemplo@shinsengumi.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <i className="fa-solid fa-envelope"></i>
+          </div>
         </div>
 
         <div className={styles.group}>
           <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className={styles.inputWrapper}>
+            <input
+              type="password"
+              id="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <i className="fa-solid fa-lock"></i>
+          </div>
         </div>
 
         {error && <div className={styles.error}>{error}</div>}
 
         <button type="submit" className={styles.submit} disabled={isLoading}>
-          {isLoading ? "Validando..." : "Entrar no Sistema"}
+          <i
+            className={
+              isLoading
+                ? "fa-solid fa-circle-notch fa-spin"
+                : "fa-solid fa-right-to-bracket"
+            }
+          ></i>
+          <span>{isLoading ? "Validando..." : "Entrar no Sistema"}</span>
         </button>
       </form>
 
