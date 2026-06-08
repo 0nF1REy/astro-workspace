@@ -1,6 +1,8 @@
 ---
 import "@styles/global.scss";
 import { baseData } from "@data/siteData";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
 import MainShell from "@components/MainShell.astro";
 
 type Props = {
@@ -30,8 +32,12 @@ const { title: pageTitle = "default", description = baseData.description } =
   </head>
 
   <body>
+    <Header />
+
     <MainShell>
       <slot />
     </MainShell>
+
+    <Footer />
   </body>
 </html>

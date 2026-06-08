@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
+import DashboardLayout from "@layouts/DashboardLayout.astro";
 import DashboardPage from "@features/dashboard";
 
 const { user } = Astro.locals;
@@ -9,6 +9,6 @@ if (!user) {
 }
 ---
 
-<BaseLayout title="Dashboard">
+<DashboardLayout title="Dashboard">
   <DashboardPage />
-</BaseLayout>
+</DashboardLayout>
