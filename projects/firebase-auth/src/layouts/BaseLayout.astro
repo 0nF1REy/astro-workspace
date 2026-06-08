@@ -1,5 +1,5 @@
 ---
-import AppLayout from "./AppLayout.astro";
+import RootLayout from "./RootLayout.astro";
 
 type Props = {
   title?: string;
@@ -9,6 +9,6 @@ type Props = {
 const { title, description } = Astro.props;
 ---
 
-<AppLayout title={title} description={description}>
+<RootLayout title={title} description={description}>
   <slot />
-</AppLayout>
+</RootLayout>
