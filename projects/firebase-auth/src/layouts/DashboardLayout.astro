@@ -1,43 +1,20 @@
 ---
-import "@styles/global.scss";
-import { baseData } from "@data/siteData";
+import AppLayout from "./AppLayout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import MainShell from "@components/MainShell.astro";
 
 type Props = {
   title?: string;
   description?: string;
 };
 
-const { title: pageTitle = "default", description = baseData.description } =
-  Astro.props;
+const { title, description } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title={baseData.title}
-      href={`${Astro.site}rss.xml`}
-    />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <title>{pageTitle} | {baseData.title}</title>
-  </head>
-
+<AppLayout title={title} description={description}>
   <body>
     <Header />
-
-    <MainShell>
-      <slot />
-    </MainShell>
-
+    <slot />
     <Footer />
   </body>
-</html>
+</AppLayout>
