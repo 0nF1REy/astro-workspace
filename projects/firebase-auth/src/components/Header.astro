@@ -1,3 +1,7 @@
+---
+const { user } = Astro.locals;
+---
+
 <header class="site-header">
   <div class="site-shell">
     <div class="site-header__inner">
@@ -7,31 +11,14 @@
       </a>
       <nav class="site-header__nav">
         {
-          Astro.locals.user ? (
-            <>
-              <a href="/dashboard" class="site-header__nav-link">
-                <i class="fa-solid fa-gauge-high" />
-                <span>Dashboard</span>
-              </a>
-              <button
-                id="logout-trigger"
-                class="site-header__nav-link site-header__logout-btn"
-              >
-                <i class="fa-solid fa-right-from-bracket" />
-                <span>Sair</span>
-              </button>
-            </>
-          ) : (
-            <>
-              <a href="/signin" class="site-header__nav-link">
-                <i class="fa-solid fa-right-to-bracket" />
-                <span>Login</span>
-              </a>
-              <a href="/register" class="site-header__nav-link">
-                <i class="fa-solid fa-user-plus" />
-                <span>Cadastro</span>
-              </a>
-            </>
+          user && (
+            <button
+              id="logout-trigger"
+              class="site-header__nav-link site-header__logout-btn"
+            >
+              <i class="fa-solid fa-right-from-bracket" />
+              <span>Sair</span>
+            </button>
           )
         }
       </nav>
