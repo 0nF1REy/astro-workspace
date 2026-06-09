@@ -1,7 +1,6 @@
 ---
 import "@styles/global.scss";
 import { baseData } from "@data/siteData";
-import MainShell from "@components/MainShell.astro";
 
 type Props = {
   title?: string;
@@ -29,8 +28,6 @@ const { title: pageTitle = "default", description = baseData.description } =
     <title>{pageTitle} | {baseData.title}</title>
   </head>
   <body>
-    <MainShell>
-      <slot />
-    </MainShell>
+    <slot />
   </body>
 </html>

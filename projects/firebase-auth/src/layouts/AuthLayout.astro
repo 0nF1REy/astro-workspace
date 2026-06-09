@@ -1,14 +1,23 @@
 ---
 import RootLayout from "./RootLayout.astro";
-
-type Props = {
-  title?: string;
-  description?: string;
-};
+import MainShell from "@components/MainShell.astro";
 
 const { title, description } = Astro.props;
 ---
 
 <RootLayout title={title} description={description}>
-  <slot />
+  <MainShell>
+    <div class="auth-centered-container">
+      <slot />
+    </div>
+  </MainShell>
 </RootLayout>
+
+<style lang="scss">
+  .auth-centered-container {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: calc(100vh - 112px);
+  }
+</style>
