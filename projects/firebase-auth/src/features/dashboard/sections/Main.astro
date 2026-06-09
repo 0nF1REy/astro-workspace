@@ -12,6 +12,7 @@ const { user } = Astro.locals;
   </header>
 
   <div class="dashboard__grid">
+    <!-- Card de Status de Segurança -->
     <article class="surface-card status-card">
       <div class="status-card__icon">
         <i class="fa-solid fa-user-shield"></i>
@@ -23,6 +24,7 @@ const { user } = Astro.locals;
       </div>
     </article>
 
+    <!-- Card de Informações da Conta -->
     <article class="surface-card info-card">
       <h3>Detalhes do Acesso</h3>
       <div class="info-list">
@@ -37,29 +39,7 @@ const { user } = Astro.locals;
       </div>
     </article>
   </div>
-
-  <footer class="dashboard__actions">
-    <button id="logout-btn" class="btn-logout">
-      <i class="fa-solid fa-right-from-bracket"></i>
-      Encerrar Sessão
-    </button>
-  </footer>
 </div>
-
-<script>
-  import { actions } from "astro:actions";
-
-  const logoutBtn = document.getElementById("logout-btn");
-
-  logoutBtn?.addEventListener("click", async () => {
-    const { error } = await actions.signOut();
-    if (!error) {
-      window.location.href = "/signin";
-    } else {
-      console.error("Falha ao encerrar sessão:", error);
-    }
-  });
-</script>
 
 <style lang="scss">
   .dashboard {
@@ -159,28 +139,6 @@ const { user } = Astro.locals;
         p {
           font-size: 0.95rem;
         }
-      }
-    }
-
-    .btn-logout {
-      width: fit-content;
-      margin-inline: auto;
-      padding: 0.75rem 2rem;
-      background-color: transparent;
-      color: var(--red);
-      border: 1px solid var(--red);
-      border-radius: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      transition: all 0.2s;
-
-      &:hover {
-        background-color: var(--red);
-        color: var(--crust);
-        transform: translateY(-2px);
       }
     }
   }
