@@ -8,10 +8,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
     url.pathname.startsWith("/signin") || url.pathname.startsWith("/register");
   const isProtectedRoute = url.pathname.startsWith("/dashboard");
 
-  if (!isAuthRoute && !isProtectedRoute) {
-    return next();
-  }
-
   const sessionCookie = cookies.get("__session")?.value;
 
   if (sessionCookie) {
