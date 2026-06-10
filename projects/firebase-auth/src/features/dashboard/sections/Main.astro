@@ -56,12 +56,15 @@ const { user } = Astro.locals;
         font-size: 0.75rem;
         margin-bottom: 0.5rem;
       }
+
       h1 {
-        font-size: 2.5rem;
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
         margin-bottom: 0.5rem;
       }
+
       .welcome-text {
         color: var(--subtext-0);
+
         strong {
           color: var(--text);
         }
@@ -88,11 +91,13 @@ const { user } = Astro.locals;
         display: grid;
         place-items: center;
         font-size: 1.5rem;
+        flex-shrink: 0;
       }
 
       h3 {
         margin-bottom: 0.25rem;
       }
+
       p {
         font-size: 0.9rem;
         color: var(--subtext-0);
@@ -123,11 +128,13 @@ const { user } = Astro.locals;
       .info-item {
         display: grid;
         gap: 0.25rem;
+
         span {
           font-size: 0.75rem;
           color: var(--subtext-1);
           font-weight: 600;
         }
+
         code {
           font-family: monospace;
           background: var(--base);
@@ -136,8 +143,86 @@ const { user } = Astro.locals;
           font-size: 0.85rem;
           word-break: break-all;
         }
+
         p {
           font-size: 0.95rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard {
+      gap: 2rem;
+      padding: 1.5rem 0;
+
+      &__header {
+        h1 {
+          font-size: 2rem;
+        }
+      }
+
+      &__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .dashboard {
+      gap: 1.5rem;
+      padding: 1rem 0;
+
+      &__header {
+        text-align: center;
+
+        h1 {
+          font-size: 1.75rem;
+        }
+
+        .welcome-text {
+          font-size: 0.95rem;
+          overflow-wrap: anywhere;
+        }
+      }
+
+      .status-card {
+        gap: 1rem;
+        align-items: flex-start;
+        padding: 1.5rem;
+
+        &__icon {
+          width: 3rem;
+          height: 3rem;
+          font-size: 1.25rem;
+        }
+
+        h3 {
+          font-size: 1rem;
+        }
+
+        p {
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      .info-card {
+        padding: 1.5rem;
+
+        h3 {
+          margin-bottom: 1rem;
+        }
+
+        .info-item {
+          code {
+            font-size: 0.8rem;
+            padding: 0.5rem;
+            overflow-wrap: anywhere;
+          }
+
+          p {
+            font-size: 0.9rem;
+          }
         }
       }
     }

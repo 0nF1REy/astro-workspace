@@ -176,24 +176,71 @@ const { user } = Astro.locals;
     }
   }
 
-  @media (max-width: 1024px) {
-    .hero__features {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      justify-content: center;
+  @media (max-width: 768px) {
+    .hero {
+      gap: 3rem;
+      padding: 3rem 0;
+
+      &__content {
+        gap: 1.25rem;
+      }
+
+      &__lead {
+        font-size: 1rem;
+      }
+
+      &__actions {
+        flex-direction: column;
+        width: 100%;
+        align-items: stretch;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+
+      .hero__features {
+        grid-template-columns: 1fr;
+      }
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 480px) {
     .hero {
-      gap: 3rem;
-    }
-    .hero__actions {
-      flex-direction: column;
-      width: 100%;
-      max-width: 300px;
-    }
-    .hero__features {
-      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding: 2rem 0;
+
+      &__eyebrow {
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+      }
+
+      &__lead {
+        font-size: 0.95rem;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        padding: 0.85rem 1.25rem;
+        font-size: 0.9rem;
+      }
+
+      .feature-card {
+        padding: 1.5rem;
+
+        i {
+          font-size: 1.5rem;
+        }
+
+        h3 {
+          font-size: 1rem;
+        }
+
+        p {
+          font-size: 0.85rem;
+        }
+      }
     }
   }
 </style>
