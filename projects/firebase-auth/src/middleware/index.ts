@@ -22,7 +22,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
       if (isAuthRoute) {
         return redirect("/dashboard");
       }
-    } catch (error) {
+    } catch {
       cookies.delete("__session", { path: "/" });
     }
   }

@@ -34,7 +34,7 @@ export default function RegisterForm() {
 
       if (actionError) throw new Error(actionError.message);
       if (data?.success) window.location.href = "/dashboard";
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
       setError("Erro ao processar o cadastro. Verifique os dados inseridos.");
     } finally {

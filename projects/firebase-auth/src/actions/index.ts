@@ -32,7 +32,7 @@ export const server = {
         return { success: true };
       } catch (error) {
         console.error("Erro no SignIn Action:", error);
-        throw new Error("Falha na autenticação do servidor");
+        throw new Error("Falha na autenticação do servidor", { cause: error });
       }
     },
   }),

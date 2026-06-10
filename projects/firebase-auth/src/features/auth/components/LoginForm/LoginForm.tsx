@@ -31,7 +31,7 @@ export default function LoginForm() {
 
       if (actionError) throw new Error(actionError.message);
       if (data?.success) window.location.href = "/dashboard";
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
       setError("Credenciais inválidas. Por favor, tente novamente.");
     } finally {
