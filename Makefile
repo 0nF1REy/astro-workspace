@@ -6,7 +6,7 @@ PROJECTS := $(sort $(notdir $(wildcard $(WORKSPACE_DIR)/*)))
 .PHONY: help list open add status sync git-context \
 	atarashii-gakko book-bites clerk-auth cloudinary-form-upload \
 	firebase-auth jashin-chan-dropkick lifelong-learning p5js-workspace \
-	portfolio product-management profile scriptora
+	portfolio profile scriptora
 
 help: ## Mostra os comandos disponíveis
 	@echo "Comandos disponíveis:"
@@ -92,9 +92,6 @@ p5js-workspace:
 
 portfolio:
 	@code "$(WORKSPACE_DIR)/portfolio/portfolio.code-workspace"
-
-product-management:
-	@code "$(WORKSPACE_DIR)/product-management/product-management.code-workspace"
 
 profile:
 	@code "$(WORKSPACE_DIR)/profile/profile.code-workspace"
