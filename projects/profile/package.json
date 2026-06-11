@@ -52,6 +52,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@astrojs/compiler-rs": "^0.2.2",
+    "@astrojs/markdown-satteri": "^0.3.0",
     "@eslint/js": "^10.0.1",
     "eslint": "^10.4.0",
     "eslint-plugin-astro": "^1.7.0",
