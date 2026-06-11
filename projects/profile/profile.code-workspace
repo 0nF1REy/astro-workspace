@@ -2,40 +2,40 @@
   "folders": [
     {
       "name": "PROJECT: PROFILE",
-      "path": "."
+      "path": ".",
     },
     {
       "name": "REPO ROOT (GIT/DOCS)",
-      "path": "../../"
-    }
+      "path": "../../",
+    },
   ],
   "settings": {
     "files.exclude": {
       "projects": true,
       "**/node_modules": true,
       "**/dist": true,
-      "**/.astro": true
+      "**/.astro": true,
     },
     "search.exclude": {
       "projects": true,
       "**/node_modules": true,
       "**/dist": true,
-      "**/.astro": true
+      "**/.astro": true,
     },
     "files.watcherExclude": {
       "projects/**": true,
       "**/node_modules/**": true,
       "**/dist/**": true,
-      "**/.astro/**": true
+      "**/.astro/**": true,
     },
     "git.autoRepositoryDetection": "subFolders",
-    "git.openRepositoryInParentFolders": "always"
+    "git.openRepositoryInParentFolders": "always",
   },
   "extensions": {
     "recommendations": [
       "astro-build.astro-vscode",
       "esbenp.prettier-vscode",
-      "bradlc.vscode-tailwindcss"
-    ]
-  }
+      "bradlc.vscode-tailwindcss",
+    ],
+  },
 }
