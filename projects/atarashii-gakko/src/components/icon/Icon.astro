@@ -4,6 +4,7 @@ import {
   library,
   icon as faIcon,
 } from "@fortawesome/fontawesome-svg-core";
+import type { IconPrefix, IconName } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
@@ -17,19 +18,16 @@ export interface Props {
 
 const { icon: iconProp, className } = Astro.props;
 
-let prefix: string = "fas";
-let iconName: string = "";
-
-if (Array.isArray(iconProp)) {
-  prefix = iconProp[0];
-  iconName = iconProp[1];
-} else {
-  iconName = iconProp as string;
-}
+const prefix = Array.isArray(iconProp)
+  ? (iconProp[0] as IconPrefix)
+  : ("fas" as IconPrefix);
+const iconName = Array.isArray(iconProp)
+  ? (iconProp[1] as IconName)
+  : (iconProp as IconName);
 
 const abstractIcon = faIcon({
-  prefix: prefix as any,
-  iconName: iconName as any,
+  prefix,
+  iconName,
 });
 
 const svgHtml = abstractIcon ? abstractIcon.html[0] : "";
