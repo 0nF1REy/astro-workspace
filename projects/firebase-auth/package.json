@@ -39,7 +39,7 @@
     "@astrojs/vercel": "^10.0.8",
     "@types/react": "^19.2.16",
     "@types/react-dom": "^19.2.3",
-    "astro": "^6.4.6",
+    "astro": "^6.4.7",
     "firebase": "^12.14.0",
     "firebase-admin": "^13.10.0",
     "react": "^19.2.7",
