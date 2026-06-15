@@ -190,7 +190,9 @@
   border-radius: 8px;
   cursor: pointer;
   letter-spacing: 0.1em;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
   margin: 1rem 0 2rem 0;
 
   &:hover {

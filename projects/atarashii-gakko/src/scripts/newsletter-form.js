@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Verificar se pelo menos um checkbox está marcado
       const checkboxes = form.querySelectorAll('input[type="checkbox"]');
       const isAnyChecked = Array.from(checkboxes).some(
-        (checkbox) => checkbox.checked
+        (checkbox) => checkbox.checked,
       );
 
       if (!isAnyChecked) {
