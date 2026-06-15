@@ -2,11 +2,18 @@
   "name": "atarashii-gakko",
   "type": "module",
   "version": "2.0.0",
+  "packageManager": "npm@11.11.0",
+  "engines": {
+    "node": "24.x"
+  },
   "description": "Clone of ATARASHII GAKKO! landing page, featuring their latest discography, world tour dates, and newsletter signup. Built with Astro and SCSS for a modern, responsive experience",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "check": "astro check",
+    "info": "astro info",
+    "upgrade": "npx @astrojs/upgrade",
     "astro": "astro"
   },
   "keywords": [
@@ -15,25 +22,27 @@
   ],
   "author": {
     "name": "Alan Ryan da Silva Domingues",
-    "email": "alanryan619@gmail.com"
+    "email": "alanryan619@gmail.com",
+    "url": "https://github.com/0nF1REy"
   },
   "license": "MIT",
-  "homepage": "https://github.com/0nF1REy/astro-projects",
+  "homepage": "https://atarashii-gakko.vercel.app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/0nF1REy/astro-projects.git"
+    "url": "https://github.com/0nF1REy/astro-workspace.git"
   },
   "bugs": {
-    "url": "https://github.com/0nF1REy/astro-projects/issues"
+    "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "@astrojs/vercel": "^9.0.4",
+    "astro": "^6.4.7",
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
-    "@fortawesome/free-solid-svg-icons": "^7.1.0",
-    "astro": "^5.18.0"
+    "@fortawesome/free-solid-svg-icons": "^7.1.0"
   },
   "devDependencies": {
-    "sass": "^1.93.2"
+    "@astrojs/check": "^0.9.9",
+    "sass": "^1.93.2",
+    "typescript": "^6.0.3"
   }
 }
