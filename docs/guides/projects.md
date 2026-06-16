@@ -7,7 +7,6 @@ Documentação detalhada de cada projeto do **Astro Workspace**.
 ## Índice
 
 - [🎭 ATARASHII GAKKO! Landing Page](#atarashii-gakko)
-- [🛒 Product Management](#product-management)
 - [📝 Scriptora](#scriptora)
 - [👤 Profile](#profile)
 - [🎨 p5.js Workspace](#p5js-workspace)
@@ -28,23 +27,6 @@ Documentação detalhada de cada projeto do **Astro Workspace**.
 - **📧 Newsletter:** Sistema de cadastro para receber atualizações
 - **📱 Design Responsivo:** Otimizado para dispositivos móveis e desktop
 - **🎨 Interface Moderna:** Uso de SCSS para estilização avançada
-
-## 🛒 Product Management <a name="product-management"></a>
-
-**📁 Pasta:** `projects/product-management/`  
-**🎯 Descrição:** Sistema completo para cadastro, edição e listagem de produtos, com autenticação de usuários e integração ao Firebase. O projeto utiliza Astro com React, SCSS modular, tipagem TypeScript e layout centralizado, focando em boas práticas de UX e arquitetura escalável.
-
-![Banner - Product Management](../images/showcases/product-management/product-management.png)
-
-### ✨ Funcionalidades
-
-- **🔐 Autenticação:** Login e registro de usuários com Firebase Auth
-- **📦 Cadastro de Produtos:** Adição, edição e remoção de produtos
-- **📋 Listagem Dinâmica:** Visualização dos produtos cadastrados
-- **🎨 SCSS Modular:** Estilos organizados por componente e variáveis globais
-- **⚛️ Componentes React:** Formulários e listas interativos com tipagem forte
-- **🗄️ Integração com Firebase:** Persistência dos dados dos produtos e usuários
-- **🖌️ Identidade Visual:** Logotipo próprio e fontes customizadas
 
 ---
 
