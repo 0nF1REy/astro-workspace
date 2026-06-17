@@ -47,7 +47,7 @@
   "dependencies": {
     "@astrojs/vercel": "^10.0.8",
     "@fortawesome/fontawesome-free": "^7.2.0",
-    "astro": "^6.4.6",
+    "astro": "^6.4.8",
     "sass": "^1.97.3"
   },
   "devDependencies": {

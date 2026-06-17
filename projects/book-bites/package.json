@@ -50,10 +50,10 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "astro": "^6.4.7",
     "@astrojs/react": "^5.0.7",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "astro": "^6.4.8",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },
