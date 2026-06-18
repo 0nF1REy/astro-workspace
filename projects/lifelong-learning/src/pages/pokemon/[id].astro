@@ -1,0 +1,277 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { fetchPokemon } from "@lib/pokemon/fetchPokemon";
+
+export const getStaticPaths = (async () => {
+  const pokemonList = await fetchPokemon();
+
+  return pokemonList.map((pokemon) => ({
+    params: { id: pokemon.id.toString() },
+    props: { pokemon },
+  }));
+}) satisfies GetStaticPaths;
+
+const { pokemon } = Astro.props;
+const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
+---
+
+<BaseLayout title={pokemon.name}>
+  <section class="pokemon-detail">
+    <div class="pokemon-detail__container">
+      <a href="/pokemon" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Voltar para a Pokédex
+      </a>
+
+      <article class="pokemon-card-detail surface-card">
+        <header class="pokemon-card-detail__header">
+          <div class="pokemon-card-detail__title-group">
+            <span class="pokemon-id">{formatId(pokemon.id)}</span>
+            <h1 class="title-gradient">{pokemon.name}</h1>
+          </div>
+          <div class="pokemon-types">
+            {
+              pokemon.types.map((type: string) => (
+                <span class:list={["type-badge", `type-badge--${type}`]}>
+                  {type}
+                </span>
+              ))
+            }
+          </div>
+        </header>
+
+        <div class="pokemon-card-detail__body">
+          <div class="image-showcase">
+            <div class="image-bg-glow"></div>
+            <img
+              src={pokemon.image}
+              alt={pokemon.name}
+              class="main-pokemon-img"
+              transition:name={`pokemon-img-${pokemon.id}`}
+            />
+          </div>
+
+          <div class="stats-panel">
+            <div class="stats-group">
+              <p class="stats-label">Informações Biométricas</p>
+              <div class="metrics-grid">
+                <div class="metric-item">
+                  <i class="fa-solid fa-ruler-vertical"></i>
+                  <div class="metric-info">
+                    <span>Altura</span>
+                    <strong>{pokemon.height / 10} m</strong>
+                  </div>
+                </div>
+                <div class="metric-item">
+                  <i class="fa-solid fa-weight-hanging"></i>
+                  <div class="metric-info">
+                    <span>Peso</span>
+                    <strong>{pokemon.weight / 10} kg</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .pokemon-detail {
+    &__container {
+      display: grid;
+      gap: 1.5rem;
+    }
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      color: var(--orange);
+      transform: translateX(-4px);
+    }
+  }
+
+  .pokemon-card-detail {
+    display: grid;
+    gap: 2rem;
+    padding: 3rem;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid rgba(253, 230, 138, 0.1);
+      padding-bottom: 1.5rem;
+    }
+
+    &__title-group {
+      display: grid;
+      gap: 0.25rem;
+
+      .pokemon-id {
+        font-family: monospace;
+        font-size: 1.2rem;
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        text-transform: capitalize;
+        margin: 0;
+        line-height: 1;
+      }
+    }
+
+    &__body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+  }
+
+  .image-showcase {
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 24px;
+    border: 1px solid rgba(251, 146, 60, 0.1);
+
+    .image-bg-glow {
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      background: var(--orange);
+      filter: blur(80px);
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .main-pokemon-img {
+      width: 100%;
+      max-width: 350px;
+      height: auto;
+      z-index: 1;
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
+      animation: float 6s ease-in-out infinite;
+    }
+  }
+
+  .stats-panel {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .stats-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-weight: 800;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .metric-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: rgba(25, 22, 18, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    i {
+      font-size: 1.5rem;
+      color: var(--orange);
+    }
+
+    .metric-info {
+      display: grid;
+      span {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+      strong {
+        font-size: 1.2rem;
+        color: var(--cream);
+      }
+    }
+  }
+
+  .type-badge {
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+
+    &--fire {
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+    &--water {
+      border-color: #3b82f6;
+      color: #93c5fd;
+    }
+    &--grass {
+      border-color: #22c55e;
+      color: #86efac;
+    }
+    &--electric {
+      border-color: #eab308;
+      color: #fde047;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @media (max-width: 920px) {
+    .pokemon-card-detail {
+      padding: 2rem;
+      &__body {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      &__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+
+    .image-showcase .main-pokemon-img {
+      max-width: 250px;
+    }
+  }
+</style>

@@ -28,46 +28,49 @@ const initialCount = Math.min(POKEMON_PAGE_SIZE, pokemonList.length);
   <div class="pokemon-grid" data-grid>
     {
       pokemonList.map((pokemon, index) => (
-        <article
-          class="pokemon-card surface-card"
+        <a
+          href={`/pokemon/${pokemon.id}`}
+          class="pokemon-card-link"
           data-index={index}
           style={index >= POKEMON_PAGE_SIZE ? "display: none;" : ""}
         >
-          <header class="pokemon-card__header">
-            <span class="pokemon-card__id">{formatId(pokemon.id)}</span>
-            <div class="pokemon-card__types">
-              {pokemon.types.map((type: string) => (
-                <span class:list={["type-badge", `type-badge--${type}`]}>
-                  {type}
-                </span>
-              ))}
-            </div>
-          </header>
-
-          <div class="pokemon-card__image-container">
-            <img
-              src={pokemon.image}
-              alt={pokemon.name}
-              class="pokemon-card__img"
-              loading={index < POKEMON_PAGE_SIZE ? "eager" : "lazy"}
-              decoding="async"
-            />
-          </div>
-
-          <footer class="pokemon-card__info">
-            <h2 class="pokemon-card__name">{pokemon.name}</h2>
-            <div class="pokemon-card__metrics">
-              <div class="metric">
-                <span>Altura</span>
-                <strong>{pokemon.height / 10}m</strong>
+          <article class="pokemon-card surface-card">
+            <header class="pokemon-card__header">
+              <span class="pokemon-card__id">{formatId(pokemon.id)}</span>
+              <div class="pokemon-card__types">
+                {pokemon.types.map((type: string) => (
+                  <span class:list={["type-badge", `type-badge--${type}`]}>
+                    {type}
+                  </span>
+                ))}
               </div>
-              <div class="metric">
-                <span>Peso</span>
-                <strong>{pokemon.weight / 10}kg</strong>
-              </div>
+            </header>
+
+            <div class="pokemon-card__image-container">
+              <img
+                src={pokemon.image}
+                alt={pokemon.name}
+                class="pokemon-card__img"
+                loading={index < POKEMON_PAGE_SIZE ? "eager" : "lazy"}
+                decoding="async"
+              />
             </div>
-          </footer>
-        </article>
+
+            <footer class="pokemon-card__info">
+              <h2 class="pokemon-card__name">{pokemon.name}</h2>
+              <div class="pokemon-card__metrics">
+                <div class="metric">
+                  <span>Altura</span>
+                  <strong>{pokemon.height / 10}m</strong>
+                </div>
+                <div class="metric">
+                  <span>Peso</span>
+                  <strong>{pokemon.weight / 10}kg</strong>
+                </div>
+              </div>
+            </footer>
+          </article>
+        </a>
       ))
     }
   </div>
@@ -93,7 +96,7 @@ const initialCount = Math.min(POKEMON_PAGE_SIZE, pokemonList.length);
   let currentVisible = POKEMON_PAGE_SIZE;
 
   loadMoreBtn?.addEventListener("click", () => {
-    const cards = grid.querySelectorAll(".pokemon-card");
+    const cards = grid.querySelectorAll(".pokemon-card-link");
     const nextLimit = currentVisible + POKEMON_PAGE_SIZE;
 
     cards.forEach((card, index) => {
@@ -169,11 +172,24 @@ const initialCount = Math.min(POKEMON_PAGE_SIZE, pokemonList.length);
     gap: 1.5rem;
   }
 
+  .pokemon-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: grid;
+    outline: none;
+
+    &:focus-visible .pokemon-card {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 2px var(--orange);
+    }
+  }
+
   .pokemon-card {
     display: grid;
     gap: 1rem;
     padding: 1.5rem;
     position: relative;
+    height: 100%;
 
     &.fade-in {
       animation: fadeIn 0.5s ease forwards;
