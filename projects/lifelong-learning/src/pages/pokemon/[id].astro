@@ -12,266 +12,473 @@ export const getStaticPaths = (async () => {
   }));
 }) satisfies GetStaticPaths;
 
-const { pokemon } = Astro.props;
+const { id } = Astro.params;
+
+const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+const fullData = await res.json();
+
 const formatId = (id: number) => `#${String(id).padStart(3, "0")}`;
+
+const statLabels: Record<string, string> = {
+  hp: "PV",
+  attack: "Ataque",
+  defense: "Defesa",
+  "special-attack": "Atq. Esp",
+  "special-defense": "Def. Esp",
+  speed: "Veloc.",
+};
+
+const stats = fullData.stats.map((s: any) => ({
+  name: statLabels[s.stat.name] || s.stat.name,
+  value: s.base_stat,
+  percentage: (s.base_stat / 255) * 100,
+}));
 ---
 
-<BaseLayout title={pokemon.name}>
-  <section class="pokemon-detail">
-    <div class="pokemon-detail__container">
-      <a href="/pokemon" class="back-link">
-        <i class="fa-solid fa-arrow-left"></i> Voltar para a Pokédex
-      </a>
+<BaseLayout title={fullData.name}>
+  <section class="pokemon-detailed-view">
+    <div class="pokemon-detailed-view__container">
+      <nav class="navigation-header">
+        <a href="/pokemon" class="back-action">
+          <i class="fa-solid fa-chevron-left"></i>
+          Voltar para a Pokédex
+        </a>
+        <span class="id-badge">{formatId(fullData.id)}</span>
+      </nav>
 
-      <article class="pokemon-card-detail surface-card">
-        <header class="pokemon-card-detail__header">
-          <div class="pokemon-card-detail__title-group">
-            <span class="pokemon-id">{formatId(pokemon.id)}</span>
-            <h1 class="title-gradient">{pokemon.name}</h1>
-          </div>
-          <div class="pokemon-types">
-            {
-              pokemon.types.map((type: string) => (
-                <span class:list={["type-badge", `type-badge--${type}`]}>
-                  {type}
-                </span>
-              ))
-            }
-          </div>
-        </header>
-
-        <div class="pokemon-card-detail__body">
-          <div class="image-showcase">
-            <div class="image-bg-glow"></div>
+      <div class="layout-grid">
+        <aside class="visual-column">
+          <div class="main-display surface-card">
+            <div class="glow-effect"></div>
             <img
-              src={pokemon.image}
-              alt={pokemon.name}
-              class="main-pokemon-img"
-              transition:name={`pokemon-img-${pokemon.id}`}
+              src={fullData.sprites.other["official-artwork"].front_default}
+              alt={fullData.name}
+              class="pokemon-illustration"
+              transition:name={`pokemon-img-${fullData.id}`}
             />
-          </div>
-
-          <div class="stats-panel">
-            <div class="stats-group">
-              <p class="stats-label">Informações Biométricas</p>
-              <div class="metrics-grid">
-                <div class="metric-item">
-                  <i class="fa-solid fa-ruler-vertical"></i>
-                  <div class="metric-info">
-                    <span>Altura</span>
-                    <strong>{pokemon.height / 10} m</strong>
-                  </div>
-                </div>
-                <div class="metric-item">
-                  <i class="fa-solid fa-weight-hanging"></i>
-                  <div class="metric-info">
-                    <span>Peso</span>
-                    <strong>{pokemon.weight / 10} kg</strong>
-                  </div>
-                </div>
-              </div>
+            <div class="type-container">
+              {
+                fullData.types.map((t: any) => (
+                  <span class:list={["type-tag", `type-tag--${t.type.name}`]}>
+                    {t.type.name}
+                  </span>
+                ))
+              }
             </div>
           </div>
-        </div>
-      </article>
+
+          <div class="misc-stats surface-card">
+            <div class="misc-item">
+              <span class="misc-label">Experiência Base</span>
+              <span class="misc-value">{fullData.base_experience} XP</span>
+            </div>
+            <div class="misc-item">
+              <span class="misc-label">Ordem na Pokédex</span>
+              <span class="misc-value">{fullData.order}</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="info-column">
+          <header class="content-header">
+            <h1 class="title-gradient">{fullData.name}</h1>
+            <div class="physical-metrics">
+              <div class="metric-pill">
+                <i class="fa-solid fa-arrows-up-down"></i>
+                <span>{fullData.height / 10} m</span>
+              </div>
+              <div class="metric-pill">
+                <i class="fa-solid fa-weight-scale"></i>
+                <span>{fullData.weight / 10} kg</span>
+              </div>
+            </div>
+          </header>
+
+          <section class="details-section surface-card">
+            <h2 class="section-title">Estatísticas de Base</h2>
+            <div class="stats-list">
+              {
+                stats.map((stat: any) => (
+                  <div class="stat-row">
+                    <span class="stat-name">{stat.name}</span>
+                    <span class="stat-value">{stat.value}</span>
+                    <div class="stat-bar-bg">
+                      <div
+                        class="stat-bar-fill"
+                        style={`width: ${stat.percentage}%`}
+                      />
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="details-section surface-card">
+            <h2 class="section-title">Habilidades</h2>
+            <div class="abilities-grid">
+              {
+                fullData.abilities.map((a: any) => (
+                  <div
+                    class:list={[
+                      "ability-card",
+                      { "ability-card--hidden": a.is_hidden },
+                    ]}
+                  >
+                    <span class="ability-name">{a.ability.name}</span>
+                    {a.is_hidden && <span class="hidden-tag">Oculta</span>}
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style lang="scss">
-  .pokemon-detail {
+  .pokemon-detailed-view {
     &__container {
       display: grid;
-      gap: 1.5rem;
+      gap: 2rem;
+      width: min(100%, 1100px);
+      margin: 0 auto;
     }
   }
 
-  .back-link {
-    display: inline-flex;
+  .navigation-header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
+  }
+
+  .back-action {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     color: var(--muted);
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.9rem;
-    transition:
-      color 0.2s ease,
-      transform 0.2s ease;
+    transition: color 0.2s ease;
 
     &:hover {
       color: var(--orange);
-      transform: translateX(-4px);
     }
   }
 
-  .pokemon-card-detail {
+  .id-badge {
+    font-family: monospace;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--border);
+  }
+
+  .layout-grid {
     display: grid;
+    grid-template-columns: 400px 1fr;
     gap: 2rem;
-    padding: 3rem;
-
-    &__header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-bottom: 1px solid rgba(253, 230, 138, 0.1);
-      padding-bottom: 1.5rem;
-    }
-
-    &__title-group {
-      display: grid;
-      gap: 0.25rem;
-
-      .pokemon-id {
-        font-family: monospace;
-        font-size: 1.2rem;
-        color: var(--muted);
-        font-weight: 800;
-      }
-
-      h1 {
-        font-size: clamp(2.5rem, 6vw, 4rem);
-        text-transform: capitalize;
-        margin: 0;
-        line-height: 1;
-      }
-    }
-
-    &__body {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
+    align-items: start;
   }
 
-  .image-showcase {
+  .visual-column {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .main-display {
     position: relative;
     display: grid;
     place-items: center;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 24px;
-    border: 1px solid rgba(251, 146, 60, 0.1);
+    padding: 3rem 2rem;
+    overflow: hidden;
 
-    .image-bg-glow {
+    .glow-effect {
       position: absolute;
-      width: 80%;
-      height: 80%;
-      background: var(--orange);
-      filter: blur(80px);
-      opacity: 0.15;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(
+        circle,
+        rgba(251, 146, 60, 0.15) 0%,
+        transparent 60%
+      );
       z-index: 0;
     }
-
-    .main-pokemon-img {
-      width: 100%;
-      max-width: 350px;
-      height: auto;
-      z-index: 1;
-      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
-      animation: float 6s ease-in-out infinite;
-    }
   }
 
-  .stats-panel {
-    display: grid;
-    gap: 2rem;
+  .pokemon-illustration {
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+    animation: floating 4s ease-in-out infinite;
   }
 
-  .stats-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-    margin-bottom: 1rem;
-    font-weight: 800;
-  }
-
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .metric-item {
+  .type-container {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: rgba(25, 22, 18, 0.4);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-
-    i {
-      font-size: 1.5rem;
-      color: var(--orange);
-    }
-
-    .metric-info {
-      display: grid;
-      span {
-        font-size: 0.75rem;
-        color: var(--muted);
-      }
-      strong {
-        font-size: 1.2rem;
-        color: var(--cream);
-      }
-    }
+    gap: 0.5rem;
+    margin-top: 2rem;
+    z-index: 1;
   }
 
-  .type-badge {
-    padding: 0.4rem 1rem;
-    border-radius: 8px;
+  .type-tag {
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
     font-size: 0.85rem;
     font-weight: 800;
     text-transform: uppercase;
+    background: var(--brown);
     border: 1px solid var(--border);
+    color: var(--text);
 
     &--fire {
       border-color: #ef4444;
-      color: #fca5a5;
+      background: rgba(239, 68, 68, 0.1);
     }
     &--water {
       border-color: #3b82f6;
-      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.1);
     }
     &--grass {
       border-color: #22c55e;
-      color: #86efac;
+      background: rgba(34, 197, 94, 0.1);
     }
     &--electric {
       border-color: #eab308;
-      color: #fde047;
+      background: rgba(234, 179, 8, 0.1);
+    }
+    &--psychic {
+      border-color: #f472b6;
+      background: rgba(244, 114, 182, 0.1);
+    }
+    &--ice {
+      border-color: #7dd3fc;
+      background: rgba(125, 211, 252, 0.1);
+    }
+    &--dragon {
+      border-color: #818cf8;
+      background: rgba(129, 140, 248, 0.1);
+    }
+    &--ghost {
+      border-color: #a78bfa;
+      background: rgba(167, 139, 250, 0.1);
+    }
+    &--dark {
+      border-color: #4b5563;
+      background: rgba(75, 85, 99, 0.1);
+    }
+    &--steel {
+      border-color: #94a3b8;
+      background: rgba(148, 163, 184, 0.1);
+    }
+    &--fairy {
+      border-color: #f9a8d4;
+      background: rgba(249, 168, 212, 0.1);
+    }
+    &--bug {
+      border-color: #a3e635;
+      background: rgba(163, 230, 53, 0.1);
+    }
+    &--rock {
+      border-color: #d97706;
+      background: rgba(217, 119, 6, 0.1);
+    }
+    &--ground {
+      border-color: #ca8a04;
+      background: rgba(202, 138, 4, 0.1);
+    }
+    &--poison {
+      border-color: #a855f7;
+      background: rgba(168, 85, 247, 0.1);
+    }
+    &--flying {
+      border-color: #60a5fa;
+      background: rgba(96, 165, 250, 0.1);
+    }
+    &--fighting {
+      border-color: #dc2626;
+      background: rgba(220, 38, 38, 0.1);
+    }
+    &--normal {
+      border-color: #9ca3af;
+      background: rgba(156, 163, 175, 0.1);
     }
   }
 
-  @keyframes float {
+  .misc-stats {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+
+    .misc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .misc-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .misc-value {
+      font-weight: 800;
+      color: var(--cream);
+    }
+  }
+
+  .info-column {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      text-transform: capitalize;
+      margin: 0;
+    }
+  }
+
+  .physical-metrics {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .metric-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: var(--brown);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-weight: 700;
+
+    i {
+      color: var(--orange);
+    }
+  }
+
+  .details-section {
+    padding: 2rem;
+
+    .section-title {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: var(--cream);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+  }
+
+  .stats-list {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: 100px 40px 1fr;
+    align-items: center;
+    gap: 1rem;
+
+    .stat-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .stat-bar-bg {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--orange), var(--cream));
+      border-radius: 4px;
+    }
+  }
+
+  .abilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .ability-card {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    .ability-name {
+      font-weight: 800;
+      text-transform: capitalize;
+      color: var(--text);
+    }
+
+    .hidden-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--orange);
+      font-weight: 900;
+    }
+
+    &--hidden {
+      border-style: dashed;
+      background: rgba(251, 146, 60, 0.03);
+    }
+  }
+
+  @keyframes floating {
     0%,
     100% {
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-20px);
+      transform: translateY(-15px);
     }
   }
 
   @media (max-width: 920px) {
-    .pokemon-card-detail {
-      padding: 2rem;
-      &__body {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      &__header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
+    .layout-grid {
+      grid-template-columns: 1fr;
     }
+    .visual-column {
+      order: 2;
+    }
+    .info-column {
+      order: 1;
+    }
+    .main-display .pokemon-illustration {
+      max-width: 300px;
+    }
+  }
 
-    .image-showcase .main-pokemon-img {
-      max-width: 250px;
+  @media (max-width: 640px) {
+    .content-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
     }
   }
 </style>
