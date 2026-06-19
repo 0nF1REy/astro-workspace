@@ -1,7 +1,7 @@
 {
-  "name": "web",
+  "name": "p5js-workspace",
   "type": "module",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Astro-based landing page for selecting p5.js execution environments (static and dynamic) with a themed UI.",
   "keywords": [
     "astro",
@@ -17,6 +17,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "check": "astro check",
+    "upgrade": "npx @astrojs/upgrade",
     "astro": "astro"
   },
   "author": {
@@ -28,14 +30,17 @@
   "homepage": "https://p5js-workspace.vercel.app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/0nF1REy/p5js-workspace.git"
+    "url": "https://github.com/0nF1REy/astro-workspace.git"
   },
   "bugs": {
-    "url": "https://github.com/0nF1REy/p5js-workspace/issues"
+    "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "@astrojs/vercel": "^10.0.0",
-    "astro": "^6.0.3",
-    "sass": "^1.97.3"
+    "astro": "^6.4.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "sass": "^1.97.3",
+    "typescript": "^6.0.3"
   }
 }
