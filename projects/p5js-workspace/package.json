@@ -17,17 +17,17 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-        "clean": "rimraf dist",
+    "clean": "rimraf dist",
     "check": "astro check",
-        "sync": "astro sync",
+    "sync": "astro sync",
     "info": "astro info",
     "upgrade": "npx @astrojs/upgrade",
     "astro": "astro",
-        "lint": "eslint .",
+    "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-        "list": "npm run"
+    "list": "npm run"
   },
   "author": {
     "name": "Alan Ryan da Silva Domingues",
@@ -48,14 +48,14 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-        "@eslint/js": "^10.0.1",
-        "eslint": "^10.4.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.4.0",
     "eslint-plugin-astro": "^1.7.0",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
-        "rimraf": "^6.1.3",
+    "rimraf": "^6.1.3",
     "sass": "^1.97.3",
     "typescript": "^6.0.3",
-        "typescript-eslint": "^8.60.0"
+    "typescript-eslint": "^8.60.0"
   }
 }
