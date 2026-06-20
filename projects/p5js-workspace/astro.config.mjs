@@ -1,8 +1,26 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import { viteCleaner } from "./configs/vite-cleaner.mjs";
 
 export default defineConfig({
+  // Site e roteamento
+  site: "https://p5js-workspace.vercel.app",
   output: "static",
-  vite: viteCleaner,
+  trailingSlash: "never",
+
+  // Servidor de desenvolvimento
+  server: {
+    host: true,
+    port: 4321,
+  },
+
+  // Performance
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "hover",
+  },
+
+  // Dev Toolbar
+  devToolbar: {
+    enabled: false,
+  },
 });
