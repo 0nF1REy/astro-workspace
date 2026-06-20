@@ -11,6 +11,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "clean": "rimraf dist",
+    "check": "astro check",
     "sync": "astro sync",
     "info": "astro info",
     "upgrade": "npx @astrojs/upgrade",
@@ -30,7 +31,7 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "astro": "^6.3.1"
+    "astro": "^6.4.8"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
