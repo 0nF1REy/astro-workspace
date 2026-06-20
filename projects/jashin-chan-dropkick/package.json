@@ -10,6 +10,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "clean": "rimraf dist",
+    "sync": "astro sync",
+    "info": "astro info",
+    "upgrade": "npx @astrojs/upgrade",
     "astro": "astro"
   },
   "author": {
@@ -30,6 +34,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "rimraf": "^6.1.3",
     "sass-embedded": "^1.97.1",
     "typescript": "^6.0.3"
   }
