@@ -1,18 +1,18 @@
 ---
-import type { GetStaticPaths } from "astro";
+export const prerender = false;
+
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { fetchTopAnime } from "../../lib/anime/fetchTopAnime.ts";
 
-export const getStaticPaths = (async () => {
-  const animeList = await fetchTopAnime();
+const { slug } = Astro.params;
 
-  return animeList.map((anime) => ({
-    params: { slugSSG: anime.mal_id.toString() },
-    props: { anime },
-  }));
-}) satisfies GetStaticPaths;
+const animeList = await fetchTopAnime();
 
-const { anime } = Astro.props;
+const anime = animeList.find((item) => item.mal_id.toString() === slug);
+
+if (!anime) {
+  return Astro.redirect("/404");
+}
 
 const _rawTrailerEmbed =
   anime.trailer?.embed_url ??
