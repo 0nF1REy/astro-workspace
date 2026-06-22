@@ -15,7 +15,12 @@ const bottomRow = menuItems.slice(5, 10);
     <div class="header-flex">
       <div class="logo-row">
         <a href="/">
-          <img src={logoImg} alt="Logo" class="main-logo" />
+          <img
+            src={logoImg}
+            alt="Logo"
+            class="main-logo"
+            transition:name="main-logo"
+          />
         </a>
       </div>
 
@@ -259,19 +264,20 @@ const bottomRow = menuItems.slice(5, 10);
     const overlay = document.getElementById("mobile-nav-overlay");
     const body = document.body;
 
+    if (!openBtn || !overlay) return;
+
     const toggle = (state: boolean) => {
-      overlay?.classList.toggle("active", state);
+      overlay.classList.toggle("active", state);
       body.style.overflow = state ? "hidden" : "";
     };
 
-    openBtn?.addEventListener("click", () => toggle(true));
+    openBtn.addEventListener("click", () => toggle(true));
     closeBtn?.addEventListener("click", () => toggle(false));
 
-    overlay?.querySelectorAll("a").forEach((link) => {
+    overlay.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => toggle(false));
     });
   }
 
-  initHeader();
-  document.addEventListener("astro:after-swap", initHeader);
+  document.addEventListener("astro:page-load", initHeader);
 </script>

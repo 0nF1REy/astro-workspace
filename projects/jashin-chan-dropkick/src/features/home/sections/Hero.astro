@@ -109,7 +109,12 @@ const colRight: MenuItem[] = menuItems.slice(5);
       </div>
 
       <div class="hero-character">
-        <img src={heroImage.src} alt={heroImage.alt} class="character-img" />
+        <img
+          src={heroImage.src}
+          alt={heroImage.alt}
+          class="character-img"
+          transition:name="jashin-hero"
+        />
       </div>
     </div>
   </div>
@@ -321,10 +326,12 @@ const colRight: MenuItem[] = menuItems.slice(5);
     const overlay = document.getElementById("hero-mobile-overlay");
     const body = document.body;
 
-    toggleBtn?.addEventListener("click", () => {
-      const isActive = overlay?.classList.toggle("active");
-      body.style.overflow = isActive ? "hidden" : "";
-    });
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", () => {
+        const isActive = overlay?.classList.toggle("active");
+        body.style.overflow = isActive ? "hidden" : "";
+      });
+    }
 
     const navLinks = document.querySelectorAll(".nav-img-item");
     navLinks.forEach((link) => {
@@ -332,10 +339,7 @@ const colRight: MenuItem[] = menuItems.slice(5);
       if (!img) return;
       const originalSrc = img.dataset.img;
       const hoverSrc = img.dataset.imghover;
-      if (hoverSrc) {
-        const preload = new Image();
-        preload.src = hoverSrc;
-      }
+
       link.addEventListener("mouseenter", () => {
         if (hoverSrc) img.src = hoverSrc;
       });
@@ -345,6 +349,5 @@ const colRight: MenuItem[] = menuItems.slice(5);
     });
   }
 
-  initHeroMobileMenu();
-  document.addEventListener("astro:after-swap", initHeroMobileMenu);
+  document.addEventListener("astro:page-load", initHeroMobileMenu);
 </script>
