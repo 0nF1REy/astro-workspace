@@ -23,9 +23,4 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
-
-  // Experimental (Rust compiler)
-  experimental: {
-    rustCompiler: true,
-  },
 });
