@@ -8,3 +8,4 @@ contexto.txt
 *.log
 *-cache.json
 .env
+*.db

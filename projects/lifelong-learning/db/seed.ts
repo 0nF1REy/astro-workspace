@@ -1,7 +1,7 @@
 import { db } from "@lib/db";
 import { Links } from "./config";
 
-export default async function seed() {
+async function seed() {
   await db.insert(Links).values([
     {
       title: "Jashin-chan Dropkick — [LOCAL]",
@@ -26,3 +26,13 @@ export default async function seed() {
     },
   ]);
 }
+
+seed()
+  .then(() => {
+    console.log("Seed finalizado com sucesso!");
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error("Erro no seed:", err);
+    process.exit(1);
+  });
