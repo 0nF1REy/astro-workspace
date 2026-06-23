@@ -4,9 +4,7 @@ import { LoggerService } from "@lib/logger";
 export const onRequest = defineMiddleware(async (context, next) => {
   const { url, locals, request } = context;
 
-  // Configurações de Contexto (Locals)
   const developerName = "Alan Ryan da Silva Domingues";
-
   locals.name = developerName;
 
   const protectedRoutes = ["/middleware", "/admin"];
@@ -15,25 +13,18 @@ export const onRequest = defineMiddleware(async (context, next) => {
     if (protectedRoutes.includes(url.pathname)) {
       return "Você precisa estar conectado.";
     }
-
     return "Freedom!";
   };
 
-  // Autenticação HTTP Basic (apenas para rotas protegidas)
   if (protectedRoutes.includes(url.pathname)) {
     const authHeader = request.headers.get("authorization");
 
     if (authHeader) {
       const authValue = authHeader.split(" ")[1] ?? "";
-
       const [username, password] = atob(authValue).split(":");
 
-      console.log({
-        username,
-        password,
-      });
-
       if (username === "Alan" && password === "13062004") {
+        locals.userMessage = () => "Você está conectado como administrador.";
         return await continueRequest();
       }
     }
@@ -49,24 +40,20 @@ export const onRequest = defineMiddleware(async (context, next) => {
   return await continueRequest();
 
   async function continueRequest() {
-    // Lógica de Redirecionamento
     const redirects = ["/test"];
 
     if (redirects.includes(url.pathname)) {
       return Response.redirect(new URL("/redirected", url), 302);
     }
 
-    // Execução da Rota
     const response = await next();
 
-    // Delegação de Observabilidade
     await LoggerService.processRequestEvent({
       url,
       status: response.status,
       contentType: response.headers.get("content-type"),
     });
 
-    // Manipulação da Resposta
     const contentType = response.headers.get("content-type") || "";
     const isHtml = contentType.includes("text/html");
 
