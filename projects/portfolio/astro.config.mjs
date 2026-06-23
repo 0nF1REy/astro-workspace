@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import vercel from "@astrojs/vercel";
-import { viteCleaner } from "./configs/vite-cleaner.mjs";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 
