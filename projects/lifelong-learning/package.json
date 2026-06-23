@@ -6,10 +6,9 @@
   "engines": {
     "node": "24.x"
   },
-  "description": "The Lifelong Learning ecosystem: an advanced technical workspace demonstrating Astro 6 with hybrid SSG/SSR rendering, server-side APIs, islands UI, React integration, MDX content collections, TypeScript support, and modular component patterns for continuous learning and examples.",
+  "description": "The Lifelong Learning ecosystem: an advanced technical workspace demonstrating Astro with hybrid SSG/SSR rendering, server-side APIs, islands UI, React integration, MDX content collections, TypeScript support, and modular component patterns for continuous learning and examples.",
   "keywords": [
     "astro",
-    "astro-6",
     "astro-islands",
     "islands-architecture",
     "hybrid-rendering",
