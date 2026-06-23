@@ -6,33 +6,37 @@ import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 
 export default defineConfig({
+  // Site e roteamento
   site: "https://alan-ryan.vercel.app",
   output: "static",
-  integrations: [react(), sitemap(), mdx()],
+  trailingSlash: "never",
   adapter: vercel(),
+
+  // Integrações
+  integrations: [react(), sitemap(), mdx()],
 
   security: {
     csp: true,
   },
 
+  // Servidor de desenvolvimento
   server: {
+    host: true,
     port: 4321,
-  },
-
-  devToolbar: {
-    enabled: false,
   },
 
   build: {
     inlineStylesheets: "never",
   },
 
+  // Performance
   prefetch: {
     prefetchAll: true,
     defaultStrategy: "hover",
   },
 
-  vite: {
-    ...viteCleaner,
+  // Dev Toolbar
+  devToolbar: {
+    enabled: false,
   },
 });
