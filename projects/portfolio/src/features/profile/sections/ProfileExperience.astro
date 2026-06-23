@@ -19,7 +19,7 @@ interface Experience {
 }
 
 const experiences: Experience[] = [
-    {
+  {
     role: "Contribuidor Open Source (Localização)",
     company: "Projeto Orbot (Guardian Project)",
     period: "Abril 2026",
@@ -71,107 +71,113 @@ const auxioProjectDescription = experiences[0]?.projectDescription ?? "";
   {
     experiences.map((exp) => {
       // Cria um ID único baseado no nome da empresa (ex: projeto-orbot)
-      const dialogId = exp.company.split('(')[0].trim().replace(/\s+/g, '-').toLowerCase();
-      
+      const dialogId = exp.company
+        .split("(")[0]
+        .trim()
+        .replace(/\s+/g, "-")
+        .toLowerCase();
+
       return (
-        <div class="experience-card">
-          <div class="card-side">
-            <div class="icon-box">
-              {exp.icon_image ? (
-                <Image
-                  src={exp.icon_image}
-                  alt={exp.company}
-                  width={40}
-                  height={40}
-                  loading="eager"
-                  class="experience-icon-image"
-                />
-              ) : (
-                <div class="experience-icon-fallback">
-                  <i class={`fa-solid ${exp.icon}`} />
-                </div>
-              )}
-            </div>
-            <div class="line" />
-          </div>
-
-          <div class="card-main">
-            <header>
-              <span class="period">{exp.period}</span>
-              <h3>{exp.role}</h3>
-              <p class="company">{exp.company}</p>
-            </header>
-
-            <div class="content">
-              <p class="description">{exp.description}</p>
-              <ul class="achievements-list">
-                {exp.achievements.map((item) => (
-                  <li>
-                    <i class="fa-solid fa-check" /> {item}
-                  </li>
-                ))}
-              </ul>
+        <>
+          <div class="experience-card">
+            <div class="card-side">
+              <div class="icon-box">
+                {exp.icon_image ? (
+                  <Image
+                    src={exp.icon_image}
+                    alt={exp.company}
+                    width={40}
+                    height={40}
+                    loading="eager"
+                    class="experience-icon-image"
+                  />
+                ) : (
+                  <div class="experience-icon-fallback">
+                    <i class={`fa-solid ${exp.icon}`} />
+                  </div>
+                )}
+              </div>
+              <div class="line" />
             </div>
 
-            <div class="footer">
-              <div class="tags">
-                {exp.tags.map((tag) => (
-                  <span>{tag}</span>
-                ))}
+            <div class="card-main">
+              <header>
+                <span class="period">{exp.period}</span>
+                <h3>{exp.role}</h3>
+                <p class="company">{exp.company}</p>
+              </header>
+
+              <div class="content">
+                <p class="description">{exp.description}</p>
+                <ul class="achievements-list">
+                  {exp.achievements.map((item) => (
+                    <li>
+                      <i class="fa-solid fa-check" /> {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <div class="links-group">
+              <div class="footer">
+                <div class="tags">
+                  {exp.tags.map((tag) => (
+                    <span>{tag}</span>
+                  ))}
+                </div>
+
+                <div class="links-group">
+                  <button
+                    type="button"
+                    class="project-btn"
+                    data-dialog-open={dialogId}
+                    aria-haspopup="dialog"
+                    aria-controls={dialogId}
+                  >
+                    <i class="fa-solid fa-circle-info" />
+                    <span>Sobre o projeto</span>
+                  </button>
+                  {exp.link && (
+                    <a href={exp.link} target="_blank" class="link-btn">
+                      <i class="fa-solid fa-up-right-from-square" />
+                      <span>Ver Contribuição</span>
+                    </a>
+                  )}
+                  {exp.project_link && (
+                    <a
+                      href={exp.project_link}
+                      target="_blank"
+                      class="link-btn secondary"
+                    >
+                      <i class="fa-brands fa-github" />
+                      <span>Repositório</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <dialog id={dialogId} class="project-dialog" data-project-dialog>
+            <div class="project-dialog__content">
+              <header class="project-dialog__header">
+                <h3>O que é o {exp.company.split("(")[0].trim()}?</h3>
                 <button
                   type="button"
-                  class="project-btn"
-                  data-dialog-open={dialogId}
-                  aria-haspopup="dialog"
-                  aria-controls={dialogId}
+                  class="dialog-close"
+                  data-dialog-close
+                  aria-label="Fechar diálogo"
                 >
-                  <i class="fa-solid fa-circle-info" />
-                  <span>Sobre o projeto</span>
+                  <i class="fa-solid fa-xmark" />
                 </button>
-                {exp.link && (
-                  <a href={exp.link} target="_blank" class="link-btn">
-                    <i class="fa-solid fa-up-right-from-square" />
-                    <span>Ver Contribuição</span>
-                  </a>
-                )}
-                {exp.project_link && (
-                  <a
-                    href={exp.project_link}
-                    target="_blank"
-                    class="link-btn secondary"
-                  >
-                    <i class="fa-brands fa-github" />
-                    <span>Repositório</span>
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <dialog id={dialogId} class="project-dialog" data-project-dialog>
-          <div class="project-dialog__content">
-            <header class="project-dialog__header">
-              <h3>O que é o {exp.company.split('(')[0].trim()}?</h3>
-              <button
-                type="button"
-                class="dialog-close"
-                data-dialog-close
-                aria-label="Fechar diálogo"
-              >
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-            </header>
+              </header>
 
-            <p class="project-dialog__description">
-              {exp.projectDescription}
-            </p>
-          </div>
-        </dialog>
-      )
+              <p class="project-dialog__description">
+                {exp.projectDescription}
+              </p>
+            </div>
+          </dialog>
+        </>
+      );
     })
   }
 </div>
@@ -204,8 +210,8 @@ const auxioProjectDescription = experiences[0]?.projectDescription ?? "";
     const openBtn = target.closest("[data-dialog-open]");
     if (openBtn) {
       const dialogId = openBtn.getAttribute("data-dialog-open");
-      
-      if (dialogId) { 
+
+      if (dialogId) {
         const dialog = document.getElementById(dialogId) as HTMLDialogElement;
         if (dialog) {
           dialog.showModal();
@@ -224,7 +230,10 @@ const auxioProjectDescription = experiences[0]?.projectDescription ?? "";
     }
 
     // Fechar ao clicar no BACKDROP
-    if (target.nodeName === "DIALOG" && target.hasAttribute("data-project-dialog")) {
+    if (
+      target.nodeName === "DIALOG" &&
+      target.hasAttribute("data-project-dialog")
+    ) {
       if (event.target === target) {
         (target as HTMLDialogElement).close();
         document.body.style.overflow = "";

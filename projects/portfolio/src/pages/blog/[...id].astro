@@ -98,9 +98,13 @@ const showMoreArticlesButton = shouldShowArticlesButton(allPosts);
           Curtiu este conteúdo? Continue explorando mais textos e projetos.
         </p>
         <div class="post-actions">
-          {showMoreArticlesButton && (
-            <a href="/blog" class="post-action">Ver mais artigos</a>
-          )}
+          {
+            showMoreArticlesButton && (
+              <a href="/blog" class="post-action">
+                Ver mais artigos
+              </a>
+            )
+          }
           <a href="/" class="post-action post-action-secondary"
             >Ir para a home</a
           >
