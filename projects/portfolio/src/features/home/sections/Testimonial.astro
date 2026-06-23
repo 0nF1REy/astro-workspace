@@ -61,7 +61,7 @@ const testimonialData = [
           <div class="rating" aria-label={`${data.rating} stars`}>
             {Array(data.rating)
               .fill(0)
-              .map((_) => (
+              .map(() => (
                 <i class="fas fa-star star-active" aria-hidden="true" />
               ))}
           </div>

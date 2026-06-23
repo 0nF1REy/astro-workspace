@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 import AspireBadgeImg from "@assets/images/achievements/aspire/aspire-badge.svg";
 import AspireCertImg from "@assets/images/achievements/aspire/aspire-certificate.jpg";
@@ -14,12 +15,12 @@ interface Achievement {
   date: string;
   description: string;
   details: string;
-  badge?: any;
+  badge?: ImageMetadata;
   icon: string;
   documents: {
     name: string;
     file: string;
-    image: any;
+    image: ImageMetadata;
   }[];
 }
 

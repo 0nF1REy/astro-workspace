@@ -195,7 +195,9 @@
         if (window.ScrollTrigger && window.ScrollTrigger.getAll) {
           window.ScrollTrigger.getAll().forEach((t) => t.kill());
         }
-      } catch (e) {}
+      } catch {
+        // Silently ignore cleanup errors during page unload
+      }
     });
   }
 

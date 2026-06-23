@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import AuxioIcon from "@assets/images/experience/auxio.png";
 import OrbotIcon from "@assets/images/experience/orbot.png";
 
@@ -14,7 +15,7 @@ interface Experience {
   link?: string;
   project_link?: string;
   icon?: string;
-  icon_image?: any;
+  icon_image?: ImageMetadata;
 }
 
 const experiences: Experience[] = [

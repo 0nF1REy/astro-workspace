@@ -1,4 +1,4 @@
-import { defineCollection } from "astro:content";
+import { defineCollection, type SchemaContext } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
@@ -7,7 +7,7 @@ const projectCollection = defineCollection({
     pattern: "**/index.json",
     base: "./src/content/projects",
   }),
-  schema: ({ image }: { image: any }) =>
+  schema: ({ image }: SchemaContext) =>
     z.object({
       title: z.string(),
       client: z.string().optional(),
@@ -18,8 +18,6 @@ const projectCollection = defineCollection({
       storyTitle: z.string(),
       storyContent: z.string(),
       tags: z.array(z.string()).optional(),
-
-      // MÍDIA
       mainImage: image(),
       mainImageRemote: z.url().optional(),
       videoUrl: z.url().optional(),
@@ -30,7 +28,7 @@ const projectCollection = defineCollection({
 
 const blogCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.mdx", base: "./src/content/blog" }),
-  schema: ({ image }: { image: any }) =>
+  schema: ({ image }: SchemaContext) =>
     z.object({
       title: z.string(),
       subtitle: z.string().optional(),
