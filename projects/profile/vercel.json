@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/v1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

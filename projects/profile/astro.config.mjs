@@ -18,14 +18,6 @@ export default defineConfig({
     port: 4321,
   },
 
-  // Redirecionamentos
-  redirects: {
-    "/": {
-      destination: "/v1",
-      status: 308,
-    },
-  },
-
   // Performance
   prefetch: {
     prefetchAll: true,
