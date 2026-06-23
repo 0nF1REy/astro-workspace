@@ -4,12 +4,7 @@ MAKEFLAGS += --no-print-directory
 
 ROOT_DIR := ../../
 
-.PHONY: help contexto send git-context add status sync \
-	dev dev-remote dev-full \
-	build preview clean \
-	check sync-types info upgrade astro \
-	db-push db-seed \
-	server
+.PHONY: help contexto send git-context add status sync
 
 # ========================= Help =========================
 
@@ -50,46 +45,3 @@ sync: ## Sincroniza o repositório (via raiz)
 	@echo "▐▓▒░ Delegando '$@' para a raiz do repositorio..."
 	@cd $(ROOT_DIR) && $(MAKE) sync
 	@echo "Sincronizacao concluida!"
-
-# ========================= Astro =========================
-
-dev: ## Inicia o servidor de desenvolvimento do Astro
-	@npm run dev
-
-dev-remote: ## Inicia Astro usando banco remoto
-	@npm run dev:remote
-
-dev-full: ## Inicia Astro + json-server
-	@npm run dev:full
-
-build: ## Gera a build de produção
-	@npm run build
-
-preview: ## Visualiza a build de produção
-	@npm run preview
-
-clean: ## Remove a pasta dist
-	@npm run clean
-
-check: ## Executa verificações do Astro
-	@npm run check
-
-sync-types: ## Sincroniza tipos gerados pelo Astro
-	@npm run sync
-
-info: ## Exibe informações do ambiente
-	@npm run info
-
-upgrade: ## Atualiza dependências do Astro
-	@npm run upgrade
-
-astro: ## Executa comandos da CLI do Astro
-	@npm run astro
-
-# ========================= Astro DB =========================
-
-db-push: ## Envia schema do Astro DB
-	@npm run db:push
-
-db-seed: ## Executa seed no banco remoto
-	@npm run db:seed
