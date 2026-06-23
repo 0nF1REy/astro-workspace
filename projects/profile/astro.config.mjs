@@ -1,7 +1,5 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import vercel from "@astrojs/vercel";
-import { satteri } from "@astrojs/markdown-satteri";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,7 +7,6 @@ export default defineConfig({
   site: "https://alan-ryan-profile.vercel.app",
   output: "static",
   trailingSlash: "never",
-  adapter: vercel(),
 
   security: {
     csp: true,
@@ -21,16 +18,11 @@ export default defineConfig({
     port: 4321,
   },
 
-  // Markdown e syntax highlight
-  markdown: {
-    processor: satteri({
-      features: {
-        directive: true,
-      },
-    }),
-    shikiConfig: {
-      theme: "dracula",
-      wrap: true,
+  // Redirecionamentos
+  redirects: {
+    "/": {
+      destination: "/v1",
+      status: 308,
     },
   },
 
@@ -43,10 +35,5 @@ export default defineConfig({
   // Dev Toolbar
   devToolbar: {
     enabled: false,
-  },
-
-  // Experimental (Rust compiler)
-  experimental: {
-    rustCompiler: true,
   },
 });
