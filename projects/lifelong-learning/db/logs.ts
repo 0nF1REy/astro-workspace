@@ -1,4 +1,4 @@
-import { db } from "../src/lib/db";
+import { db } from "@lib/db";
 import { Logs } from "./config";
 
 export interface LogEntry {
@@ -8,7 +8,11 @@ export interface LogEntry {
 }
 
 export async function insertLog(entry: LogEntry) {
-  if (!import.meta.env.ASTRO_DB_REMOTE_URL && !import.meta.env.DEV) {
+  const url = (process.env.DATABASE_URL ||
+    import.meta.env.DATABASE_URL) as string;
+  const isDev = import.meta.env.DEV;
+
+  if (!url && !isDev) {
     return;
   }
 
