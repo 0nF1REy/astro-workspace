@@ -3,7 +3,6 @@ import { defineConfig } from "astro/config";
 import vercel from "@astrojs/vercel";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import { satteri } from "@astrojs/markdown-satteri";
 
 // https://astro.build/config
 export default defineConfig({
@@ -34,19 +33,6 @@ export default defineConfig({
     port: 4321,
   },
 
-  // Markdown e syntax highlight
-  markdown: {
-    processor: satteri({
-      features: {
-        directive: true,
-      },
-    }),
-    shikiConfig: {
-      theme: "dracula",
-      wrap: true,
-    },
-  },
-
   // Performance
   prefetch: {
     prefetchAll: true,
@@ -56,10 +42,5 @@ export default defineConfig({
   // Dev Toolbar
   devToolbar: {
     enabled: false,
-  },
-
-  // Experimental (Rust compiler)
-  experimental: {
-    rustCompiler: true,
   },
 });
