@@ -1,5 +1,7 @@
 ---
-import { db, Logs, desc } from "astro:db";
+import { db } from "@lib/db";
+import { Logs } from "@db/config";
+import { desc } from "drizzle-orm";
 
 console.log("[Page] Dados recebidos do middleware:", Astro.locals);
 console.log("[Page] Mensagem:", Astro.locals.userMessage());
@@ -8,6 +10,13 @@ const logs = await db.select().from(Logs).orderBy(desc(Logs.date_accessed));
 
 const name = Astro.locals.name;
 const userMessage = Astro.locals.userMessage();
+
+interface LogRow {
+  id: number;
+  url: string;
+  status: number;
+  date_accessed: Date;
+}
 ---
 
 <section class="middleware-demo">
@@ -22,7 +31,6 @@ const userMessage = Astro.locals.userMessage();
   </div>
 
   <div class="middleware-demo__grid">
-    <!-- Card de Locals -->
     <article class="middleware-demo__card surface-card">
       <div class="middleware-demo__card-header">
         <i class="fa-solid fa-user-shield"></i>
@@ -40,7 +48,6 @@ const userMessage = Astro.locals.userMessage();
       </div>
     </article>
 
-    <!-- Card de Redação/Segurança -->
     <article class="middleware-demo__card surface-card">
       <div class="middleware-demo__card-header">
         <i class="fa-solid fa-eye-slash"></i>
@@ -63,7 +70,6 @@ const userMessage = Astro.locals.userMessage();
     </article>
   </div>
 
-  <!-- Seção de Logs do Astro DB -->
   <section class="middleware-logs surface-card">
     <div class="middleware-demo__card-header">
       <i class="fa-solid fa-database"></i>
@@ -86,7 +92,7 @@ const userMessage = Astro.locals.userMessage();
         <tbody>
           {
             logs.length > 0 ? (
-              logs.map((log) => (
+              logs.map((log: LogRow) => (
                 <tr>
                   <td>
                     <span

@@ -4,7 +4,6 @@ import vercel from "@astrojs/vercel";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import db from "@astrojs/db";
 import { satteri } from "@astrojs/markdown-satteri";
 
 // https://astro.build/config
@@ -19,7 +18,7 @@ export default defineConfig({
   }),
 
   // Integrações
-  integrations: [react(), mdx(), sitemap(), db()],
+  integrations: [react(), mdx(), sitemap()],
 
   // Servidor de desenvolvimento
   server: {

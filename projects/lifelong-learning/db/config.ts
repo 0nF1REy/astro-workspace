@@ -1,25 +1,16 @@
-import { column, defineDb, defineTable } from "astro:db";
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
-const Links = defineTable({
-  columns: {
-    id: column.number({ primaryKey: true }),
-    title: column.text(),
-    description: column.text(),
-    url: column.text(),
-    isRead: column.boolean(),
-  },
+export const Links = sqliteTable("Links", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  url: text("url").notNull(),
+  isRead: integer("isRead", { mode: "boolean" }).notNull().default(false),
 });
 
-const Logs = defineTable({
-  columns: {
-    id: column.number({ primaryKey: true }),
-    url: column.text(),
-    status: column.number(),
-    date_accessed: column.date(),
-  },
-});
-
-// https://astro.build/db/config
-export default defineDb({
-  tables: { Links, Logs },
+export const Logs = sqliteTable("Logs", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  url: text("url").notNull(),
+  status: integer("status").notNull(),
+  date_accessed: integer("date_accessed", { mode: "timestamp" }).notNull(),
 });

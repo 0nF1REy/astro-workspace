@@ -4,7 +4,8 @@ import LinkCard, {
 } from "@features/links/components/LinkCard.astro";
 import Button from "@ui/Button.astro";
 import LinkDialog from "@features/links/components/LinkDialog.astro";
-import { db, Links } from "astro:db";
+import { db } from "@lib/db";
+import { Links } from "@db/config";
 
 const links = (await db.select().from(Links)) as LinkProps[];
 ---

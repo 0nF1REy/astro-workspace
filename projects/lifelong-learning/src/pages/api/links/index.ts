@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import sanitize from "sanitize-html";
-import { db, Links } from "astro:db";
+import { db } from "@lib/db";
+import { Links } from "@db/config";
 
 export const prerender = false;
 
@@ -47,18 +48,21 @@ export const POST: APIRoute = async ({ request }) => {
       throw new Error("Por favor, forneça todos os campos obrigatórios.");
     }
 
-    const result = await db.insert(Links).values({
-      title: sanitize(title),
-      description: sanitize(description),
-      url: sanitize(url),
-      isRead,
-    });
+    const result = await db
+      .insert(Links)
+      .values({
+        title: sanitize(title),
+        description: sanitize(description),
+        url: sanitize(url),
+        isRead,
+      })
+      .returning();
 
     return new Response(
       JSON.stringify({
         success: true,
         message: "Link adicionado com sucesso.",
-        data: result,
+        data: result[0],
       }),
       {
         status: 201,

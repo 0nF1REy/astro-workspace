@@ -1,6 +1,8 @@
 import type { APIRoute } from "astro";
 import sanitize from "sanitize-html";
-import { db, Links, eq } from "astro:db";
+import { db } from "@lib/db";
+import { Links } from "@db/config";
+import { eq } from "drizzle-orm";
 
 export const prerender = false;
 
@@ -9,18 +11,17 @@ export const GET: APIRoute = async ({ params }) => {
     const id = params.id ? parseInt(params.id) : null;
     if (!id) throw new Error("ID não informado.");
 
-    const link = await db.select().from(Links).where(eq(Links.id, id));
+    const result = await db.select().from(Links).where(eq(Links.id, id));
 
-    if (link.length === 0) {
+    if (result.length === 0) {
       throw new Error("Link não encontrado.");
     }
 
-    return new Response(JSON.stringify({ success: true, data: link[0] }), {
+    return new Response(JSON.stringify({ success: true, data: result[0] }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (e) {
-    console.error(e);
     return new Response(
       JSON.stringify({
         success: false,
@@ -40,7 +41,6 @@ export const DELETE: APIRoute = async ({ params }) => {
 
     return new Response(null, { status: 204 });
   } catch (e) {
-    console.error(e);
     return new Response(
       JSON.stringify({
         success: false,
@@ -63,7 +63,6 @@ export const PATCH: APIRoute = async ({ params, request }) => {
 
     return new Response(null, { status: 204 });
   } catch (e) {
-    console.error(e);
     return new Response(
       JSON.stringify({
         success: false,
@@ -82,15 +81,6 @@ export const PUT: APIRoute = async ({ params, request }) => {
     const body = await request.json();
     const { title, description, url, isRead } = body;
 
-    if (
-      typeof title !== "string" ||
-      typeof description !== "string" ||
-      typeof url !== "string" ||
-      typeof isRead !== "boolean"
-    ) {
-      throw new Error("Campos inválidos.");
-    }
-
     await db
       .update(Links)
       .set({
@@ -101,18 +91,14 @@ export const PUT: APIRoute = async ({ params, request }) => {
       })
       .where(eq(Links.id, id));
 
-    const updated = await db.select().from(Links).where(eq(Links.id, id));
-
     return new Response(
       JSON.stringify({
         success: true,
         message: "Link atualizado com sucesso.",
-        data: updated[0],
       }),
       { status: 200, headers: { "Content-Type": "application/json" } },
     );
   } catch (e) {
-    console.error(e);
     return new Response(
       JSON.stringify({
         success: false,

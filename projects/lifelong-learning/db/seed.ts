@@ -1,6 +1,6 @@
-import { Links, db } from "astro:db";
+import { db } from "@lib/db";
+import { Links } from "./config";
 
-// https://astro.build/db/seed
 export default async function seed() {
   await db.insert(Links).values([
     {
