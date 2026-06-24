@@ -36,7 +36,7 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "astro": "^7.0.0"
+    "astro": "^7.0.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
