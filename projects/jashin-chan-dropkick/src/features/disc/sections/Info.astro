@@ -1,7 +1,5 @@
 ---
-import {
-  discAssets,
-} from "@data/disc";
+import { discAssets } from "@data/disc";
 
 const { bgPattern, bgGirl, bgWave, ttlDisc, ttlSpDisc } = discAssets;
 ---
@@ -16,6 +14,101 @@ const { bgPattern, bgGirl, bgWave, ttlDisc, ttlSpDisc } = discAssets;
           <img src={ttlDisc} alt="CD & DVD & BD" />
         </picture>
       </h1>
+      <div>
+        <div class="section-header short">3期 Blu-ray</div>
+        <div class="section-content">
+          <h3 class="post-title">邪神ちゃんドロップキックX Blu-ray</h3>
+          <h2>邪神ちゃんドロップキックX Blu-ray Vol.1</h2>
+
+          <p></p>
+
+          <figure>
+            <img
+              src="/assets/images/disc/info/jashinX_sellBD01.jpg"
+              width="430"
+              height="540"
+            />
+          </figure>
+
+          <p>
+            発売日： 2022年10月21日（金）<br />価格： ￥19,800（税込）<br
+            />品番： HPXR-1937<br />収録内容： 第1話～第6話収録
+          </p>
+
+          <h3>■映像特典</h3>
+
+          <ul>
+            <li>まめアニメ 誕生日編</li><li>
+              『邪神ちゃんドロップキックＸ』声優オーディション
+              エキュートを勝ちとるのは誰だ!? 略して…エキュ誰!?
+            </li><li>ノンクレジットOP</li>
+          </ul>
+
+          <h3>■仕様・封入特典</h3>
+
+          <ul>
+            <li>
+              キャラクターデザイン・総作画監督古賀誠描き下ろしスリーブケース
+            </li><li>特製ブックレット</li>
+          </ul>
+
+          <h2>
+            <strong>邪神ちゃんドロップキックX Blu-ray Vol.2&nbsp;</strong>
+          </h2>
+
+          <p></p>
+
+          <figure>
+            <img
+              src="/assets/images/disc/info/jashinX_sellBD02.jpg"
+              width="420"
+              height="528"
+            />
+          </figure>
+
+          <p>
+            発売日： 2022年11月18日（金）<br />価格： ￥19,800（税込）<br
+            />品番： HPXR-1938<br />収録内容： 第7話～第12話収録
+          </p>
+
+          <h3>■映像特典</h3>
+
+          <ul>
+            <li>まめアニメSP 釧路炉端焼き</li><li>
+              イラストコンテスト結果発表映像
+            </li><li>ノンクレジットED</li>
+          </ul>
+
+          <h3>■仕様・封入特典</h3>
+
+          <ul>
+            <li>総作画監督代見裕美描き下ろしジャケットスリーブケース</li><li>
+              特製ブックレット
+            </li>
+          </ul>
+
+          <blockquote class="block-quote">
+            <p>※商品の仕様及び特典は変更になる場合がございます</p>
+          </blockquote>
+
+          <p class="has-text-align-center has-small-font-size">
+            発売元：メディアネットピクチャーズ
+            販売元：株式会社ハピネット・メディアマーケティング
+          </p>
+
+          <p class="has-text-align-center has-small-font-size">
+            ©ユキヲ・COMICメテオ／邪神ちゃんドロップキックX製作委員会
+          </p>
+
+          <figure class="wp-block-image size-large">
+            <img
+              src="/assets/images/disc/info/jashinX_sellBD03.png"
+              height="874"
+              width="865"
+            />
+          </figure>
+        </div>
+      </div>
     </div>
   </div>
   <div class="info-wave"></div>
@@ -103,6 +196,77 @@ const { bgPattern, bgGirl, bgWave, ttlDisc, ttlSpDisc } = discAssets;
           height: auto;
         }
       }
+    }
+
+    .section-header.short {
+      padding: 10px;
+      width: 30%;
+      min-width: 200px;
+      font-size: 20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 25px;
+      background: linear-gradient(#61ac69, #b4d69a);
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      color: #fff;
+      margin: 0;
+    }
+
+    .section-content {
+      background-color: #fffef1;
+      padding: 25px;
+      border: 3px solid #b4d69a;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+
+    .post-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #fb4c69;
+      border-bottom: 2px dotted #62ad6a;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: bold;
+      font-size: 25px;
+      background: linear-gradient(#61ac69, #b4d69a);
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      color: #fff;
+      margin: 0;
+      padding: 25px;
+    }
+
+    p {
+      margin: 15px 0;
+    }
+
+    figure {
+      margin: 0 0 1rem;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+    }
+
+    ul {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .block-quote {
+      margin: 0 0 1rem;
+    }
+
+    .has-text-align-center {
+      text-align: center;
     }
 
     @media screen and (max-width: 750px) {
