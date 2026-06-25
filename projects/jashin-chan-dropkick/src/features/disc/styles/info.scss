@@ -14,7 +14,7 @@ p {
   margin: 15px 0;
 }
 
-figure {
+img {
   margin: 0 0 1rem;
 }
 
@@ -111,4 +111,29 @@ hr {
 
 .btn-sofmap {
   background-color: #0693e3;
+}
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-row-auto {
+  display: flex;
+
+  img {
+    flex: 1;
+    width: 0;
+    min-width: 0;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    img {
+      width: 100%;
+    }
+  }
 }
