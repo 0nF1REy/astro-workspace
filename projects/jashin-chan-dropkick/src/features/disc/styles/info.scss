@@ -10,16 +10,20 @@ h2 {
   padding: 25px;
 }
 
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
 p {
   margin: 15px 0;
 }
 
 img {
   margin: 0 0 1rem;
-}
-
-h3 {
-  font-size: 1.75rem;
 }
 
 ul {
@@ -50,6 +54,10 @@ hr {
   box-sizing: content-box;
   height: 0;
   overflow: visible;
+}
+
+blockquote {
+  margin: 0 0 1rem;
 }
 
 .section-content {
@@ -85,12 +93,13 @@ hr {
   margin-bottom: 10px;
 }
 
-.block-quote {
-  margin: 0 0 1rem;
-}
-
 .has-text-align-center {
   text-align: center;
+}
+
+.img-center {
+  display: block;
+  margin-inline: auto;
 }
 
 .bottom {
