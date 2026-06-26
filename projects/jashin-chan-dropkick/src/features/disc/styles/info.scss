@@ -121,6 +121,17 @@ blockquote {
   background-color: #0693e3;
 }
 
+.btn-zamb {
+  color: #313131;
+  background-color: #cf2e2e;
+
+  &:visited,
+  &:hover,
+  &:active {
+    color: #313131;
+  }
+}
+
 .img-responsive {
   width: 100%;
   height: auto;
