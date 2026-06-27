@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 
 export default defineConfig({
   // Site e roteamento
+  site: "https://jashin-chan.vercel.app",
   output: "static",
   trailingSlash: "never",
 

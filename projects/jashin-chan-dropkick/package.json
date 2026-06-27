@@ -6,6 +6,19 @@
   "engines": {
     "node": "24.x"
   },
+  "description": "A modern high-fidelity fan-made port and clone of the official Jashin-chan Dropkick (Dropkick on My Devil!!) anime website, built with Astro, TypeScript, and Sass.",
+  "keywords": [
+    "jashin-chan",
+    "dropkick-on-my-devil",
+    "anime",
+    "manga",
+    "astro-framework",
+    "typescript",
+    "sass",
+    "web-clone",
+    "fan-site",
+    "frontend-development"
+  ],
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
