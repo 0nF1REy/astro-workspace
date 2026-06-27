@@ -132,6 +132,17 @@ blockquote {
   }
 }
 
+.btn-halcao {
+  color: #313131;
+  background-color: #cde9fb;
+
+  &:visited,
+  &:hover,
+  &:active {
+    color: #313131;
+  }
+}
+
 .img-responsive {
   width: 100%;
   height: auto;
@@ -155,4 +166,12 @@ blockquote {
       width: 100%;
     }
   }
+}
+
+.video-embed {
+  border: 0;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 16/9;
+  height: auto;
 }
