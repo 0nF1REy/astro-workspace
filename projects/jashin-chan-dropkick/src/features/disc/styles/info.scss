@@ -175,3 +175,26 @@ blockquote {
   aspect-ratio: 16/9;
   height: auto;
 }
+
+@media screen and (max-width: 750px) {
+  img,
+  .img-center {
+    max-width: 100%;
+    height: auto !important;
+  }
+
+  .section-content {
+    padding: 15px;
+  }
+
+  .section-header.short {
+    width: 50%;
+    min-width: 150px;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
