@@ -26,6 +26,25 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
           <strong>お問い合わせはこちら</strong>
         </a>
       </div>
+      <img
+        src="/assets/images/business-info/info/paragraph-text.png"
+        height="380"
+      />
+      <div class="special-buttons">
+        <a class="btn-special btn" href="#example1">
+          <strong>キャラクターを活用した</strong><br />
+          <strong>商品化</strong>
+        </a>
+
+        <a class="btn-special btn" href="#example2">
+          <strong>キャラクターを活用した</strong><br />
+          <strong>プロモーション</strong>
+        </a>
+        <a class="btn-special btn" href="#example3">
+          <strong>自治体・公共団体との</strong><br />
+          <strong>共同プロジェクト</strong>
+        </a>
+      </div>
     </div>
   </div>
   <div class="info-wave"></div>
@@ -130,7 +149,8 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
     .button-wrapper {
       display: flex;
       justify-content: center;
-      margin-top: 10px;
+      padding-top: 30px;
+      padding-bottom: 30px;
     }
 
     .btn {
@@ -145,6 +165,19 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
 
     .btn:hover {
       text-decoration: underline;
+    }
+
+    .special-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .btn-special {
+      text-align: center;
+      color: #fb4d6a;
+      border-color: #fb4d6a;
     }
   }
 </style>
