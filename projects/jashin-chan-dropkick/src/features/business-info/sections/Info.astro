@@ -61,7 +61,7 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
         alt="Section 01"
       />
 
-      <div class="tabs-container">
+      <div class="tabs-container" id="example1">
         <nav class="tabs-nav" role="tablist">
           <button
             class="tab-btn active"
@@ -213,6 +213,26 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
           </div>
         </div>
       </div>
+
+      <img
+        src="/assets/images/business-info/info/02.png"
+        class="section-divider-img"
+        alt="Section 02"
+      />
+
+      <div class="tabs-container" id="example2">
+        <p>COMING SOON...</p>
+      </div>
+
+      <img
+        src="/assets/images/business-info/info/03.png"
+        class="section-divider-img"
+        alt="Section 03"
+      />
+
+      <div class="tabs-container" id="example3">
+        <p>COMING SOON...</p>
+      </div>
     </div>
   </div>
   <div class="info-wave"></div>
@@ -359,7 +379,7 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
 
     .tabs-container {
       background: rgba(255, 255, 255, 0.8);
-      border: 3px solid #b4d69a;
+      border: 3px solid #323276;
       border-radius: 20px;
       overflow: hidden;
       margin-top: 20px;
@@ -367,8 +387,8 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
 
     .tabs-nav {
       display: flex;
-      background: #f1f8e9;
-      border-bottom: 2px solid #b4d69a;
+      background: #dde5ff;
+      border-bottom: 2px solid #323276;
       @media (max-width: 750px) {
         flex-wrap: wrap;
       }
@@ -381,20 +401,19 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
       background: transparent;
       cursor: pointer;
       font-weight: bold;
-      color: #61ac69;
+      color: #323276;
       transition: 0.3s;
-      border-right: 1px solid #b4d69a;
+      border-right: 1px solid #323276;
       &:last-child {
         border-right: none;
       }
       &.active {
         background: #fff;
-        color: #fb4d6a;
         position: relative;
       }
       @media (max-width: 750px) {
         flex: 0 0 50%;
-        border-bottom: 1px solid #b4d69a;
+        border-bottom: 1px solid #323276;
       }
     }
 
