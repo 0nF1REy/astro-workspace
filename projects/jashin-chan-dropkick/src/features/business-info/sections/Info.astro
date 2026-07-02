@@ -276,9 +276,66 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
     position: relative;
     background-image: var(--bgPattern);
     background-repeat: repeat;
+    background-size: auto;
     width: 100%;
     z-index: 1;
     overflow: visible;
+
+    .page-disc {
+      position: relative;
+      max-width: 954px;
+      margin: 0 auto;
+      padding: 135px 0 185px 0;
+      z-index: 3;
+
+      .page-title {
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+
+    .bg-image-girl {
+      position: absolute;
+      right: 0;
+      bottom: -73px;
+      height: 400px;
+      width: 337px;
+      background-image: var(--bgGirl);
+      background-repeat: no-repeat;
+      background-size: contain;
+      z-index: 11;
+    }
+
+    .info-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      z-index: 11;
+      background-color: #493f3e;
+      background-image:
+        radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0),
+        radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0);
+      background-size: 12px 12px;
+      background-position:
+        0 0,
+        18px 18px;
+      background-repeat: repeat;
+      -webkit-mask-image: var(--bgWave);
+      mask-image: var(--bgWave);
+      -webkit-mask-size: 338px 120px;
+      mask-size: 338px 120px;
+      -webkit-mask-repeat: repeat-x;
+      mask-repeat: repeat-x;
+      -webkit-mask-position: center bottom;
+      mask-position: center bottom;
+    }
 
     .img-responsive {
       width: 100%;
@@ -300,24 +357,6 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
       height: auto;
       display: block;
       margin: 60px auto 30px;
-    }
-
-    .page-disc {
-      position: relative;
-      max-width: 954px;
-      margin: 0 auto;
-      padding: 135px 0 185px 0;
-      z-index: 3;
-
-      .page-title {
-        margin-bottom: 30px;
-        display: flex;
-        justify-content: center;
-        img {
-          max-width: 100%;
-          height: auto;
-        }
-      }
     }
 
     .button-wrapper {
@@ -478,33 +517,6 @@ const { bgPattern, bgGirl, bgWave, ttlBusinessInfo, ttlSpBusinessInfo } =
         opacity: 1;
         transform: translateY(0);
       }
-    }
-
-    .bg-image-girl {
-      position: absolute;
-      right: 0;
-      bottom: -73px;
-      height: 400px;
-      width: 337px;
-      background-image: var(--bgGirl);
-      background-repeat: no-repeat;
-      background-size: contain;
-      z-index: 11;
-    }
-
-    .info-wave {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 120px;
-      z-index: 11;
-      background-color: #493f3e;
-      -webkit-mask-image: var(--bgWave);
-      mask-image: var(--bgWave);
-      mask-size: 338px 120px;
-      mask-repeat: repeat-x;
-      mask-position: center bottom;
     }
 
     @media screen and (max-width: 750px) {
