@@ -1,12 +1,16 @@
 ---
 import { businessInfoAssets } from "@data/business-info";
-import Hero from "./Hero.astro";
-import { Productization, Promotion, JointProject } from "./collaboration";
+import Hero from "./sections/Hero.astro";
+import {
+  Productization,
+  Promotion,
+  JointProject,
+} from "./sections/collaboration";
 
 const { bgPattern, bgGirl, bgWave } = businessInfoAssets;
 ---
 
-<section id="info">
+<div id="info">
   <div class="bg-image-girl"></div>
   <div class="container">
     <div class="page-business">
@@ -17,7 +21,7 @@ const { bgPattern, bgGirl, bgWave } = businessInfoAssets;
     </div>
   </div>
   <div class="info-wave"></div>
-</section>
+</div>
 
 <script>
   function initTabs() {
@@ -58,7 +62,7 @@ const { bgPattern, bgGirl, bgWave } = businessInfoAssets;
 </style>
 
 <style lang="scss" define:vars={{ bgPattern, bgGirl, bgWave }}>
-  @use "../../../styles/globals.scss" as *;
+  @use "../../styles/globals.scss" as *;
 
   #info {
     font-family: HiraKakuPro-W3;
