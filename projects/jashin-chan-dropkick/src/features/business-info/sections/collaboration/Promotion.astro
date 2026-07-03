@@ -2,12 +2,135 @@
 import "../../styles/business-info.scss";
 ---
 
-<img
-  src="/assets/images/business-info/info/02.png"
-  class="section-divider-img"
-  alt="Section 02"
-/>
+<div id="example2" class="anchor-section">
+  <img
+    src="/assets/images/business-info/info/02.png"
+    class="section-divider-img"
+    alt="Promotion"
+  />
+  <div class="tabs-container">
+    <nav class="tabs-nav" role="tablist">
+      <button
+        class="tab-btn active"
+        data-target="promo-0"
+        role="tab"
+        aria-selected="true">商品・サービス</button
+      >
+      <button
+        class="tab-btn"
+        data-target="promo-1"
+        role="tab"
+        aria-selected="false">他IPとのコラボ</button
+      >
+      <button
+        class="tab-btn"
+        data-target="promo-2"
+        role="tab"
+        aria-selected="false">過去の実績</button
+      >
+    </nav>
 
-<div class="tabs-container" id="example2">
-  <p>COMING SOON...</p>
+    <div class="tabs-content">
+      <div class="tab-panel active" id="promo-0" role="tabpanel">
+        <div class="panel-single-img large">
+          <img
+            src="https://jashinchan.com/wp-content/uploads/2026/01/プロモーション-1-1024x1024.png"
+            alt="商品のプロモーション"
+          />
+          <p>商品のプロモーション</p>
+        </div>
+        <div class="panel-info">
+          <h3>キャラクターの力で商品価値を高め、購買意欲を刺激</h3>
+          <p>
+            食品・飲料、日用品、化粧品、カード類など、様々な商品とのコラボレーションが可能です。<br
+            />実用性とコレクション性を兼ね備えた商品展開により、<br
+            />SNSでの話題性や継続的な購買につながります。
+          </p>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="promo-1" role="tabpanel">
+        <div class="panel-single-img large">
+          <img
+            src="https://jashinchan.com/wp-content/uploads/2025/12/11-1024x1024.png"
+            alt="他キャラクターとの共演"
+          />
+        </div>
+        <div class="panel-info">
+          <h3>他キャラクターとの共演で新たなファン層を獲得</h3>
+          <p>
+            他キャラクターとコラボレーションイベントを開催することで、<br
+            />相互のファン層へアプローチできます。<br
+            />邪神ちゃんドロップキックを用いた「スーパーきぐるみファイト」などの<br
+            />様々なユニークな企画により、話題性を創出しSNSでの拡散効果も期待できます。
+          </p>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="promo-2" role="tabpanel">
+        <div class="results-table-wrapper">
+          <h2 class="table-title">過去の実績</h2>
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th colspan="2">商品・サービス</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>株式会社エポスカード</th>
+                <td
+                  >邪神ちゃんドロップキックエポスカード（<a
+                    href="https://www.eposcard.co.jp/gecard/jashinchan/index.html"
+                    target="_blank">詳細</a
+                  >）</td
+                >
+              </tr>
+              <tr>
+                <th>東海旅客鉄道株式会社</th>
+                <td
+                  >JR東海「推し旅」コラボ（<a
+                    href="https://recommend.jr-central.co.jp/oshi-tabi/jashinchan/"
+                    target="_blank">詳細</a
+                  >）</td
+                >
+              </tr>
+              <tr class="spacer-row"><td colspan="2"></td></tr>
+              <tr class="category-header">
+                <th colspan="2">他IPとのコラボ</th>
+              </tr>
+              <tr>
+                <th>スライム倒して300年</th>
+                <td
+                  >コラボボイスドラマ（<a
+                    href="https://jashinchan.com/news/11702"
+                    target="_blank">詳細</a
+                  >）</td
+                >
+              </tr>
+              <tr>
+                <th>東北ずん子・ずんだもん</th>
+                <td
+                  >アニメ「ずんだホライずん2」（<a
+                    href="https://jashinchan.com/news/11969"
+                    target="_blank">詳細</a
+                  >）</td
+                >
+              </tr>
+              <tr>
+                <th>リトルボブドッグ / イワシカちゃん / ほっぺちゃん</th>
+                <td
+                  >スーパーきぐるみファイト（<a
+                    href="https://jashinchan.com/news/12677"
+                    target="_blank">詳細</a
+                  >）</td
+                >
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-footer">ほか多数</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
