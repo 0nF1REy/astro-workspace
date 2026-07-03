@@ -1,0 +1,48 @@
+---
+import { businessInfoAssets } from "@data/business-info";
+import "../styles/business-info.scss";
+
+const { ttlBusinessInfo, ttlSpBusinessInfo } = businessInfoAssets;
+---
+
+<h1 class="page-title">
+  <picture>
+    <source srcset={ttlSpBusinessInfo} media="(max-width: 750px)" />
+    <img src={ttlBusinessInfo} alt="BUSINESS INFO" />
+  </picture>
+</h1>
+
+<img
+  src="/assets/images/business-info/info/banner.png"
+  class="img-responsive"
+  alt="Banner"
+/>
+
+<div class="button-wrapper">
+  <a
+    class="btn-primary"
+    href="https://forms.gle/MA5JwbZMBRob9CN76"
+    target="_blank"
+    rel="noreferrer noopener"
+  >
+    <strong>お問い合わせはこちら</strong>
+  </a>
+</div>
+
+<img
+  src="/assets/images/business-info/info/paragraph-text.png"
+  class="img-centered-text"
+  alt="Description"
+/>
+
+<div class="special-buttons">
+  <a class="btn-outline" href="#example1">
+    <strong>キャラクターを活用した</strong><br /><strong>商品化</strong>
+  </a>
+  <a class="btn-outline" href="#example2">
+    <strong>キャラクターを活用した</strong><br /><strong>プロモーション</strong>
+  </a>
+  <a class="btn-outline" href="#example3">
+    <strong>自治体・公共団体との</strong><br /><strong>共同プロジェクト</strong>
+  </a>
+</div>
