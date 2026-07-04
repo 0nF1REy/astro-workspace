@@ -7,10 +7,10 @@ interface Props {
   bgWave?: string;
 }
 
-const { 
-  bgPattern = globalInfoAssets.bgPattern, 
-  bgGirl = globalInfoAssets.bgGirl, 
-  bgWave = globalInfoAssets.bgWave 
+const {
+  bgPattern = globalInfoAssets.bgPattern,
+  bgGirl = globalInfoAssets.bgGirl,
+  bgWave = globalInfoAssets.bgWave,
 } = Astro.props;
 ---
 
@@ -51,6 +51,17 @@ const {
     width: 100%;
     z-index: 1;
     overflow: visible;
+
+    :global(.page-title) {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
 
     .shell-content {
       position: relative;

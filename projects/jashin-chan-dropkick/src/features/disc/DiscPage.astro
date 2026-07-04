@@ -1,5 +1,14 @@
 ---
-import Info from "./sections/Info.astro";
+import InfoShell from "@components/InfoShell.astro";
+import Hero from "./sections/Hero.astro"
+import { DiscSeason2, DiscSeason3 } from "./sections/disc-seasons";
+import { EndingTheme, OpeningTheme } from "./sections/theme-songs";
 ---
 
-<Info />
+<InfoShell>
+  <Hero />
+  <DiscSeason3 />
+  <DiscSeason2 />
+  <EndingTheme />
+  <OpeningTheme />
+</InfoShell>
