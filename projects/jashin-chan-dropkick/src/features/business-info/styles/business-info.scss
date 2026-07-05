@@ -254,6 +254,11 @@
     color: #493f3e;
   }
 
+  .text-gap {
+    margin-right: 15px;
+    display: inline-block;
+  }
+
   @media (max-width: 750px) {
     .results-table {
       th,
@@ -265,6 +270,11 @@
       th {
         background: #f1f8e9;
       }
+    }
+
+    .text-gap {
+      margin-right: 10px;
+      display: inline;
     }
   }
 }
