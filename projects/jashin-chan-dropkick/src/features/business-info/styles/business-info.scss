@@ -110,16 +110,27 @@
   color: #323276;
   transition: 0.3s;
   border-right: 1px solid #323276;
+
   &:last-child {
     border-right: none;
   }
+
   &.active {
     background: #fff;
     position: relative;
   }
+
   @media (max-width: 750px) {
-    flex: 0 0 50%;
+    flex: 1 1 50%;
     border-bottom: 1px solid #323276;
+
+    &:nth-child(2n) {
+      border-right: none;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
   }
 }
 
