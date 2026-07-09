@@ -1,131 +1,24 @@
 ---
 const ttlGoods = "/assets/images/goods/hero/ttl_goods.png";
 const ttlSpGoods = "/assets/images/goods/hero/ttl_sp_goods.png";
-const bgPattern = `url("/assets/images/global/bg_pattern.png")`;
-const bgGirl = `url("/assets/images/global/bg_character01.png")`;
-const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
 ---
 
-<section id="hero">
-  <div class="bg-image-girl"></div>
-  <div class="container">
-    <div class="page-goods">
-      <h1 class="page-title">
-        <picture>
-          <source srcset={ttlSpGoods} media="(max-width: 750px)" />
-          <img src={ttlGoods} alt="GOODS" />
-        </picture>
-      </h1>
-      <p class="centered">COMING SOON...</p>
-    </div>
-  </div>
-  <div class="hero-wave"></div>
-</section>
+<header class="hero-intro">
+  <h1 class="page-title">
+    <picture>
+      <source srcset={ttlSpGoods} media="(max-width: 750px)" />
+      <img src={ttlGoods} alt="GOODS" />
+    </picture>
+  </h1>
 
-<style lang="scss" is:global>
-  #footer {
-    background-color: transparent !important;
-  }
+  <p class="centered">COMING SOON...</p>
+</header>
 
-  #footer .bg-wave-top {
-    display: none !important;
-  }
-
-  #footer .foreground {
-    background-color: #493f3e !important;
-    position: relative;
-    z-index: 5;
-    padding: 0px 0 100px 0 !important;
-  }
-</style>
-
-<style lang="scss" define:vars={{ bgPattern, bgGirl, bgWave }}>
-  @use "../../../styles/globals.scss" as *;
-
-  #hero {
-    position: relative;
-    background-image: var(--bgPattern);
-    background-repeat: repeat;
-    background-size: auto;
-    width: 100%;
-    z-index: 1;
-    overflow: visible;
-
-    .bg-image-girl {
-      position: absolute;
-      right: 0;
-      bottom: -73px;
-      height: 400px;
-      width: 337px;
-      background-image: var(--bgGirl);
-      background-repeat: no-repeat;
-      background-size: contain;
-      z-index: 11;
-    }
-
-    .hero-wave {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 120px;
-      z-index: 11;
-      background-color: #493f3e;
-      background-image:
-        radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0),
-        radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0);
-      background-size:
-        12px 12px,
-        12px 12px;
-      background-position:
-        0 0,
-        18px 18px;
-      background-repeat: repeat, repeat;
-      -webkit-mask-image: var(--bgWave);
-      mask-image: var(--bgWave);
-      -webkit-mask-size: 338px 120px;
-      mask-size: 338px 120px;
-      -webkit-mask-repeat: repeat-x;
-      mask-repeat: repeat-x;
-      -webkit-mask-position: center bottom;
-      mask-position: center bottom;
-    }
-
-    .page-goods {
-      position: relative;
-      max-width: 954px;
-      text-align: center;
-      margin: 0 auto;
-      padding: 135px 0 185px 0;
-      z-index: 3;
-
-      .page-title {
-        margin-bottom: 1.5rem;
-        display: flex;
-        justify-content: center;
-
-        img {
-          max-width: 100%;
-          height: auto;
-        }
-      }
-
-      .centered {
-        text-align: center;
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #493f3e;
-      }
-    }
-
-    @media screen and (max-width: 750px) {
-      .bg-image-girl {
-        display: none;
-      }
-
-      .page-goods {
-        padding: 80px 0 160px 0;
-      }
-    }
+<style lang="scss">
+  .centered {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #493f3e;
   }
 </style>
