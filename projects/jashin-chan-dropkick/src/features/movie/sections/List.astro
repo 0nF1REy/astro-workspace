@@ -1,162 +1,52 @@
 ---
-import { movieAssets, movieVideos } from "@data/movie";
-
-const { bgPattern, bgGirl, bgWave, ttlMovie, ttlSpMovie } = movieAssets;
+import { movieVideos } from "@data/movie";
 ---
 
-<section id="list">
-  <div class="bg-image-girl"></div>
-  <div class="container">
-    <div class="page-movie">
-      <h1 class="page-title">
-        <picture>
-          <source srcset={ttlSpMovie} media="(max-width: 750px)" />
-          <img src={ttlMovie} alt="MOVIE" />
-        </picture>
-      </h1>
-
-      <div class="movies-container">
-        {
-          movieVideos.map((url: string) => (
-            <div class="iframe-wrapper">
-              <iframe
-                src={url}
-                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              />
-            </div>
-          ))
-        }
-      </div>
-    </div>
+<section class="movie-list">
+  <div class="movies-container">
+    {
+      movieVideos.map((url: string) => (
+        <div class="iframe-wrapper">
+          <iframe
+            src={url}
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+      ))
+    }
   </div>
-  <div class="list-wave"></div>
 </section>
 
-<style lang="scss" is:global>
-  #footer {
-    background-color: transparent !important;
-  }
+<style lang="scss">
+  .movies-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    gap: 2%;
 
-  #footer .bg-wave-top {
-    display: none !important;
-  }
-
-  #footer .foreground {
-    background-color: #493f3e !important;
-    position: relative;
-    z-index: 5;
-    padding: 0px 0 100px 0 !important;
-  }
-</style>
-
-<style lang="scss" define:vars={{ bgPattern, bgGirl, bgWave }}>
-  @use "../../../styles/globals.scss" as *;
-
-  #list {
-    font-family: HiraKakuPro-W3;
-    position: relative;
-    background-image: var(--bgPattern);
-    background-repeat: repeat;
-    background-size: auto;
-    width: 100%;
-    z-index: 1;
-    overflow: visible;
-
-    .bg-image-girl {
-      position: absolute;
-      right: 0;
-      bottom: -73px;
-      height: 400px;
-      width: 337px;
-      background-image: var(--bgGirl);
-      background-repeat: no-repeat;
-      background-size: contain;
-      z-index: 11;
-    }
-
-    .list-wave {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 120px;
-      z-index: 11;
-      background-color: #493f3e;
-      background-image:
-        radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0),
-        radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0);
-      background-size: 12px 12px;
-      background-position:
-        0 0,
-        18px 18px;
-      background-repeat: repeat;
-      -webkit-mask-image: var(--bgWave);
-      mask-image: var(--bgWave);
-      -webkit-mask-size: 338px 120px;
-      mask-size: 338px 120px;
-      -webkit-mask-repeat: repeat-x;
-      mask-repeat: repeat-x;
-      -webkit-mask-position: center bottom;
-      mask-position: center bottom;
-    }
-
-    .page-movie {
+    .iframe-wrapper {
+      flex: 0 1 49%;
+      margin-bottom: 20px;
       position: relative;
-      max-width: 954px;
-      margin: 0 auto;
-      padding: 135px 0 185px 0;
-      z-index: 3;
-      text-align: left;
+      width: 100%;
+      aspect-ratio: 16 / 9;
 
-      .page-title {
-        margin-bottom: 30px;
-        display: flex;
-        justify-content: center;
-        img {
-          max-width: 100%;
-          height: auto;
-        }
-      }
-
-      .movies-container {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-        gap: 2%;
-
-        .iframe-wrapper {
-          flex: 0 1 49%;
-          margin-bottom: 20px;
-          position: relative;
-          width: 100%;
-          aspect-ratio: 16 / 9;
-
-          iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 4px solid #f6ef94;
-          }
-        }
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 4px solid #f6ef94;
       }
     }
+  }
 
-    @media screen and (max-width: 750px) {
-      .bg-image-girl {
-        display: none;
-      }
-
-      .page-movie {
-        padding: 80px 15px 185px 15px;
-
-        .movies-container {
-          .iframe-wrapper {
-            flex: 0 1 100%;
-          }
-        }
+  @media screen and (max-width: 750px) {
+    .movies-container {
+      .iframe-wrapper {
+        flex: 0 1 100%;
       }
     }
   }
