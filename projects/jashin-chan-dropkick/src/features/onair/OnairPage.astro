@@ -1,5 +1,31 @@
 ---
-import Info from "./sections/Info.astro";
+import InfoShell from "@components/InfoShell.astro";
+import Hero from "./sections/Hero.astro";
+import BroadcastTable from "./sections/BroadcastTable.astro";
+import StreamingSection from "./sections/StreamingSection.astro";
+import StreamingWithDateSection from "./sections/StreamingWithDateSection.astro";
+import BroadcastSimpleTable from "./sections/BroadcastSimpleTable.astro";
+import StreamingLinksSection from "./sections/StreamingLinksSection.astro";
+import BroadcastThreeColTable from "./sections/BroadcastThreeColTable.astro";
+
+import {
+  onair1stBroadcast,
+  onair1stRebroadcast,
+  onair1stStreaming,
+  onair2ndBroadcast,
+  onair2ndStreaming,
+  onair3rdBroadcast,
+  onair3rdStreaming,
+} from "@data/onair";
 ---
 
-<Info />
+<InfoShell>
+  <Hero />
+  <BroadcastTable {...onair3rdBroadcast} />
+  <StreamingSection {...onair3rdStreaming} />
+  <StreamingWithDateSection {...onair2ndStreaming} />
+  <BroadcastSimpleTable {...onair2ndBroadcast} />
+  <StreamingLinksSection {...onair1stStreaming} />
+  <BroadcastThreeColTable {...onair1stRebroadcast} />
+  <BroadcastThreeColTable {...onair1stBroadcast} />
+</InfoShell>

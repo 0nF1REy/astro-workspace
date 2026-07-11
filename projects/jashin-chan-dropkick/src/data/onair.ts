@@ -1,11 +1,3 @@
-export const onairAssets = {
-  bgPattern: `url("/assets/images/global/bg_pattern.png")`,
-  bgGirl: `url("/assets/images/global/bg_character01.png")`,
-  bgWave: `url("/assets/images/global/bg_wave_bottom.png")`,
-  ttlOnair: "/assets/images/onair/info/ttl_onair.png",
-  ttlSpOnair: "/assets/images/onair/info/ttl_sp_onair.png",
-} as const;
-
 export const onair3rdBroadcastRows = [
   { channel: "テレビ東京", schedule: "2022年7月5日（火）26:05〜" },
   { channel: "北海道文化放送", schedule: "2022年7月6日（水）25:40〜" },
