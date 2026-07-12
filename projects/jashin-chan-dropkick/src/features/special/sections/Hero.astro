@@ -1,0 +1,29 @@
+---
+const ttlSpecial = "/assets/images/special/info/ttl_special.png";
+const ttlSpSpecial = "/assets/images/special/info/ttl_sp_special.png";
+const bannerSpecial = "/assets/images/special/info/banner_special.jpg";
+---
+
+<header class="hero-intro">
+  <h1 class="page-title">
+    <picture>
+      <source srcset={ttlSpSpecial} media="(max-width: 750px)" />
+      <img src={ttlSpecial} alt="SPECIAL" />
+    </picture>
+  </h1>
+
+  <figure class="main-banner">
+    <img src={bannerSpecial} alt="Special Visual" class="img-responsive" />
+  </figure>
+</header>
+
+<style lang="scss">
+  .main-banner {
+    margin: 0 0 18px 0;
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+</style>

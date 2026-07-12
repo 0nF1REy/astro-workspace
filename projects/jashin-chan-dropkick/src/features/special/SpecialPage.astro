@@ -1,5 +1,67 @@
 ---
-import Info from "./sections/Info.astro";
+import InfoShell from "@components/InfoShell.astro";
+import Hero from "./sections/Hero.astro";
+import IntroSection from "./sections/guidelines/IntroSection.astro";
+import YoutubeSection from "./sections/guidelines/YoutubeSection.astro";
+import NiconicoSection from "./sections/guidelines/NiconicoSection.astro";
+import RulesSection from "./sections/guidelines/RulesSection.astro";
+import EnglishSection from "./sections/guidelines/EnglishSection.astro";
+import FinalFooter from "./sections/guidelines/FinalFooter.astro";
 ---
 
-<Info />
+<InfoShell>
+  <Hero />
+  <div class="guideline-container">
+    <IntroSection />
+    <YoutubeSection />
+    <NiconicoSection />
+    <RulesSection />
+    <EnglishSection />
+    <FinalFooter />
+  </div>
+</InfoShell>
+
+<style lang="scss">
+  .guideline-container {
+    color: #212529;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+
+    :global(p) {
+      margin-bottom: 1.5rem;
+    }
+
+    :global(.example-note) {
+      font-size: 14px;
+      color: #555;
+      border-left: 4px solid #b4d69a;
+      padding-left: 15px;
+    }
+
+    :global(.guideline-block) {
+      margin-top: 40px;
+      h3 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #493f3e;
+      }
+    }
+
+    :global(.english-guidelines) {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid #ccc;
+    }
+
+    @media screen and (max-width: 750px) {
+      padding: 15px;
+      font-size: 14px;
+
+      :global(.guideline-block h3) {
+        font-size: 16px;
+      }
+    }
+  }
+</style>
