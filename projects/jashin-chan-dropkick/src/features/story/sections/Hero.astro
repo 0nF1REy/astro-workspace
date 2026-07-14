@@ -1,7 +1,7 @@
 ---
 const ttlStory = "/assets/images/story/hero/ttl_story.png";
 const ttlSpStory = "/assets/images/story/hero/ttl_sp_story.png";
-const textStory = `url("/assets/images/story/hero/text_story.png")`;
+const textStory = "/assets/images/story/hero/text_story.png";
 ---
 
 <header class="hero-intro">
@@ -12,21 +12,23 @@ const textStory = `url("/assets/images/story/hero/text_story.png")`;
     </picture>
   </h1>
 
-  <div class="story-intro-image"></div>
+  <img
+    src={textStory}
+    alt="邪神ちゃんとゆりねの物語"
+    class="story-intro-text"
+  />
 </header>
 
-<style lang="scss" define:vars={{ textStory }}>
-  .story-intro-image {
+<style lang="scss">
+  .story-intro-text {
     width: 100%;
-    min-height: 220px;
-    background-image: var(--textStory);
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-size: 100% auto;
-    margin-bottom: 16px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+    max-width: 1000px;
 
     @media screen and (max-width: 750px) {
-      min-height: 120px;
+      padding-bottom: 50px;
     }
   }
 </style>
