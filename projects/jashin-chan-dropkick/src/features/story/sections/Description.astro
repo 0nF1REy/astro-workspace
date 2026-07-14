@@ -1,0 +1,48 @@
+<section class="story-body">
+  <article class="story-box">
+    <header class="story-header"></header>
+    <div class="story-content">
+      魔界の悪魔、通称「邪神ちゃん」は、<br />
+      ある日突然人間界に召喚されてしまう。<br />
+      彼女を召喚したのは、神保町のボロアパートで暮らす<br />
+      ちょっとブラックな心を持つ女子大生「花園ゆりね」。<br />
+      「邪神ちゃん」を召還したものの<br />
+      彼女？を魔界に帰す方法がわからない。<br />
+      仕方なく一緒に暮らし始めた邪神ちゃんとゆりねだが、<br />
+      邪神ちゃん曰く、「召喚者が死ねば魔界に帰れる」。<br />
+      そこで邪神ちゃんがとった行動とは……!?<br />
+    </div>
+  </article>
+</section>
+
+<style lang="scss">
+  .story-box {
+    position: relative;
+    z-index: 10;
+
+    .story-header {
+      background: linear-gradient(#61ac69, #b4d69a);
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      padding: 25px;
+    }
+
+    .story-content {
+      background-color: #fffef1;
+      padding: 25px;
+      border: 3px solid #b4d69a;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      color: #212529;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 750px) {
+      .story-content {
+        padding: 15px 10px;
+        font-size: 14px;
+      }
+    }
+  }
+</style>

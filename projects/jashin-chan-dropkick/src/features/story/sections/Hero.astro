@@ -1,193 +1,32 @@
 ---
-const bgPattern = `url("/assets/images/global/bg_pattern.png")`;
-const bgGirl = `url("/assets/images/global/bg_character01.png")`;
-const bgWave = `url("/assets/images/global/bg_wave_bottom.png")`;
 const ttlStory = "/assets/images/story/hero/ttl_story.png";
 const ttlSpStory = "/assets/images/story/hero/ttl_sp_story.png";
 const textStory = `url("/assets/images/story/hero/text_story.png")`;
 ---
 
-<section id="hero">
-  <div class="bg-image-girl"></div>
-  <div class="container">
-    <div class="page-story">
-      <h1 class="page-title">
-        <picture>
-          <source srcset={ttlSpStory} media="(max-width: 750px)" />
-          <img src={ttlStory} alt="STORY" />
-        </picture>
-      </h1>
+<header class="hero-intro">
+  <h1 class="page-title">
+    <picture>
+      <source srcset={ttlSpStory} media="(max-width: 750px)" />
+      <img src={ttlStory} alt="STORY" />
+    </picture>
+  </h1>
 
-      <div class="story-intro-text"></div>
+  <div class="story-intro-image"></div>
+</header>
 
-      <article class="story-box">
-        <header class="story-header">
-          <h2></h2>
-        </header>
-        <div class="story-content">
-          魔界の悪魔、通称「邪神ちゃん」は、<br />
-          ある日突然人間界に召喚されてしまう。<br />
-          彼女を召喚したのは、神保町のボロアパートで暮らす<br />
-          ちょっとブラックな心を持つ女子大生「花園ゆりね」。<br />
-          「邪神ちゃん」を召還したものの<br />
-          彼女？を魔界に帰す方法がわからない。<br />
-          仕方なく一緒に暮らし始めた邪神ちゃんとゆりねだが、<br />
-          邪神ちゃん曰く、「召喚者が死ねば魔界に帰れる」。<br />
-          そこで邪神ちゃんがとった行動とは……!?<br />
-        </div>
-      </article>
-    </div>
-  </div>
-  <div class="hero-wave"></div>
-</section>
-
-<style lang="scss" is:global>
-  #footer {
-    background-color: transparent !important;
-  }
-
-  #footer .bg-wave-top {
-    display: none !important;
-  }
-
-  #footer .foreground {
-    background-color: #493f3e !important;
-    position: relative;
-    z-index: 5;
-    padding: 0px 0 100px 0 !important;
-  }
-</style>
-
-<style lang="scss" define:vars={{ bgPattern, bgGirl, bgWave, textStory }}>
-  @use "../../../styles/globals.scss" as *;
-
-  #hero {
-    position: relative;
-    background-image: var(--bgPattern);
-    background-repeat: repeat;
-    background-size: auto;
+<style lang="scss" define:vars={{ textStory }}>
+  .story-intro-image {
     width: 100%;
-    z-index: 1;
-    overflow: visible;
-
-    .bg-image-girl {
-      position: absolute;
-      right: 0;
-      bottom: -73px;
-      height: 400px;
-      width: 337px;
-      background-image: var(--bgGirl);
-      background-repeat: no-repeat;
-      background-size: contain;
-      z-index: 11;
-    }
-
-    .hero-wave {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 120px;
-      z-index: 11;
-      background-color: #493f3e;
-      background-image:
-        radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0),
-        radial-gradient(rgba(255, 255, 255, 0.3) 20%, transparent 0);
-      background-size: 12px 12px;
-      background-position:
-        0 0,
-        18px 18px;
-      background-repeat: repeat;
-      -webkit-mask-image: var(--bgWave);
-      mask-image: var(--bgWave);
-      -webkit-mask-size: 338px 120px;
-      mask-size: 338px 120px;
-      -webkit-mask-repeat: repeat-x;
-      mask-repeat: repeat-x;
-      -webkit-mask-position: center bottom;
-      mask-position: center bottom;
-    }
-
-    .page-story {
-      position: relative;
-      max-width: 954px;
-      text-align: center;
-      margin: 0 auto;
-      padding: 135px 0 185px 0;
-      z-index: 3;
-
-      .page-title {
-        margin-bottom: 30px;
-        display: flex;
-        justify-content: center;
-        img {
-          max-width: 100%;
-          height: auto;
-        }
-      }
-
-      .story-intro-text {
-        width: 100%;
-        min-height: 220px;
-        background-image: var(--textStory);
-        background-repeat: no-repeat;
-        background-position: top center;
-        background-size: 100% auto;
-        margin-bottom: 16px;
-      }
-
-      .story-box {
-        position: relative;
-        z-index: 10;
-
-        .story-header {
-          background: linear-gradient(#61ac69, #b4d69a);
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
-          padding: 25px;
-
-          h2 {
-            margin: 0;
-            color: #fff;
-            font-size: 25px;
-            font-weight: bold;
-          }
-        }
-
-        .story-content {
-          background-color: #fffef1;
-          padding: 25px;
-          border: 3px solid #b4d69a;
-          border-bottom-left-radius: 10px;
-          border-bottom-right-radius: 10px;
-          color: #212529;
-          font-size: 16px;
-          font-family: HiraKakuPro-W3;
-        }
-      }
-    }
+    min-height: 220px;
+    background-image: var(--textStory);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    margin-bottom: 16px;
 
     @media screen and (max-width: 750px) {
-      .bg-image-girl {
-        display: none;
-      }
-
-      .page-story {
-        padding: 80px 0 140px 0;
-
-        .page-title img {
-          max-width: 280px;
-        }
-
-        .story-intro-text {
-          min-height: 120px;
-        }
-
-        .story-content {
-          margin-bottom: 50px;
-          padding: 7px 5px 8px 5px !important;
-        }
-      }
+      min-height: 120px;
     }
   }
 </style>
