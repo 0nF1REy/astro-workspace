@@ -1,0 +1,13 @@
+---
+const ttlNews = "/assets/images/news/hero/ttl_news.png";
+const ttlSpNews = "/assets/images/news/hero/ttl_sp_news.png";
+---
+
+<header class="hero-intro">
+  <h1 class="page-title">
+    <picture>
+      <source srcset={ttlSpNews} media="(max-width: 750px)" />
+      <img src={ttlNews} alt="NEWS" />
+    </picture>
+  </h1>
+</header>
