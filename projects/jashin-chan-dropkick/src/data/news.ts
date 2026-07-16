@@ -93,7 +93,7 @@ export const newsItems: NewsItem[] = [
     description:
       "いよいよ年の瀬。今年はコミケもなくてがっかりなあなたを富良野ワイン酒場「千明」にご招待いたします。",
     image: {
-      src: `${IMAGE_BASE_PATH}/news_4406.jpg`,
+      src: `${IMAGE_BASE_PATH}/news_4406.png`,
       alt: "Furano Online 2020",
     },
   },
@@ -105,7 +105,7 @@ export const newsItems: NewsItem[] = [
     description:
       "おいつきさんが描いて下さった神保町哀歌紹介マンガが素晴らしいので皆さまにご紹介します！",
     image: {
-      src: `${IMAGE_BASE_PATH}/news_1413.jpg`,
+      src: `${IMAGE_BASE_PATH}/news_1413.png`,
       alt: "Jinbocho Manga 2019",
     },
   },
