@@ -1,1 +1,27 @@
-<div>Hello World!</div>
+---
+import { newsItems } from "@data/news";
+import NewsCard from "@components/NewsCard.astro";
+---
+
+<section class="news-list-section">
+  <div class="news-grid">
+    {newsItems.map((item) => <NewsCard item={item} />)}
+  </div>
+</section>
+
+<style lang="scss">
+  .news-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem 1.3rem;
+    justify-items: center;
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
