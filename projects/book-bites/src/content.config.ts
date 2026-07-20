@@ -3,7 +3,11 @@ import { z } from "astro/zod";
 import { defineCollection } from "astro:content";
 
 const books = defineCollection({
-  loader: glob({ base: "src/content/books", pattern: "*.md" }),
+  loader: glob({
+    base: "src/content/books",
+    pattern: "*.md",
+    deferRender: true,
+  }),
   schema: z.object({
     title: z.string(),
     author: z.string(),
