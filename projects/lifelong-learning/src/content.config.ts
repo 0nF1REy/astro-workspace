@@ -22,6 +22,7 @@ const todos = defineCollection({
 const posts = defineCollection({
   loader: glob({
     pattern: "src/content/post/**/*.{md,mdx}",
+    deferRender: true,
     generateId: ({ entry }) =>
       entry
         .replace(/^\/?src\/content\/post\//, "")
@@ -65,6 +66,7 @@ const animes = defineCollection({
   // }),
   loader: glob({
     pattern: "src/content/animes/*.yaml",
+    deferRender: true,
     generateId: ({ entry }) =>
       entry.replace(/^\/?src\/content\/animes\//, "").replace(/\.ya?ml$/, ""),
   }),
