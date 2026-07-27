@@ -38,14 +38,15 @@ make scriptora
 
 ## 🚀 Projetos <a name="projetos"></a>
 
-Documentação detalhada de cada projeto em [docs/guides/projects.md](./docs/guides/projects.md).
+Cada projeto possui sua própria documentação detalhada dentro de seu respectivo diretório.
 
-| Projeto                                          | Descrição                                | Stack            |
-| ------------------------------------------------ | ---------------------------------------- | ---------------- |
-| [🎭 ATARASHII GAKKO!](projects/atarashii-gakko/) | Clone da landing page do grupo japonês   | Astro · SCSS     |
-| [📝 Scriptora](projects/scriptora/)              | Blog com Content Collections e busca     | Astro · Tailwind |
-| [👤 Profile](projects/profile/)                  | Página de perfil com link hub pessoal    | Astro · SCSS     |
-| [🎨 p5.js Workspace](projects/p5js-workspace/)   | Seletor de ambientes para sketches p5.js | Astro · SCSS     |
+| Projeto                                                   | Descrição                                | Stack             |
+| --------------------------------------------------------- | ---------------------------------------- | ----------------- |
+| [🎭 ATARASHII GAKKO!](projects/atarashii-gakko/)          | Clone da landing page do grupo japonês   | Astro · SCSS      |
+| [📝 Scriptora](projects/scriptora/)                       | Blog com Content Collections e busca     | Astro · Tailwind  |
+| [👤 Profile](projects/profile/)                           | Página de perfil com link hub pessoal    | Astro · SCSS      |
+| [🎨 p5.js Workspace](projects/p5js-workspace/)            | Seletor de ambientes para sketches p5.js | Astro · SCSS      |
+| [🐍 Jashin-chan Dropkick](projects/jashin-chan-dropkick/) | Clone do site oficial do anime           | Astro · SCSS · TS |
 
 ---
 
