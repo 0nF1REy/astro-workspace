@@ -36,10 +36,10 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "@astrojs/vercel": "^11.0.4",
+    "@astrojs/vercel": "^11.0.5",
     "@types/react": "^19.2.16",
     "@types/react-dom": "^19.2.3",
-    "astro": "^7.1.6",
+    "astro": "^7.2.2",
     "firebase": "^12.14.0",
     "firebase-admin": "^13.10.0",
     "react": "^19.2.7",
