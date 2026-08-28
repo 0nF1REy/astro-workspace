@@ -9,6 +9,9 @@ import AspireAckImg from "@assets/images/achievements/aspire/aspire-acknowledgem
 import OracleBadgeImg from "@assets/images/achievements/oracle/oci-foundations/oracle-badge.svg";
 import OracleCertImg from "@assets/images/achievements/oracle/oci-foundations/oracle-certificate.jpg";
 
+import EtecBadgeImg from "@assets/images/achievements/etec/cps.svg";
+import AcademicExcellenceImg from "@assets/images/achievements/etec/academic-excellence-certificate.jpg";
+
 interface Achievement {
   title: string;
   institution: string;
@@ -62,6 +65,24 @@ const achievements: Achievement[] = [
         name: "Reconhecimento",
         file: "/documents/achievements/aspire/aspire-acknowledgement.pdf",
         image: AspireAckImg,
+      },
+    ],
+  },
+  {
+    title: "Destaque Acadêmico - Desenvolvimento de Sistemas",
+    institution: "Etec Dr. Demétrio Azevedo Júnior (Centro Paula Souza)",
+    date: "Outubro 2025",
+    description:
+      "Reconhecimento por excelente desempenho acadêmico, comprometimento e assiduidade.",
+    details:
+      "Certificado concedido aos alunos com as melhores notas e engajamento exemplar durante a 1ª etapa do 2º semestre de 2025 no curso Técnico em Desenvolvimento de Sistemas.",
+    badge: EtecBadgeImg,
+    icon: "fa-star",
+    documents: [
+      {
+        name: "Certificado de Destaque",
+        file: "/documents/achievements/etec/academic-excellence-certificate.pdf",
+        image: AcademicExcellenceImg,
       },
     ],
   },
