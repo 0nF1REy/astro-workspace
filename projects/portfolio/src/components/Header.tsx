@@ -19,6 +19,10 @@ const Header = ({
     setIsClicked(!isClicked);
   };
 
+  const closeNav = () => {
+    setIsClicked(false);
+  };
+
   useEffect(() => {
     let ticking = false;
     const onScroll = () => {
@@ -40,11 +44,23 @@ const Header = ({
     };
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsClicked(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <header className={isScrolling ? "header scrolling" : "header"}>
       <div className="header__wrapper">
         <div className="header__content">
-          {/* Esquerda: Logo ou Voltar */}
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             {showNav ? (
               <a href="/" className="logo" title="Ir para a página inicial">
@@ -54,7 +70,7 @@ const Header = ({
               <a
                 href={backHref}
                 className="header__back-link"
-                title="{backLabel}"
+                title={backLabel}
               >
                 <i className="fa-solid fa-arrow-left" aria-hidden="true"></i>
                 <span>{backLabel}</span>
@@ -62,11 +78,12 @@ const Header = ({
             )}
           </div>
 
-          {/* Centro: Navbar (quando showNav) */}
-          {showNav && <Nav isClicked={isClicked} />}
+          {showNav && <Nav isClicked={isClicked} onClose={closeNav} />}
 
-          {/* Direita: Toggle, Voltar (quando !showNav) e Menu */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <div
+            className="header__actions"
+            style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+          >
             <button
               className="bg-toggle-btn"
               title="Alternar fundo animado"

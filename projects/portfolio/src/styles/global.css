@@ -283,9 +283,15 @@ h2 {
   transform: scaleX(1);
 }
 
+.header__actions {
+  position: relative;
+  z-index: 1005;
+}
+
 /* icons */
 .menu-icons {
-  z-index: 200;
+  position: relative;
+  z-index: 1005;
   min-width: 44px;
   min-height: 44px;
   display: inline-grid;
@@ -306,12 +312,19 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  transform: translateX(190.25rem);
-  transition: transform 0.5s ease-in-out;
+  transform: translateX(100%);
+  transition:
+    transform 0.4s ease-in-out,
+    background-color 0.3s ease;
+  z-index: 1000;
+  pointer-events: none;
+  background-color: transparent;
 }
 
 .nav.showMenu {
   transform: translateX(0);
+  pointer-events: auto;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .menu {
@@ -323,6 +336,7 @@ h2 {
   background-color: rgba(17, 24, 39, 0.82);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  pointer-events: auto;
 }
 
 .menu li:not(:last-child) {
@@ -393,6 +407,11 @@ button:focus-visible {
     position: relative;
     transform: translateX(0);
     height: 100%;
+    width: auto;
+    margin-left: auto;
+    background-color: transparent !important;
+    pointer-events: auto;
+    z-index: auto;
   }
 
   .menu-icons {

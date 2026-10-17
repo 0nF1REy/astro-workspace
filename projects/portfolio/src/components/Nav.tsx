@@ -7,7 +7,12 @@ const links = [
   { label: "contato", href: "/#contact", id: "contact" },
 ];
 
-const Nav = ({ isClicked }: { isClicked: boolean }) => {
+type NavProps = {
+  isClicked: boolean;
+  onClose?: () => void;
+};
+
+const Nav = ({ isClicked, onClose }: NavProps) => {
   const [active, setActive] = useState("home");
 
   const smoothScrollTo = (targetId: string) => {
@@ -29,11 +34,18 @@ const Nav = ({ isClicked }: { isClicked: boolean }) => {
     setActive(targetId);
   };
 
+  const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
+    if (e.target === e.currentTarget && onClose) {
+      onClose();
+    }
+  };
+
   return (
     <nav
       id="primary-navigation"
       aria-label="Navegação principal"
       className={`nav ${isClicked ? "showMenu" : ""}`}
+      onClick={handleBackdropClick}
     >
       <ul className="menu">
         {links.map(({ label, href, id }) => (
@@ -45,6 +57,9 @@ const Nav = ({ isClicked }: { isClicked: boolean }) => {
               onClick={(e) => {
                 e.preventDefault();
                 smoothScrollTo(id);
+                if (onClose) {
+                  onClose();
+                }
               }}
             >
               {label}
