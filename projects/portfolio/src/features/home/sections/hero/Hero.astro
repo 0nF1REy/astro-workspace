@@ -100,10 +100,12 @@ const heroImage = {
 
   .hero__copy {
     width: min(100%, 56ch);
-    text-align: left;
+    text-align: center;
+    margin-inline: auto;
   }
 
   .hero__media {
+    display: none;
     width: min(100%, 460px);
   }
 
@@ -153,19 +155,20 @@ const heroImage = {
     line-height: 1.45;
     min-height: 2.1rem;
     width: 100%;
-    text-align: left;
+    text-align: center;
   }
 
   .hero__subtitle-role {
     display: block;
     font-weight: 600;
     color: var(--secondary-clr-100);
-    text-align: left;
+    text-align: center;
   }
 
   .hero__actions {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1.15rem;
   }
@@ -192,6 +195,7 @@ const heroImage = {
   .hero__social {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
     margin-top: 1.1rem;
   }
@@ -219,6 +223,11 @@ const heroImage = {
       justify-items: stretch;
     }
 
+    .hero__copy {
+      text-align: left;
+      margin-inline: 0;
+    }
+
     .hero__intro {
       font-size: 1.25rem;
     }
@@ -230,13 +239,24 @@ const heroImage = {
     .hero__subtitle {
       font-size: clamp(1.2rem, 2vw, 1.65rem);
       min-height: 2.6rem;
+      text-align: left;
+    }
+
+    .hero__subtitle-role {
+      text-align: left;
+    }
+
+    .hero__actions {
+      justify-content: flex-start;
     }
 
     .hero__social {
+      justify-content: flex-start;
       margin-top: 1.2rem;
     }
 
     .hero__media {
+      display: block;
       justify-self: end;
       width: min(100%, 520px);
     }
