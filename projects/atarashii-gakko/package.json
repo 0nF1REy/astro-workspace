@@ -42,10 +42,10 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "astro": "^7.4.0"
+    "astro": "^7.4.1"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "^0.9.11",
     "@eslint/js": "^10.0.1",
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
@@ -60,7 +60,7 @@
     "typescript-eslint": "^8.60.0"
   },
   "allowScripts": {
-    "@parcel/watcher@2.5.1": true,
-    "esbuild@0.28.1": true
+    "esbuild@0.28.1": true,
+    "@parcel/watcher@2.6.0": true
   }
 }
