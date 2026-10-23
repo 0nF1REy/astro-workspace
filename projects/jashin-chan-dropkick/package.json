@@ -51,10 +51,10 @@
     "url": "https://github.com/0nF1REy/astro-workspace/issues"
   },
   "dependencies": {
-    "astro": "^7.4.1"
+    "astro": "^7.4.2"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.11",
+    "@astrojs/check": "^0.9.12",
     "@eslint/js": "^10.0.1",
     "eslint": "^10.4.0",
     "eslint-plugin-astro": "^1.7.0",
